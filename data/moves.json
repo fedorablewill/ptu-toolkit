@@ -229,7 +229,7 @@
       "AC":"3",
       "DB":"3",
       "Class":"Physical",
-      "Range":"Melee, 1 Target, Doublestrike",
+      "Range":"Melee, 1 Target, Double Strike",
       "Effect":"Twineedle Poisons the target on 18+.",
       "Contest Type":"Cool",
       "Contest Effect":"Reliable"
@@ -666,7 +666,7 @@
       "AC":"3",
       "DB":"5",
       "Class":"Physical",
-      "Range":"Melee, 1 Target, Doublestrike",
+      "Range":"Melee, 1 Target, Double Strike",
       "Contest Type":"Tough",
       "Contest Effect":"Reliable"
    },
@@ -2773,7 +2773,7 @@
       "AC":"3",
       "DB":"5",
       "Class":"Physical",
-      "Range":"6, 1 Target, Doublestrike",
+      "Range":"6, 1 Target, Double Strike",
       "Contest Type":"Tough",
       "Contest Effect":"Reliable"
    },
