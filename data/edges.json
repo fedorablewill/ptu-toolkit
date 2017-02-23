@@ -1,0 +1,569 @@
+{
+		"Basic Skills": {
+			"Effect": "You Rank Up a Skill from Pathetic to Untrained, or Untrained to Novice. You may take this Edge multiple times."
+		},
+		"Adept Skills": {
+			"Prerequisites": {
+				"Level": 2
+			},
+			"Effect": "You Rank Up a Skill from Novice to Adept. You may take this Edge multiple times."
+		},
+		"Expert Skills": {
+			"Prerequisites": {
+				"Level": 6
+			},
+			"Effect": "You Rank Up a Skill from Adept to Expert. You may take this Edge multiple times."
+		},
+		"Master Skills": {
+			"Prerequisites": {
+				"Level": 12
+			},
+			"Effect": "You Rank Up a Skill from Expert to Master. You may take this Edge multiple times."
+		},
+		"Skill Stunt": {
+			"Prerequisites": {
+				"Skills": ["Any"]
+			},
+			"Effect": "Choose a Skill you have at Novice Rank or higher. Choose a specific use of that Skill; when rolling that skill under those circumstances, you may choose to roll one less dice, and instead add +6 to the result. You may take this Edge multiple times, choosing a different circumstance each time."
+		},
+		"Categoric Inclination": {
+			"Effect": "Choose Body, Mind, or Spirit. You gain a +1 Bonus to all Skill Checks of that Category."
+		},
+		"Skill Enhancement": {
+			"Effect": "Choose two different Skills. You gain a +2 bonus to each of those skills. Skill Enhancement may be taken multiple times, but the bonus may be applied only once to a particular skill."
+		},
+		"Virtuoso": {
+			"Prerequisites": {
+				"Level": 20,
+				"Skills": [{
+					"Acrobatics": 6,
+					"Athletics": 6,
+					"Combat": 6,
+					"Intimidate": 6,
+					"Stealth": 6,
+					"Survival": 6,
+					"Guile": 6,
+					"Perception": 6,
+					"Charm": 6,
+					"Command": 6,
+					"Focus": 6,
+					"Intuition": 6,
+					"General Education": 6,
+					"Medicine Education": 6,
+					"Occult Education": 6,
+					"Pokémon Education": 6,
+					"Technology Education": 6
+				}]
+			},
+			"Effect": "Choose a Skill at Master Rank. Consider that Skill to be effectively \"Rank 8\" for any Features or effects that depend on Skill Rank. Virtuoso may be taken multiple times, but you must choose a different Skill each time."
+		},
+		"Apricorn Balls": {
+			"Prerequisites": {
+				"Skills": [{
+					"Survival": 3,
+					"Technology Education": 4
+				}]
+			},
+			"Effect": "As an Extended Action, you may craft Apricorns into their corresponding Poké Ball. Use of this Feature requires access to a Poké Ball Tool Box."
+		},
+		"Basic Balls": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology Education": 3
+				}]
+			},
+			"Effect": "You may craft Basic Balls for $100 and Great Balls for $175. Requires access to a Poké Ball Tool Box."
+		},
+		"Basic Cooking": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intuition": 3
+				}]
+			},
+			"Effect": "You may create \"Candy Bars\" or \"Baby Food\" with cooking ingredients costing $50. You may fluff the food in any reasonable manner you like."
+		},
+		"Gem Lore": {
+			"Prerequisites": {
+				"Skills": [{
+					"Occult Education": 3
+				}]
+			},
+			"Effect": "As an Extended Action, you may turn a Shard into a Gem of one of its associated Types. Additionally, you can turn 4 Red Shards into a Fire Stone; 4 Blue Shards into a Water Stone; 4 Yellow Shards into a Thunder Stone; 4 Orange Shards into a Shiny Stone; 4 Green Shards into a Leaf Stone; or 4 Violet Shards into a Dusk Stone. You can also destroy any of these six Stones to gain 4 Shards of the corresponding color."
+		},
+		"Green Thumb": {
+			"Prerequisites": {
+				"Skills": [{
+					"Survival": 3,
+					"General Education": 4
+				}]
+			},
+			"Effect": "You know how to grow Apricorns and Tier 1 Berries using a Portable Grower or Fertilized Soil."
+		},
+		"Poké Ball Repair": {
+			"Prerequisites": {
+				"Edges": ["Basic Balls", "Apricorn Balls"]
+			},
+			"Effect": "You may attempt to fix any Poké Ball that has failed to capture a Pokémon and broke. Make a Technology Check with a DC of 15. If you succeed, the Poké Ball is fixed and is treated as if it had not broken. If you fail, the ball is permanently broken. Requires access to a Poké Ball Tool Box."
+		},
+		"Repel Crafter": {
+			"Prerequisites": {
+				"Skills": [{
+					"Medicine Education": 3,
+					"Technology Education": 3
+				}]
+			},
+			"Effect": "Create a Repel for $100 or a Super Repel for $150. Requires access to a Chemistry Set."
+		},
+		"Tag Scribe": {
+			"Prerequisites": {
+				"Skills": [{
+					"Occult Education": 3
+				}]
+			},
+			"Freq": "Special - Extended Action",
+			"Effect": "You create a Cleanse Tag. This may be used a number of times each day equal to half your Occult Education Rank."
+		},
+		"Beast Master": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intimidate": 3
+				}]
+			},
+			"Effect": "You may use Intimidate instead of Command to make Pokemon at 0 or 1 Loyalty obey your commands. You may also use Intimidate instead of Command to determine the limits and Bonus Experience from Training."
+		},
+		"Breeder": {
+			"Prerequisites": {
+				"Skills": [{
+					"Pokémon Education": 3
+				}]
+			},
+			"Freq": "Static",
+			"Effect": "If you are able to give two Pokémon that are compatible for breeding at least 4 hours of time alone, you may make a Pokémon Education Check with a DC of 12. If you succeed, the Pokémon are guaranteed to produce an egg if you give them an additional 4 hours."
+		},
+		"Grace": {
+			"Prerequisites": {
+				"Skills": [{
+					"Charm": 3,
+					"Command": 3,
+					"Guile": 3,
+					"Intimidate": 3,
+					"Intuition": 3
+				}]
+			},
+			"Effect": "Your Pokémon may consume and benefit from 2 more Poffins each. If this Pokémon is traded to a Trainer without the Grace feature, these extra dice from additional Poffins are not lost, but a Trainer without Grace may not benefit from more than 6 Dice gained from Poffins. You may always use any of the Skills that are prerequisites for Grace in the Introduction Stage of a Contest to roll for Contest Stat Dice of any kind."
+		},
+		"Groomer": {
+			"Prerequisites": {
+				"Skills": [{
+					"Pokémon Education": 3
+				}]
+			},
+			"Effect": "You know how to effectively groom your Pokémon with access to a Groomer's Kit. You may groom up to 6 Pokémon in one hour. Grooming Pokémon may count as an hour of Training, and you may apply Experience Training, teach Poke-Edges, and apply any Features that could be applied during Training. If you apply Experience Training from Grooming, use your General Education or Pokémon Education Rank to determine Bonus Experience gained during Training. A Pokémon that has been Groomed also gains a +1d6 Bonus to the Introduction Roll of a Contest for the rest of the day."
+		},
+		"Paleontologist": {
+			"Prerequisites": {
+				"Skills": [{
+					"Survival": 3,
+					"Pokémon Education": 3
+				}]
+			},
+			"Effect": "You can identify fossils with a DC 10 Pokémon Education or Survival Check. You know how to operate Reanimation Machines and can use them to revive Fossils. See the \"Pokémon Fossils\" section (page 216) for more information."
+		},
+		"Train the Reserves": {
+			"Prerequisites": {
+				"Skills": [{
+					"Command": 3
+				}]
+			},
+			"Effect": "You may apply Experience Training to a number of Pokemon equal to twice your Command Rank, in- stead of equal to your Command Rank.\nNote: Beast Master or Groomer do not change the Skill that this Edge uses."
+		},
+		"Trainer of Champions": {
+			"Prerequisites": {
+				"Skills": [{
+					"Command": 5
+				}]
+			},
+			"Effect": "Whenever you apply Experience Training to a Pokémon, they gain an additional +5 Experience."
+		},
+		"Athletic Initiative": {
+			"Prerequisites": {
+				"Skills": [{
+					"Athletic": 4
+				}]
+			},
+			"Effect": "You learn the Move Agility."
+		},
+		"Bad Mood": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intimidate": 5
+				}]
+			},
+			"Effect": "Your Critical Hit Range is increased by +1 if you are suffering from a Persistent Status Affliction. Your Critical Hit Range is increased by +1 if you are suffering from a Volatile Status Affliction. These stack with each other, giving a total of +2 to Critical Hit Range if you are suffering from both a Persistant and a Volatile Status Affliction."
+		},
+		"Basic Martial Arts": {
+			"Prerequisites": {
+				"Skills": [{
+					"Combat": 3
+				}]
+			},
+			"Effect": "You learn the Move Rock Smash."
+		},
+		"Basic Psionics": {
+			"Prerequisites": {
+				"Edges": ["Elemental Connection (Psychic)"]
+			},
+			"Effect": "You learn the Move Confusion."
+		},
+		"Charmer": {
+			"Prerequisites": {
+				"Skills": [{
+					"Charm": 3
+				}]
+			},
+			"Effect": "You learn the Move Baby-Doll Eyes."
+		},
+		"Confidence Artist": {
+			"Prerequisites": {
+				"Skills": [{
+					"Guile": 3
+				}]
+			},
+			"Effect": "You learn the Move Confide."
+		},
+		"Demoralize": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intimidate": 4
+				}]
+			},
+			"Effect": "Whenever you land a Critical Hit on a foe, that foe becomes Vulnerable. Status-Class Moves with an Accuracy Roll can \"Crit\" for the purposes of activating this effect on a natural roll of 19 or higher, and any ef- fects that expand your Critical-Hit Range also expand this range."
+		},
+		"Dynamism": {
+			"Prerequisites": {
+				"Skills": [{
+					"Guile": 3
+				}]
+			},
+			"Effect": "Your initiative is increased by your Guile Rank."
+		},
+		"Expert Manipulator": {
+			"Prerequisites": {
+				"Skills": [{
+					"Guile": 4
+				}]
+			},
+			"Effect": "You gain a +2 Opposed Checks with all Manipulate Maneuvers. The \"Once per Scene per Foe\" Limitation of each Manipulate Maneuver is expended only upon succesfully affecting a foe with that Manipulate Maneuver."
+		},
+		"Expert Trickster": {
+			"Prerequisites": {
+				"Skills": [{
+					"Stealth": 4
+				}]
+			},
+			"Effect": "You gain a +2 Opposed Checks with all Dirty Trick Maneuvers. The \"Once per Scene per Foe\" Limitation of each Dirty Trick Maneuver is expended only upon successfully affecting a foe with that Dirty Trick Maneuver."
+		},
+		"Flustering Charisma": {
+			"Prerequisites": {
+				"Skills": [{
+					"Charm": 4,
+					"Guile": 4
+				}]
+			},
+			"Effect": "When you hit with a Move with the Social keyword, the target takes a -2 penalty to Save Checks against Volatile Status Afflictions for 1 full round."
+		},
+		"Intimidating Presence": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intimidate": 3
+				}]
+			},
+			"Effect": "You learn the Move Leer."
+		},
+		"Kip Up": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 5
+				}]
+			},
+			"Effect": "You may stand up from being Tripped as a Swift Action"
+		},
+		"Leader": {
+			"Prerequisites": {
+				"Skills": [{
+					"Command": 4
+				}]
+			},
+			"Effect": "You learn the Move After You."
+		},
+		"Nimble Movement": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 4,
+					"Stealth": 4
+				}]
+			},
+			"Effect": "Whenever you Disengage, you Shift 2 meters instead of 1."
+		},
+		"Slippery": {
+			"Prerequisites": {
+				"Skills": [{
+					"Stealth": 3
+				}]
+			},
+			"Effect": "You may use your Stealth Skill when defending in Opposed Grapple, Push, or Trip checks. When Grappling, if you win an Opposed Check when using Stealth, you must choose to end the Grapple (you cannot choose to gain Dominance)."
+		},
+		"Smooth": {
+			"Prerequisites": {
+				"Skills": [{
+					"Charm": 5,
+					"Focus": 5
+				}]
+			},
+			"Effect": "You gain +4 Evasion against Moves with the Social keyword, and gain a +2 Bonus on Save Checks against Rage and Infatuation."
+		},
+		"Sneak's Tricks": {
+			"Prerequisites": {
+				"Skills": [{
+					"Stealth": 4
+				}]
+			},
+			"Effect": "You learn the Move Astonish."
+		},
+		"Stamina": {
+			"Prerequisites": {
+				"Skills": [{
+					"Athletics": 5,
+					"Combat": 5
+				}]
+			},
+			"Effect": "Whenever you Take a Breather or take Massive Damage or a Critical Hit, you gain Temporary Hit Points equal to your Athletics or Combat Rank after the triggering action has resolved."
+		},
+		"Survival Drive": {
+			"Prerequisites": {
+				"Skills": [{
+					"Survival": 4
+				}]
+			},
+			"Effect": "You learn the Move Bulk Up."
+		},
+		"Throwing Masteries": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 4
+				}]
+			},
+			"Effect": "Increase the Throwing Range of your Poké Balls, Ranged Weapons, and other small items by +2."
+		},
+		"Weapon of Choice": {
+			"Prerequisites": {
+				"Feats": [{
+					"Tags": "Weapon"
+				}]
+			},
+			"Effect": "Choose a specific weapon type. You gain a +2 Bonus on Opposed Rolls to prevent being disarmed while wielding weapons of your chosen type. If you would be disarmed anyway, you may pay 1 AP to prevent yourself from being Disarmed."
+		},
+		"Work Up": {
+			"Prerequisites": {
+				"Skills": [{
+					"Focus": 4
+				}]
+			},
+			"Effect": "You learn the Move Work Up."
+		},
+		"Acrobat": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 3
+				}]
+			},
+			"Effect": "Increase your Jump and Long Jump Capabilities by +1 each."
+		},
+		"Art of Stealth": {
+			"Prerequisites": {
+				"Skills": [{
+					"Stealth": 4
+				}]
+			},
+			"Effect": "You gain the Stealth Capability."
+		},
+		"Elemental Connection": {
+			"Effect": "Choose an Elemental Type. You gain a +2 bonus to Charm, Command, Guile, Intimidate, and Intuition Checks targeting Pokémon of that Type. You may not take Elemental Connection if you have the Mystic Senses Edge, and you may not take Mystic Senses if you have Elemental Connection."
+		},
+		"Instinctive Aptitude": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intuition": 4
+				}]
+			},
+			"Effect": "Whenever you spend AP to raise your roll on an Accuracy Roll or Skill Check, you get a +2 bonus instead of +1. This cannot be used on Rolls made by your Pokémon."
+		},
+		"Instruction": {
+			"Prerequisites": {
+				"Skills": [{}]
+			},
+			"Effect": "Whenever you aid an ally in an Assisted Skill Check using an Education Skill you have at Novice Rank or higher, add your full Rank value as a bonus to their roll instead of half."
+		},
+		"Iron Mind": {
+			"Prerequisites": {
+				"Skills": [{
+					"Focus": 3
+				}]
+			},
+			"Effect": "You become aware of all attempts to read your mind with Telepathy, whether the attempt is successful or not."
+		},
+		"Medic Training": {
+			"Prerequisites": {
+				"Skills": [{}]
+			},
+			"Effect": "When you use Restorative Items on others, they do not forfeit their next turn."
+		},
+		"Mounted Prowess": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 3,
+					"Athletics": 3
+				}]
+			},
+			"Effect": "You automatically succeed at Acrobatics and Athletics Checks made to mount a Pokémon, and you gain a +3 Bonus to all Acrobatics and Athletics Checks made to remain Mounted."
+		},
+		"Mystic Senses": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intuition": 3
+				}]
+			},
+			"Effect": "You may use Intuition instead of Charm to improve the disposition of Wild Pokémon. You may not take Mystic Senses if you have the Elemental Connection Edge, and you may not take Elemental Connection if you have Mystic Senses."
+		},
+		"PokéPsychologist": {
+			"Prerequisites": {
+				"Skills": [{}]
+			},
+			"Effect": "You may use your Pokémon Education Skill instead of Charm, Guile, Intimidate, or Intuition when making general Skill checks to interact with Pokémon or to raise or lower disposition."
+		},
+		"Power Boost": {
+			"Prerequisites": {
+				"Skills": [{
+					"Athletics": 5
+				}]
+			},
+			"Effect": " Increase your Power Capability by +2"
+		},
+		"Scholar": {
+			"Prerequisites": {
+				"Skills": [{}]
+			},
+			"Effect": " You gain a +1 Bonus to Skill Checks with General Education, Medicine Education, Occult Education, Pokémon Education, Technology Education, and Survival."
+		},
+		"Swimmer": {
+			"Prerequisites": {
+				"Skills": [{
+					"Athletics": 3,
+					"Survival": 3
+				}]
+			},
+			"Effect": "You gain a +2 bonus to your Swim Speed. You may spend X minutes underwater before you begin to suffocate, where X is the higher of your Athletics or Survival Ranks."
+		},
+		"Traveler": {
+			"Prerequisites": {
+				"Skills": [{
+					"Survival": 3
+				}]
+			},
+			"Effect": "You may use Survival instead of Athletics and Acrobatics to determine your Power Capability, High Jump, and Long Jump values. Determine your Overland Movement by substituting your Survival Rank for the lower of your Athletics or Acrobatics Rank."
+		},
+		"Wallrunner": {
+			"Prerequisites": {
+				"Skills": [{
+					"Acrobatics": 5
+				}]
+			},
+			"Effect": "You may run on vertical surfaces both vertically and horizontally for up to your Acrobatics Rank in meters before jumping off."
+		},
+		"Defensive Hacking": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology Education": 4
+				}, {
+					"Focus": 3
+				}],
+				"Other": "Datajack Augmentation"
+			},
+			"Effect": "You may add your Focus Ranks as additional Damage Reduction while in digital battles. You may apply this Damage Reduction to Technology Education attacks."
+		},
+		"Dream Architect": {
+			"Prerequisites": {
+				"Skills": [{
+					"Intuition": 4,
+					"Pokémon Education": 4,
+					"Technology Education": 4
+				}]
+			},
+			"Effect": "You know how to operate Dream Machines and can use them to study and influence a Pokémon's dreams."
+		},
+		"Emergency Repairs": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology Education": 3
+				}]
+			},
+			"Effect": "You may repair vehicles as a standard action by making a Technology Education roll. You pay the amount of your roll and repair that much Hit Point damage to the vehicle. If the vehicle has any Breaches you may Patch one of them. Patched Breaches no longer count towards Breach Security but still count toward Breach Capacity."
+		},
+		"Glitched Existence": {
+			"Prerequisites": {
+				"Other": "Exposure to Glitch Phenomena, GM Permission"
+			},
+			"Effect": "You gain +2 to all Skill rolls to deal with Glitch phenomena."
+		},
+		"Gravity Training": {
+			"Prerequisites": {
+				"Skills": [{
+					"Athletics": 3,
+					"Focus": 3
+				}]
+			},
+			"Effect": "You gain the Gravitic Tolerance capability at a value of 1-3 or 2-4."
+		},
+		"Pokébot Training": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology": 3
+				}]
+			},
+			"Effect": "You may control a Pokébot with Complexity up to your Technology Rank by using a Pokémon turn."
+		},
+		"Psychic Navigator": {
+			"Prerequisites": {
+				"Edges": ["Elemental Connection (Psychic)"],
+				"Skills": [{
+					"Perception": 4,
+					"Focus": 4
+				}]
+			},
+			"Effect": "You gain the Psychic Navigator Capability."
+		},
+		"Quick Case": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology Education": 3
+				}]
+			},
+			"Effect": "You may remove a Case from a Poké Ball as a Swift Action. You may apply a Case to a Poké Ball as a Shift Action. (Normally these would be Shift and Standard Actions respectively)"
+		},
+		"Shock Resistance": {
+			"Prerequisites": {
+				"Skills": [{
+					"Technology Education": 3
+				}]
+			},
+			"Effect": "You don't suffer Augmentation Shock from Electric Type damage unless it is Massive Damage."
+		},
+		"Field Clinic": {
+			"Prerequisites": {
+				"Skills": [{
+					"Medicine Education": 4
+				}]
+			},
+			"Effect": "Whenever your party Sets Up Camp, you may spend $200 worth of Medical Scrap to set up a Field Clinic. While using the Field Clinic, all members gain the following benefits;\n» You may spend $300 of Medical Scrap to create and apply a Bandage or use a First Aid Kit\n» If you have the Nurse Feature, you may spend $300 to activate it without Draining AP.\n» Potions, Super Potions, Hyper Potions, Full Restores, Revives, Energy Powders, and Energy Roots used in this area heal their target an additional 5 Hit Points."
+		}
+	}
