@@ -19,3 +19,4 @@ The main goal of this project is to make it open source. I want to make it so th
 ## Contribution Rules
 First things first, there are going to be a lot of people reading your code. While I don't want to sound like a stubborn Computer Science professor, I gotta say: **Readability is required!!!**
 
+[Click here to get started with contributing!](https://github.com/absorr/ptu-toolkit/projects/1 "Contribution Tasks")
