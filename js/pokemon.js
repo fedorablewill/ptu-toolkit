@@ -1,5 +1,5 @@
 /**
- * Scripts for Pokemon Manager/Battler
+ * Scripts for Player Client
  * @author Will Stephenson
  */
 

@@ -1,3 +1,8 @@
+/**
+ * Universal scripts for Pokemon Manager/Battler
+ * @author Will Stephenson
+ */
+
 var host_id = null;
 
 var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
