@@ -218,15 +218,19 @@
                     <hr/>
                     <div id="stages">
                         <label for="stage-atk">Attack Stage</label>
-                        <input type="number" id="stage-atk" value="0" /><br/>
+                        <input type="number" id="stage-atk" value="0" data-target="stage_atk" /><br/>
                         <label for="stage-def">Defense Stage</label>
-                        <input type="number" id="stage-def" value="0" /><br/>
+                        <input type="number" id="stage-def" value="0" data-target="stage_def" /><br/>
                         <label for="stage-spatk">Special Atk Stage</label>
-                        <input type="number" id="stage-spatk" value="0" /><br/>
+                        <input type="number" id="stage-spatk" value="0" data-target="stage_spatk" /><br/>
                         <label for="stage-spdef">Special Def Stage</label>
-                        <input type="number" id="stage-spdef" value="0" /><br/>
+                        <input type="number" id="stage-spdef" value="0" data-target="stage_spdef" /><br/>
                         <label for="stage-speed">Speed Stage</label>
-                        <input type="number" id="stage-speed" value="0" />
+                        <input type="number" id="stage-speed" value="0" data-target="stage_speed" /><br/>
+                        <label for="stage-acc">Accuracy Bonus</label>
+                        <input type="number" id="stage-acc" value="0" data-target="stage_acc" /><br/>
+                        <label for="stage-eva">Evasion Bonus</label>
+                        <input type="number" id="stage-eva" value="0" data-target="stage_eva" />
                     </div>
                 </div>
             </div>

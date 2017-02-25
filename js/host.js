@@ -67,7 +67,9 @@ function onUpdate() {
                     "stage_def": this.stage_def,
                     "stage_spatk": this.stage_spatk,
                     "stage_spdef": this.stage_spdef,
-                    "stage_speed": this.stage_speed
+                    "stage_speed": this.stage_speed,
+                    "stage_acc": this.stage_acc,
+                    "stage_eva": this.stage_eva
                 };
 
                 sendMessage(client_id, JSON.stringify({
@@ -83,6 +85,15 @@ function onUpdate() {
             /*
                 Update Field Received
              */
+            else if (this.type == "pokemon_update") {
+                gm_data["pokemon"][this.pokemon][this.field] = this.value;
+            }
+            /*
+                Update Combat Stage Received
+             */
+            else if (this.type == "pokemon_setcs") {
+                battle[this.pokemon][this.field] = this.value;
+            }
             /*
                 Attack Received
              */
