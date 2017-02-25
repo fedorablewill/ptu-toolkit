@@ -1,5 +1,5 @@
 /**
- * Scripts for Pokemon Manager/Battler
+ * Scripts for Player Client
  * @author Will Stephenson
  */
 
@@ -60,26 +60,18 @@ $(function () {
         $(".progress-bar").css("width", Math.floor((hp / maxHp) * 100) + "%");
     });
 
-    $("#stage-atk").change(function () {
-        setStage($(this), "data-atk-stage");
-    });
+    $("#stages input").change(function () {
+        sendMessage("host:"+host_id, JSON.stringify({
+            "type": "pokemon_setcs",
+            "pokemon": $("#pokemonId").val(),
+            "field": $(this).attr("data-target"),
+            "value": $(this).val()
+        }));
 
-    $("#stage-def").change(function () {
-        setStage($(this), "data-def-stage");
-    });
-
-    $("#stage-spatk").change(function () {
-        setStage($(this), "data-spatk-stage");
-    });
-
-    $("#stage-spdef").change(function () {
-        setStage($(this), "data-spdef-stage");
-    });
-
-    $("#stage-speed").change(function () {
-        setStage($(this), "data-speed-stage");
-
-        $("#speed").html(parseInt($("#mon1").attr("data-speed")) * parseFloat($("#mon1").attr("data-speed-stage")));
+        if ($(this).attr("id") == "stage-speed") {
+            var s = pokemon_data["speed"] * getStageMultiplier(parseInt($(this).val()));
+            $("#speed").html(s);
+        }
     });
 
     $(".progress").click(function () {
@@ -235,7 +227,9 @@ function addPokemonToBattle() {
         "stage_def": $("#stage-def").val(),
         "stage_spatk": $("#stage-spatk").val(),
         "stage_spdef": $("#stage-spdef").val(),
-        "stage_speed": $("#stage-speed").val()
+        "stage_speed": $("#stage-speed").val(),
+        "stage_acc": $("#stage-acc").val(),
+        "stage_eva": $("#stage-eva").val()
     };
 
     sendMessage("host:"+host_id, JSON.stringify(message));

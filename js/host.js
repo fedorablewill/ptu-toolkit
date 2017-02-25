@@ -1,6 +1,14 @@
+/**
+ * Scripts for GM Client
+ * @author Will Stephenson
+ */
+
 var gm_data = {};
 var battle = {};
 
+/**
+ * Receives commands/messages
+ */
 function onUpdate() {
 
     // Check for incoming requests
@@ -59,7 +67,9 @@ function onUpdate() {
                     "stage_def": this.stage_def,
                     "stage_spatk": this.stage_spatk,
                     "stage_spdef": this.stage_spdef,
-                    "stage_speed": this.stage_speed
+                    "stage_speed": this.stage_speed,
+                    "stage_acc": this.stage_acc,
+                    "stage_eva": this.stage_eva
                 };
 
                 sendMessage(client_id, JSON.stringify({
@@ -75,6 +85,15 @@ function onUpdate() {
             /*
                 Update Field Received
              */
+            else if (this.type == "pokemon_update") {
+                gm_data["pokemon"][this.pokemon][this.field] = this.value;
+            }
+            /*
+                Update Combat Stage Received
+             */
+            else if (this.type == "pokemon_setcs") {
+                battle[this.pokemon][this.field] = this.value;
+            }
             /*
                 Attack Received
              */
@@ -88,12 +107,19 @@ function onUpdate() {
     setTimeout(onUpdate, 500);
 }
 
+/**
+ * Generates the Pokemon battle, primarilly the health visual
+ */
 function renderInit() {
     var html = '';
 
     $.each(battle, function (id, data) {
         var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
         var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+
+        if (w > 100)
+            console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
+                gm_data["pokemon"][id]['health'] + "/" + max_hp);
 
         html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="'+id+'">' +
             '<h2 class="name">'+gm_data["pokemon"][id]["name"]+'</h2>' +
@@ -106,6 +132,9 @@ function renderInit() {
     $("#view-holder").html(html);
 }
 
+/**
+ * Used when a GM ID is submitted
+ */
 function registerNewGM() {
     // Store selected GM ID
     host_id = $("#battle-id").val();
@@ -121,6 +150,12 @@ function registerNewGM() {
     });
 }
 
+/**
+ * Handle a move request and dish out effects
+ * @param moveName The name of the move used
+ * @param target_id The Pokemon id of the target
+ * @param dealer_id The Pokemon id of the user
+ */
 function performMove(moveName, target_id, dealer_id) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
@@ -151,7 +186,7 @@ function performMove(moveName, target_id, dealer_id) {
 
             if (move["Class"] == "Physical") {
                 damage = rolledDmg +
-                        gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
+                    gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
                 if (target_id != "other")
                     damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
             }
@@ -170,10 +205,20 @@ function performMove(moveName, target_id, dealer_id) {
                 $.getJSON("/data/type-effects.json", function (json) {
                     var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
-                    damage = damage * json[move["Type"].toLowerCase()][target_types[0].toLowerCase()];
+                    var effect1 = json[move["Type"].toLowerCase()][target_types[0].toLowerCase()];
+                    var effect2 = 1;
 
                     if (target_types.length > 1)
-                        damage = damage * json[move["Type"].toLowerCase()][target_types[1].toLowerCase()];
+                        effect2 = json[move["Type"].toLowerCase()][target_types[1].toLowerCase()];
+
+                    damage = damage * effect1 * effect2;
+
+                    if (effect1 * effect2 == 0)
+                        doToast("No effect!");
+                    else if (effect1 * effect2 >= 2)
+                        doToast("It's super effective!");
+                    else if (effect1 * effect2 < 1)
+                        doToast("It's not very effective.");
 
                     // Subtract health
                     gm_data["pokemon"][target_id]["health"] -= damage;
@@ -192,51 +237,5 @@ function performMove(moveName, target_id, dealer_id) {
                 });
             }
         }
-    });
-}
-
-function calcDamage(dmg, moveType, isSpecial, pokemon) {
-    moveType = moveType.toLocaleLowerCase();
-
-    var def, defStage;
-
-    if (isSpecial) {
-        def = parseInt(mon.attr("data-spdef"));
-        defStage = parseFloat(mon.attr("data-spdef-stage"));
-    }
-    else {
-        def = parseInt(mon.attr("data-def"));
-        defStage = parseFloat(mon.attr("data-def-stage"));
-    }
-
-    var damage = Math.floor(dmg - (def * defStage));
-
-    var monType1 = mon.attr("data-type-1");
-    var monType2 = mon.attr("data-type-2");
-
-    var effect1 = 1, effect2 = 1;
-
-    $.getJSON("data/type-effects.json", function(json) {
-        effect1 = json[moveType][monType1];
-
-        if (monType2 != null)
-            effect2 = json[moveType][monType2];
-
-        damage = damage * effect1 * effect2;
-
-        if (damage < 1)
-            damage = 1;
-
-        hp = hp - damage;
-
-        if (hp <= 0) {
-            window.alert("The pokemon fainted!");
-        }
-
-        progress.attr("data-hp", hp);
-
-        sendUpdate("hp", hp);
-
-        $(".progress-bar").css("width", Math.floor((hp / maxHp) * 100) + "%");
     });
 }
