@@ -377,7 +377,7 @@
             	  "type": "status",
             	  "stat": ["Stuck"],
             	  "target": "TARGET"
-              },
+              }
           }
         }
       ]
@@ -1165,7 +1165,7 @@
             "19": 17,
             "20": 17
           }
-        }
+        },
         {
           "type":"push",
           "value":1,
@@ -2392,7 +2392,7 @@
            "type": "status",
            "stat": ["Confused"],
            "target": "TARGET"
-        }
+        },
         {
           "type": "action-needed",
           "text": "Dynamic Punch ignores the target's Evasion if they are Flanked."
@@ -10065,7 +10065,7 @@
               "value": "3/2 User Level",
               "target":"TARGET"
             },
-            "3": {
+            "4": {
               "type": "damage",
               "value": "2 User Level",
               "target":"TARGET"
