@@ -23,7 +23,32 @@ var ptuApiData = {
         requestData: {},
         urlDescription: ["abilities", "abilities/name", "abilities/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
     },
+    capabilities: {
+        url: "capabilities/",
+        verbs: ["Marsupial", "Dream Reader"],
+        requestData: {},
+        urlDescription: ["capabilities", "capabilities/name", "capabilities/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
+    },
+    edges: {
+        url: "edges/",
+        verbs: ["Breeder", "Basic Cooking"],
+        requestData: {},
+        urlDescription: ["edges", "edges/name", "edges/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
+    },
+    features: {
+        url: "features/",
+        verbs: ["Press", "Guardian Orders"],
+        requestData: {},
+        urlDescription: ["features", "features/1", "features/name", "features/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
+    },
+    natures: {
+        url: "natures/",
+        verbs: ["Distracted", "Adamant"],
+        requestData: {},
+        urlDescription: ["natures", "natures/name", "natures/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
+    },
 };
+
 var ptuApi = (function(){
     var _baseUrl = "/api/v1/";
     var _type = null;
@@ -32,7 +57,8 @@ var ptuApi = (function(){
         setApiDetails: function(type) {
             _type = type;
             // Set Placeholder
-            $("#urlInput").attr("placeholder", type.verbs[0]);
+            var randomVerbIndex = Math.round(Math.random() * (type.verbs.length - 1));
+            $("#urlInput").attr("placeholder", type.verbs[randomVerbIndex]);
             
             // Set url descriptions
             $("#callExplanation").html("");
@@ -72,12 +98,21 @@ var ptuApi = (function(){
         hideLoader: function() {
             $("#loader").hide();
             $("#callData").show();
-        }
+        },
+        setSelectOptions: function() {
+            var html = [];
+            $.each(ptuApiData, function(type, data){
+                html.push("<option>"+type+"</option>");
+            });
+            $("#apiSelect").html(html.join());
+            
+        },
     };
 })();
 
 // On load
 (function(){
+    ptuApi.setSelectOptions();
     ptuApi.onSelect();
     
     // Bind enter key
@@ -86,4 +121,5 @@ var ptuApi = (function(){
             $("#submitBtn").click();
         }
     });
+    
 })();
