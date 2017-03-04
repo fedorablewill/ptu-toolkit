@@ -159,7 +159,7 @@ function registerNewGM() {
 function performMove(moveName, target_id, dealer_id) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
-    $.getJSON("/api/moves/?name="+moveName, function (move) {
+    $.getJSON("/api/v1/moves/"+moveName, function (move) {
         var acRoll = roll(1, 20, 1);
         var crit = 20;
 
@@ -201,8 +201,7 @@ function performMove(moveName, target_id, dealer_id) {
                 doToast("OUTGOING DAMAGE = " + damage);
             }
             else {
-                //TODO: add type-effects to API
-                $.getJSON("/data/type-effects.json", function (json) {
+                $.getJSON("/api/v1/types", function (json) {
                     var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
                     var effect1 = json[move["Type"].toLowerCase()][target_types[0].toLowerCase()];

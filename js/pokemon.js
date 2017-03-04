@@ -281,7 +281,7 @@ function onUpdate() {
 }
 
 function fetchMoves() {
-    $.getJSON("/api/moves/?names="+encodeURIComponent(JSON.stringify(pokemon_data["moves"])), function (json) {
+    $.getJSON("/api/v1/moves/?names="+encodeURIComponent(JSON.stringify(pokemon_data["moves"])), function (json) {
         var i = 0;
         $.each(json, function (name, move) {
             if (name != "") {
@@ -372,7 +372,7 @@ function damage(dmg, moveType, isSpecial) {
 
     var effect1 = 1, effect2 = 1;
 
-    $.getJSON("data/type-effects.json", function(json) {
+    $.getJSON("/api/v1/types", function(json) {
         effect1 = json[moveType][monType1];
 
         if (monType2 != null)
@@ -397,7 +397,7 @@ function damage(dmg, moveType, isSpecial) {
     });
 }
 
-$.getJSON("data/type-effects.json", function(json) {
+$.getJSON("/api/v1/types", function(json) {
     $.each(json, function (k, v) {
         document.getElementById("dmg-type").innerHTML += "<option>" + k + "</option>";
     })
