@@ -13,9 +13,11 @@ require_once 'api.class.php';
 class PtuAPI extends API
 {
     const JSON_DATA_PATH = "../../data/";
+    const ABILITIES_FILENAME = "abilities.json";
     const POKEMON_FILENAME = "ptu_pokedex_1_05.json";
-    const TYPE_FILENAME = "type-effects.json";
     const MOVES_FILENAME = "moves.json";
+    const TYPE_FILENAME = "type-effects.json";
+    
     
     public function __construct($request, $origin)
     {
@@ -26,6 +28,48 @@ class PtuAPI extends API
     /*******************
      **** API Calls ****
      ******************/
+    
+    /** abilities
+     * api/v1/abilities/
+     * api/v1/abilities/name/
+     * api/v1/abilities/name/?names=["Abominable","Bad Dreams"] (uri encoded)
+     * api/v1/abilities/?offset=20&size=3
+     */
+    public function abilities()
+    {
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return "Why you telling me what to do? Just get fool";
+        }
+        
+        $abilitiesData = $this->getJsonFromFile(self::ABILITIES_FILENAME);
+        
+        // Get List of Abilities
+        if ($this->checkEmptyRequest()) {
+            // Check for ?names
+            $names = (!empty($_GET['names'])) ? json_decode($_GET['names'], true)  : array();
+            if (!empty($names))  {
+                $abilitiesArr = array();
+                foreach ($names as $name) {
+                    if (!empty($abilitiesData[$name])) {
+                        $abilitiesArr[$name] = $abilitiesData[$name];
+                    }
+                }
+                return $abilitiesArr;
+            }
+            // No specification passed
+            else {
+                return "TODO: get 20 with offset";
+            }
+        }
+
+        // Get Ability by name
+        $abilityName = ucwords($this->verb);
+        if (!empty($abilityName) && array_key_exists($abilityName, $abilitiesData)) {
+            return $abilitiesData[$abilityName];
+        }
+        return "Not Found";
+    }
     
     /** moves
      * api/v1/moves/

@@ -17,6 +17,12 @@ var ptuApiData = {
         requestData: {},
         urlDescription: ["moves", "moves/name", "moves/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
     },
+    abilities: {
+        url: "abilities/",
+        verbs: ["Sequence", "Bad Dreams"],
+        requestData: {},
+        urlDescription: ["abilities", "abilities/name", "abilities/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
+    },
 };
 var ptuApi = (function(){
     var _baseUrl = "/api/v1/";
