@@ -87,6 +87,18 @@ function onUpdate() {
              */
             else if (this.type == "pokemon_update") {
                 gm_data["pokemon"][this.pokemon][this.field] = this.value;
+
+                if (this.field == "health") {
+                    var max_hp = gm_data["pokemon"][this.pokemon]['level'] + gm_data["pokemon"][this.pokemon]['hp'] * 3 + 10;
+                    var w = Math.floor((gm_data["pokemon"][this.pokemon]['health'] / max_hp) * 100);
+
+                    $("[data-name='"+this.pokemon+"']").find(".progress-bar").css("width", w + "%");
+
+                    sendMessage(battle[this.pokemon]["client_id"], JSON.stringify({
+                        "type": "health",
+                        "value": this.value
+                    }));
+                }
             }
             /*
                 Update Combat Stage Received
@@ -99,6 +111,12 @@ function onUpdate() {
              */
             else if (this.type == "battle_move") {
                 performMove(this.move, this.target, this.dealer);
+            }
+            /*
+                Manual Damage Received
+             */
+            else if (this.type == "battle_damage") {
+                damagePokemon(this.target, this.moveType, this.isSpecial, this.damage);
             }
         });
     });
@@ -160,10 +178,14 @@ function performMove(moveName, target_id, dealer_id) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
-        var acRoll = roll(1, 20, 1);
-        var crit = 20;
+        var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
+        var crit = 20, evade = 0;
 
-        if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"])) {
+        if (target_id != "other") {
+            //TODO: get evade
+        }
+
+        if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
             doToast("It missed!");
             return;
         }
@@ -201,40 +223,42 @@ function performMove(moveName, target_id, dealer_id) {
                 doToast("OUTGOING DAMAGE = " + damage);
             }
             else {
-                $.getJSON("/api/v1/types", function (json) {
-                    var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
-
-                    var effect1 = json[move["Type"].toLowerCase()][target_types[0].toLowerCase()];
-                    var effect2 = 1;
-
-                    if (target_types.length > 1)
-                        effect2 = json[move["Type"].toLowerCase()][target_types[1].toLowerCase()];
-
-                    damage = damage * effect1 * effect2;
-
-                    if (effect1 * effect2 == 0)
-                        doToast("No effect!");
-                    else if (effect1 * effect2 >= 2)
-                        doToast("It's super effective!");
-                    else if (effect1 * effect2 < 1)
-                        doToast("It's not very effective.");
-
-                    // Subtract health
-                    gm_data["pokemon"][target_id]["health"] -= damage;
-
-                    if (gm_data["pokemon"][target_id]["health"] <= 0) {
-                        doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
-                        gm_data["pokemon"][target_id]["health"] = 0;
-                    }
-
-                    // Update health bar
-                    var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
-                    var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
-
-                    $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
-                    //TODO: send update to target
-                });
+                damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage)
             }
+        }
+    });
+}
+
+function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
+    if (moveIsSpecial)
+        damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
+    else
+        damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
+
+    $.getJSON("/api/v1/types", function (json) {
+        var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
+
+        var effect1 = json[moveType][target_types[0].toLowerCase()];
+        var effect2 = 1;
+
+        if (target_types.length > 1)
+            effect2 = json[moveType][target_types[1].toLowerCase()];
+
+        damage = damage * effect1 * effect2;
+
+        if (effect1 * effect2 == 0)
+            doToast("No effect!");
+        else if (effect1 * effect2 >= 2)
+            doToast("It's super effective!");
+        else if (effect1 * effect2 < 1)
+            doToast("It's not very effective.");
+
+        // Subtract health
+        gm_data["pokemon"][target_id]["health"] -= damage;
+
+        if (gm_data["pokemon"][target_id]["health"] <= 0) {
+            doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
+            gm_data["pokemon"][target_id]["health"] = 0;
         }
     });
 }
