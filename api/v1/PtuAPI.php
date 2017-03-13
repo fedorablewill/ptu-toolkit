@@ -14,6 +14,7 @@ class PtuAPI extends API
 {
     // Json path data
     const JSON_DATA_PATH = "../../data/";
+    const JSON_FILE_EXTENSION = ".json";
     const ABILITIES_FILENAME = "abilities.json";
     const CAPABILITIES_FILENAME = "capabilities.json";
     const EDGES_FILENAME = "edges.json";
@@ -129,6 +130,18 @@ class PtuAPI extends API
                 }
             }
         }
+    }
+    
+    /** Any Generic Json file getter
+     * api/v1/getJson/filename
+     */
+    public function getJson()
+    {
+         // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
+        }
+        return $this->getJsonFromFile($this->verb . self::JSON_FILE_EXTENSION);
     }
     
     /** moves

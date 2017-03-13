@@ -54,6 +54,12 @@ var ptuApi = (function(){
     var _type = null;
     
     return {
+        getJson: function(filename) {
+            $.getJSON("/api/v1/getJson/oldabilities", function(data){
+                var a = data;
+                console.log(data);
+            });
+        },
         setApiDetails: function(type) {
             _type = type;
             // Set Placeholder
