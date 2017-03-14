@@ -468,7 +468,9 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$septe
 			//Setting particular stipulations
 			$maxDB = 9;
 			$frequencies = ["At-Will","EOT"];
-			//Iterate over moves in $list
+			//Iterate over moves in $littlelist
+			echo nl2br("firstEvo:".$dex["EvolutionStages"][0]["Species"]."\n\n");
+			echo nl2br("dex:".json_encode($bigdex)."\n\n");
 			echo nl2br("littlelist:".json_encode($littlelist)."\n\n");
 			foreach($littlelist as $key=>$value){
 				//Looking up move info;
