@@ -299,10 +299,11 @@
       "Effect":"Spider Web cannot miss. The target is Stuck and Trapped. If the target is freed of the Stuck condition, it is freed of Trapped as well. *Grants Threaded",
       "Contest Type":"Smart",
       "Contest Effect":"Sabotage",
+      "Grants":["Threaded"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "Spider Web cannot miss. The target is Stuck and Trapped. If the target is freed of the Stuck condition, it is freed of Trapped as well. *Grants Threaded"
+          "text": "Spider Web cannot miss. The target is Stuck and Trapped. If the target is freed of the Stuck condition, it is freed of Trapped as well."
         }
       ]
    },
@@ -347,10 +348,11 @@
       "Effect":"Set 8 square meters of Sticky Web hazards within your range such that all 8 meters are adjacent with at least one other space of Sticky Web. Sticky Web causes Terrain to become Slow Terrain, and a grounded foe that runs into the hazard has its Speed lowered by -1 CS and becomes Slowed until the end of their next turn. Flying-type Pokémon and Pokémon and Trainers with Levitate are not affected by Sticky Web. Bug-type Pokémon may move over Sticky Web harmlessly, destroying the Hazards as they do so. *Grants Threaded",
       "Contest Type":"Smart",
       "Contest Effect":"Sabotage",
+      "Grants":["Threaded"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "Set 8 square meters of Sticky Web hazards within your range such that all 8 meters are adjacent with at least one other space of Sticky Web. Sticky Web causes Terrain to become Slow Terrain, and a grounded foe that runs into the hazard has its Speed lowered by -1 CS and becomes Slowed until the end of their next turn. Flying-type Pokémon and Pokémon and Trainers with Levitate are not affected by Sticky Web. Bug-type Pokémon may move over Sticky Web harmlessly, destroying the Hazards as they do so. *Grants Threaded"
+          "text": "Set 8 square meters of Sticky Web hazards within your range such that all 8 meters are adjacent with at least one other space of Sticky Web. Sticky Web causes Terrain to become Slow Terrain, and a grounded foe that runs into the hazard has its Speed lowered by -1 CS and becomes Slowed until the end of their next turn. Flying-type Pokémon and Pokémon and Trainers with Levitate are not affected by Sticky Web. Bug-type Pokémon may move over Sticky Web harmlessly, destroying the Hazards as they do so."
         }
       ]
    },
@@ -363,6 +365,7 @@
       "Effect":"Lower the Speed of all legal targets by -1 CS. If this lowers their Speed CS to -6, or if their Speed CS was already at -6, they are instead Stuck. *Grants Threaded",
       "Contest Type":"Smart",
       "Contest Effect":"Excitement",
+      "Grants":["Threaded"],
       "Triggers":[
         {
           "type":"CS",
@@ -410,6 +413,7 @@
       "Effect":"Raise the user’s Special Attack by +3 CS. *Grants Glow",
       "Contest Type":"Beauty",
       "Contest Effect":"Get Ready!",
+      "Grants":["Glow"],
       "Triggers":[
         {
           "type":"CS",
@@ -1451,6 +1455,7 @@
       "Effect":"Lower the target's Special Attack by -2 CS. *Grants Glow.",
       "Contest Type":"Cool",
       "Contest Effect":"Excitement",
+      "Grants":["Glow"],
       "Triggers":[
         {
           "type":"CS",
@@ -1639,7 +1644,8 @@
       "Effect":"Shock Wave cannot miss. *Grants Zapper",
       "Contest Type":"Cool",
       "Contest Effect":"Exhausting Act",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Zapper"]
    },
    "Spark":{
       "Type":"Electric",
@@ -1794,6 +1800,7 @@
       "Contest Type":"Cool",
       "Contest Effect":"Steady Performance",
       "Crits On":20,
+      "Grants":["Zapper"],
       "Triggers":[
         {
           "prereq": "accuracy",
@@ -3055,6 +3062,7 @@
       "Contest Type":"Beauty",
       "Contest Effect":"Steady Performance",
       "Crits On":20,
+      "Grants":["Firestarter"],
       "Triggers":[
         {
           "prereq": "accuracy",
@@ -3215,6 +3223,7 @@
       "Contest Type":"Beauty",
       "Contest Effect":"Safe Option",
       "Crits On":20,
+      "Grants":["Firestarter"],
       "Triggers":[
         {
           "type":"vortex"
@@ -3852,10 +3861,11 @@
       "Contest Type":"Smart",
       "Contest Effect":" Special Attention",
       "Crits On":20,
+      "Grants":["+3 Sky"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "Set-Up Effect: The user is moved up 25 meters into the air. Resolution Effect: The user may shift twice while in the air, using their overland or sky speed, and then comes down next to a legal target, and attacks with Fly. *Grants: Sky +3"
+          "text": "Set-Up Effect: The user is moved up 25 meters into the air. Resolution Effect: The user may shift twice while in the air, using their overland or sky speed, and then comes down next to a legal target, and attacks with Fly."
         }
       ]
    },
@@ -3870,10 +3880,11 @@
       "Contest Type":"Smart",
       "Contest Effect":"Steady Performance",
       "Crits On":20,
+      "Grants":["Guster"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "If the target is airborne as a result of Bounce, Fly, or Sky Drop, Gust can hit them, ignoring Range and has a Damage Base of 8 instead. *Grants: Guster"
+          "text": "If the target is airborne as a result of Bounce, Fly, or Sky Drop, Gust can hit them, ignoring Range and has a Damage Base of 8 instead."
         }
       ]
    },
@@ -4051,10 +4062,11 @@
       "Effect":"For the remainder of the encounter, all allied trainers and Pokémon gain +5 to their Initiative. Multiple instances of Tailwind cannot stack. *Grants: Guster",
       "Contest Type":"Smart",
       "Contest Effect":"Saving Grace",
+      "Grants":["Guster"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "For the remainder of the encounter, all allied trainers and Pokémon gain +5 to their Initiative. Multiple instances of Tailwind cannot stack. *Grants: Guster"
+          "text": "For the remainder of the encounter, all allied trainers and Pokémon gain +5 to their Initiative. Multiple instances of Tailwind cannot stack."
         }
       ]
    },
@@ -4854,7 +4866,8 @@
       "Effect":"*Grants: Threaded",
       "Contest Type":"Beauty",
       "Contest Effect":"Steady Performance",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Threaded"]
    },
    "Razor Leaf":{
       "Type":"Grass",
@@ -5007,7 +5020,8 @@
       "Effect":"*Grants: Threaded",
       "Contest Type":"Cool",
       "Contest Effect":"Steady Performance",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Threaded"]
    },
    "Wood Hammer":{
       "Type":"Grass",
@@ -5115,10 +5129,11 @@
       "Contest Type":"Smart",
       "Contest Effect":" Special Attention",
       "Crits On":20,
+      "Grants":["+3 Burrow"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "Set-Up Effect: The user shifts 25 meters underground and their turn ends. Resolution Effect: The user may shift horizontally using their burrow or overland speed, and then shifts 25 meters straight up. Upon reaching the surface, the user attacks with Dig, creating a Burst 1. *Grants: Burrow +3"
+          "text": "Set-Up Effect: The user shifts 25 meters underground and their turn ends. Resolution Effect: The user may shift horizontally using their burrow or overland speed, and then shifts 25 meters straight up. Upon reaching the surface, the user attacks with Dig, creating a Burst 1."
         }
       ]
    },
@@ -5174,6 +5189,7 @@
       "Contest Type":"Tough",
       "Contest Effect":"Desperation",
       "Crits On":20,
+      "Grants":["Groundshaper"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -5189,6 +5205,7 @@
       "Effect":"Roll 1d100. This roll may not be modified in any way. If you roll X or lower, the target Faints. X is equal to 30 + The User's Level - The Target's Level. *Grants: Groundshaper",
       "Contest Type":"Tough",
       "Contest Effect":"Big Show",
+      "Grants":["Groundshaper"],
       "Triggers":[
         {
           "type":"execute"
@@ -5205,7 +5222,8 @@
       "Effect":"*Grants: Groundshaper",
       "Contest Type":"Tough",
       "Contest Effect":"Big Show",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Groundshaper"]
    },
    "Magnitude":{
       "Type":"Ground",
@@ -5218,6 +5236,7 @@
       "Contest Type":"Tough",
       "Contest Effect":"Desperation",
       "Crits On":20,
+      "Grants":["Groundshaper"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -5399,6 +5418,7 @@
       "Contest Type":"Beauty",
       "Contest Effect":"Exhausting Act",
       "Crits On":20,
+      "Grants":["Freezer"],
       "Triggers":[
         {
           "prereq": "accuracy",
@@ -5527,7 +5547,8 @@
       "Effect":"If Frost Breath hits, it is a Critical Hit. *Grants: Freezer",
       "Contest Type":"Beauty",
       "Contest Effect":"Steady Performance",
-      "Crits On":0
+      "Crits On":0,
+      "Grants":["Freezer"]
    },
    "Glaciate":{
       "Type":"Ice",
@@ -5817,6 +5838,7 @@
       "Contest Type":"Beauty",
       "Contest Effect":"Steady Performance",
       "Crits On":20,
+      "Grants":["Freezer"],
       "Triggers":[
         {
           "prereq": "accuracy",
@@ -5839,6 +5861,7 @@
       "Effect":"Roll 1d100. This roll may not be modified in any way. If you roll X or lower, the target Faints. X is equal to 30 + The User's Level - The Target's Level. *Grants: Freezer",
       "Contest Type":"Beauty",
       "Contest Effect":"Big Show",
+      "Grants":["Freezer"],
       "Triggers":[
         {
           "type":"execute"
@@ -6116,6 +6139,7 @@
       "Effect":"The user changes their Type to match the field. Forests and grassy areas change the user into a Grass Type. Watery areas change the user into a Water Type. Caves and Mountains could change the user into a Rock or Ground Type. An icy terrain would turn the user into an Ice Type. A building may change the user into a Steel or Normal Type. Weather affects what Type the user becomes. Use common sense; if you are having difficult determining what Type the user should become, consult the GM. *Grants Blender",
       "Contest Type":"Smart",
       "Contest Effect":"Sabotage",
+      "Grants":["Blender"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -6713,6 +6737,7 @@
       "Effect":"Lower the Accuracy of all legal targets by -1. *Grants Glow",
       "Contest Type":"Beauty",
       "Contest Effect":" Unsettling",
+      "Grants":["Glow"],
       "Triggers":[
         {
           "type":"CS",
@@ -6861,6 +6886,7 @@
       "Effect":"Raise the user's Attack and Special Attack by +1 CS each. If it is Sunny, double the amount of Combat Stages gained. *Grants Inflatable",
       "Contest Type":"Beauty",
       "Contest Effect":"Get Ready!",
+      "Grants":["Inflatable"],
       "Triggers":[
         {
           "type":"CS",
@@ -7345,6 +7371,7 @@
       "Effect":"The user gains +4 Evasion, and the user's size is lowered to Small for the remainder of the encounter. *Grants Shrinkable",
       "Contest Type":"Cute",
       "Contest Effect":"Sabotage",
+      "Grants":["Shrinkable"],
       "Triggers":[
         {
           "type":"CS",
@@ -8248,10 +8275,11 @@
       "Effect":"Shift Action - The user may make a single Jump, adding +1 to their Long Jump and High Jump values, and gains +2 Evasion until the end of their next turn. *Grants +1 Long Jump",
       "Contest Type":"Cute",
       "Contest Effect":"Inversed Appeal",
+      "Grants":["+1 Long Jump"],
       "Triggers":[
         {
           "type": "action-needed",
-          "text": "Shift Action - The user may make a single Jump, adding +1 to their Long Jump and High Jump values, and gains +2 Evasion until the end of their next turn. *Grants +1 Long Jump"
+          "text": "Shift Action - The user may make a single Jump, adding +1 to their Long Jump and High Jump values, and gains +2 Evasion until the end of their next turn."
         }
       ]
    },
@@ -8314,6 +8342,7 @@
       "Contest Type":"Tough",
       "Contest Effect":"Steady Performance",
       "Crits On":20,
+      "Grants":["+1 Power"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -8435,6 +8464,7 @@
       "Effect":"Targets hit by Sweet Scent gain a -2 Penalty to Evasion. (Total Evasion may not be lowered to a negative value.) *Grants Alluring",
       "Contest Type":"Cute",
       "Contest Effect":"Excitement",
+      "Grants":["Alluring"],
       "Triggers":[
         {
           "type":"CS",
@@ -10188,6 +10218,7 @@
       "Effect":"The target becomes Lifted. While Lifted, they gain the Levitate Ability, are Slowed, and lose all Movement Capabilities except for the Levitate 4 granted by Levitate (reduced to 2 by the Slow condition). While Lifted, the user may not apply any Evasion bonuses to determine whether they are hit by Moves or not. The Lifted target may use a Shift Action to roll 1d20; on a result of 16+, they stop being Lifted. *Grants Telekinetic",
       "Contest Type":"Smart",
       "Contest Effect":"Steady Performance",
+      "Grants":["Telekinetic"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -10203,6 +10234,7 @@
       "Effect":"The user Teleports up to X meters, where X is its Teleporter Capability. Any Move that targeted Teleport's user continue through the desired target's space if the Move allows for it as if the user hadn't been there; single target moves simply miss. *Grants Teleporter 4",
       "Contest Type":"Cool",
       "Contest Effect":"Saving Grace",
+      "Grants":["+4 Teleporter"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -10376,7 +10408,8 @@
       "Effect":"*Grants Materializer",
       "Contest Type":"Tough",
       "Contest Effect":"Reliable",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Materializer"]
    },
    "Rock Polish":{
       "Type":"Rock",
@@ -10444,6 +10477,7 @@
       "Contest Type":"Smart",
       "Contest Effect":"Desperation",
       "Crits On":20,
+      "Grants":["Materializer"],
       "Triggers":[
         {
           "type":"CS",
@@ -10463,7 +10497,8 @@
       "Effect":"*Grants Materializer",
       "Contest Type":"Tough",
       "Contest Effect":"Seen Nothing Yet",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Materializer"]
    },
    "Rollout":{
       "Type":"Rock",
@@ -10524,6 +10559,7 @@
       "Effect":"Set 4 square meters of Stealth Rock hazards within 6 meters. If a foe moves within 2 meters of a space occupied by Rocks, move at most one Rock to the offender, then destroy the Rock. When that happens, the Stealth Rock causes a foe to lose a Tick of Hit Points. Stealth Rock is considered to be dealing damage; Apply Weakness and Resistance. Do not apply stats. A Pokémon who has been hit by a Stealth Rock Hazard cannot get hit by another in the same encounter until it is returned to a Poké Ball and then sent back out. *Grants Materializer",
       "Contest Type":"Cool",
       "Contest Effect":"Sabotage",
+      "Grants":["Materializer"],
       "Triggers":[
         {
           "type": "action-needed",
@@ -10774,7 +10810,8 @@
       "Effect":"Magnet Bomb cannot miss. *Grants Magnetic",
       "Contest Type":"Cool",
       "Contest Effect":"Steady Performance",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Magnetic"]
    },
    "Metal Burst":{
       "Type":"Steel",
@@ -11321,7 +11358,8 @@
       "Effect":"*Grants Fountain",
       "Contest Type":"Cute",
       "Contest Effect":"Steady Performance",
-      "Crits On":20
+      "Crits On":20,
+      "Grants":["Fountain"]
    },
    "Water Pledge":{
       "Type":"Water",
@@ -11387,6 +11425,7 @@
       "Effect":"All targets in the burst, including the user, gain a Coat which grants them 1 Step of Resistance to Fire Type Moves. After a target has been hit by a damaging Fire Type Move, the coat is removed. *Grants Fountain",
       "Contest Type":"Cute",
       "Contest Effect":"Sabotage",
+      "Grants":["Fountain"],
       "Triggers":[
         {
           "type": "action-needed",
