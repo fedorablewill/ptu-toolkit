@@ -397,9 +397,10 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$septe
 					$move = $value["Name"];
 				}
 				//Looking up move info;
-				echo nl2br("move:".$move."\n\n");
+				if ($moveData[$move]===null){
+					echo nl2br("move:".$move."\n\n");
+				}
 				$move = $moveData[$move];
-				echo nl2br("moveData:".json_encode($move)."\n\n");
 				//If the move doesn't meet the stipulations, add its key to the key list
 				if ((array_key_exists("DB",$move)&&$move["DB"]>$maxDB)||(array_key_exists("Freq",$move)&&!in_array($move["Freq"],$frequencies))){
 					$keys[$key]=1;
