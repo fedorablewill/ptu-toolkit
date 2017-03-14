@@ -1,4 +1,7 @@
 <?php
+//////////////////////////////////////////////////////////////////////////////////////////
+//User options
+
 //$genType = type of generation; two-layer array with two-long subarrays
 //Each step may be one of [Type, Habitat, Generation,Specific,All]
 //Examples:
@@ -17,16 +20,41 @@ $levelRange=[1,100];
 //$nature: If "Random", will generate random nature; otherwise, the nature for the mon.
 $nature = "Random";
 
-//$statWeights: An array of numbers with with the six stats as keys. This is used for randomly selecting stats, BSR allowing.
+//$location: This string indicates the location of the battle, and will be the value of the 'discovery' field on the Pokémon
+$location = "";
+
+//$gender: If a particular gender (presumably "Male" or "Female") is desired, set this string to that value. Otherwise, let it be the empty string.
+$gender = "";
+
+//$statWeights: An array of numbers with with the six stats as keys. This is used for randomly selecting stats, BSR allowing. A 0 for a stat should completely remove it from being selected to be added to.
 //The default, unweighted version is as shown below:
 $statWeights = ["HP"=>1,"Attack"=>1,"Defense"=>1,"SpecialAttack"=>1,"SpecialDefense"=>1,"Speed"=>1];
 
-//$tutorRange: Array of lower and upper bounds on the amount of TM, HM, and Tutor moves allowed to generate per 'mon 
+//$tutorRange: Array of lower and upper bounds on the amount of TM, HM, and Tutor moves allowed to generate per 'mon. Upper limit should be at most 3, but some features, namely Lifelong Learning, boost this limit; 
 $tutorRange = [0,3];
 
 //$eggRange: Array of lower and upper bounds on the amount of Egg moves allowed to generate per 'mon
 $eggRange = [0,3];
 
+//$topPercentage: If a Pokémon's Trainer has top percentage, i.e. $topPercentage[0]==TRUE, they gain extra TP and boosted Base Stats on Levels divisible by 5. The second entry indicates the level at which it was caught, and thus how many instances of Top Percentage it has been affected by.
+$topPercentage = [FALSE, 0];
+
+//$expandHorizons: If TRUE, the trainer has the Mentor feature Expand Horizons, giving an extra 3 TP to the 'mon.
+$expandHorizons = FALSE;
+
+//$guidance: If TRUE, the trainer has the Mentor feature Guidance, giving an extra +1 to the Move List Limit;
+$guidance = FALSE;
+
+//$saveTP: The number of TP the 'mon should have left unspent at the end of generation. Default is 0, allowing as much TP to be spent as can be.
+$saveTP = 0;
+
+//$enduringSoul: If TRUE, the trainer is an Enduring Soul, allowing HP to break BSR:
+$enduringSoul = FALSE;
+
+//$statAce: A list of non-HP stats which the trainer has the corresponding Stat Ace base feature for. Empty means the trainer is not a Stat Ace.
+$statAce = [];
+
+//////////////////////////////////////////////////////////////////////////////////////////
 //Getting data from the JSONs
 $fname = __DIR__ ."/data/ptu_pokedex_1_05.json";
 $bigdex = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
@@ -35,7 +63,8 @@ $fname = __DIR__ ."/data/natures.json";
 $natureList = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 $fname = __DIR__ ."/data/experience.json";
 $exp = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//Functions
 //This function removes mon from an array that do not meet specific criteria. For multi-step generation, feed the results back into the function with further stipulations.
 function genstep($dex,$genType,$genData){
   $arr = [];
@@ -180,7 +209,7 @@ function abilitySelect($dex,$level){
   return $abilities;
 }
 
-function statGen($level,$baseStats,$statWeights){
+function statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce){
   $stats = [
     "HP" => 0,
     "Attack" => 0,
@@ -221,7 +250,8 @@ function statGen($level,$baseStats,$statWeights){
   		if($value==0){
   			array_push($a,$key);
   		} else {
-  			if (($baseStats[$key]+$stats[$key])+1<($baseStats[$bsr[$value-1][0]]+$stats[$bsr[$value-1][0]])){
+  			$test = ($baseStats[$key]+$stats[$key])+1<($baseStats[$bsr[$value-1][0]]+$stats[$bsr[$value-1][0]]);
+  			if ($test||($key=="HP"&&$enduringSoul)||in_array($key,$statAce)){
   				array_push($a,$key);
   			}
   		}
@@ -244,11 +274,8 @@ function statGen($level,$baseStats,$statWeights){
   }
   return $stats;
 }
-//Iterates over $genType for multi-step generation
 
-function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit){
-	$TP = 1 + floor($level/5);
-	settype($TP,"integer");
+function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP){
 	$tutor = mt_rand($tutorRange[0],$tutorRange[1]);
 	$egg = mt_rand($eggRange[0],$eggRange[1]);
 	$list = array_merge($dex["TmHmMoves"],$dex["TutorMoves"]);
@@ -300,40 +327,50 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit){
 	}
 	return $monMoves;
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////
+try{
+//Go time!
 $export = ["name" => ""];
 
+//Iterates over $genType for multi-step generation
 foreach ($genType as &$value){
   $dex = genStep($dex,$value[0],$value[1]);
 }
 
-if ($legend == FALSE){
+//Remove legendaries if not allowed
+if (!$legend){
   $dex = noLegend($dex);
 }
 
 
+//Throw exception if $dex is an empty array
+if ($dex === []){
+	throw new Exception("Critera too limited; no such 'mon exist.")
+}
 //Selects single entry from limited dex.
-if ($dex != []){
-	$num = array_rand($dex);
-	$export["dex"]=(int)$num;
-  	$dex = $dex[$num];
-  	if (sizeOf($dex["Types"])==1){
-		$export["type"]=$dex["Types"][0];
-  	} else {
-  		$s = "";
-  		foreach($dex["Types"] as &$value){
-  			$s = $s.$value." / ";
-  		}
-  		$export["type"] = substr($s,0,-3);
+$num = array_rand($dex);
+$export["dex"]=(int)$num;
+$dex = $dex[$num];  	
+
+//Setting $export["type"]
+if (sizeOf($dex["Types"])==1){
+	$export["type"]=$dex["Types"][0];
+} else {
+	$s = "";
+  	foreach($dex["Types"] as &$value){
+  		$s = $s.$value." / ";
   	}
+  	$export["type"] = substr($s,0,-3);
 }
 echo nl2br(json_encode($dex)."\n\n");
 
+//No random Held Item generation atm, so setting $export["held-item"] to an empty string.
 $export["held-item"] = "";
 
 //Picking level for the 'mon
 $level = mt_rand($levelRange[0],$levelRange[1]);
 
+//Putting level and minimum EXP in $export
 $export["level"] = (int)$level;
 $export["EXP"] = $exp[$level];
 
@@ -347,19 +384,28 @@ if ($nature=="Random"){
 //echo nl2br($nature."\n\n");
 $export["nature"] = $nature;
 
+//Checking if species has gender
 if (!$dex["BreedingData"]["HasGender"]){
 	$export["gender"]="No Gender";
 } else {
-	$num = mt_rand() / mt_getrandmax();
-	if ($num < $dex["BreedingData"]["MaleChance"]){
-		$export["gender"]="Male";
+	//Checking if gender is pre-set 
+	if ($gender != ""){
+		$export["gender"]=$gender;
 	} else {
-		$export["gender"]="Female";
+		//Selecting gender based on species MaleChance
+		$num = mt_rand() / mt_getrandmax();
+		if ($num < $dex["BreedingData"]["MaleChance"]){
+			$export["gender"]="Male";
+		} else {
+			$export["gender"]="Female";
+		}
 	}
 }
 
-$export["discovery"]="";
+//Setting discovery location
+$export["discovery"]=$location;
 
+//Setting base stats based on species baseline and nature
 $baseStats = $dex["BaseStats"];
 if ($natureList[$nature]["Raise"]=="HP"){
   $baseStats["HP"] = $baseStats["HP"] + 1;
@@ -371,9 +417,44 @@ if ($natureList[$nature]["Lower"]=="HP"){
 } else {
   $baseStats[$natureList[$nature]["Lower"]] = max($baseStats[$natureList[$nature]["Lower"]] - 2,1);
 }
+
+//Calculating $TP
+$TP = 1 + floor($level/5);
+
+//Checking if Top Percentage is active
+if ($topPercentage[0]){
+	//Calculating number of levels divisible by 5 the user has encountered while in the care of the Trainer with Top Percentage:
+	$num = [floor($topPercentage[1]/5),floor($level/5)];
+	$num = $num[1]-$num[0];
+	settype($num,"integer");
+	//Limiting $num to the range 0<=$num<=4
+	$num = min(max($num,0),4);
+	//Adding $num to $TP
+	$TP = $TP + $num;
+	//Checking if the 'mon qualifies for boosted Base Stats, and boosting if they do.
+	if ($num==4){
+		foreach($baseStats as &$value){
+			$value = $value + 1;
+		}
+	}
+}
+//Checking if Expand Horizons is active
+if ($expandHorizons){
+	$TP = $TP + 3;
+}
+
+//Adding Stat Ace Base Stats
+$num = 1+floor($level/10);
+settype($num,"integer");
+foreach($statAce as $key=>$value){
+	$baseStats[$key]=$baseStats[$key]+$num;
+}
+
+settype($TP,"integer");
+
 //echo nl2br(json_encode($baseStats)."\n\n");
 
-$stats = statGen($level,$baseStats,$statWeights);
+$stats = statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce);
 //echo json_encode($stats);
 
 $export["health"]=$level+3*($baseStats["HP"]+$stats["HP"])+10;
@@ -385,16 +466,23 @@ $export["spatk"]=$baseStats["SpecialAttack"]+$stats["SpecialAttack"];
 $export["spdef"]=$baseStats["SpecialDefense"]+$stats["SpecialDefense"];
 $export["speed"]=$baseStats["Speed"]+$stats["Speed"];
 
+$moveLimit = 6;
 if (in_Array("Cluster Mind",$abilities)){
-	$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,8);
-} else {
-	$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,6);
+	$moveLimit = $moveLimit + 2;
 }
+if ($guidance){
+	$moveLimit = $moveLimit + 1;
+}
+
+$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP-$saveTP);
+
 $export["moves"]=$moves;
 $export["abilities"]=$abilities;
 
 echo json_encode($export, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-
+} catch (Exception $e){
+	echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 // Save JSON (from array) to file
 //$handle = fopen($fname, 'w') or die('Cannot open file:  '.$fname);
 //$data = json_encode($json);
