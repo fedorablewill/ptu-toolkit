@@ -122,21 +122,23 @@ function abilitySelect($dex,$level){
   $a = array_rand($abilityList[0]);
   array_push($abilities,$abilityList[0][$a]);
   array_splice($abilityList[0],$a,1);
-  if ($abilityList[0]==[]){
+  if ($abilityList[0]==[]&&$level>19){
     $a = array_rand($abilityList[1]);
     array_push($abilities,$abilityList[1][$a]);
     array_splice($abilityList[1],$a,1);
-    $x = mt_rand(1,10);
-    if ($x<2){
-      $a = array_rand($abilityList[1]);
-      array_push($abilities,$abilityList[1][$a]);
-      array_splice($abilityList[1],$a,1);
-    } else {
-      $a = array_rand($abilityList[2]);
-      array_push($abilities,$abilityList[2][$a]);
-      array_splice($abilityList[2],$a,1);
+    if ($level>39){
+    	$x = mt_rand(1,10);
+    	if ($x<2){
+      		$a = array_rand($abilityList[1]);
+      		array_push($abilities,$abilityList[1][$a]);
+      		array_splice($abilityList[1],$a,1);
+    	} else {
+      		$a = array_rand($abilityList[2]);
+      		array_push($abilities,$abilityList[2][$a]);
+      		array_splice($abilityList[2],$a,1);
+    	}
     }
-  } else {
+  } elseif ($level>19) {
     $x = mt_rand(1,10);
     if ($x<4){
       $a = array_rand($abilityList[0]);
@@ -147,7 +149,7 @@ function abilitySelect($dex,$level){
       array_push($abilities,$abilityList[1][$a]);
       array_splice($abilityList[1],$a,1);
     }
-    if ($abilityList[0]==[]){
+    if ($abilityList[0]==[]&&$level>39){
       $x = mt_rand(1,10);
       if ($x<2){
         $a = array_rand($abilityList[1]);
@@ -158,7 +160,7 @@ function abilitySelect($dex,$level){
         array_push($abilities,$abilityList[2][$a]);
         array_splice($abilityList[2],$a,1);
       }
-    } else {
+    } elseif ($level>39) {
       $x = mt_rand(1,20);
       if ($x<2){
         $a = array_rand($abilityList[0]);
