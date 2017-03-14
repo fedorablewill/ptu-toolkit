@@ -1,10 +1,12 @@
 <?php
 //////////////////////////////////////////////////////////////////////////////////////////
-//User options
 
+//User options
+{
 //$genType = type of generation; two-layer array with two-long subarrays
 //Each step may be one of [Type, Habitat, Generation,Specific,All]
 //Examples:
+
 $genType = [["All",""]];
 //$genType=[["Type","Fire"]];
 //$genType=[["Habitat","Urban"]];
@@ -54,8 +56,14 @@ $enduringSoul = FALSE;
 //$statAce: A list of non-HP stats which the trainer has the corresponding Stat Ace base feature for. Empty means the trainer is not a Stat Ace.
 $statAce = [];
 
+//september: If TRUE, September Playtest rules are in effect, in this case limiting tutor and egg moves.
+$september = TRUE;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 //Getting data from the JSONs
+{
 $fname = __DIR__ ."/data/ptu_pokedex_1_05.json";
 $bigdex = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 $dex = $bigdex;
@@ -63,10 +71,41 @@ $fname = __DIR__ ."/data/natures.json";
 $natureList = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 $fname = __DIR__ ."/data/experience.json";
 $exp = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
+$fname = __DIR__ ."/data/moves.json";
+$moveData = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 //Functions
+{
+//Eliminates Pokémon whose evolve above the maximum possible range;
+function levelCheck($dex,$maxLevel){
+	$arr = [];
+	foreach($dex as $key => $value){
+		//Figure out which evolutionary stage matches the dex entry
+		$stip = $value["EvolutionStages"];
+		foreach($stip as $k => $v){
+			if ($v["Species"]==$value["Species"]){
+				$x = $k;
+				break;
+			}
+		}
+		//Set $stip to the Criteria of the according entry
+		$stip = $stip[$x]["Criteria"];
+		//See if the word Minimum occcurs in $stip, and if so use it to find the minimum level
+		if (strpos($stip,"Minimum")!==FALSE){
+			$req = (int)substr($stip,strpos($stip,"Minimum")+1);
+		}
+		//If there either is not a minimum level, or the minimum is less than the maximum level, the 'mon is allowed
+		if (strpos($stip,"Minimum")===FALSE||($req<=$maxLevel)){
+			$arr[$key] = $value;
+		}
+	}
+	return $arr;
+}
 //This function removes mon from an array that do not meet specific criteria. For multi-step generation, feed the results back into the function with further stipulations.
-function genstep($dex,$genType,$genData){
+function genstep($dex,$genType,$genData,$maxLevel){
   $arr = [];
   //Selects by an Elemental Type
   if ($genType == "Type"){
@@ -82,7 +121,7 @@ function genstep($dex,$genType,$genData){
         $arr[$key]=$value;
       }
     }
-  //Selects by a game Generation (I, II, III, IV, V, VI)
+  //Selects by a game Generation (1,2,3,4,5,6)
   } elseif ($genType == "Generation"){
     if ($genData == 1){
       $x = 1;
@@ -118,7 +157,6 @@ function genstep($dex,$genType,$genData){
     $arr[$x]=$dex[$x];
   //Simply returns the original array
   } else {
-  	
     $arr = $dex;
   }
   return $arr;
@@ -136,9 +174,13 @@ function noLegend($dex){
   return $arr;
 }
 
+//This function selects species abilities.
 function abilitySelect($dex,$level){
+  //$abilityList: Array for abilities by Basic (pos 0), Advanced (pos 1), and High (pos 2)
   $abilityList = [[],[],[]];
+  //$abilities: Array for selected abilities
   $abilities = [];
+  //Populating $abilityList
   foreach($dex["Abilities"] as &$value){
     if ($value["Type"]=="Basic"){
       array_push($abilityList[0],$value["Name"]);
@@ -148,60 +190,88 @@ function abilitySelect($dex,$level){
       array_push($abilityList[2],$value["Name"]);
     }
   }
+  //Selecting first ability
   $a = array_rand($abilityList[0]);
   array_push($abilities,$abilityList[0][$a]);
+  //Removing it from $abilityList
   array_splice($abilityList[0],$a,1);
+  //If the 'mon still has Basic Abilities and is at least level 20:
   if ($abilityList[0]==[]&&$level>19){
+  	//Selecing random Advanced Ability
     $a = array_rand($abilityList[1]);
     array_push($abilities,$abilityList[1][$a]);
+    //Removing from List
     array_splice($abilityList[1],$a,1);
+    //If the 'mon is at least level 40:
     if ($level>39){
+    	//Selecting random remaining ability, with 90% weight towards the High Ability
     	$x = mt_rand(1,10);
     	if ($x<2){
+    		//Selecting Advanced Ability
       		$a = array_rand($abilityList[1]);
       		array_push($abilities,$abilityList[1][$a]);
+      		//Still removing, in case we incorporate Poké Edges later
       		array_splice($abilityList[1],$a,1);
     	} else {
+    		//Selecting High Ability
       		$a = array_rand($abilityList[2]);
       		array_push($abilities,$abilityList[2][$a]);
+      		//Still removing, in case we incorporate Poké Edges later
       		array_splice($abilityList[2],$a,1);
     	}
     }
   } elseif ($level>19) {
+    //Selecting random remaining ability, with 90% weight towards the Advanced Abilities
     $x = mt_rand(1,10);
-    if ($x<4){
+    if ($x<2){
+      //Selecting remaining Basic Ability
       $a = array_rand($abilityList[0]);
       array_push($abilities,$abilityList[0][$a]);
       array_splice($abilityList[0],$a,1);
     } else {
+      //Selecting Advanced Ability
       $a = array_rand($abilityList[1]);
       array_push($abilities,$abilityList[1][$a]);
       array_splice($abilityList[1],$a,1);
     }
+    //Checking if there are still Basic Abilities and if the 'mon is at least level 40
     if ($abilityList[0]==[]&&$level>39){
+      //Selecting random remaining ability, with 90% weight towards the High Ability
       $x = mt_rand(1,10);
       if ($x<2){
+      	//Selecting Advanced Ability
         $a = array_rand($abilityList[1]);
         array_push($abilities,$abilityList[1][$a]);
+      	//Still removing, in case we incorporate Poké Edges later
         array_splice($abilityList[1],$a,1);
       } else {
+      	//Selecting High Ability
         $a = array_rand($abilityList[2]);
         array_push($abilities,$abilityList[2][$a]);
+      	//Still removing, in case we incorporate Poké Edges later
         array_splice($abilityList[2],$a,1);
       }
+    //If the 'mon still has Basic Abilities, and is at least level 40:
     } elseif ($level>39) {
+      //Selecting random remaining ability, with 85% weight towards the High Ability, and 10% towards the remaining Advanced Ability
       $x = mt_rand(1,20);
       if ($x<2){
+      	//Selecting basic Ability
         $a = array_rand($abilityList[0]);
         array_push($abilities,$abilityList[0][$a]);
+      	//Still removing, in case we incorporate Poké Edges later
         array_splice($abilityList[0],$a,1);
       } elseif ($x<4) {
+      	//Selecting Advanced Ability
         $a = array_rand($abilityList[1]);
         array_push($abilities,$abilityList[1][$a]);
+      	//Still removing, in case we incorporate Poké Edges later
         array_splice($abilityList[1],$a,1);
       } else{
+      	//Selecting High Ability
         $a = array_rand($abilityList[2]);
         array_push($abilities,$abilityList[2][$a]);
+      	//Still removing, in case we incorporate Poké Edges later
         array_splice($abilityList[2],$a,1);
       }
     }
@@ -210,6 +280,7 @@ function abilitySelect($dex,$level){
 }
 
 function statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce){
+  //Making array for added stats
   $stats = [
     "HP" => 0,
     "Attack" => 0,
@@ -218,24 +289,30 @@ function statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce){
     "SpecialDefense" => 0,
     "Speed" => 0
   ];
+  //Making sorted array of base stats
   $arr = $baseStats;
   arsort($arr);
+  //Calculating BSR
   $bsr = [];
   foreach($arr as $key => $value){
     if ($bsr == []){
+  	  //If highest stat, push single-element array to $bsr
       array_push($bsr,[$key]);
     } else {
+  	  //If tied with last stat added, push to last array;
       if ($value == $baseStats[end($bsr)[0]]){
       	$x = key( array_slice( $bsr, -1, 1, TRUE ) );
       	$a = $bsr[$x];
         array_push($a,$key);
         $bsr[$x]=$a;
       } else {
+  	  //If lower than last stat added, push new single-element array;
         array_push($bsr,[$key]);
       }
     }
   }
   //echo nl2br("bsr:".json_encode($bsr)."\n\n");
+  //Get location of each stat in $bsr
   $ordera = [];
   foreach($stats as $key => $value){
   	foreach($bsr as $k => $v){
@@ -244,22 +321,37 @@ function statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce){
   		}
   	}
   }
+  //echo nl2br("ordera:".json_encode($ordera)."\n\n");
+  //Add stats for each level
   for($i=0;$i<$level;$i++){
+  	//Make empty array for valid choices
   	$a = [];
   	foreach($ordera as $key => $value){
+  		//If highest stat or tied for highest stat, add to $a
   		if($value==0){
   			array_push($a,$key);
   		} else {
-  			$test = ($baseStats[$key]+$stats[$key])+1<($baseStats[$bsr[$value-1][0]]+$stats[$bsr[$value-1][0]]);
+  			//Empty array for value of stats higher in BSR
+  			$higher=[];
+  			foreach($bsr[$value-1] as &$v){
+  				array_push($higher,$baseStats[$v]+$stats[$v]);
+  			}
+  			//Get smallest value of the stats in $higher
+  			$higher = min($higher);
+  			//Test to see if stat can be raised without breaking BSR
+  			$test = ($baseStats[$key]+$stats[$key])+1<$higher;
+  			//Add to $a if either $test is true or Trainer can break BSR for this stat
   			if ($test||($key=="HP"&&$enduringSoul)||in_array($key,$statAce)){
   				array_push($a,$key);
   			}
   		}
   	}
   	$lWeight=[];
+  	//Get weights for valid stats
   	foreach($a as &$value){
   		$lWeight[$value]=$statWeights[$value];
   	}
+  	//Weighted random selection.
   	$x = mt_rand(0,array_sum($lWeight)-1);
   	foreach($lWeight as $key => $value){
   		if ($x<$value){
@@ -270,49 +362,142 @@ function statGen($level,$baseStats,$statWeights,$enduringSoul,$statAce){
   		}
   	}
   	//echo nl2br($up."\n\n");
+  	//Raise selected stat
   	$stats[$up]++;
   }
+  //Return all raised stats
   return $stats;
 }
 
-function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP){
+function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$september,$moveData){
+	//Get number of allowed tutor moves:
 	$tutor = mt_rand($tutorRange[0],$tutorRange[1]);
-	$egg = mt_rand($eggRange[0],$eggRange[1]);
+	//Get total list of possible TM/HM/Tutor moves
 	$list = array_merge($dex["TmHmMoves"],$dex["TutorMoves"]);
+	//Checking if we need to get rid of moves based on current 'mon level
+	if ($september){
+		//Checking if the mon is low enough level to have stipulations
+		if ($level<29){
+			//List of keys to be removed;
+			$keys = [];
+			//Checking particular stipulations
+			if ($level>19){
+				$maxDB = 9;
+				$frequencies = ["At-Will","EOT","Scene"];
+			} else {
+				$maxDB = 7;
+				$frequencies = ["At-Will","EOT"];
+			}
+			//Iterate over moves in $list 
+			foreach($list as $key=>$value){
+				//checking if the move name includes the (N) symbol and getting rid of it for lookup.
+				if (strpos($value["Name"],"(N)")!==FALSE){
+					$move = trim(substr($value["Name"],0,strpos($value["Name"],"(N)")));
+				} else {
+					$move = $value["Name"];
+				}
+				//Looking up move info;
+				echo nl2br("move:".$move."\n\n");
+				$move = $moveData[$move];
+				echo nl2br("moveData:".json_encode($move)."\n\n");
+				//If the move doesn't meet the stipulations, add its key to the key list
+				if ((array_key_exists("DB",$move)&&$move["DB"]>$maxDB)||(array_key_exists("Freq",$move)&&!in_array($move["Freq"],$frequencies))){
+					$keys[$key]=1;
+				}
+			}
+			$list = array_values(array_diff_key($list,$keys));
+		}
+	}
 	$monMoves=[];
+	//Fill as many moves in $list as possible into $monMoves
 	while ($TP>2&&$tutor>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
+		//Get random move
 		$move = array_rand($list);
-		if (strpos($list[$move]["Name"],"(N)")) {
+		if (strpos($list[$move]["Name"],"(N)")!==FALSE) {
+			//If a (N) move, it costs less to learn, the name needs to be trimmed, and it doesn't count as a tutor move.
 			array_push($monMoves,trim(substr($list[$move]["Name"],0,strpos($list[$move]["Name"],"(N)"))));
 			$TP = $TP-1;
-			$tutor = $tutor-1;
+			//Getting rid of the move from $list
 			unset($list[$move]);
+			$list = array_values($list);
 		} elseif (in_Array($list[$move],$dex["TmHmMoves"])) {
+			//TMs cost one TP, and count as a tutor move;
 			array_push($monMoves,$list[$move]["Name"]);
 			$TP = $TP-1;
 			$tutor = $tutor-1;
+			//Getting rid of the move from $list
 			unset($list[$move]);
+			$list = array_values($list);
 		} else {
+			//Other tutor moves cost two TP, and count as a tutor move;
 			array_push($monMoves,$list[$move]["Name"]);
 			$TP = $TP-2;
 			$tutor = $tutor-1;
+			//Getting rid of the move from $list
 			unset($list[$move]);
+			$list = array_values($list);
 		}
 	}
+	//Add an extra $TM move if one leftover $TP
 	if ($TP==1&&$tutor>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
-		$move = array_rand($dex["TmHmMoves"]);
-		array_push($monMoves,$dex["TmHmMoves"][$move]["Name"]);
-		$TP = $TP-1;
-		$tutor = $tutor-1;
+		$list = array_intersect($list,$dex["TmHmMoves"]);
+		if ($list!=[]){
+			$move = array_rand($list);
+			array_push($monMoves,$list[$move]["Name"]);
+			$TP = $TP-1;
+			$tutor = $tutor-1;
+		}
 	}
+	//Get number of allowed Egg moves
+	$egg = mt_rand($eggRange[0],$eggRange[1]);
+	//Calculating maximum possible Egg moves
+	$max = max(0,(int)floor(($level/10))-1);
+	//Setting egg to maximum possible if greater than maximum;
+	$egg = min($egg,$max);
+	//Getting possible egg moves
 	$list = $bigdex[$dex["EvolutionStages"][0]["Species"]]["EggMoves"];
+	//Checking legal Egg Moves
+	if ($september){
+		//Checking if the mon needs stipulations
+		if ($egg>0&&$level<20+10*$egg){
+			//Making copy of list
+			$littlelist = $list;
+			//Array of keys to be removed;
+			$keys = [];
+			//Setting particular stipulations
+			$maxDB = 9;
+			$frequencies = ["At-Will","EOT"];
+			//Iterate over moves in $list
+			echo nl2br("littlelist:".json_encode($littlelist)."\n\n");
+			foreach($littlelist as $key=>$value){
+				//Looking up move info;
+				$move = $moveData[$value["Name"]];
+				//If the move doesn't meet the stipulations, add its key to the key list
+				if ((array_key_exists("DB",$move)&&$move["DB"]>$maxDB)||(array_key_exists("Freq",$move)&&!in_array($move["Freq"],$frequencies))){
+					$keys[$key]=1;
+				}
+			}
+			$littlelist = array_diff_key($littlelist,$keys);
+			//Since there's only ever one move that needs to follow these stipulations, picking it now
+			$move = array_rand($littlelist);
+			array_push($monMoves,$littlelist[$move]["Name"]);
+			$egg=$egg-1;
+			//Removing $move from the big list
+			unset($list[$move]);
+			$list = array_values($list);
+		}
+	}
+	//Getting remaining egg moves
 	while($egg>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
 		$move = array_rand($list);
 		array_push($monMoves,$list[$move]["Name"]);
 		$egg=$egg-1;
 		unset($list[$move]);
+		$list = array_values($list);
 	}
+	//Getting Level Up Moves
 	$list = $dex["LevelUpMoves"];
+	//Getting rid of LUMs that are too high a level
 	$keys = [];
 	foreach($list as $key => $value){
 		if ($value["LevelLearned"]>$level){
@@ -320,6 +505,7 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP){
 		}
 	}
 	$list = array_values(array_diff_key($list,$keys));
+	//Picking remaining moves
 	while (sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
 		$move = array_rand($list);
 		array_push($monMoves,$list[$move]["Name"]);
@@ -327,14 +513,18 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP){
 	}
 	return $monMoves;
 }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 try{
 //Go time!
-$export = ["name" => ""];
+
+//Get rid of mon that are illegal for the given level range
+$dex = levelCheck($dex,$levelRange[1]);
 
 //Iterates over $genType for multi-step generation
 foreach ($genType as &$value){
-  $dex = genStep($dex,$value[0],$value[1]);
+  $dex = genStep($dex,$value[0],$value[1],$levelRange[1]);
 }
 
 //Remove legendaries if not allowed
@@ -342,15 +532,15 @@ if (!$legend){
   $dex = noLegend($dex);
 }
 
-
 //Throw exception if $dex is an empty array
 if ($dex === []){
-	throw new Exception("Critera too limited; no such 'mon exist.")
+	throw new Exception("Critera too limited; no such 'mon exist.");
 }
 //Selects single entry from limited dex.
 $num = array_rand($dex);
-$export["dex"]=(int)$num;
-$dex = $dex[$num];  	
+$dex = $dex[$num];  
+//Making $export, with "name" = species name, and "dex" the dex number;	
+$export = ["name" => $dex["Species"],"dex"=>(int)$num];
 
 //Setting $export["type"]
 if (sizeOf($dex["Types"])==1){
@@ -366,6 +556,22 @@ echo nl2br(json_encode($dex)."\n\n");
 
 //No random Held Item generation atm, so setting $export["held-item"] to an empty string.
 $export["held-item"] = "";
+
+//Setting lower bound on level to minimum value for the 'mon
+$stip = $dex["EvolutionStages"];
+foreach($stip as $key => $value){
+	if ($value["Species"]==$dex["Species"]){
+		$num = $key;
+		break;
+	}
+}
+$stip = $stip[$num]["Criteria"];
+if (strpos($stip,"Minimum")!==FALSE){
+	$stip = (int)substr($stip,strpos($stip,"Minimum")+1);
+	if ($stip<$levelRange[0]){
+		$levelRange[0]=$stip;
+	}
+}
 
 //Picking level for the 'mon
 $level = mt_rand($levelRange[0],$levelRange[1]);
@@ -474,18 +680,20 @@ if ($guidance){
 	$moveLimit = $moveLimit + 1;
 }
 
-$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP-$saveTP);
+$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP-$saveTP,$september,$moveData);
 
 $export["moves"]=$moves;
 $export["abilities"]=$abilities;
 
 echo json_encode($export, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-} catch (Exception $e){
-	echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
 // Save JSON (from array) to file
 //$handle = fopen($fname, 'w') or die('Cannot open file:  '.$fname);
 //$data = json_encode($json);
 //fwrite($handle, $data);
 //fclose($handle);
+} 
+catch (Exception $e){
+	echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
+
 ?>
