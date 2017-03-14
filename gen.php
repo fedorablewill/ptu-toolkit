@@ -8,15 +8,33 @@ $genType = [["All",""]];
 //$genType=[["Generation",1],["Type","Ice"]];
 //$genType=[["Specific","Bulbasaur"]];
 
+//$legend = Boolean; if FALSE, no legndaries are allowed to generate
+$legend = TRUE; 
+
 //$levelRange = two-entry array, with first entry the lower bound and second the upper bound for the level range, inclusive.
 $levelRange=[1,100];
-//$nature: If "Random", will generate random nature; otherwise, the nature for the mon.
-//$statWeights: An array of numbers with with the six stats as keys. This is used for randomly selecting stats, BSR allowing
 
+//$nature: If "Random", will generate random nature; otherwise, the nature for the mon.
+$nature = "Random";
+
+//$statWeights: An array of numbers with with the six stats as keys. This is used for randomly selecting stats, BSR allowing.
+//The default, unweighted version is as shown below:
+$statWeights = ["HP"=>1,"Attack"=>1,"Defense"=>1,"SpecialAttack"=>1,"SpecialDefense"=>1,"Speed"=>1];
+
+//$tutorRange: Array of lower and upper bounds on the amount of TM, HM, and Tutor moves allowed to generate per 'mon 
+$tutorRange = [0,3];
+
+//$eggRange: Array of lower and upper bounds on the amount of Egg moves allowed to generate per 'mon
+$eggRange = [0,3];
+
+//Getting data from the JSONs
 $fname = __DIR__ ."/data/ptu_pokedex_1_05.json";
-$dex = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
-//$fname = "/data/natures.json";
-//$natureList = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
+$bigdex = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
+$dex = $bigdex;
+$fname = __DIR__ ."/data/natures.json";
+$natureList = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
+$fname = __DIR__ ."/data/experience.json";
+$exp = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 
 //This function removes mon from an array that do not meet specific criteria. For multi-step generation, feed the results back into the function with further stipulations.
 function genstep($dex,$genType,$genData){
@@ -108,7 +126,7 @@ function abilitySelect($dex,$level){
     $a = array_rand($abilityList[1]);
     array_push($abilities,$abilityList[1][$a]);
     array_splice($abilityList[1],$a,1);
-    $x = rand(1,10);
+    $x = mt_rand(1,10);
     if ($x<2){
       $a = array_rand($abilityList[1]);
       array_push($abilities,$abilityList[1][$a]);
@@ -119,7 +137,7 @@ function abilitySelect($dex,$level){
       array_splice($abilityList[2],$a,1);
     }
   } else {
-    $x = rand(1,10);
+    $x = mt_rand(1,10);
     if ($x<4){
       $a = array_rand($abilityList[0]);
       array_push($abilities,$abilityList[0][$a]);
@@ -130,7 +148,7 @@ function abilitySelect($dex,$level){
       array_splice($abilityList[1],$a,1);
     }
     if ($abilityList[0]==[]){
-      $x = rand(1,10);
+      $x = mt_rand(1,10);
       if ($x<2){
         $a = array_rand($abilityList[1]);
         array_push($abilities,$abilityList[1][$a]);
@@ -141,7 +159,7 @@ function abilitySelect($dex,$level){
         array_splice($abilityList[2],$a,1);
       }
     } else {
-      $x = rand(1,20);
+      $x = mt_rand(1,20);
       if ($x<2){
         $a = array_rand($abilityList[0]);
         array_push($abilities,$abilityList[0][$a]);
@@ -160,33 +178,128 @@ function abilitySelect($dex,$level){
   return $abilities;
 }
 
-function statGen($level,$baseStats){
+function statGen($level,$baseStats,$statWeights){
   $stats = [
     "HP" => 0,
-    "ATK" => 0,
-    "DEF" => 0,
-    "SPATK" => 0,
-    "SPDEF" => 0,
-    "SPEED" => 0
+    "Attack" => 0,
+    "Defense" => 0,
+    "SpecialAttack" => 0,
+    "SpecialDefense" => 0,
+    "Speed" => 0
   ];
-  $arr = arsort($baseStats);
+  $arr = $baseStats;
+  arsort($arr);
   $bsr = [];
   foreach($arr as $key => $value){
     if ($bsr == []){
       array_push($bsr,[$key]);
     } else {
-      if ($value == end($bsr)[0]){
-        array_push(end($bsr),$key);
+      if ($value == $baseStats[end($bsr)[0]]){
+      	$x = key( array_slice( $bsr, -1, 1, TRUE ) );
+      	$a = $bsr[$x];
+        array_push($a,$key);
+        $bsr[$x]=$a;
       } else {
         array_push($bsr,[$key]);
       }
     }
   }
-  return $bsr;
+  //echo nl2br("bsr:".json_encode($bsr)."\n\n");
+  $ordera = [];
+  foreach($stats as $key => $value){
+  	foreach($bsr as $k => $v){
+  		if (in_array($key,$v)){
+  			$ordera[$key]=$k;
+  		}
+  	}
+  }
+  for($i=0;$i<$level;$i++){
+  	$a = [];
+  	foreach($ordera as $key => $value){
+  		if($value==0){
+  			array_push($a,$key);
+  		} else {
+  			if (($baseStats[$key]+$stats[$key])+1<($baseStats[$bsr[$value-1][0]]+$stats[$bsr[$value-1][0]])){
+  				array_push($a,$key);
+  			}
+  		}
+  	}
+  	$lWeight=[];
+  	foreach($a as &$value){
+  		$lWeight[$value]=$statWeights[$value];
+  	}
+  	$x = mt_rand(0,array_sum($lWeight)-1);
+  	foreach($lWeight as $key => $value){
+  		if ($x<$value){
+  			$up = $key;
+  			break;
+  		} else {
+  			$x = $x - $value;
+  		}
+  	}
+  	//echo nl2br($up."\n\n");
+  	$stats[$up]++;
+  }
+  return $stats;
 }
 //Iterates over $genType for multi-step generation
 
+function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit){
+	$TP = 1 + floor($level/5);
+	settype($TP,"integer");
+	$tutor = mt_rand($tutorRange[0],$tutorRange[1]);
+	$egg = mt_rand($eggRange[0],$eggRange[1]);
+	$list = array_merge($dex["TmHmMoves"],$dex["TutorMoves"]);
+	$monMoves=[];
+	while ($TP>2&&$tutor>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
+		$move = array_rand($list);
+		if (strpos($list[$move]["Name"],"(N)")) {
+			array_push($monMoves,trim(substr($list[$move]["Name"],0,strpos($list[$move]["Name"],"(N)"))));
+			$TP = $TP-1;
+			$tutor = $tutor-1;
+			unset($list[$move]);
+		} elseif (in_Array($list[$move],$dex["TmHmMoves"])) {
+			array_push($monMoves,$list[$move]["Name"]);
+			$TP = $TP-1;
+			$tutor = $tutor-1;
+			unset($list[$move]);
+		} else {
+			array_push($monMoves,$list[$move]["Name"]);
+			$TP = $TP-2;
+			$tutor = $tutor-1;
+			unset($list[$move]);
+		}
+	}
+	if ($TP==1&&$tutor>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
+		$move = array_rand($dex["TmHmMoves"]);
+		array_push($monMoves,$dex["TmHmMoves"][$move]["Name"]);
+		$TP = $TP-1;
+		$tutor = $tutor-1;
+	}
+	$list = $bigdex[$dex["EvolutionStages"][0]["Species"]]["EggMoves"];
+	while($egg>0&&sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
+		$move = array_rand($list);
+		array_push($monMoves,$list[$move]["Name"]);
+		$egg=$egg-1;
+		unset($list[$move]);
+	}
+	$list = $dex["LevelUpMoves"];
+	$keys = [];
+	foreach($list as $key => $value){
+		if ($value["LevelLearned"]>$level){
+			$keys[$key]=1;
+		}
+	}
+	$list = array_values(array_diff_key($list,$keys));
+	while (sizeOf($monMoves)<$moveLimit&&sizeOf($list)!=0){
+		$move = array_rand($list);
+		array_push($monMoves,$list[$move]["Name"]);
+		unset($list[$move]);
+	}
+	return $monMoves;
+}
 
+$export = ["name" => ""];
 
 foreach ($genType as &$value){
   $dex = genStep($dex,$value[0],$value[1]);
@@ -199,17 +312,28 @@ if ($legend == FALSE){
 
 //Selects single entry from limited dex.
 if ($dex != []){
-  $dex = $dex[array_rand($dex)];
+	$num = array_rand($dex);
+	$export["dex"]=(int)$num;
+  	$dex = $dex[$num];
+  	if (sizeOf($dex["Types"])==1){
+		$export["type"]=$dex["Types"][0];
+  	} else {
+  		$s = "";
+  		foreach($dex["Types"] as &$value){
+  			$s = $s.$value." / ";
+  		}
+  		$export["type"] = substr($s,0,-3);
+  	}
 }
 echo nl2br(json_encode($dex)."\n\n");
 
+$export["held-item"] = "";
+
 //Picking level for the 'mon
-if ($levelRange[0]==$levelRange[1]){
-  $level = $levelRange[0];
-} else {
-  $level = rand($levelRange[0],$levelRange[1]);
-}
-echo $level;
+$level = mt_rand($levelRange[0],$levelRange[1]);
+
+$export["level"] = (int)$level;
+$export["EXP"] = $exp[$level];
 
 //Picking abilities
 $abilities = abilitySelect($dex,$level);
@@ -218,6 +342,21 @@ $abilities = abilitySelect($dex,$level);
 if ($nature=="Random"){
   $nature = array_rand($natureList);
 }
+//echo nl2br($nature."\n\n");
+$export["nature"] = $nature;
+
+if (!$dex["BreedingData"]["HasGender"]){
+	$export["gender"]="No Gender";
+} else {
+	$num = mt_rand() / mt_getrandmax();
+	if ($num < $dex["BreedingData"]["MaleChance"]){
+		$export["gender"]="Male";
+	} else {
+		$export["gender"]="Female";
+	}
+}
+
+$export["discovery"]="";
 
 $baseStats = $dex["BaseStats"];
 if ($natureList[$nature]["Raise"]=="HP"){
@@ -226,12 +365,33 @@ if ($natureList[$nature]["Raise"]=="HP"){
   $baseStats[$natureList[$nature]["Raise"]] = $baseStats[$natureList[$nature]["Raise"]] + 2;
 }
 if ($natureList[$nature]["Lower"]=="HP"){
-  $baseStats["HP"] = $baseStats["HP"] - 1;
+  $baseStats["HP"] = max($baseStats["HP"] - 1,1);
 } else {
-  $baseStats[$natureList[$nature]["Lower"]] = $baseStats[$natureList[$nature]["Lower"]] - 2;
+  $baseStats[$natureList[$nature]["Lower"]] = max($baseStats[$natureList[$nature]["Lower"]] - 2,1);
 }
+//echo nl2br(json_encode($baseStats)."\n\n");
 
-$stats = statGen($level,$baseStats);
+$stats = statGen($level,$baseStats,$statWeights);
+//echo json_encode($stats);
+
+$export["health"]=$level+3*($baseStats["HP"]+$stats["HP"])+10;
+$export["injuries"]=0;
+$export["hp"]=$baseStats["HP"]+$stats["HP"];
+$export["atk"]=$baseStats["Attack"]+$stats["Attack"];
+$export["def"]=$baseStats["Defense"]+$stats["Defense"];
+$export["spatk"]=$baseStats["SpecialAttack"]+$stats["SpecialAttack"];
+$export["spdef"]=$baseStats["SpecialDefense"]+$stats["SpecialDefense"];
+$export["speed"]=$baseStats["Speed"]+$stats["Speed"];
+
+if (in_Array("Cluster Mind",$abilities)){
+	$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,8);
+} else {
+	$moves = moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,6);
+}
+$export["moves"]=$moves;
+$export["abilities"]=$abilities;
+
+echo json_encode($export, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
 // Save JSON (from array) to file
 //$handle = fopen($fname, 'w') or die('Cannot open file:  '.$fname);
