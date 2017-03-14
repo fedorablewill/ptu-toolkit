@@ -152,6 +152,7 @@ function genstep($dex,$genType,$genData,$maxLevel){
     foreach ($dex as $key => $value){
       if ($value["Species"]==$genData){
         $x=$key;
+        break;
       }
     }
     $arr[$x]=$dex[$x];
@@ -456,7 +457,14 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$septe
 	//Setting egg to maximum possible if greater than maximum;
 	$egg = min($egg,$max);
 	//Getting possible egg moves
-	$list = $bigdex[$dex["EvolutionStages"][0]["Species"]]["EggMoves"];
+	$list = [];
+	foreach ($bigdex as $key => $value){
+      if ($value["Species"]==$dex["EvolutionStages"][0]["Species"]){
+        $x=$key;
+        break;
+      }
+    }
+    $list = $bigdex[$x]["EggMoves"];
 	//Checking legal Egg Moves
 	if ($september){
 		//Checking if the mon needs stipulations
@@ -469,9 +477,6 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$septe
 			$maxDB = 9;
 			$frequencies = ["At-Will","EOT"];
 			//Iterate over moves in $littlelist
-			echo nl2br("firstEvo:".$dex["EvolutionStages"][0]["Species"]."\n\n");
-			echo nl2br("dex:".json_encode($bigdex)."\n\n");
-			echo nl2br("littlelist:".json_encode($littlelist)."\n\n");
 			foreach($littlelist as $key=>$value){
 				//Looking up move info;
 				$move = $moveData[$value["Name"]];
@@ -555,7 +560,6 @@ if (sizeOf($dex["Types"])==1){
   	}
   	$export["type"] = substr($s,0,-3);
 }
-echo nl2br(json_encode($dex)."\n\n");
 
 //No random Held Item generation atm, so setting $export["held-item"] to an empty string.
 $export["held-item"] = "";
