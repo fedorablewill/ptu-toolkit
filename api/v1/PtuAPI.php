@@ -253,6 +253,44 @@ class PtuAPI extends API
         return "Not Found";
         
     }
+
+    public function generate() {
+        require_once "PtuGenerator.php";
+
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
+        }
+
+        $generator = new PtuGenerator(
+            array_key_exists("type", $_GET) ? $_GET['type'] : null,
+            array_key_exists("habitat", $_GET) ? $_GET['habitat'] : null,
+            array_key_exists("generation", $_GET) ? $_GET['generation'] : null,
+            array_key_exists("specific", $_GET) ? $_GET['specific'] : null,
+            array_key_exists("legendary", $_GET) ? $_GET['legendary'] : true,
+            array_key_exists("min_level", $_GET) ? $_GET['min_level'] : 0,
+            array_key_exists("max_level", $_GET) ? $_GET['max_level'] : 100,
+            array_key_exists("nature", $_GET) ? $_GET['nature'] : "Random",
+            array_key_exists("location", $_GET) ? $_GET['location'] : "",
+            array_key_exists("gender", $_GET) ? $_GET['gender'] : "",
+            array_key_exists("statWeights", $_GET) ? json_decode($_GET['statWeights'], true) :
+                ["HP"=>1,"Attack"=>1,"Defense"=>1,"SpecialAttack"=>1,"SpecialDefense"=>1,"Speed"=>1],
+            array_key_exists("min_tm", $_GET) ? $_GET['min_tm'] : 0,
+            array_key_exists("max_tm", $_GET) ? $_GET['max_tm'] : 3,
+            array_key_exists("min_em", $_GET) ? $_GET['min_em'] : 0,
+            array_key_exists("max_em", $_GET) ? $_GET['max_em'] : 3,
+            array_key_exists("top_percent", $_GET) ? $_GET['top_percent'] : false,
+            array_key_exists("level_caught", $_GET) ? $_GET['level_caught'] : 0,
+            array_key_exists("expand_horizons", $_GET) ? $_GET['expand_horizons'] : false,
+            array_key_exists("guidance", $_GET) ? $_GET['guidance'] : false,
+            array_key_exists("save_tp", $_GET) ? $_GET['save_tp'] : 0,
+            array_key_exists("enduring_soul", $_GET) ? $_GET['enduring_soul'] : false,
+            array_key_exists("stat_ace", $_GET) ? json_decode($_GET['stat_ace'], true) : [],
+            array_key_exists("september", $_GET) ? $_GET['september'] : true
+        );
+
+        return $generator->start();
+    }
     
     /*********************
      * Private Functions *
