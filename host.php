@@ -38,6 +38,10 @@
             margin-top: 10px;
         }
 
+        .content-init input {
+            color: white;
+        }
+
         .effects {
             padding-bottom: 10px;
             min-height: 20px;
