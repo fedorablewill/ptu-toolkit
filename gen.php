@@ -374,7 +374,15 @@ function moveGen($bigdex,$dex,$level,$tutorRange,$eggRange,$moveLimit,$TP,$septe
 	//Get number of allowed tutor moves:
 	$tutor = mt_rand($tutorRange[0],$tutorRange[1]);
 	//Get total list of possible TM/HM/Tutor moves
-	$list = array_merge($dex["TmHmMoves"],$dex["TutorMoves"]);
+	if ($dex["Species"]==="Mew"){
+		$list = [];
+		foreach($moveData as $key => $value){
+			$x = ["Name"=>$key,"LevelLearned"=>null,"TechnicalMachineId"=>null,"Natural"=>false];
+			array_push($list,$x);
+		}
+	} else {
+		$list = array_merge($dex["TmHmMoves"],$dex["TutorMoves"]);
+	}
 	//Checking if we need to get rid of moves based on current 'mon level
 	if ($september){
 		//Checking if the mon is low enough level to have stipulations
