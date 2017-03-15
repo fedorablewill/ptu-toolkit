@@ -254,6 +254,27 @@ class PtuAPI extends API
         
     }
 
+    /**
+     * Generate random pokemon
+     *
+     * api/v1/generate/[parameters]
+     *
+     * Parameter    Default
+     * type         random
+     * habitat      random
+     * generation   random
+     * specific     random
+     * legendary    true
+     * min_level    0
+     * max_level    100
+     * nature       random
+     * location     none
+     * gender       random
+     * stat_weights unweighted
+     * //TODO: finish documentation...
+     *
+     * @return array|string JSON pokemon data
+     */
     public function generate() {
         require_once "PtuGenerator.php";
 

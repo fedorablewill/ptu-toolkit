@@ -5,6 +5,8 @@
  */
 class PtuGenerator
 {
+    const JSON_DATA_PATH = "../../data/";
+
     private $genType = array();
     //$genType=[["Type","Fire"]];
     //$genType=[["Habitat","Urban"]];
@@ -61,17 +63,17 @@ class PtuGenerator
                                 $location, $gender, $statWeights, $minTM, $maxTM, $minEM, $maxEM, $isTopPercent,
                                 $levelCaught, $doExpandHorizons, $hasGuidance, $saveTP, $enduringSoul, $statAce, $september) {
 
-        if ($specific != null)
-            $genType[0] = ["Specific", $specific];
-        elseif ($type == null && $habitat == null && $generation == null)
-            $genType[0] = ["All", ""];
+        if (!is_null($specific))
+            $this->genType[0] = ["Specific", $specific];
+        elseif (is_null($type) && is_null($habitat) && is_null($generation))
+            $this->genType[0] = ["All", ""];
         else {
-            if ($type != null)
-                array_push($genType, ["Type", $type]);
-            if ($habitat != null)
-                array_push($genType, ["Habitat", $habitat]);
-            if ($generation != null)
-                array_push($genType, ["Generation", $generation]);
+            if (!is_null($type))
+                array_push($this->genType, ["Type", $type]);
+            if (!is_null($habitat))
+                array_push($this->genType, ["Habitat", $habitat]);
+            if (!is_null($generation))
+                array_push($this->genType, ["Generation", $generation]);
         }
 
         $this->legend = $doLegendary;
@@ -93,14 +95,14 @@ class PtuGenerator
 
     public function start() {
         //Get JSON data
-        $fname = __DIR__ ."/data/ptu_pokedex_1_05.json";
+        $fname = self::JSON_DATA_PATH ."/ptu_pokedex_1_05.json";
         $bigdex = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
         $dex = $bigdex;
-        $fname = __DIR__ ."/data/natures.json";
+        $fname = self::JSON_DATA_PATH ."/natures.json";
         $natureList = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
-        $fname = __DIR__ ."/data/experience.json";
+        $fname = self::JSON_DATA_PATH ."/experience.json";
         $exp = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
-        $fname = __DIR__ ."/data/moves.json";
+        $fname = self::JSON_DATA_PATH ."/moves.json";
         $moveData = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 
 //Get rid of mon that are illegal for the given level range
@@ -268,7 +270,7 @@ class PtuGenerator
         $export["moves"]=$moves;
         $export["abilities"]=$abilities;
 
-        return json_encode($export, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+        return $export;
 // Save JSON (from array) to file
 //$handle = fopen($fname, 'w') or die('Cannot open file:  '.$fname);
 //$data = json_encode($json);
