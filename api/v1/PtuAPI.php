@@ -339,7 +339,7 @@ class PtuAPI extends API
                 $returnData = array();
                 foreach ($names as $name) {
                     $name = ucwords($name);
-                    if (!empty($returnData[$name])) {
+                    if (empty($returnData[$name])) {
                         $returnData[$name] = $data[$name];
                     }
                 }
