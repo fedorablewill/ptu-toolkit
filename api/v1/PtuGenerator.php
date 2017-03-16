@@ -177,7 +177,7 @@ class PtuGenerator
 
 //Checking if species has gender
         if (!$dex["BreedingData"]["HasGender"]){
-            $export["gender"]="No Gender";
+            $export["gender"]="Genderless";
         } else {
             //Checking if gender is pre-set
             if ($this->gender != ""){
