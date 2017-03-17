@@ -9,11 +9,11 @@
 		},
 		"Proud": {
 			"Raise": "HP",
-			"Lower": "Special Attack"
+			"Lower": "SpecialAttack"
 		},
 		"Decisive": {
 			"Raise": "HP",
-			"Lower": "Special Defense"
+			"Lower": "SpecialDefense"
 		},
 		"Patient": {
 			"Raise": "HP",
@@ -29,11 +29,11 @@
 		},
 		"Adamant": {
 			"Raise": "Attack",
-			"Lower": "Special Attack"
+			"Lower": "SpecialAttack"
 		},
 		"Naughty": {
 			"Raise": "Attack",
-			"Lower": "Special Defense"
+			"Lower": "SpecialDefense"
 		},
 		"Brave": {
 			"Raise": "Attack",
@@ -49,54 +49,54 @@
 		},
 		"Impish": {
 			"Raise": "Defense",
-			"Lower": "Special Defense"
+			"Lower": "SpecialDefense"
 		},
 		"Lax": {
 			"Raise": "Defense",
-			"Lower": "Special Defense"
+			"Lower": "SpecialDefense"
 		},
 		"Relaxed": {
 			"Raise": "Defense",
 			"Lower": "Speed"
 		},
 		"Curious": {
-			"Raise": "Special Attack",
+			"Raise": "SpecialAttack",
 			"Lower": "HP"
 		},
 		"Modest": {
-			"Raise": "Special Attack",
+			"Raise": "SpecialAttack",
 			"Lower": "Attack"
 		},
 		"Mild": {
-			"Raise": "Special Attack",
+			"Raise": "SpecialAttack",
 			"Lower": "Defense"
 		},
 		"Rash": {
-			"Raise": "Special Attack",
-			"Lower": "Special Defense"
+			"Raise": "SpecialAttack",
+			"Lower": "SpecialDefense"
 		},
 		"Quiet": {
-			"Raise": "Special Attack",
+			"Raise": "SpecialAttack",
 			"Lower": "Speed"
 		},
 		"Dreamy": {
-			"Raise": "Special Defense",
+			"Raise": "SpecialDefense",
 			"Lower": "HP"
 		},
 		"Calm": {
-			"Raise": "Special Defense",
+			"Raise": "SpecialDefense",
 			"Lower": "Attack"
 		},
 		"Gentle": {
-			"Raise": "Special Defense",
+			"Raise": "SpecialDefense",
 			"Lower": "Defense"
 		},
 		"Careful": {
-			"Raise": "Special Defense",
-			"Lower": "Special Attack"
+			"Raise": "SpecialDefense",
+			"Lower": "SpecialAttack"
 		},
 		"Sassy": {
-			"Raise": "Special Defense",
+			"Raise": "SpecialDefense",
 			"Lower": "Speed"
 		},
 		"Skittish": {
@@ -113,11 +113,11 @@
 		},
 		"Jolly": {
 			"Raise": "Speed",
-			"Lower": "Special Attack"
+			"Lower": "SpecialAttack"
 		},
 		"Naive": {
 			"Raise": "Speed",
-			"Lower": "Special Defense"
+			"Lower": "SpecialDefense"
 		},
 		"Composed": {
 			"Raise": "HP",
@@ -132,12 +132,12 @@
 			"Lower": "Defense"
 		},
 		"Bashful": {
-			"Raise": "Special Attack",
-			"Lower": "Special Attack"
+			"Raise": "SpecialAttack",
+			"Lower": "SpecialAttack"
 		},
 		"Quirky": {
-			"Raise": "Special Defense",
-			"Lower": "Special Defense"
+			"Raise": "SpecialDefense",
+			"Lower": "SpecialDefense"
 		},
 		"Serious": {
 			"Raise": "Speed",

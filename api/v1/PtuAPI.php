@@ -26,13 +26,14 @@ class PtuAPI extends API
     
     // Useful consts
     const NOT_GET_RESPONSE = "Why you telling me what to do? Just get fool";
+    const DEFAULT_CHUNK_SIZE = 10;
     
     
     
     public function __construct($request, $origin)
     {
         parent::__construct($request);
-        // TODO: validation, api key, user validation?
+        // No validation, open API
     }
     
     /*******************
@@ -43,7 +44,6 @@ class PtuAPI extends API
      * api/v1/abilities/
      * api/v1/abilities/name/
      * api/v1/abilities/name/?names=["Abominable","Bad Dreams"] (uri encoded)
-     * api/v1/abilities/?offset=20&size=3
      */
     public function abilities()
     {
@@ -59,7 +59,6 @@ class PtuAPI extends API
      * api/v1/capabilities/
      * api/v1/capabilities/name/
      * api/v1/capabilities/name/?names=["Abominable","Bad Dreams"] (uri encoded)
-     * api/v1/capabilities/?offset=20&size=3
      */
     public function capabilities()
     {
@@ -75,7 +74,6 @@ class PtuAPI extends API
      * api/v1/edges/
      * api/v1/edges/name/
      * api/v1/edges/name/?names=["Abominable","Bad Dreams"] (uri encoded)
-     * api/v1/edges/?offset=20&size=3
      */
     public function edges()
     {
@@ -96,7 +94,7 @@ class PtuAPI extends API
         $featuresData = $this->getJsonFromFile(self::FEATURES_FILENAME);
         
         // Check for list
-        if ($this->checkEmptyRequest()) {
+        if ($this->checkBasicRequest()) {
             // Check for ?names
             $names = (!empty($_GET['names'])) ? json_decode($_GET['names'], true)  : array();
             if (!empty($names))  {
@@ -111,7 +109,6 @@ class PtuAPI extends API
             }
             // No specification passed
             else {
-                // TODO: Check ?offset & ?size
                 return $featuresData;
             }
         }
@@ -148,7 +145,6 @@ class PtuAPI extends API
      * api/v1/moves/
      * api/v1/moves/name/
      * api/v1/moves/name/?names=["pound","horn drill"] (uri encoded)
-     * api/v1/moves/?offset=20&size=3
      */
     public function moves()
     {
@@ -164,7 +160,6 @@ class PtuAPI extends API
      * api/v1/natures/
      * api/v1/natures/name/
      * api/v1/natures/name/?names=["pound","horn drill"] (uri encoded)
-     * api/v1/natures/?offset=20&size=3
      */
     public function natures()
     {
@@ -193,11 +188,13 @@ class PtuAPI extends API
         $pokemonData = $this->getJsonFromFile(self::POKEMON_FILENAME);
         
         // Get List of Pokemon
-        if ($this->checkEmptyRequest()) {
-            // TODO was late and seeing bugs, i must just be tired, debug this
+        if ($this->checkBasicRequest()) {
+            // Sort by dex id
+            ksort($pokemonData);
+            // Grab a chunk
             $offset = (!empty($_GET['offset'])) ? $_GET['offset'] : 0;
-            $size = (!empty($_GET['size'])) ? $_GET['size'] : 10;
-            $data = array_slice($pokemonData, $offset, $size);
+            $size = (!empty($_GET['size'])) ? $_GET['size'] : self::DEFAULT_CHUNK_SIZE;
+            $data = array_slice($pokemonData, $offset, $size, true);
             return $data;
         }
         
@@ -237,7 +234,7 @@ class PtuAPI extends API
         $typesData = $this->getJsonFromFile(self::TYPE_FILENAME);
         
         // Get All
-        if ($this->checkEmptyRequest()) {
+        if ($this->checkBasicRequest()) {
             return $typesData;
         }
         // Get Type
@@ -317,8 +314,17 @@ class PtuAPI extends API
      * Private Functions *
      ********************/
     
-    // TODO refactor 'empty' to something more like 'basic'
-    private function checkEmptyRequest()
+    /**
+     * checks for an basic path
+     *      ex. /api/v1/pokemon => true
+     *          /api/v1/moves => true
+     *          /api/v1/pokemon/bulbasaur/ => false
+     *          /api/v1/moves/assurance => false
+     *          /api/v1/types/water/fire => false
+     *          /api/v1/types/ => true
+     * @return bool
+     */
+    private function checkBasicRequest()
     {
         return (empty($this->verb) && empty($this->args));
     }
@@ -327,12 +333,11 @@ class PtuAPI extends API
      * api/v1/{Entity}/
      * api/v1/{Entity}/name/
      * api/v1/{Entity}/name/?names=["{Entityname1}","{Entity name 2}"] (uri encoded)
-     * api/v1/{Entity}/?offset=20&size=3
      */
     private function getBasicNamedStructure($data)
     {
         // Get a list
-        if ($this->checkEmptyRequest()) {
+        if ($this->checkBasicRequest()) {
             // Check for ?names
             $names = (!empty($_GET['names'])) ? json_decode($_GET['names'], true)  : array();
             if (!empty($names))  {
@@ -347,7 +352,6 @@ class PtuAPI extends API
             }
             // No specification passed
             else {
-                // TODO: Check ?offset & ?size
                 return $data;
             }
         }
