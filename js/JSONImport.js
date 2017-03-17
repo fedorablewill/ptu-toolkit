@@ -1,66 +1,55 @@
 /*
-data: JSON from the Google Drive-based Fancy Sheet
-dex: object mapping Pokémon Names to Dex Numbers
-
+monIn: JSON from the Google Drive-based Fancy Sheet
 */
 
-/*First, putting in the elements that can be directly mapped from data to t*/
-t = {
-  name: data.nickname,
-  dex: dex[data.species],
-  level: data.Level,
-  EXP: data.EXP,
-  nature: data.Nature,
-  gender: data.Gender,
+$.getJSON("api/v1/pokemon/", function (dex) {
+//monOut: box.json Pokémon; we'll define the easy stuff to start with:
+var monOut = {
+  name: monIn.nickname,
+  level: monIn.Level,
+  EXP: monIn.EXP,
+  nature: monIn.Nature,
+  gender: monIn.Gender,
   discovery: "",
-  health: 0,
+  health: monIn.level+3*(monIn.base_HP+monIn.HP)+10,
   injuries: 0,
-  hp: data.HP,
-  atk: data.ATK,
-  def: data.DEF,
-  spatk: data.SPATK,
-  spdef: data.SPDEF,
-  speed: data.SPEED,
-  moves: [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-  ],
-  abilities: [
-    "",
-    "",
-    ""
-  ]
+  hp: monIn.base_HP+monIn.HP,
+  atk: monIn.base_ATK+monIn.ATK,
+  def: monIn.base_DEF+monIn.DEF,
+  spatk: monIn.base_SPATK+monIn.SPATK,
+  spdef: monIn.base_SPDEF+monIn.SPDEF,
+  speed: monIn.base_SPEED+monIn.SPEED
 };
-/*The dash in held-item seems to be an issue in the object defininition, so it's defined here*/
-t["held-item"]= data.HeldItem;
-/*Checking for single or dual type, and acting accordingly*/
-if (data.type2===""){
-  t.type = data.type1;
-} else {
-  t.type = data.type1 + " / " + data.type2;
+
+//The dash seems to give a spot of trouble, so we do it seperately:
+monOut["held-item"]=monIn.HeldItem;
+
+//Getting the dex entry:
+var keys = dex.keys();
+var i; for (i=0;i<keys.length;i++){
+  if (dex[keys[i]].Species==monIn.species){
+    monOut.dex = keys[i];
+    break;
+  }
 }
-/*Handling things of variable number, like Moves and Abilities */
-$.each(data, function(key,value){
-  /*Handling Moves*/
+
+//Checking for single or dual type, and acting accordingly
+if (monIn.type2===""){
+  monOut.type = monIn.type1;
+} else {
+  monOut.type = monIn.type1 + " / " + monIn.type2;
+}
+
+
+//Handling things of variable number, like Moves and Abilities
+$.each(monIn, function(key,value){
+  //Handling Moves
   if (key.indexOf("Move")!==-1){
-    t.moves.append(value.Name);
-  /*Handling Abilities*/
+    monOut.moves.append(value.Name);
+  //Handling Abilities
   } else if (key.indexOf("Ability")!==-1){
-    t.abilities.append(value.name);
+    monOut.abilities.append(value.name);
   }
 });
-/*Padding out moves; can be removed if the code does not rely on length of these arrays*/
-while (t.moves.length<9) {
-  t.moves.append("");
-}
-/*Padding out abilities; can be removed if the code does not rely on length of these arrays*/
-while (t.abilities.length<3) {
-  t.abilities.append("");
-}
+
+});
