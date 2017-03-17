@@ -16,7 +16,6 @@ var client_id = "";
  * JQuery Bindings & Initialization
  */
 $(function () {
-    $.material.init();
 
     // GENERATE CLIENT ID
     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -39,28 +38,32 @@ $(function () {
     });
 
     $("#btn-do-dmg").click(function () {
-        damage(parseInt($("#do-dmg").val()), $("#dmg-type").val(), $("#do-dmg-sp").is(':checked'));
+        sendMessage("host:"+host_id, JSON.stringify({
+            "type": "battle_damage",
+            "target": $("#pokemonId").val(),
+            "moveType": $("#dmg-type").val(),
+            "isSpecial": $("#do-dmg-sp").is(':checked'),
+            "damage": $("#do-dmg").val()
+        }))
     });
 
     $("#btn-do-heal").click(function () {
-        var progress = $(".progress");
+        var max_hp = pokemon_data['level'] + pokemon_data['hp'] * 3 + 10;
 
-        var maxHp = parseInt(progress.attr("data-max-hp"));
-        var hp = parseInt(progress.attr("data-hp"));
+        pokemon_data["health"] += $("#do-heal").val();
 
-        hp += parseInt($("#do-heal").val());
+        if (pokemon_data["health"] > max_hp)
+            pokemon_data["health"] = max_hp;
 
-        if (hp > maxHp)
-            hp = maxHp;
-
-        progress.attr("data-hp", hp);
-
-        sendUpdate("hp", hp);
-
-        $(".progress-bar").css("width", Math.floor((hp / maxHp) * 100) + "%");
+        sendMessage("host:"+host_id, JSON.stringify({
+            "type": "pokemon_update",
+            "pokemon": $("#pokemonId").val(),
+            "field": "health",
+            "value": pokemon_data["health"]
+        }));
     });
 
-    $("#stages input").change(function () {
+    $("#stages").find("input").change(function () {
         sendMessage("host:"+host_id, JSON.stringify({
             "type": "pokemon_setcs",
             "pokemon": $("#pokemonId").val(),
@@ -179,7 +182,9 @@ function displayInit() {
 }
 
 function updateStatus() {
-    $(".bar-hp").css("width", Math.floor((parseInt(pokemon_data['health']) / parseInt(pokemon_data['max-hp'])) * 100) + "%");
+    var max_hp = pokemon_data['level'] + pokemon_data['hp'] * 3 + 10;
+
+    $(".bar-hp").css("width", Math.floor((parseInt(pokemon_data['health']) / max_hp) * 100) + "%");
     $(".bar-exp").css("width", Math.floor((parseInt(pokemon_data['EXP']) / EXP_CHART[parseInt(pokemon_data['level'])]) * 100) + "%");
 }
 
@@ -266,6 +271,13 @@ function onUpdate() {
             else if (this.type == "battle_added") {
                 battle_data[this.pokemon_id] = this.pokemon_name;
                 updateTargetList();
+            }
+            /*
+                Health changed
+             */
+            else if (this.type == "health") {
+                pokemon_data["health"] = this.value;
+                updateStatus();
             }
             /*
                 Snackbar Alert Received

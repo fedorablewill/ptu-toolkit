@@ -5,6 +5,7 @@
 
 var gm_data = {};
 var battle = {};
+var currentView = 0;
 
 /**
  * Receives commands/messages
@@ -87,6 +88,18 @@ function onUpdate() {
              */
             else if (this.type == "pokemon_update") {
                 gm_data["pokemon"][this.pokemon][this.field] = this.value;
+
+                if (this.field == "health") {
+                    var max_hp = gm_data["pokemon"][this.pokemon]['level'] + gm_data["pokemon"][this.pokemon]['hp'] * 3 + 10;
+                    var w = Math.floor((gm_data["pokemon"][this.pokemon]['health'] / max_hp) * 100);
+
+                    $("[data-name='"+this.pokemon+"']").find(".progress-bar").css("width", w + "%");
+
+                    sendMessage(battle[this.pokemon]["client_id"], JSON.stringify({
+                        "type": "health",
+                        "value": this.value
+                    }));
+                }
             }
             /*
                 Update Combat Stage Received
@@ -99,6 +112,12 @@ function onUpdate() {
              */
             else if (this.type == "battle_move") {
                 performMove(this.move, this.target, this.dealer);
+            }
+            /*
+                Manual Damage Received
+             */
+            else if (this.type == "battle_damage") {
+                damagePokemon(this.target, this.moveType, this.isSpecial, this.damage);
             }
         });
     });
@@ -132,6 +151,20 @@ function renderInit() {
     $("#view-holder").html(html);
 }
 
+function changeGMView(view) {
+    if (view == 0) {
+        renderInit();
+    }
+    else if (view == 1) {
+        $("#view-holder").html($("#body-pokemon").html());
+    }
+    else if (view == 2) {
+        $("#view-holder").html($("#body-settings").html());
+    }
+
+    currentView = view;
+}
+
 /**
  * Used when a GM ID is submitted
  */
@@ -160,10 +193,14 @@ function performMove(moveName, target_id, dealer_id) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
-        var acRoll = roll(1, 20, 1);
-        var crit = 20;
+        var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
+        var crit = 20, evade = 0;
 
-        if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"])) {
+        if (target_id != "other") {
+            //TODO: get evade
+        }
+
+        if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
             doToast("It missed!");
             return;
         }
@@ -201,40 +238,176 @@ function performMove(moveName, target_id, dealer_id) {
                 doToast("OUTGOING DAMAGE = " + damage);
             }
             else {
-                $.getJSON("/api/v1/types", function (json) {
-                    var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
-
-                    var effect1 = json[move["Type"].toLowerCase()][target_types[0].toLowerCase()];
-                    var effect2 = 1;
-
-                    if (target_types.length > 1)
-                        effect2 = json[move["Type"].toLowerCase()][target_types[1].toLowerCase()];
-
-                    damage = damage * effect1 * effect2;
-
-                    if (effect1 * effect2 == 0)
-                        doToast("No effect!");
-                    else if (effect1 * effect2 >= 2)
-                        doToast("It's super effective!");
-                    else if (effect1 * effect2 < 1)
-                        doToast("It's not very effective.");
-
-                    // Subtract health
-                    gm_data["pokemon"][target_id]["health"] -= damage;
-
-                    if (gm_data["pokemon"][target_id]["health"] <= 0) {
-                        doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
-                        gm_data["pokemon"][target_id]["health"] = 0;
-                    }
-
-                    // Update health bar
-                    var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
-                    var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
-
-                    $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
-                    //TODO: send update to target
-                });
+                damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage)
             }
         }
     });
+}
+
+/**
+ * Inflict incoming damage onto a specified Pokemon
+ * @param target_id The ID of the Pokemon taking damage
+ * @param moveType The move type
+ * @param moveIsSpecial True when special, false when physical
+ * @param damage The amount of damage
+ */
+function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
+    if (moveIsSpecial)
+        damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
+    else
+        damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
+
+    $.getJSON("/api/v1/types", function (json) {
+        var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
+
+        var effect1 = json[moveType][target_types[0].toLowerCase()];
+        var effect2 = 1;
+
+        if (target_types.length > 1)
+            effect2 = json[moveType][target_types[1].toLowerCase()];
+
+        damage = damage * effect1 * effect2;
+
+        if (effect1 * effect2 == 0)
+            doToast("No effect!");
+        else if (effect1 * effect2 >= 2)
+            doToast("It's super effective!");
+        else if (effect1 * effect2 < 1)
+            doToast("It's not very effective.");
+
+        // Subtract health
+        gm_data["pokemon"][target_id]["health"] -= damage;
+
+        if (gm_data["pokemon"][target_id]["health"] <= 0) {
+            doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
+            gm_data["pokemon"][target_id]["health"] = 0;
+        }
+
+        // Update health bar
+        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+        var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
+
+        $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
+
+        // Update Player client
+        sendMessage(battle[target_id]["client_id"], JSON.stringify({
+            "type": "health",
+            "value": gm_data["pokemon"][target_id]['health']
+        }));
+    });
+}
+
+/**
+ * Initialize Add/Edit Pokemon
+ */
+$(function () {
+    $.getJSON("api/v1/types", function(json) {
+        $.each(json, function (k, v) {
+            document.getElementById("addmon-type1").innerHTML += "<option>" + k + "</option>";
+            document.getElementById("addmon-type2").innerHTML += "<option>" + k + "</option>";
+        })
+    });
+
+    $.getJSON("data/natures.json", function(json) {
+        $.each(json, function (k, v) {
+            document.getElementById("addmon-nature").innerHTML += "<option>" + k + "</option>";
+        })
+    });
+
+    $.getJSON("data/moves.json", function(json) {
+        var html = "<option></option>";
+
+        $.each(json, function (k, v) {
+            html += "<option>" + k + "</option>";
+        });
+
+        $("#addmon-moves").find("select").each(function () {
+            $(this).html(html);
+        });
+    });
+
+    $.getJSON("data/abilities.json", function(json) {
+        var html = "<option></option>";
+
+        $.each(json, function (k, v) {
+            html += "<option>" + k + "</option>";
+        });
+
+        $("#addmon-abilities").find("select").each(function () {
+            $(this).html(html);
+        });
+    });
+});
+
+/**
+ * Save Pokemon
+ */
+$("#btn-addmon").click(function () {
+
+    var form = $(".form-addmon");
+    var isValid = true;
+
+    // Validate Form
+    form.find("[required]").each(function () {
+        if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+            $(this).parent().addClass("has-error");
+            isValid = false;
+        }
+        else
+            $(this).parent().removeClass("has-error");
+    });
+
+    if (!isValid) {
+        doToast("One or more fields were not filled out properly. Please try again.")
+    }
+    else {
+        var data = {}, moves = [], abil = [];
+
+        form.find("input, select").each(function () {
+            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities"))
+                data[$(this).attr("data-field")] = $(this).val();
+        });
+
+        var i = 0;
+
+        form.find(".addmon-moves select").each(function () {
+            moves[i] = $(this).val();
+            i++;
+        });
+
+        i = 0;
+
+        form.find(".addmon-abilities select").each(function () {
+            abil[i] = $(this).val();
+            i++;
+        });
+
+        data["moves"] = moves;
+        data["abilities"] = abil;
+
+        var pmon_id = $("#addmon-id").val();
+
+        if (pmon_id == "") {
+            pmon_id = generatePmonId();
+        }
+
+        gm_data["pokemon"][pmon_id] = data;
+
+        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+
+        //TODO: dismiss modal
+    }
+});
+
+function generatePmonId() {
+    var pmon_id = "";
+
+    // Create ID for Pokemon
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    //TODO: check if id exists
+    for( var j=0; j < 3; j++ )
+        pmon_id += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    return pmon_id;
 }
