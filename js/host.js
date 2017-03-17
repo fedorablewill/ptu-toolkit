@@ -179,22 +179,78 @@ function changeGMView(view) {
 /**
  * Used when a GM ID is submitted
  */
-function registerNewGM() {
+function GMID() {
     // Store selected GM ID
     host_id = $("#battle-id").val();
 
     // Update display
     $("#display-gmid").html(host_id);
     $(".content-init").css("display", "none");
-
+    $(".content-select").css("display", "inline");
     $(".footer-gm").removeClass("hidden");
+    onUpdate();
+}
 
+function newGM() {
+    // Update display
+    $(".content-select").css("display", "none");
     onUpdate();
 
-    //TODO: import settings/pokemon from file
-    $.getJSON("pokemon/box.json", function (json) {
-        gm_data = json;
-    });
+    //New blank gm_data object
+    gm_data = {characters:{},pokemon:{},settings:{}};
+}
+
+function selectGM() {
+    // Update display
+    var ulAnchorElem = document.getElementById('uploadAnchor');
+    ulAnchorElem.click();
+}
+
+function loadGM(){
+  {
+    if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+      alert('The File APIs are not fully supported in this browser.');
+      return;
+    }
+
+    input = document.getElementById('uploadAnchor');
+    if (!input) {
+      alert("Um, couldn't find the fileinput element.");
+    }
+    else if (!input.files) {
+      alert("This browser doesn't seem to support the `files` property of file inputs.");
+    }
+    else if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+		  fr.onload = (function (theFile) {
+			     return function (e) {
+				         //console.log('e readAsText = ', e);
+				         //console.log('e readAsText target = ', e.target);
+				         try {
+					              json = JSON.parse(e.target.result);
+                        $(".content-select").css("display", "none");
+                        onUpdate();
+                        gm_data = json;
+				         } catch (ex) {
+					              alert('ex when trying to parse json = ' + ex);
+				         }
+		      };
+		  })(file);
+		  fr.readAsText(file);
+    }
+  }
+}
+
+function saveGM() {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gm_data));
+    var dlAnchorElem = document.getElementById('downloadAnchor');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", "GMData.json");
+    dlAnchorElem.click();
 }
 
 /**
