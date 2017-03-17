@@ -47,6 +47,12 @@ var ptuApiData = {
         requestData: {},
         urlDescription: ["natures", "natures/name", "natures/?names=encodeURIComponent(JSON.stringify(arrayOfNames))"]
     },
+    generate: {
+        url: "generate/",
+        verbs: [],
+        requestData: {},
+        urlDescription: []
+    },
 };
 
 var ptuApi = (function(){
