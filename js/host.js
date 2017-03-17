@@ -81,7 +81,7 @@ function onUpdate() {
 
                 doToast(gm_data["pokemon"][this.pokemon]["name"] + " Appears!");
 
-                renderInit();
+                renderBattler();
             }
             /*
                 Update Field Received
@@ -119,6 +119,15 @@ function onUpdate() {
             else if (this.type == "battle_damage") {
                 damagePokemon(this.target, this.moveType, this.isSpecial, this.damage);
             }
+            /*
+                Request for Status
+             */
+            else if (this.type == "status") {
+                sendMessage(this.sender, JSON.stringify({
+                    "type": "gm_status",
+                    "value": "online"
+                }));
+            }
         });
     });
 
@@ -129,31 +138,33 @@ function onUpdate() {
 /**
  * Generates the Pokemon battle, primarilly the health visual
  */
-function renderInit() {
-    var html = '';
+function renderBattler() {
+    if (currentView == 0) {
+        var html = '';
 
-    $.each(battle, function (id, data) {
-        var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-        var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+        $.each(battle, function (id, data) {
+            var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+            var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
 
-        if (w > 100)
-            console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
-                gm_data["pokemon"][id]['health'] + "/" + max_hp);
+            if (w > 100)
+                console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
+                    gm_data["pokemon"][id]['health'] + "/" + max_hp);
 
-        html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="'+id+'">' +
-            '<h2 class="name">'+gm_data["pokemon"][id]["name"]+'</h2>' +
-            '<div class="progress" data-hp="'+gm_data["pokemon"][id]["hp"]+'" data-max-hp="'+gm_data["pokemon"][id]["max_hp"]+'">' +
-            '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="'+w+'" aria-valuemin="0" aria-valuemax="100" style="width: '+w+'%;"></div>' +
-            '</div>' +
-            '</div>';
-    });
+            html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
+                '<h2 class="name">' + gm_data["pokemon"][id]["name"] + '</h2>' +
+                '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
+                '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
+                '</div>' +
+                '</div>';
+        });
 
-    $("#view-holder").html(html);
+        $("#view-holder").html(html);
+    }
 }
 
 function changeGMView(view) {
     if (view == 0) {
-        renderInit();
+        renderBattler();
     }
     else if (view == 1) {
         $("#view-holder").html($("#body-pokemon").html());
@@ -175,6 +186,9 @@ function registerNewGM() {
     // Update display
     $("#display-gmid").html(host_id);
     $(".content-init").css("display", "none");
+
+    $(".footer-gm").removeClass("hidden");
+
     onUpdate();
 
     //TODO: import settings/pokemon from file
@@ -301,6 +315,9 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
  * Initialize Add/Edit Pokemon
  */
 $(function () {
+
+    fetchPokemon(0, 50);
+
     $.getJSON("api/v1/types", function(json) {
         $.each(json, function (k, v) {
             document.getElementById("addmon-type1").innerHTML += "<option>" + k + "</option>";
@@ -308,13 +325,13 @@ $(function () {
         })
     });
 
-    $.getJSON("data/natures.json", function(json) {
+    $.getJSON("api/v1/natures", function(json) {
         $.each(json, function (k, v) {
             document.getElementById("addmon-nature").innerHTML += "<option>" + k + "</option>";
         })
     });
 
-    $.getJSON("data/moves.json", function(json) {
+    $.getJSON("api/v1/moves", function(json) {
         var html = "<option></option>";
 
         $.each(json, function (k, v) {
@@ -326,7 +343,7 @@ $(function () {
         });
     });
 
-    $.getJSON("data/abilities.json", function(json) {
+    $.getJSON("api/v1/abilities", function(json) {
         var html = "<option></option>";
 
         $.each(json, function (k, v) {
@@ -338,6 +355,129 @@ $(function () {
         });
     });
 });
+
+var mon_list = [];
+
+function fetchPokemon(offset, size) {
+    $.getJSON("api/v1/pokemon/?offset=" + offset + "&size=" + size, function(json) {
+        if ($.isEmptyObject(json)) {
+            $("#addmon-dex").autocomplete({
+                source: mon_list,
+                change: function( event, ui ) {
+                    if (ui.item != null) {
+                        $("#addmon-dex").parent().removeClass("has-error");
+                        $.getJSON("api/v1/pokemon/" + ui.item.value, function (entry) {
+                            // Fields to change
+                            var field_type1 = $("#addmon-type1");
+                            var field_type2 = $("#addmon-type2");
+
+                            var field_hp = $("#addmon-hp");
+                            var field_atk = $("#addmon-atk");
+                            var field_def = $("#addmon-def");
+                            var field_spatk = $("#addmon-spatk");
+                            var field_spdef = $("#addmon-spdef");
+                            var field_spd = $("#addmon-speed");
+
+                            // Change type 1
+                            field_type1.val(entry["Types"][0].toLowerCase());
+                            field_type1.parent().removeClass("is-empty");
+
+                            // Change type 2
+                            if (entry["Types"].length > 1) {
+                                field_type2.val(entry["Types"][1].toLowerCase());
+                                field_type2.parent().removeClass("is-empty");
+                            }
+                            else {
+                                field_type2.val("");
+                                field_type2.parent().addClass("is-empty");
+                            }
+
+                            // Change base stats
+                            if (field_hp.attr("data-base") != null)
+                                field_hp.val(parseInt(field_hp.val()) - parseInt(field_hp.attr("data-base")));
+
+                            if (field_hp.val() != "")
+                                field_hp.val(parseInt(field_hp.val()) + entry["BaseStats"]["HP"]);
+                            else
+                                field_hp.val(entry["BaseStats"]["HP"]);
+
+                            field_hp.attr("data-base", entry["BaseStats"]["HP"]);
+                            field_hp.parent().removeClass("is-empty");
+
+                            if (field_def.attr("data-base") != null)
+                                field_def.val(parseInt(field_def.val()) - parseInt(field_def.attr("data-base")));
+
+                            if (field_def.val() != "")
+                                field_def.val(parseInt(field_def.val()) + entry["BaseStats"]["Defense"]);
+                            else
+                                field_def.val(entry["BaseStats"]["Defense"]);
+
+                            field_def.attr("data-base", entry["BaseStats"]["Defense"]);
+                            field_def.parent().removeClass("is-empty");
+
+                            if (field_atk.attr("data-base") != null)
+                                field_atk.val(parseInt(field_atk.val()) - parseInt(field_atk.attr("data-base")));
+
+                            if (field_atk.val() != "")
+                                field_atk.val(parseInt(field_atk.val()) + entry["BaseStats"]["Attack"]);
+                            else
+                                field_atk.val(entry["BaseStats"]["Attack"]);
+
+                            field_atk.attr("data-base", entry["BaseStats"]["Attack"]);
+                            field_atk.parent().removeClass("is-empty");
+
+                            if (field_spatk.attr("data-base") != null)
+                                field_spatk.val(parseInt(field_spatk.val()) - parseInt(field_spatk.attr("data-base")));
+
+                            if (field_spatk.val() != "")
+                                field_spatk.val(parseInt(field_spatk.val()) + entry["BaseStats"]["SpecialAttack"]);
+                            else
+                                field_spatk.val(entry["BaseStats"]["SpecialAttack"]);
+
+                            field_spatk.attr("data-base", entry["BaseStats"]["SpecialAttack"]);
+                            field_spatk.parent().removeClass("is-empty");
+
+                            if (field_spdef.attr("data-base") != null)
+                                field_spdef.val(parseInt(field_spdef.val()) - parseInt(field_spdef.attr("data-base")));
+
+                            if (field_spdef.val() != "")
+                                field_spdef.val(parseInt(field_spdef.val()) + entry["BaseStats"]["SpecialDefense"]);
+                            else
+                                field_spdef.val(entry["BaseStats"]["SpecialDefense"]);
+
+                            field_spdef.attr("data-base", entry["BaseStats"]["SpecialDefense"]);
+                            field_spdef.parent().removeClass("is-empty");
+
+                            if (field_spd.attr("data-base") != null)
+                                field_spd.val(parseInt(field_spd.val()) - parseInt(field_spd.attr("data-base")));
+
+                            if (field_spd.val() != "")
+                                field_spd.val(parseInt(field_spd.val()) + entry["BaseStats"]["Speed"]);
+                            else
+                                field_spd.val(entry["BaseStats"]["Speed"]);
+
+                            field_spd.attr("data-base", entry["BaseStats"]["Speed"]);
+                            field_spd.parent().removeClass("is-empty");
+
+                        });
+                    }
+                    else {
+                        $("#addmon-dex").val("").parent().addClass("has-error");
+                    }
+                }
+            });
+        }
+        else {
+            $.each(json, function (k, v) {
+                mon_list.push({
+                    label: k + " - " + v["Species"],
+                    value: k
+                });
+            });
+            fetchPokemon(offset + size, size);
+        }
+    });
+}
 
 /**
  * Save Pokemon
