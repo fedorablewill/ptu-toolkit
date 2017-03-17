@@ -16,7 +16,6 @@ var client_id = "";
  * JQuery Bindings & Initialization
  */
 $(function () {
-    $.material.init();
 
     // GENERATE CLIENT ID
     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
