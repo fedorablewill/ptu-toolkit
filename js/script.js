@@ -14,6 +14,10 @@ var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 6110, 6360, 6610, 6868, 7125, 7390, 7660, 7925, 8205, 8485,
 8770, 9060]; //TODO: finish exp chart
 
+$(function () {
+    $.material.init();
+});
+
 function receiveMessages(name, callback) {
     if (host_id != null) {
         $.getJSON("api/message/?id=" + host_id + "&name=" + name, callback);

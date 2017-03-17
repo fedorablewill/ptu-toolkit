@@ -5,6 +5,7 @@
 
 var gm_data = {};
 var battle = {};
+var currentView = 0;
 
 /**
  * Receives commands/messages
@@ -150,6 +151,20 @@ function renderInit() {
     $("#view-holder").html(html);
 }
 
+function changeGMView(view) {
+    if (view == 0) {
+        renderInit();
+    }
+    else if (view == 1) {
+        $("#view-holder").html($("#body-pokemon").html());
+    }
+    else if (view == 2) {
+        $("#view-holder").html($("#body-settings").html());
+    }
+
+    currentView = view;
+}
+
 /**
  * Used when a GM ID is submitted
  */
@@ -229,6 +244,13 @@ function performMove(moveName, target_id, dealer_id) {
     });
 }
 
+/**
+ * Inflict incoming damage onto a specified Pokemon
+ * @param target_id The ID of the Pokemon taking damage
+ * @param moveType The move type
+ * @param moveIsSpecial True when special, false when physical
+ * @param damage The amount of damage
+ */
 function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     if (moveIsSpecial)
         damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
@@ -260,5 +282,132 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
             doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
             gm_data["pokemon"][target_id]["health"] = 0;
         }
+
+        // Update health bar
+        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+        var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
+
+        $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
+
+        // Update Player client
+        sendMessage(battle[target_id]["client_id"], JSON.stringify({
+            "type": "health",
+            "value": gm_data["pokemon"][target_id]['health']
+        }));
     });
+}
+
+/**
+ * Initialize Add/Edit Pokemon
+ */
+$(function () {
+    $.getJSON("api/v1/types", function(json) {
+        $.each(json, function (k, v) {
+            document.getElementById("addmon-type1").innerHTML += "<option>" + k + "</option>";
+            document.getElementById("addmon-type2").innerHTML += "<option>" + k + "</option>";
+        })
+    });
+
+    $.getJSON("data/natures.json", function(json) {
+        $.each(json, function (k, v) {
+            document.getElementById("addmon-nature").innerHTML += "<option>" + k + "</option>";
+        })
+    });
+
+    $.getJSON("data/moves.json", function(json) {
+        var html = "<option></option>";
+
+        $.each(json, function (k, v) {
+            html += "<option>" + k + "</option>";
+        });
+
+        $("#addmon-moves").find("select").each(function () {
+            $(this).html(html);
+        });
+    });
+
+    $.getJSON("data/abilities.json", function(json) {
+        var html = "<option></option>";
+
+        $.each(json, function (k, v) {
+            html += "<option>" + k + "</option>";
+        });
+
+        $("#addmon-abilities").find("select").each(function () {
+            $(this).html(html);
+        });
+    });
+});
+
+/**
+ * Save Pokemon
+ */
+$("#btn-addmon").click(function () {
+
+    var form = $(".form-addmon");
+    var isValid = true;
+
+    // Validate Form
+    form.find("[required]").each(function () {
+        if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+            $(this).parent().addClass("has-error");
+            isValid = false;
+        }
+        else
+            $(this).parent().removeClass("has-error");
+    });
+
+    if (!isValid) {
+        doToast("One or more fields were not filled out properly. Please try again.")
+    }
+    else {
+        var data = {}, moves = [], abil = [];
+
+        form.find("input, select").each(function () {
+            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities"))
+                data[$(this).attr("data-field")] = $(this).val();
+        });
+
+        var i = 0;
+
+        form.find(".addmon-moves select").each(function () {
+            moves[i] = $(this).val();
+            i++;
+        });
+
+        i = 0;
+
+        form.find(".addmon-abilities select").each(function () {
+            abil[i] = $(this).val();
+            i++;
+        });
+
+        data["moves"] = moves;
+        data["abilities"] = abil;
+
+        var pmon_id = $("#addmon-id").val();
+
+        if (pmon_id == "") {
+            pmon_id = generatePmonId();
+        }
+
+        gm_data["pokemon"][pmon_id] = data;
+
+        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+
+        //TODO: dismiss modal
+    }
+});
+
+function generatePmonId() {
+    var pmon_id = "";
+
+    // Create ID for Pokemon
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    //TODO: check if id exists
+    for( var j=0; j < 3; j++ )
+        pmon_id += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    return pmon_id;
 }
