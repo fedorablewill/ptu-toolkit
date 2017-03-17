@@ -126,7 +126,16 @@
             <label class="control-label" for="battle-id">GM ID</label>
             <input type="text" class="form-control col-md-8" id="battle-id"/>
         </div>
-        <button class="btn btn-danger btn-raised" onclick="registerNewGM();">GO</button>
+        <button class="btn btn-danger btn-raised" onclick="GMID();">GO</button>
+    </div>
+    <div class="col-md-6 col-md-offset-3 content-select" hidden>
+        <h2>Create or Import a GM File</h2>
+        <button class="btn btn-danger btn-raised" onclick="newGM();">Create Blank GM File</button>
+        <br>
+        <button class="btn btn-danger btn-raised" onclick="selectGM();">Select Existing GM File</button>
+        <button class="btn btn-danger btn-raised" onclick="loadGM();">Upload File</button>
+        <input id = "uploadAnchor" type="file" style="display: none"/>
+        <a id="downloadAnchor" style="display:none" />
     </div>
     <div class="col-md-6 col-md-offset-3 pokemon"></div>
 </div>
@@ -157,7 +166,7 @@
             </button>
         </div>
         <div class="col-xs-3">
-            <button class="btn btn-default">
+            <button class="btn btn-default" onclick="saveGM();">
                 Save
             </button>
         </div>

@@ -1,6 +1,7 @@
 /*
 monIn: JSON from box.json
 */
+function JSONExport(monIn){
 
 $.getJSON("api/v1/pokemon/", function (dex) {//replace with single-entry call later
 $.getJSON("api/v1/moves/", function (moves) {
@@ -230,9 +231,12 @@ $.each(monOut.abilities,function(index,value){
     monOut.lastctype+="Poison";
   }
 });
-console.log(monOut);
+
+return monOut;
 
 });
 });
 });
 });
+
+}

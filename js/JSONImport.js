@@ -1,6 +1,7 @@
 /*
 monIn: JSON from the Google Drive-based Fancy Sheet
 */
+function JSONImport(monIn){
 
 $.getJSON("api/v1/pokemon/", function (dex) {
 //monOut: box.json Pokémon; we'll define the easy stuff to start with:
@@ -52,4 +53,6 @@ $.each(monIn, function(key,value){
   }
 });
 
+return monOut;
 });
+}
