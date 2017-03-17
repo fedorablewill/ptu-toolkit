@@ -97,6 +97,10 @@
         .modal-body {
             color: #0f0f0f;
         }
+
+        .ui-autocomplete {
+            z-index: 1500 !important;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +152,7 @@
     </div>
 </div>
 
-<footer class="footer-gm">
+<footer class="footer-gm hidden">
     <div class="container">
         <div class="col-xs-3">
             <button class="btn btn-default" onclick="changeGMView(0)">
@@ -249,12 +253,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-danger" id="myModalLabel">Add a Pokemon</h4>
+                <h3 class="modal-title text-danger" id="myModalLabel">Add a Pokemon</h3>
             </div>
 
             <input type="hidden" id="addmon-id" value="" />
 
             <div class="modal-body form-addmon">
+                <small><i>Feature is work in progress</i></small>
+
+                <h4>Basic Info</h4>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-name">Pokémon Name</label>
@@ -273,8 +280,6 @@
                     <select class="form-control" id="addmon-type2"><option></option></select>
                 </div>
 
-                <hr/>
-
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-level">Level</label>
                     <input class="form-control" type="number" id="addmon-level" data-field="level" required />
@@ -283,8 +288,6 @@
                     <label class="control-label" for="addmon-exp">EXP</label>
                     <input class="form-control" type="number" id="addmon-exp" data-field="EXP" value="0" />
                 </div>
-
-                <hr/>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-nature">Nature</label>
@@ -299,8 +302,6 @@
                     </select>
                 </div>
 
-                <hr/>
-
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-discover">Discovered at</label>
                     <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
@@ -313,6 +314,8 @@
 
                 <hr/>
 
+                <h4>Health</h4>
+
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-health">Current Health</label>
                     <input class="form-control" type="number" id="addmon-health" data-field="health" />
@@ -324,9 +327,11 @@
 
                 <hr/>
 
+                <h4>Stats</h4>
+
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-hp">HP (Stat)</label>
-                    <input class="form-control" type="number" id="addmon-injure" data-field="hp" required />
+                    <input class="form-control" type="number" id="addmon-hp" data-field="hp" required />
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-atk">Attack</label>
@@ -350,6 +355,8 @@
                 </div>
 
                 <hr/>
+
+                <h4>Moves & Abilities</h4>
 
                 <!-- TODO: make moves add/remove -->
                 <label for="addmon-moves">Moves</label>
