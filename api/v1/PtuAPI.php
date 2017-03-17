@@ -194,7 +194,7 @@ class PtuAPI extends API
             // Grab a chunk
             $offset = (!empty($_GET['offset'])) ? $_GET['offset'] : 0;
             $size = (!empty($_GET['size'])) ? $_GET['size'] : self::DEFAULT_CHUNK_SIZE;
-            $data = array_slice($pokemonData, $offset, $size);
+            $data = array_slice($pokemonData, $offset, $size, true);
             return $data;
         }
         
