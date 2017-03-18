@@ -163,6 +163,8 @@ function renderBattler() {
 }
 
 function changeGMView(view) {
+    currentView = view;
+
     if (view == 0) {
         renderBattler();
     }
@@ -172,8 +174,6 @@ function changeGMView(view) {
     else if (view == 2) {
         $("#view-holder").html($("#body-settings").html());
     }
-
-    currentView = view;
 }
 
 /**
@@ -187,13 +187,12 @@ function GMID() {
     $("#display-gmid").html(host_id);
     $(".content-init").css("display", "none");
     $(".content-select").css("display", "inline");
-    $(".footer-gm").removeClass("hidden");
-    onUpdate();
 }
 
 function newGM() {
     // Update display
     $(".content-select").css("display", "none");
+    $(".footer-gm").removeClass("hidden");
     onUpdate();
 
     //New blank gm_data object
@@ -206,44 +205,45 @@ function selectGM() {
     ulAnchorElem.click();
 }
 
-function loadGM(){
-  {
-    if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-      alert('The File APIs are not fully supported in this browser.');
-      return;
-    }
+$("#uploadAnchor").change(function() {
+    {
+        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+            alert('The File APIs are not fully supported in this browser.');
+            return;
+        }
 
-    input = document.getElementById('uploadAnchor');
-    if (!input) {
-      alert("Um, couldn't find the fileinput element.");
-    }
-    else if (!input.files) {
-      alert("This browser doesn't seem to support the `files` property of file inputs.");
-    }
-    else if (!input.files[0]) {
-      alert("Please select a file before clicking 'Load'");
-    }
-    else {
-      file = input.files[0];
-      fr = new FileReader();
-		  fr.onload = (function (theFile) {
-			     return function (e) {
-				         //console.log('e readAsText = ', e);
-				         //console.log('e readAsText target = ', e.target);
-				         try {
-					              json = JSON.parse(e.target.result);
+        input = document.getElementById('uploadAnchor');
+        if (!input) {
+            alert("Um, couldn't find the fileinput element.");
+        }
+        else if (!input.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+        }
+        else if (!input.files[0]) {
+            alert("Please select a file before clicking 'Load'");
+        }
+        else {
+            file = input.files[0];
+            fr = new FileReader();
+            fr.onload = (function (theFile) {
+                return function (e) {
+                    //console.log('e readAsText = ', e);
+                    //console.log('e readAsText target = ', e.target);
+                    try {
+                        json = JSON.parse(e.target.result);
                         $(".content-select").css("display", "none");
+                        $(".footer-gm").removeClass("hidden");
                         onUpdate();
                         gm_data = json;
-				         } catch (ex) {
-					              alert('ex when trying to parse json = ' + ex);
-				         }
-		      };
-		  })(file);
-		  fr.readAsText(file);
+                    } catch (ex) {
+                        alert('ex when trying to parse json = ' + ex);
+                    }
+                };
+            })(file);
+            fr.readAsText(file);
+        }
     }
-  }
-}
+});
 
 function saveGM() {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gm_data));
