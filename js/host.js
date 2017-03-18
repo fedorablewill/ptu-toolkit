@@ -392,6 +392,8 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
  */
 $(function () {
 
+    /* Populate Options */
+
     fetchPokemon(0, 50);
 
     $.getJSON("api/v1/types", function(json) {
@@ -429,6 +431,12 @@ $(function () {
         $("#addmon-abilities").find("select").each(function () {
             $(this).html(html);
         });
+    });
+
+    /* Add listeners */
+
+    $(".form-addmon input").change(function () {
+        updatePokemonEditor();
     });
 });
 
@@ -535,6 +543,8 @@ function fetchPokemon(offset, size) {
                             field_spd.attr("data-base", entry["BaseStats"]["Speed"]);
                             field_spd.parent().removeClass("is-empty");
 
+                            updatePokemonEditor();
+
                         });
                     }
                     else {
@@ -553,6 +563,121 @@ function fetchPokemon(offset, size) {
             fetchPokemon(offset + size, size);
         }
     });
+}
+
+function updatePokemonEditor() {
+    var dex = $("#addmon-dex").val();
+
+    if (dex != "")
+        $.getJSON("api/v1/pokemon/" + dex, function (entry) {
+            // Fields to edit/view
+            var field_level = $("#addmon-level");
+            var field_health = $("#addmon-health");
+            var field_hp = $("#addmon-hp");
+            var field_atk = $("#addmon-atk");
+            var field_def = $("#addmon-def");
+            var field_spatk = $("#addmon-spatk");
+            var field_spdef = $("#addmon-spdef");
+            var field_spd = $("#addmon-speed");
+
+            /*
+                Update max health
+             */
+            if (field_hp.val() != "" && field_level.val() != "") {
+                max_hp = parseInt(field_level.val()) + ( parseInt(field_hp.val()) * 3 ) + 10;
+
+                if (field_health.val() > max_hp)
+                    $("#warn-health").html("Health is over maximum of " + max_hp);
+                else
+                    $("#warn-health").html("");
+            }
+
+            /*
+                Check stat distribution
+             */
+            if (field_level.val() != "" && field_hp.val() != "" && field_atk.val() != "" && field_def.val() != "" &&
+                    field_spatk.val() != "" && field_spdef.val() != "" && field_spd.val() != "") {
+
+                var statTotal = parseInt(field_hp.val()) + parseInt(field_atk.val()) + parseInt(field_def.val()) +
+                        parseInt(field_spatk.val()) + parseInt(field_spdef.val()) + parseInt(field_spd.val())
+                    - entry["BaseStats"]["HP"] - entry["BaseStats"]["Attack"] - entry["BaseStats"]["Defense"]
+                    - entry["BaseStats"]["SpecialDefense"] - entry["BaseStats"]["SpecialAttack"] - entry["BaseStats"]["Speed"];
+
+                var statGoal = parseInt(field_level.val()) + 10;
+
+                if (statGoal != statTotal)
+                    $("#warn-stats").html("Stats points not rewarded properly. Rewarded " + statTotal + "/" + statGoal);
+                /*
+                    Check Base Relations Rule
+                 */
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Attack"] && field_hp.val() <= field_atk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP > ATK");
+                else if(entry["BaseStats"]["HP"] < entry["BaseStats"]["Attack"] && field_hp.val() >= field_atk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP < ATK");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Defense"] && field_hp.val() <= field_def.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP > DEF");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Defense"] && field_hp.val() >= field_def.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP < DEF");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialAttack"] && field_hp.val() <= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPATK");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialAttack"] && field_hp.val() >= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPATK");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialDefense"] && field_hp.val() <= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPDEF");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialDefense"] && field_hp.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPDEF");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Speed"] && field_hp.val() <= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPD");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Speed"] && field_hp.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPD");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Defense"] && field_atk.val() >= field_def.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < DEF");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Defense"] && field_atk.val() >= field_def.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > DEF");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialAttack"] && field_atk.val() >= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPATK");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialAttack"] && field_atk.val() >= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPATK");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialDefense"] && field_atk.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPDEF");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialDefense"] && field_atk.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPDEF");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Speed"] && field_atk.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPD");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Speed"] && field_atk.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPD");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialAttack"] && field_def.val() >= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPATK");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialAttack"] && field_def.val() >= field_spatk.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPATK");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialDefense"] && field_def.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPDEF");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialDefense"] && field_def.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPDEF");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["Speed"] && field_def.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPD");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["Speed"] && field_def.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPD");
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["SpecialDefense"] && field_spatk.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK < SPDEF");
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["SpecialDefense"] && field_spatk.val() >= field_spdef.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK > SPDEF");
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["Speed"] && field_spatk.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK < SPD");
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["Speed"] && field_spatk.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK > SPD");
+                else if (entry["BaseStats"]["SpecialDefense"] < entry["BaseStats"]["Speed"] && field_spdef.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPDEF < SPD");
+                else if (entry["BaseStats"]["SpecialDefense"] > entry["BaseStats"]["Speed"] && field_spdef.val() >= field_spd.val())
+                    $("#warn-stats").html("Base Relations Rule violated: SPDEF > SPD");
+                else
+                    $("#warn-stats").html("");
+            }
+
+            //TODO: Check if move is valid
+
+            //TODO: Check for moves to be learned
+        });
 }
 
 function onClickAddPokemon() {
@@ -627,6 +752,8 @@ function onClickEditPokemon(id) {
     $("[title='Ability 1']").val(gm_data['pokemon'][id]['abilities'][0]);
     $("[title='Ability 2']").val(gm_data['pokemon'][id]['abilities'][1]);
     $("[title='Ability 3']").val(gm_data['pokemon'][id]['abilities'][2]);
+
+    updatePokemonEditor();
 
     $('#modalAddPokemon').modal('show');
 }

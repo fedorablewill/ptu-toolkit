@@ -183,7 +183,7 @@
 </footer>
 
 <div class="hidden" id="body-pokemon">
-    <h2>Editing Pokemon work in progress..</h2>
+    <h2>Manage Pokémon</h2>
     <div class="list-pokemon"></div>
     <br/>
     <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
@@ -321,7 +321,7 @@
 
                 <hr/>
 
-                <h4>Health</h4>
+                <h4>Health <small class="text-warning" id="warn-health"></small></h4>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-health">Current Health</label>
@@ -334,7 +334,7 @@
 
                 <hr/>
 
-                <h4>Stats</h4>
+                <h4>Stats <small class="text-warning" id="warn-stats"></small></h4>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-hp">HP (Stat)</label>
