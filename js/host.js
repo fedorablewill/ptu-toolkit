@@ -172,8 +172,8 @@ function renderPokemonList() {
         html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
                 '<img src="http://www.ptu.panda-games.net/images/pokemon/'+v["dex"]+'.png"> '+v["name"]+
                 '<div class="btn-group-vertical pull-right">'+
-                    '<a href="javascript:onClickEditPokemon('+k+')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></a>'+
-                    '<a href="javascript:onClickDeletePokemon('+k+')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></a>'+
+                    '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></button>'+
+                    '<button onclick="onClickDeletePokemon(\''+k+'\')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></button>'+
                 '</div>'+
             '</div>';
     });
@@ -396,8 +396,8 @@ $(function () {
 
     $.getJSON("api/v1/types", function(json) {
         $.each(json, function (k, v) {
-            document.getElementById("addmon-type1").innerHTML += "<option>" + k + "</option>";
-            document.getElementById("addmon-type2").innerHTML += "<option>" + k + "</option>";
+            document.getElementById("addmon-type1").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
+            document.getElementById("addmon-type2").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
         })
     });
 
@@ -455,12 +455,12 @@ function fetchPokemon(offset, size) {
                             var field_spd = $("#addmon-speed");
 
                             // Change type 1
-                            field_type1.val(entry["Types"][0].toLowerCase());
+                            field_type1.val(entry["Types"][0]);
                             field_type1.parent().removeClass("is-empty");
 
                             // Change type 2
                             if (entry["Types"].length > 1) {
-                                field_type2.val(entry["Types"][1].toLowerCase());
+                                field_type2.val(entry["Types"][1]);
                                 field_type2.parent().removeClass("is-empty");
                             }
                             else {
@@ -555,8 +555,80 @@ function fetchPokemon(offset, size) {
     });
 }
 
-function onClickEditPokemon(id) {
+function onClickAddPokemon() {
 
+    $("#addmon-id").val("").parent().addClass("is-empty");
+    $("#addmon-name").val("").parent().addClass("is-empty");
+    $("#addmon-dex").val("").parent().addClass("is-empty");
+    $("#addmon-level").val("").parent().addClass("is-empty");
+    $("#addmon-exp").val(0).parent().removeClass("is-empty");
+    $("#addmon-type1").val("").parent().addClass("is-empty");
+    $("#addmon-type2").val("").parent().addClass("is-empty");
+    $("#addmon-nature").val("").parent().addClass("is-empty");
+    $("#addmon-gender").val("Genderless").parent().removeClass("is-empty");
+    $("#addmon-discover").val("").parent().addClass("is-empty");
+    $("#addmon-item").val("").parent().addClass("is-empty");
+    $("#addmon-health").val("").parent().addClass("is-empty");
+    $("#addmon-injure").val("0").parent().removeClass("is-empty");
+    $("#addmon-hp").val("").parent().addClass("is-empty");
+    $("#addmon-atk").val("").parent().addClass("is-empty");
+    $("#addmon-def").val("").parent().addClass("is-empty");
+    $("#addmon-spdef").val("").parent().addClass("is-empty");
+    $("#addmon-spatk").val("").parent().addClass("is-empty");
+    $("#addmon-speed").val("").parent().addClass("is-empty");
+    $("[title='Move 1']").val("");
+    $("[title='Move 2']").val("");
+    $("[title='Move 3']").val("");
+    $("[title='Move 4']").val("");
+    $("[title='Move 5']").val("");
+    $("[title='Move 6']").val("");
+    $("[title='Move 7']").val("");
+    $("[title='Move 8']").val("");
+    $("[title='Move 9']").val("");
+    $("[title='Ability 1']").val("");
+    $("[title='Ability 2']").val("");
+    $("[title='Ability 3']").val("");
+
+    $('#modalAddPokemon').modal('show');
+}
+
+function onClickEditPokemon(id) {
+    var types = gm_data['pokemon'][id]['type'].split(" / ");
+
+    $("#addmon-id").val(id);
+    $("#addmon-name").val(gm_data['pokemon'][id]['name']).parent().removeClass("is-empty");
+    $("#addmon-dex").val(gm_data['pokemon'][id]['dex']).parent().removeClass("is-empty");
+    $("#addmon-level").val(gm_data['pokemon'][id]['level']).parent().removeClass("is-empty");
+    $("#addmon-exp").val(gm_data['pokemon'][id]['EXP']).parent().removeClass("is-empty");
+    $("#addmon-type1").val(types[0]).parent().removeClass("is-empty");
+    if (types[1] != null)
+        $("#addmon-type2").val(types[1]).parent().removeClass("is-empty");
+    $("#addmon-nature").val(gm_data['pokemon'][id]['nature']).parent().removeClass("is-empty");
+    $("#addmon-gender").val(gm_data['pokemon'][id]['gender']).parent().removeClass("is-empty");
+    $("#addmon-discover").val(gm_data['pokemon'][id]['discovery']).parent().removeClass("is-empty");
+    $("#addmon-item").val(gm_data['pokemon'][id]['held-item']).parent().removeClass("is-empty");
+    $("#addmon-health").val(gm_data['pokemon'][id]['health']).parent().removeClass("is-empty");
+    $("#addmon-injure").val(gm_data['pokemon'][id]['injuries']).parent().removeClass("is-empty");
+    $("#addmon-hp").val(gm_data['pokemon'][id]['hp']).parent().removeClass("is-empty");
+    $("#addmon-atk").val(gm_data['pokemon'][id]['atk']).parent().removeClass("is-empty");
+    $("#addmon-def").val(gm_data['pokemon'][id]['def']).parent().removeClass("is-empty");
+    $("#addmon-spdef").val(gm_data['pokemon'][id]['spdef']).parent().removeClass("is-empty");
+    $("#addmon-spatk").val(gm_data['pokemon'][id]['spatk']).parent().removeClass("is-empty");
+    $("#addmon-speed").val(gm_data['pokemon'][id]['speed']).parent().removeClass("is-empty");
+    $("[title='Move 1']").val(gm_data['pokemon'][id]['moves'][0]);
+    $("[title='Move 2']").val(gm_data['pokemon'][id]['moves'][1]);
+    $("[title='Move 3']").val(gm_data['pokemon'][id]['moves'][2]);
+    $("[title='Move 4']").val(gm_data['pokemon'][id]['moves'][3]);
+    $("[title='Move 5']").val(gm_data['pokemon'][id]['moves'][4]);
+    $("[title='Move 6']").val(gm_data['pokemon'][id]['moves'][5]);
+    $("[title='Move 7']").val(gm_data['pokemon'][id]['moves'][6]);
+    $("[title='Move 8']").val(gm_data['pokemon'][id]['moves'][7]);
+    $("[title='Move 9']").val(gm_data['pokemon'][id]['moves'][8]);
+    $("[title='Ability 1']").val(gm_data['pokemon'][id]['abilities'][0]);
+    $("[title='Ability 2']").val(gm_data['pokemon'][id]['abilities'][1]);
+    $("[title='Ability 3']").val(gm_data['pokemon'][id]['abilities'][2]);
+
+    $('#modalAddPokemon').modal('show');
 }
 
 function onClickDeletePokemon(id) {
@@ -625,9 +697,10 @@ $("#btn-addmon").click(function () {
 
         gm_data["pokemon"][pmon_id] = data;
 
-        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+        doToast(gm_data["pokemon"][pmon_id]["name"] + " was saved");
 
         renderPokemonList();
+        $('#modalAddPokemon').modal('hide');
     }
 });
 
