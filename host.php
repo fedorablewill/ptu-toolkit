@@ -123,6 +123,9 @@
     </div>
 </nav>
 
+<input id = "uploadAnchor" type="file" style="display: none"/>
+<a id="downloadAnchor" style="display:none"></a>
+
 <div class="container" id="view-holder">
     <div class="col-md-6 col-md-offset-3 content-init">
         <h2>Enter a desired GM ID</h2>
@@ -137,8 +140,6 @@
         <button class="btn btn-danger btn-raised" onclick="newGM();">Create Blank GM File</button>
         <br>
         <button class="btn btn-danger btn-raised" onclick="selectGM();">Upload Existing GM File</button>
-        <input id = "uploadAnchor" type="file" style="display: none"/>
-        <a id="downloadAnchor" style="display:none"></a>
     </div>
     <div class="col-md-6 col-md-offset-3 pokemon"></div>
 </div>
