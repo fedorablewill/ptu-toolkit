@@ -631,6 +631,44 @@ $("#btn-addmon").click(function () {
     }
 });
 
+$("#btn-impmon").click(function () {
+
+    var form = $(".form-impmon");
+    var isValid = true;
+
+    // Validate Form
+    form.find("[required]").each(function () {
+        if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+            $(this).parent().addClass("has-error");
+            isValid = false;
+        }
+        else
+            $(this).parent().removeClass("has-error");
+    });
+
+    if (!isValid) {
+        doToast("One or more fields were not filled out properly. Please try again.")
+    }
+    else {
+
+        var data = JSON.parse($("#impmon-JSON").val());
+
+        data = JSONImport(data);
+
+        var pmon_id = $("#impmon-id").val();
+
+        if (pmon_id == "") {
+            pmon_id = generatePmonId();
+        }
+
+        gm_data["pokemon"][pmon_id] = data;
+
+        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+
+        renderPokemonList();
+    }
+});
+
 function generatePmonId() {
     var pmon_id = "";
 
