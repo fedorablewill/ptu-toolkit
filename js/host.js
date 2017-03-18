@@ -162,6 +162,19 @@ function renderBattler() {
     }
 }
 
+/**
+ * Render list of editable Pokemon for Pokemon tab
+ */
+function renderPokemonList() {
+    var html = '';
+
+    $.each(gm_data['pokemon'], function (k, v) {
+        html += '<button class="edit-pokemon btn btn-default"><img src="http://www.ptu.panda-games.net/images/pokemon/'+v["dex"]+'.png"> '+v["name"]+'</button>';
+    });
+
+    $("#view-holder").find(".list-pokemon").html(html);
+}
+
 function changeGMView(view) {
     currentView = view;
 
@@ -170,6 +183,7 @@ function changeGMView(view) {
     }
     else if (view == 1) {
         $("#view-holder").html($("#body-pokemon").html());
+        renderPokemonList()
     }
     else if (view == 2) {
         $("#view-holder").html($("#body-settings").html());
@@ -566,14 +580,14 @@ $("#btn-addmon").click(function () {
 
         var i = 0;
 
-        form.find(".addmon-moves select").each(function () {
+        form.find("#addmon-moves select").each(function () {
             moves[i] = $(this).val();
             i++;
         });
 
         i = 0;
 
-        form.find(".addmon-abilities select").each(function () {
+        form.find("#addmon-abilities select").each(function () {
             abil[i] = $(this).val();
             i++;
         });
