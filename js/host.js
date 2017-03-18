@@ -163,6 +163,8 @@ function renderBattler() {
 }
 
 function changeGMView(view) {
+    currentView = view;
+    
     if (view == 0) {
         renderBattler();
     }
@@ -172,8 +174,6 @@ function changeGMView(view) {
     else if (view == 2) {
         $("#view-holder").html($("#body-settings").html());
     }
-
-    currentView = view;
 }
 
 /**
