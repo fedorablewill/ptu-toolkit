@@ -162,6 +162,25 @@ function renderBattler() {
     }
 }
 
+/**
+ * Render list of editable Pokemon for Pokemon tab
+ */
+function renderPokemonList() {
+    var html = '';
+
+    $.each(gm_data['pokemon'], function (k, v) {
+        html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
+                '<img src="http://www.ptu.panda-games.net/images/pokemon/'+v["dex"]+'.png"> '+v["name"]+
+                '<div class="btn-group-vertical pull-right">'+
+                    '<a href="javascript:onClickEditPokemon('+k+')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></a>'+
+                    '<a href="javascript:onClickDeletePokemon('+k+')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></a>'+
+                '</div>'+
+            '</div>';
+    });
+
+    $("#view-holder").find(".list-pokemon").html(html);
+}
+
 function changeGMView(view) {
     currentView = view;
 
@@ -170,6 +189,7 @@ function changeGMView(view) {
     }
     else if (view == 1) {
         $("#view-holder").html($("#body-pokemon").html());
+        renderPokemonList()
     }
     else if (view == 2) {
         $("#view-holder").html($("#body-settings").html());
@@ -535,6 +555,14 @@ function fetchPokemon(offset, size) {
     });
 }
 
+function onClickEditPokemon(id) {
+
+}
+
+function onClickDeletePokemon(id) {
+
+}
+
 /**
  * Save Pokemon
  */
@@ -564,16 +592,24 @@ $("#btn-addmon").click(function () {
                 data[$(this).attr("data-field")] = $(this).val();
         });
 
+        var type1 = $("#addmon-type1").val();
+        var type2 = $("#addmon-type2").val();
+
+        if (type2 == "")
+            data["type"] = type1;
+        else
+            data["type"] = type1 + " / " + type2;
+
         var i = 0;
 
-        form.find(".addmon-moves select").each(function () {
+        form.find("#addmon-moves select").each(function () {
             moves[i] = $(this).val();
             i++;
         });
 
         i = 0;
 
-        form.find(".addmon-abilities select").each(function () {
+        form.find("#addmon-abilities select").each(function () {
             abil[i] = $(this).val();
             i++;
         });
@@ -591,7 +627,7 @@ $("#btn-addmon").click(function () {
 
         doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
 
-        //TODO: dismiss modal
+        renderPokemonList();
     }
 });
 
