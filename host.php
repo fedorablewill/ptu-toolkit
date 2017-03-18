@@ -12,6 +12,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Bootstrap Material Design -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
     <link href="css/ripples.min.css" rel="stylesheet">
     <link href="dist/snackbar.min.css" rel="stylesheet">
@@ -79,6 +80,10 @@
 
         .content-generator {
             margin-top: 300px;
+        }
+
+        .edit-pokemon img {
+            height: 50px;
         }
 
         footer.footer-gm {
@@ -180,6 +185,7 @@
 <div class="hidden" id="body-pokemon">
     <h2>Editing Pokemon work in progress..</h2>
     <div class="list-pokemon"></div>
+    <br/>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalAddPokemon">Add Pokemon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokemon</button>
 </div>
