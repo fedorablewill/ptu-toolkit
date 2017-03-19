@@ -92,7 +92,7 @@ function displayInit() {
     var display = $("#mon1");
 
     $(".content-header").find(".name").html(pokemon_data["name"] + ' <small>Level ' + pokemon_data['level'] + '</small>');
-    $(".pokemon-image").attr("src", "http://www.ptu.panda-games.net/images/pokemon/"+pokemon_data["dex"]+".png");
+    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
 
     $("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 

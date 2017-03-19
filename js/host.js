@@ -170,7 +170,7 @@ function renderPokemonList() {
 
     $.each(gm_data['pokemon'], function (k, v) {
         html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
-                '<img src="http://www.ptu.panda-games.net/images/pokemon/'+v["dex"]+'.png"> '+v["name"]+
+                '<img src="img/pokemon/'+v["dex"]+'.gif"> '+v["name"]+
                 '<div class="btn-group-vertical pull-right">'+
                     '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></button>'+
                     '<button onclick="onClickDeletePokemon(\''+k+'\')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></button>'+
@@ -350,11 +350,11 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     $.getJSON("/api/v1/types", function (json) {
         var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
-        var effect1 = json[moveType][target_types[0].toLowerCase()];
+        var effect1 = json[moveType.toLowerCase()][target_types[0].toLowerCase()];
         var effect2 = 1;
 
         if (target_types.length > 1)
-            effect2 = json[moveType][target_types[1].toLowerCase()];
+            effect2 = json[moveType.toLowerCase()][target_types[1].toLowerCase()];
 
         damage = damage * effect1 * effect2;
 
@@ -610,65 +610,65 @@ function updatePokemonEditor() {
                 /*
                     Check Base Relations Rule
                  */
-                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Attack"] && field_hp.val() <= field_atk.val())
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Attack"] && parseInt(field_hp.val()) <= parseInt(field_atk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP > ATK");
-                else if(entry["BaseStats"]["HP"] < entry["BaseStats"]["Attack"] && field_hp.val() >= field_atk.val())
+                else if(entry["BaseStats"]["HP"] < entry["BaseStats"]["Attack"] && parseInt(field_hp.val()) >= parseInt(field_atk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP < ATK");
-                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Defense"] && field_hp.val() <= field_def.val())
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Defense"] && parseInt(field_hp.val()) <= parseInt(field_def.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP > DEF");
-                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Defense"] && field_hp.val() >= field_def.val())
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Defense"] && parseInt(field_hp.val()) >= parseInt(field_def.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP < DEF");
-                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialAttack"] && field_hp.val() <= field_spatk.val())
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_hp.val()) <= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP > SPATK");
-                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialAttack"] && field_hp.val() >= field_spatk.val())
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_hp.val()) >= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP < SPATK");
-                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialDefense"] && field_hp.val() <= field_spdef.val())
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_hp.val()) <= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP > SPDEF");
-                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialDefense"] && field_hp.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_hp.val()) >= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP < SPDEF");
-                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Speed"] && field_hp.val() <= field_spd.val())
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Speed"] && parseInt(field_hp.val()) <= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP > SPD");
-                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Speed"] && field_hp.val() >= field_spd.val())
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Speed"] && parseInt(field_hp.val()) >= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: HP < SPD");
-                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Defense"] && field_atk.val() >= field_def.val())
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Defense"] && parseInt(field_atk.val()) >= parseInt(field_def.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK < DEF");
-                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Defense"] && field_atk.val() >= field_def.val())
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Defense"] && parseInt(field_atk.val()) <= parseInt(field_def.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK > DEF");
-                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialAttack"] && field_atk.val() >= field_spatk.val())
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_atk.val()) >= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK < SPATK");
-                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialAttack"] && field_atk.val() >= field_spatk.val())
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_atk.val()) <= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK > SPATK");
-                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialDefense"] && field_atk.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_atk.val()) >= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK < SPDEF");
-                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialDefense"] && field_atk.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_atk.val()) <= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK > SPDEF");
-                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Speed"] && field_atk.val() >= field_spd.val())
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Speed"] && parseInt(field_atk.val()) >= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK < SPD");
-                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Speed"] && field_atk.val() >= field_spd.val())
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Speed"] && parseInt(field_atk.val()) <= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: ATK > SPD");
-                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialAttack"] && field_def.val() >= field_spatk.val())
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_def.val()) >= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF < SPATK");
-                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialAttack"] && field_def.val() >= field_spatk.val())
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_def.val()) <= parseInt(field_spatk.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF > SPATK");
-                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialDefense"] && field_def.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_def.val()) >= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF < SPDEF");
-                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialDefense"] && field_def.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_def.val()) <= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF > SPDEF");
-                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["Speed"] && field_def.val() >= field_spd.val())
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["Speed"] && parseInt(field_def.val()) >= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF < SPD");
-                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["Speed"] && field_def.val() >= field_spd.val())
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["Speed"] && parseInt(field_def.val()) <= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: DEF > SPD");
-                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["SpecialDefense"] && field_spatk.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_spatk.val()) >= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPATK < SPDEF");
-                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["SpecialDefense"] && field_spatk.val() >= field_spdef.val())
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_spatk.val()) <= parseInt(field_spdef.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPATK > SPDEF");
-                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["Speed"] && field_spatk.val() >= field_spd.val())
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["Speed"] && parseInt(field_spatk.val()) >= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPATK < SPD");
-                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["Speed"] && field_spatk.val() >= field_spd.val())
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["Speed"] && parseInt(field_spatk.val()) <= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPATK > SPD");
-                else if (entry["BaseStats"]["SpecialDefense"] < entry["BaseStats"]["Speed"] && field_spdef.val() >= field_spd.val())
+                else if (entry["BaseStats"]["SpecialDefense"] < entry["BaseStats"]["Speed"] && parseInt(field_spdef.val()) >= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPDEF < SPD");
-                else if (entry["BaseStats"]["SpecialDefense"] > entry["BaseStats"]["Speed"] && field_spdef.val() >= field_spd.val())
+                else if (entry["BaseStats"]["SpecialDefense"] > entry["BaseStats"]["Speed"] && parseInt(field_spdef.val()) <= parseInt(field_spd.val()))
                     $("#warn-stats").html("Base Relations Rule violated: SPDEF > SPD");
                 else
                     $("#warn-stats").html("");
@@ -787,8 +787,12 @@ $("#btn-addmon").click(function () {
         var data = {}, moves = [], abil = [];
 
         form.find("input, select").each(function () {
-            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities"))
-                data[$(this).attr("data-field")] = $(this).val();
+            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities")) {
+                if ($(this).attr("type") == "number")
+                    data[$(this).attr("data-field")] = parseInt($(this).val());
+                else
+                    data[$(this).attr("data-field")] = $(this).val();
+            }
         });
 
         var type1 = $("#addmon-type1").val();
