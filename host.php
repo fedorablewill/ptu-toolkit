@@ -186,13 +186,82 @@
     <h2>Manage Pokémon</h2>
     <div class="list-pokemon"></div>
     <br/>
+<<<<<<< HEAD
     <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokémon</button>
+=======
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalAddPokemon">Add Pokemon</button>
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokemon</button>
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokemon</button>
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokemon</button>
+>>>>>>> origin/master
 </div>
 
 <div class="hidden" id="body-settings">
     <h1>Nothin' to see yet..</h1>
 </div>
+
+<!-- Modal dialog for exporting Pokemon -->
+<div class="modal fade" id="modalExpPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-danger" id="expMonLabel">Export a Pokemon</h3>
+            </div>
+
+            <input type="hidden" id="expmon-id" value="" />
+
+            <div class="modal-body form-expmon">
+                <small><i>Feature is work in progress</i></small>
+
+                <h4>Basic Info</h4>
+
+                <div class="form-group label-floating">
+                    <label class="control-label" for="expmon-mon">Select Pokemon</label>
+                    <select class="form-control" id="expmon-mon" required><option></option></select>
+                </div>
+                <div class="form-group label-floating">
+                    <label class="control-label" for="expmon-name">Click in the text field below and use ctrl-A to copy JSON:</label>
+                    <textarea class="form-control" rows="5" cols="20" data-field="json" id="expmon-JSON" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal dialog for importing Pokemon -->
+<div class="modal fade" id="modalImpPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-danger" id="impMonLabel">Import a Pokemon</h3>
+            </div>
+
+            <input type="hidden" id="impmon-id" value="" />
+
+            <div class="modal-body form-impmon">
+                <small><i>Feature is work in progress</i></small>
+
+                <h4>Basic Info</h4>
+
+                <div class="form-group label-floating">
+                    <label class="control-label" for="impmon-name">Put Fancy Sheet JSON below:</label>
+                    <textarea class="form-control" rows="5" cols="20" data-field="json" id="impmon-JSON" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="btn-impmon">Save</button>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal dialog for generating Pokemon -->
 <div class="modal fade" id="modalGenPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -200,14 +269,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-danger" id="myModalLabel">Generate Pokemon</h4>
+                <h4 class="modal-title text-danger" id="genMonLabel">Generate Pokemon</h4>
             </div>
 
             <div class="modal-body form-genmon">
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="genmon-type">Species</label>
-                    <select class="form-control" id="genmon-type" required><option></option></select>
+                    <label class="control-label" for="genmon-species">Species</label>
+                    <select class="form-control" id="genmon-species" required><option></option></select>
                 </div>
 
                 <div class="form-group label-floating">
@@ -410,6 +479,8 @@
 <script src="js/material.js"></script>
 
 <script src="js/script.js"></script>
+<script src="js/JSONImport.js"></script>
+<script src="js/JSONExport.js"></script>
 <script src="js/host.js"></script>
 </body>
 </html>
