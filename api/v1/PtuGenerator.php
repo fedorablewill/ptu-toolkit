@@ -105,9 +105,6 @@ class PtuGenerator
         $fname = self::JSON_DATA_PATH ."/moves.json";
         $moveData = file_exists($fname) ? json_decode(file_get_contents($fname), true) : array();
 
-//Get rid of mon that are illegal for the given level range
-        $dex = $this->levelCheck($dex,$this->levelRange[1]);
-
 //Iterates over $genType for multi-step generation
         foreach ($this->genType as &$value){
             $dex = $this->genstep($dex,$value[0],$value[1],$this->levelRange[1]);
@@ -122,9 +119,13 @@ class PtuGenerator
         if ($dex === []){
             throw new Exception("Critera too limited; no such 'mon exist.");
         }
+
+//Picking level for the 'mon
+        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);        
+
 //Selects single entry from limited dex.
-        $num = array_rand($dex);
-        $dex = $dex[$num];
+        $dex = evoWeightRand($dex,$level);
+        
 //Making $export, with "name" = species name, and "dex" the dex number;
         $export = ["name" => $dex["Species"],"dex"=>(int)$num];
 
@@ -142,24 +143,7 @@ class PtuGenerator
 //No random Held Item generation atm, so setting $export["held-item"] to an empty string.
         $export["held-item"] = "";
 
-//Setting lower bound on level to minimum value for the 'mon
-        $stip = $dex["EvolutionStages"];
-        foreach($stip as $key => $value){
-            if ($value["Species"]==$dex["Species"]){
-                $num = $key;
-                break;
-            }
-        }
-        $stip = $stip[$num]["Criteria"];
-        if (strpos($stip,"Minimum")!==FALSE){
-            $stip = (int)substr($stip,strpos($stip,"Minimum")+1);
-            if ($stip<$this->levelRange[0]){
-                $this->levelRange[0]=$stip;
-            }
-        }
 
-//Picking level for the 'mon
-        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);
 
 //Putting level and minimum EXP in $export
         $export["level"] = (int)$level;
@@ -278,7 +262,7 @@ class PtuGenerator
 //fclose($handle);
     }
 
-    //Eliminates Pokémon whose evolve above the maximum possible range;
+//Eliminates Pokémon whose evolve above the maximum possible range;
     function levelCheck($dex,$maxLevel){
         $arr = [];
         foreach($dex as $key => $value){
@@ -303,6 +287,7 @@ class PtuGenerator
         }
         return $arr;
     }
+
 //This function removes mon from an array that do not meet specific criteria. For multi-step generation, feed the results back into the function with further stipulations.
     function genstep($dex,$genType,$genData,$maxLevel){
         $arr = [];
@@ -361,6 +346,69 @@ class PtuGenerator
         }
         return $arr;
     }
+
+//Makes it more likely that higher-level 'mon will be more evolved
+	function evoWeightRand($dex,$level){
+		$reverseDex=[];
+		$weight = [];
+		foreach($dex as $key => $value){
+			$reverseDex[$value["Species"]]=$key;
+			if ($value["EvolutionStages"][0]["Species"]==$value["Species"]){
+            	$evos = [];$stages = [];$thresh = [];
+            	$max = 0;
+        		foreach($value["EvolutionStages"] as $k => $v){
+        			if (strpos($v["Criteria"],"Minimum")!==FALSE){
+                		$req = (int)substr($v["Criteria"],strpos($v["Criteria"],"Minimum")+1);
+                		if (!array_key_exists($v["Stage"],$thresh)){
+            				$thresh[$v["Stage"]]=$req;
+            			}
+            		} else {
+            			$req = 1;
+            		}
+            		if ($req <= $level){
+            			array_push($evos,$v);
+            			if (array_key_exists($v["Stage"],$stages)){
+            				$stages[$v["Stage"]]++;
+            			} else {
+            				$stages[$v["Stage"]]=1;
+            			}
+            			if ($max<$v["Stage"]){
+            				$max = $v["Stage"];
+            			}
+            		}
+            	}
+            	$miniWeight=[];$mod=[];
+            	if (array_key_exists(2,$thresh)&&array_key_exists(3,$thresh)){
+            		$mod[1]=$thresh[2];
+            		$mod[2]=$thresh[3]-$thresh[2];
+            		$mod[3]=$level-$thresh[3];
+            	} elseif (array_key_exists(2,$thresh)){
+            		$mod[1]=$thresh[2];
+            		$mod[2]=$level-$thresh[2];
+            	} else {
+            		$mod[1]=1;
+            	}
+        		foreach($evos as $k => $v){
+        			$miniWeight[$v["Species"]]=(pow(10,$v["Stage"]-1)*$mod[$v["Stage"]])/$stages[$v["Stage"]];
+        		}
+        		$mod=array_sum($miniWeight);
+        		foreach($miniWeight as $k => $v){
+        			$v = $v * 100 / $mod;
+        		}
+        		$weight = array_merge($weight,$miniWeight);
+        	}
+		}
+        $x = mt_rand(0,array_sum($weight)-1);
+        foreach($weight as $key => $value){
+          if ($x<$value){
+             $x = $key;
+             break;
+          } else {
+             $x = $x - $value;
+          }
+        }
+        return $dex[$reverseDex[$x]];
+	}
 
 //This function will get rid of legendaries from the dex, by directly eleminating their dex number.
     function noLegend($dex){
@@ -523,7 +571,7 @@ class PtuGenerator
         }
         //echo nl2br("ordera:".json_encode($ordera)."\n\n");
         //Add stats for each level
-        for($i=0;$i<$level;$i++){
+        for($i=0;$i<$level+10;$i++){
             //Make empty array for valid choices
             $a = [];
             foreach($ordera as $key => $value){

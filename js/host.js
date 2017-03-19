@@ -230,6 +230,12 @@ $("#expmon-mon").change(function(){
   $('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id]));
 });
 
+function fetchExistingPokemon(){
+  $.each(gm_data["pokemon"],function (k,v){
+  	document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
+  })   
+}
+
 $("#uploadAnchor").change(function() {
     {
         if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
