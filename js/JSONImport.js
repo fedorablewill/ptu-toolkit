@@ -26,7 +26,7 @@ var monOut = {
 monOut["held-item"]=monIn.HeldItem;
 
 //Getting the dex entry:
-var keys = dex.keys();
+var keys = Object.keys(dex);
 var i; for (i=0;i<keys.length;i++){
   if (dex[keys[i]].Species==monIn.species){
     monOut.dex = keys[i];
