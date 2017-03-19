@@ -183,13 +183,18 @@
 </footer>
 
 <div class="hidden" id="body-pokemon">
-    <h2>Editing Pokemon work in progress..</h2>
+    <h2>Manage Pokémon</h2>
     <div class="list-pokemon"></div>
     <br/>
+<<<<<<< HEAD
+    <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokémon</button>
+=======
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalAddPokemon">Add Pokemon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokemon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokemon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokemon</button>
+>>>>>>> origin/master
 </div>
 
 <div class="hidden" id="body-settings">
@@ -324,7 +329,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title text-danger" id="addMonLabel">Add a Pokemon</h3>
+                <h3 class="modal-title text-danger" id="myModalLabel">Add/Edit Pokémon</h3>
             </div>
 
             <input type="hidden" id="addmon-id" value="" />
@@ -385,7 +390,7 @@
 
                 <hr/>
 
-                <h4>Health</h4>
+                <h4>Health <small class="text-warning" id="warn-health"></small></h4>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-health">Current Health</label>
@@ -398,7 +403,7 @@
 
                 <hr/>
 
-                <h4>Stats</h4>
+                <h4>Stats <small class="text-warning" id="warn-stats"></small></h4>
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-hp">HP (Stat)</label>
@@ -451,7 +456,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" id="btn-addmon">Save</button>
             </div>
         </div>

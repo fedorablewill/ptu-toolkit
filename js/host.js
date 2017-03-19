@@ -170,10 +170,10 @@ function renderPokemonList() {
 
     $.each(gm_data['pokemon'], function (k, v) {
         html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
-                '<img src="http://www.ptu.panda-games.net/images/pokemon/'+v["dex"]+'.png"> '+v["name"]+
+                '<img src="img/pokemon/'+v["dex"]+'.gif"> '+v["name"]+
                 '<div class="btn-group-vertical pull-right">'+
-                    '<a href="javascript:onClickEditPokemon('+k+')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></a>'+
-                    '<a href="javascript:onClickDeletePokemon('+k+')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></a>'+
+                    '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></button>'+
+                    '<button onclick="onClickDeletePokemon(\''+k+'\')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></button>'+
                 '</div>'+
             '</div>';
     });
@@ -355,11 +355,11 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     $.getJSON("/api/v1/types", function (json) {
         var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
-        var effect1 = json[moveType][target_types[0].toLowerCase()];
+        var effect1 = json[moveType.toLowerCase()][target_types[0].toLowerCase()];
         var effect2 = 1;
 
         if (target_types.length > 1)
-            effect2 = json[moveType][target_types[1].toLowerCase()];
+            effect2 = json[moveType.toLowerCase()][target_types[1].toLowerCase()];
 
         damage = damage * effect1 * effect2;
 
@@ -397,12 +397,14 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
  */
 $(function () {
 
+    /* Populate Options */
+
     fetchPokemon(0, 50);
 
     $.getJSON("api/v1/types", function(json) {
         $.each(json, function (k, v) {
-            document.getElementById("addmon-type1").innerHTML += "<option>" + k + "</option>";
-            document.getElementById("addmon-type2").innerHTML += "<option>" + k + "</option>";
+            document.getElementById("addmon-type1").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
+            document.getElementById("addmon-type2").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
         })
     });
 
@@ -435,6 +437,12 @@ $(function () {
             $(this).html(html);
         });
     });
+
+    /* Add listeners */
+
+    $(".form-addmon input").change(function () {
+        updatePokemonEditor();
+    });
 });
 
 var mon_list = [];
@@ -460,12 +468,12 @@ function fetchPokemon(offset, size) {
                             var field_spd = $("#addmon-speed");
 
                             // Change type 1
-                            field_type1.val(entry["Types"][0].toLowerCase());
+                            field_type1.val(entry["Types"][0]);
                             field_type1.parent().removeClass("is-empty");
 
                             // Change type 2
                             if (entry["Types"].length > 1) {
-                                field_type2.val(entry["Types"][1].toLowerCase());
+                                field_type2.val(entry["Types"][1]);
                                 field_type2.parent().removeClass("is-empty");
                             }
                             else {
@@ -540,6 +548,8 @@ function fetchPokemon(offset, size) {
                             field_spd.attr("data-base", entry["BaseStats"]["Speed"]);
                             field_spd.parent().removeClass("is-empty");
 
+                            updatePokemonEditor();
+
                         });
                     }
                     else {
@@ -560,14 +570,197 @@ function fetchPokemon(offset, size) {
     });
 }
 
-function fetchExistingPokemon() {
-    $.each(gm_data["pokemon"], function (k, v) {
-      document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
-    });
+function updatePokemonEditor() {
+    var dex = $("#addmon-dex").val();
+
+    if (dex != "")
+        $.getJSON("api/v1/pokemon/" + dex, function (entry) {
+            // Fields to edit/view
+            var field_level = $("#addmon-level");
+            var field_health = $("#addmon-health");
+            var field_hp = $("#addmon-hp");
+            var field_atk = $("#addmon-atk");
+            var field_def = $("#addmon-def");
+            var field_spatk = $("#addmon-spatk");
+            var field_spdef = $("#addmon-spdef");
+            var field_spd = $("#addmon-speed");
+
+            /*
+                Update max health
+             */
+            if (field_hp.val() != "" && field_level.val() != "") {
+                max_hp = parseInt(field_level.val()) + ( parseInt(field_hp.val()) * 3 ) + 10;
+
+                if (field_health.val() > max_hp)
+                    $("#warn-health").html("Health is over maximum of " + max_hp);
+                else
+                    $("#warn-health").html("");
+            }
+
+            /*
+                Check stat distribution
+             */
+            if (field_level.val() != "" && field_hp.val() != "" && field_atk.val() != "" && field_def.val() != "" &&
+                    field_spatk.val() != "" && field_spdef.val() != "" && field_spd.val() != "") {
+
+                var statTotal = parseInt(field_hp.val()) + parseInt(field_atk.val()) + parseInt(field_def.val()) +
+                        parseInt(field_spatk.val()) + parseInt(field_spdef.val()) + parseInt(field_spd.val())
+                    - entry["BaseStats"]["HP"] - entry["BaseStats"]["Attack"] - entry["BaseStats"]["Defense"]
+                    - entry["BaseStats"]["SpecialDefense"] - entry["BaseStats"]["SpecialAttack"] - entry["BaseStats"]["Speed"];
+
+                var statGoal = parseInt(field_level.val()) + 10;
+
+                if (statGoal != statTotal)
+                    $("#warn-stats").html("Stats points not rewarded properly. Rewarded " + statTotal + "/" + statGoal);
+                /*
+                    Check Base Relations Rule
+                 */
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Attack"] && parseInt(field_hp.val()) <= parseInt(field_atk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP > ATK");
+                else if(entry["BaseStats"]["HP"] < entry["BaseStats"]["Attack"] && parseInt(field_hp.val()) >= parseInt(field_atk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP < ATK");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Defense"] && parseInt(field_hp.val()) <= parseInt(field_def.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP > DEF");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Defense"] && parseInt(field_hp.val()) >= parseInt(field_def.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP < DEF");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_hp.val()) <= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPATK");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_hp.val()) >= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPATK");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_hp.val()) <= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPDEF");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_hp.val()) >= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPDEF");
+                else if (entry["BaseStats"]["HP"] > entry["BaseStats"]["Speed"] && parseInt(field_hp.val()) <= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP > SPD");
+                else if (entry["BaseStats"]["HP"] < entry["BaseStats"]["Speed"] && parseInt(field_hp.val()) >= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: HP < SPD");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Defense"] && parseInt(field_atk.val()) >= parseInt(field_def.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < DEF");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Defense"] && parseInt(field_atk.val()) <= parseInt(field_def.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > DEF");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_atk.val()) >= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPATK");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_atk.val()) <= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPATK");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_atk.val()) >= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPDEF");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_atk.val()) <= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPDEF");
+                else if (entry["BaseStats"]["Attack"] < entry["BaseStats"]["Speed"] && parseInt(field_atk.val()) >= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK < SPD");
+                else if (entry["BaseStats"]["Attack"] > entry["BaseStats"]["Speed"] && parseInt(field_atk.val()) <= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: ATK > SPD");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialAttack"] && parseInt(field_def.val()) >= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPATK");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialAttack"] && parseInt(field_def.val()) <= parseInt(field_spatk.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPATK");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_def.val()) >= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPDEF");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_def.val()) <= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPDEF");
+                else if (entry["BaseStats"]["Defense"] < entry["BaseStats"]["Speed"] && parseInt(field_def.val()) >= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF < SPD");
+                else if (entry["BaseStats"]["Defense"] > entry["BaseStats"]["Speed"] && parseInt(field_def.val()) <= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: DEF > SPD");
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["SpecialDefense"] && parseInt(field_spatk.val()) >= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK < SPDEF");
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["SpecialDefense"] && parseInt(field_spatk.val()) <= parseInt(field_spdef.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK > SPDEF");
+                else if (entry["BaseStats"]["SpecialAttack"] < entry["BaseStats"]["Speed"] && parseInt(field_spatk.val()) >= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK < SPD");
+                else if (entry["BaseStats"]["SpecialAttack"] > entry["BaseStats"]["Speed"] && parseInt(field_spatk.val()) <= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPATK > SPD");
+                else if (entry["BaseStats"]["SpecialDefense"] < entry["BaseStats"]["Speed"] && parseInt(field_spdef.val()) >= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPDEF < SPD");
+                else if (entry["BaseStats"]["SpecialDefense"] > entry["BaseStats"]["Speed"] && parseInt(field_spdef.val()) <= parseInt(field_spd.val()))
+                    $("#warn-stats").html("Base Relations Rule violated: SPDEF > SPD");
+                else
+                    $("#warn-stats").html("");
+            }
+
+            //TODO: Check if move is valid
+
+            //TODO: Check for moves to be learned
+        });
+}
+
+function onClickAddPokemon() {
+
+    $("#addmon-id").val("").parent().addClass("is-empty");
+    $("#addmon-name").val("").parent().addClass("is-empty");
+    $("#addmon-dex").val("").parent().addClass("is-empty");
+    $("#addmon-level").val("").parent().addClass("is-empty");
+    $("#addmon-exp").val(0).parent().removeClass("is-empty");
+    $("#addmon-type1").val("").parent().addClass("is-empty");
+    $("#addmon-type2").val("").parent().addClass("is-empty");
+    $("#addmon-nature").val("").parent().addClass("is-empty");
+    $("#addmon-gender").val("Genderless").parent().removeClass("is-empty");
+    $("#addmon-discover").val("").parent().addClass("is-empty");
+    $("#addmon-item").val("").parent().addClass("is-empty");
+    $("#addmon-health").val("").parent().addClass("is-empty");
+    $("#addmon-injure").val("0").parent().removeClass("is-empty");
+    $("#addmon-hp").val("").parent().addClass("is-empty");
+    $("#addmon-atk").val("").parent().addClass("is-empty");
+    $("#addmon-def").val("").parent().addClass("is-empty");
+    $("#addmon-spdef").val("").parent().addClass("is-empty");
+    $("#addmon-spatk").val("").parent().addClass("is-empty");
+    $("#addmon-speed").val("").parent().addClass("is-empty");
+    $("[title='Move 1']").val("");
+    $("[title='Move 2']").val("");
+    $("[title='Move 3']").val("");
+    $("[title='Move 4']").val("");
+    $("[title='Move 5']").val("");
+    $("[title='Move 6']").val("");
+    $("[title='Move 7']").val("");
+    $("[title='Move 8']").val("");
+    $("[title='Move 9']").val("");
+    $("[title='Ability 1']").val("");
+    $("[title='Ability 2']").val("");
+    $("[title='Ability 3']").val("");
+
+    $('#modalAddPokemon').modal('show');
 }
 
 function onClickEditPokemon(id) {
+    var types = gm_data['pokemon'][id]['type'].split(" / ");
 
+    $("#addmon-id").val(id);
+    $("#addmon-name").val(gm_data['pokemon'][id]['name']).parent().removeClass("is-empty");
+    $("#addmon-dex").val(gm_data['pokemon'][id]['dex']).parent().removeClass("is-empty");
+    $("#addmon-level").val(gm_data['pokemon'][id]['level']).parent().removeClass("is-empty");
+    $("#addmon-exp").val(gm_data['pokemon'][id]['EXP']).parent().removeClass("is-empty");
+    $("#addmon-type1").val(types[0]).parent().removeClass("is-empty");
+    if (types[1] != null)
+        $("#addmon-type2").val(types[1]).parent().removeClass("is-empty");
+    $("#addmon-nature").val(gm_data['pokemon'][id]['nature']).parent().removeClass("is-empty");
+    $("#addmon-gender").val(gm_data['pokemon'][id]['gender']).parent().removeClass("is-empty");
+    $("#addmon-discover").val(gm_data['pokemon'][id]['discovery']).parent().removeClass("is-empty");
+    $("#addmon-item").val(gm_data['pokemon'][id]['held-item']).parent().removeClass("is-empty");
+    $("#addmon-health").val(gm_data['pokemon'][id]['health']).parent().removeClass("is-empty");
+    $("#addmon-injure").val(gm_data['pokemon'][id]['injuries']).parent().removeClass("is-empty");
+    $("#addmon-hp").val(gm_data['pokemon'][id]['hp']).parent().removeClass("is-empty");
+    $("#addmon-atk").val(gm_data['pokemon'][id]['atk']).parent().removeClass("is-empty");
+    $("#addmon-def").val(gm_data['pokemon'][id]['def']).parent().removeClass("is-empty");
+    $("#addmon-spdef").val(gm_data['pokemon'][id]['spdef']).parent().removeClass("is-empty");
+    $("#addmon-spatk").val(gm_data['pokemon'][id]['spatk']).parent().removeClass("is-empty");
+    $("#addmon-speed").val(gm_data['pokemon'][id]['speed']).parent().removeClass("is-empty");
+    $("[title='Move 1']").val(gm_data['pokemon'][id]['moves'][0]);
+    $("[title='Move 2']").val(gm_data['pokemon'][id]['moves'][1]);
+    $("[title='Move 3']").val(gm_data['pokemon'][id]['moves'][2]);
+    $("[title='Move 4']").val(gm_data['pokemon'][id]['moves'][3]);
+    $("[title='Move 5']").val(gm_data['pokemon'][id]['moves'][4]);
+    $("[title='Move 6']").val(gm_data['pokemon'][id]['moves'][5]);
+    $("[title='Move 7']").val(gm_data['pokemon'][id]['moves'][6]);
+    $("[title='Move 8']").val(gm_data['pokemon'][id]['moves'][7]);
+    $("[title='Move 9']").val(gm_data['pokemon'][id]['moves'][8]);
+    $("[title='Ability 1']").val(gm_data['pokemon'][id]['abilities'][0]);
+    $("[title='Ability 2']").val(gm_data['pokemon'][id]['abilities'][1]);
+    $("[title='Ability 3']").val(gm_data['pokemon'][id]['abilities'][2]);
+
+    updatePokemonEditor();
+
+    $('#modalAddPokemon').modal('show');
 }
 
 function onClickDeletePokemon(id) {
@@ -599,8 +792,12 @@ $("#btn-addmon").click(function () {
         var data = {}, moves = [], abil = [];
 
         form.find("input, select").each(function () {
-            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities"))
-                data[$(this).attr("data-field")] = $(this).val();
+            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities")) {
+                if ($(this).attr("type") == "number")
+                    data[$(this).attr("data-field")] = parseInt($(this).val());
+                else
+                    data[$(this).attr("data-field")] = $(this).val();
+            }
         });
 
         var type1 = $("#addmon-type1").val();
@@ -636,9 +833,10 @@ $("#btn-addmon").click(function () {
 
         gm_data["pokemon"][pmon_id] = data;
 
-        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+        doToast(gm_data["pokemon"][pmon_id]["name"] + " was saved");
 
         renderPokemonList();
+        $('#modalAddPokemon').modal('hide');
     }
 });
 
