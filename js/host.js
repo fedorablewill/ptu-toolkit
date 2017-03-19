@@ -189,7 +189,7 @@ function changeGMView(view) {
     }
     else if (view == 1) {
         $("#view-holder").html($("#body-pokemon").html());
-        renderPokemonList()
+        renderPokemonList();
     }
     else if (view == 2) {
         $("#view-holder").html($("#body-settings").html());
@@ -224,6 +224,11 @@ function selectGM() {
     var ulAnchorElem = document.getElementById('uploadAnchor');
     ulAnchorElem.click();
 }
+
+$("#expmon-mon").change(function(){
+  var id = $('#expmon-mon').find(":selected").val();
+  $('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id]));
+});
 
 $("#uploadAnchor").change(function() {
     {
@@ -552,6 +557,12 @@ function fetchPokemon(offset, size) {
             });
             fetchPokemon(offset + size, size);
         }
+    });
+}
+
+function fetchExistingPokemon() {
+    $.each(gm_data["pokemon"], function (k, v) {
+      document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
     });
 }
 
