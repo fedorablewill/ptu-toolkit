@@ -140,6 +140,28 @@
         .form-genmon h3,h4 {
             text-align: center;
         }
+
+        .togglebutton label input[type=checkbox]:checked + .toggle {
+            background-color: rgba(244, 67, 54, 0.7);
+        }
+
+        .togglebutton label input[type=checkbox]:checked + .toggle:after {
+            border-color: #f44336;
+        }
+
+        .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+            background: #f44336;
+        }
+
+
+        .form-group.is-focused .form-control {
+            outline: none;
+            background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+        }
+
+        .form-group.is-focused label, .form-group.is-focused label.control-label {
+            color: #f44336;
+        }
     </style>
 </head>
 <body>
@@ -276,7 +298,7 @@
                                         </label>
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label" for="genmon-species">Species</label>
+                                        <label class="control-label" for="genmon-species" style="opacity: 0.6">Species</label>
                                         <input class="form-control" type="text" id="genmon-species" disabled data-populate="dex" />
                                     </div>
                                 </div>
@@ -289,7 +311,7 @@
                                         </label>
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label" for="genmon-type">Type</label>
+                                        <label class="control-label" for="genmon-type" style="opacity: 0.6">Type</label>
                                         <select class="form-control" id="genmon-type" disabled data-populate="type">
                                             <option></option>
                                         </select>
@@ -307,7 +329,7 @@
                                         </label>
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label" for="genmon-habitat">Habitat</label>
+                                        <label class="control-label" for="genmon-habitat" style="opacity: 0.6">Habitat</label>
                                         <select class="form-control" id="genmon-habitat" disabled>
                                             <option></option>
                                             <option>Arctic</option>
@@ -336,7 +358,7 @@
                                         </label>
                                     </div>
                                     <div class="form-group label-floating">
-                                        <label class="control-label" for="genmon-gen">Generation</label>
+                                        <label class="control-label" for="genmon-gen" style="opacity: 0.6">Generation</label>
                                         <select class="form-control" id="genmon-gen" disabled>
                                             <option></option>
                                             <option value="1">Gen I</option>

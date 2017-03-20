@@ -833,30 +833,32 @@ function onRenderPokemonManage() {
      */
     $(".input-enable .form-control-enabler").click(function () {
         if ($(this).is(":checked")) {
-            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").removeAttr("disabled");
+            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)")
+                .removeAttr("disabled").parent().find("label").animate({opacity:1});
 
             if ($(this).attr("id") == "enable-species") {
                 $("#enable-type").attr("disabled", "");
-                $("#genmon-type").attr("disabled", "");
+                $("#genmon-type").attr("disabled", "").parent().find("label").animate({opacity:0.6});
                 $("#enable-habitat").attr("disabled", "");
-                $("#genmon-habitat").attr("disabled", "");
+                $("#genmon-habitat").attr("disabled", "").parent().find("label").animate({opacity:0.6});
                 $("#enable-gen").attr("disabled", "");
-                $("#genmon-gen").attr("disabled", "");
+                $("#genmon-gen").attr("disabled", "").parent().find("label").animate({opacity:0.6});
             }
         }
         else {
-            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").attr("disabled" , "");
+            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)")
+                .attr("disabled" , "").parent().find("label").animate({opacity:0.6});
 
             if ($(this).attr("id") == "enable-species") {
                 $("#enable-type").removeAttr("disabled");
                 if ($("#enable-type").is(":checked"))
-                    $("#genmon-type").removeAttr("disabled");
+                    $("#genmon-type").removeAttr("disabled").parent().find("label").animate({opacity:1});
                 $("#enable-habitat").removeAttr("disabled");
                 if ($("#enable-habitat").is(":checked"))
-                    $("#genmon-habitat").removeAttr("disabled");
+                    $("#genmon-habitat").removeAttr("disabled").parent().find("label").animate({opacity:1});
                 $("#enable-gen").removeAttr("disabled");
                 if ($("#enable-gen").is(":checked"))
-                    $("#genmon-gen").removeAttr("disabled");
+                    $("#genmon-gen").removeAttr("disabled").parent().find("label").animate({opacity:1});
             }
         }
     });
