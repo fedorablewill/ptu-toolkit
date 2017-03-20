@@ -830,7 +830,7 @@ $("#btn-impmon").click(function () {
  */
 $(".input-enable .form-control-enabler").change(function () {
     if ($(this).is(":checked")) {
-        $(this).closest(".input-enable").find("input:not(.form-control-enabler)").removeAttr("disabled");
+        $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").removeAttr("disabled");
 
         if ($(this).attr("id") == "enable-species") {
             $("#enable-type").attr("disabled", "");
@@ -842,7 +842,7 @@ $(".input-enable .form-control-enabler").change(function () {
         }
     }
     else {
-        $(this).closest(".input-enable").find("input:not(.form-control-enabler)").attr("disabled" , "");
+        $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").attr("disabled" , "");
 
         if ($(this).attr("id") == "enable-species") {
             $("#enable-type").removeAttr("disabled");
