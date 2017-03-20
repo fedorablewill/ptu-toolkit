@@ -108,6 +108,10 @@
             z-index: 1500 !important;
         }
 
+        .input-group {
+            width: 100%;
+        }
+
         .input-enable .checkbox {
             display: inline-block;
             margin-right: 15px;
@@ -115,6 +119,7 @@
 
         .input-enable .form-group {
             display: inline-block;
+            width: calc(100% - 50px);
         }
 
         .collapse-form {
@@ -142,14 +147,9 @@
 <nav class="navbar navbar-danger">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="javascript:void(0)">PTU GM's Tools</a>
         </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <div>
             <div class="navbar-right navbar-gmid">
                 <strong>GM ID:</strong> <span id="display-gmid"></span>
             </div>
@@ -428,13 +428,17 @@
                         <h4>Step 3: Pokémon Settings</h4>
 
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-sm-2">
                                 <div class="form-group label-floating">
                                     <label class="control-label" for="genmon-lvlmin">Min Level</label>
                                     <input class="form-control" type="number" id="genmon-lvlmin" min="1" max="100" value="1" required />
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-sm-8">
+                                <label class="control-label" for="genmon-lvl-slider">Level Range</label>
+                                <div class="slider slider-danger" id="genmon-lvl-slider"></div>
+                            </div>
+                            <div class="col-sm-2">
                                 <div class="form-group label-floating">
                                     <label class="control-label" for="genmon-lvlmax">Max Level</label>
                                     <input class="form-control" type="number" id="genmon-lvlmax" min="1" max="100" value="100" required />
@@ -525,6 +529,10 @@
                                     <input class="form-control" type="number" id="genmon-speed" value="1" />
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <button class="btn btn-success pull-right">Generate</button>
                         </div>
                     </div>
                 </div>
@@ -753,6 +761,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="dist/snackbar.min.js"></script>
 <script src="js/material.min.js"></script>
+<script src="js/nouislider.min.js"></script>
 
 <script src="js/script.js"></script>
 <script src="js/JSONImport.js"></script>

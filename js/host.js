@@ -873,6 +873,30 @@ function onRenderPokemonManage() {
             $("#genmon-emmax").val("3");
         }
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('#genmon-lvl-slider').change(function() {
+        var values = $(this).val();
+        $("#genmon-lvlmin").val(values[0]);
+        $("#genmon-lvlmax").val(values[1]);
+    }).noUiSlider({
+        start: [1, 100] ,
+        step: 1,
+        connect: true,
+        range: {
+            min: 1,
+            max: 100
+        }
+    });
+
+    $("#genmon-lvlmin").on('change', function(){
+        $("#genmon-lvl-slider").val([$(this).val(), $("#genmon-lvlmax").val()]);
+    });
+
+    $("#genmon-lvlmax").on('change', function(){
+        $("#genmon-lvl-slider").val([$("#genmon-lvlmin").val(), $(this).val()]);
+    });
 }
 
 function generatePmonId() {
