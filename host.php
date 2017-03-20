@@ -13,8 +13,7 @@
 
     <!-- Bootstrap Material Design -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
-    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/material-kit.css" rel="stylesheet">
     <link href="dist/snackbar.min.css" rel="stylesheet">
 
     <style>
@@ -94,6 +93,7 @@
             background-color: #f44336;
             color: rgba(255,255,255,.84);
             text-align: center;
+            padding: 0;
         }
 
         .footer-gm .btn-default {
@@ -181,22 +181,22 @@
 <footer class="footer-gm hidden">
     <div class="container">
         <div class="col-xs-3">
-            <button class="btn btn-default" onclick="changeGMView(0)">
+            <button class="btn btn-white btn-simple" onclick="changeGMView(0)">
                 Battler
             </button>
         </div>
         <div class="col-xs-3">
-            <button class="btn btn-default" onclick="changeGMView(1)">
+            <button class="btn btn-white btn-simple" onclick="changeGMView(1)">
                 Pokémon
             </button>
         </div>
         <div class="col-xs-3">
-            <button class="btn btn-default" onclick="changeGMView(2)">
+            <button class="btn btn-white btn-simple" onclick="changeGMView(2)">
                 Settings
             </button>
         </div>
         <div class="col-xs-3">
-            <button class="btn btn-default" onclick="saveGM();">
+            <button class="btn btn-white btn-simple" onclick="saveGM();">
                 Save
             </button>
         </div>
@@ -207,10 +207,10 @@
     <h2>Manage Pokémon</h2>
     <div class="list-Pokémon"></div>
     <br/>
-    <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokémon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokémon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokémon</button>
+    <button class="btn btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
+    <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokémon</button>
+    <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokémon</button>
+    <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokémon</button>
 </div>
 
 <div class="hidden" id="body-settings">
@@ -714,8 +714,7 @@
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="dist/snackbar.min.js"></script>
-<script src="js/ripples.js"></script>
-<script src="js/material.js"></script>
+<script src="js/material.min.js"></script>
 
 <script src="js/script.js"></script>
 <script src="js/JSONImport.js"></script>

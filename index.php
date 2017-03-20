@@ -13,8 +13,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Bootstrap Material Design -->
-    <link href="css/bootstrap-material-design.min.css" rel="stylesheet">
-    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/material-kit.css" rel="stylesheet">
 
     <style>
         body {
@@ -350,8 +349,7 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="dist/snackbar.min.js"></script>
-    <script src="js/ripples.js"></script>
-    <script src="js/material.js"></script>
+    <script src="js/material.min.js"></script>
 
     <script src="js/script.js"></script>
     <script src="js/pokemon.js"></script>
