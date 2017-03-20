@@ -16,6 +16,7 @@ var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 
 $(function () {
     $.material.init();
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function receiveMessages(name, callback) {

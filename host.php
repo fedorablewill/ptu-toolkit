@@ -2,7 +2,7 @@
 <html>
 <head>
     <!--
-    $.getJSON("/api/v1/generate", {"habitat": "Grassland", "min_level": 12, "max_level": 14}, function (data){gm_data["pokemon"][generatePmonId()] = data});
+    $.getJSON("/api/v1/generate", {"habitat": "Grassland", "min_level": 12, "max_level": 14}, function (data){gm_data["Pokémon"][generatePmonId()] = data});
     -->
 
     <title>PTU Battle Viewer</title>
@@ -26,7 +26,7 @@
                     rgba(0, 0, 0, 0.45),
                     rgba(50, 50, 50, 0.88)
                 ),
-                url('img/pixel-art-pokemon-wallpaper-2.jpg')
+                url('img/pixel-art-Pokémon-wallpaper-2.jpg')
                 no-repeat fixed center bottom;
 
             background-size: cover !important;
@@ -71,7 +71,8 @@
         }
 
         .togglebutton label {
-            color: #FFFFFF;
+            color: inherit;
+            font-weight: 300;
         }
 
         input, select, button:not(.btn) {
@@ -82,7 +83,7 @@
             margin-top: 300px;
         }
 
-        .edit-pokemon img {
+        .edit-Pokémon img {
             height: 50px;
         }
 
@@ -105,6 +106,26 @@
 
         .ui-autocomplete {
             z-index: 1500 !important;
+        }
+
+        .input-enable .checkbox {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .input-enable .form-group {
+            display: inline-block;
+        }
+
+        .collapse-form {
+            margin-left: 5px;
+            padding-left: 10px;
+            border-left: solid rgb(238, 238, 238) 1px;
+        }
+
+        .help {
+            font-size: 15px;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -146,7 +167,7 @@
         <br>
         <button class="btn btn-danger btn-raised" onclick="selectGM();">Upload Existing GM File</button>
     </div>
-    <div class="col-md-6 col-md-offset-3 pokemon"></div>
+    <div class="col-md-6 col-md-offset-3 Pokémon"></div>
 </div>
 
 <div class="bottom">
@@ -182,9 +203,9 @@
     </div>
 </footer>
 
-<div class="hidden" id="body-pokemon">
+<div class="hidden" id="body-Pokémon">
     <h2>Manage Pokémon</h2>
-    <div class="list-pokemon"></div>
+    <div class="list-Pokémon"></div>
     <br/>
 <<<<<<< HEAD
     <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
@@ -207,7 +228,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title text-danger" id="expMonLabel">Export a Pokemon</h3>
+                <h3 class="modal-title text-danger" id="expMonLabel">Export a Pokémon</h3>
             </div>
 
             <input type="hidden" id="expmon-id" value="" />
@@ -218,7 +239,7 @@
                 <h4>Basic Info</h4>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="expmon-mon">Select Pokemon</label>
+                    <label class="control-label" for="expmon-mon">Select Pokémon</label>
                     <select class="form-control" id="expmon-mon" required><option></option></select>
                 </div>
                 <div class="form-group label-floating">
@@ -239,7 +260,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title text-danger" id="impMonLabel">Import a Pokemon</h3>
+                <h3 class="modal-title text-danger" id="impMonLabel">Import a Pokémon</h3>
             </div>
 
             <input type="hidden" id="impmon-id" value="" />
@@ -269,29 +290,228 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-danger" id="genMonLabel">Generate Pokemon</h4>
+                <h3 class="modal-title text-danger" id="genMonLabel">Generate Pokémon</h3>
             </div>
 
             <div class="modal-body form-genmon">
 
-                <div class="form-group label-floating">
-                    <label class="control-label" for="genmon-species">Species</label>
-                    <select class="form-control" id="genmon-species" required><option></option></select>
+                <h4>Step 1: Select Categories</h4>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-enable">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="form-control-enabler" id="enable-species">
+                                </label>
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="genmon-species">Species</label>
+                                <input class="form-control" type="text" id="genmon-species" disabled data-populate="dex" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-enable">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="form-control-enabler" id="enable-type">
+                                </label>
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="genmon-type">Type</label>
+                                <select class="form-control" id="genmon-type" disabled data-populate="type">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group input-enable">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="form-control-enabler" id="enable-habitat">
+                                </label>
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="genmon-habitat">Habitat</label>
+                                <select class="form-control" id="genmon-habitat" disabled>
+                                    <option></option>
+                                    <option>Arctic</option>
+                                    <option>Beach</option>
+                                    <option>Cave</option>
+                                    <option>Desert</option>
+                                    <option>Forest</option>
+                                    <option>Freshwater</option>
+                                    <option>Grassland</option>
+                                    <option>Marsh</option>
+                                    <option>Mountain</option>
+                                    <option>Ocean</option>
+                                    <option>Rainforest</option>
+                                    <option>Taiga</option>
+                                    <option>Tundra</option>
+                                    <option>Urban</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-enable">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="form-control-enabler" id="enable-gen">
+                                </label>
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="genmon-gen">Generation</label>
+                                <select class="form-control" id="genmon-gen" disabled>
+                                    <option></option>
+                                    <option value="1">Gen I</option>
+                                    <option value="2">Gen II</option>
+                                    <option value="3">Gen III</option>
+                                    <option value="4">Gen IV</option>
+                                    <option value="5">Gen V</option>
+                                    <option value="6">Gen VI</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Step 2: Owner Information</h4>
+
+                <div class="togglebutton">
+                    <label>
+                        <input type="checkbox" id="genmon-is-wild" checked> Wild Pokémon
+                    </label>
+                </div>
+
+                <div class="collapse" id="group-owner-settings">
+                    Owner Specifications
+                    <div class="collapse-form">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="genmon-tp"> Top Percentage Class
+                                <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                                   title="Pokémon from an owner with Top Percentage gain extra Tutor Points and boosted Base Stats on Levels divisible by 5">help</i>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-soul"> Enduring Soul Class
+                                <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                                   title="Pokémon from an owner with Enduring Soul can have their HP stat raised outside of the Base Relations Rule">help</i>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-horiz"> Expand Horizons Feature
+                                <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                                   title="Pokémon from an owner with Expand Horizons gain 3 extra Tutor Points">help</i>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-guide"> Guidance Feature
+                                <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                                   title="Pokémon from an owner with Guidance have an extra move">help</i>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-hp"> Stat Ace (HP)
+                                <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                                   title="Pokémon from an owner with Stat Ace gain an extra point to the bound stat with a bonus +1 per 10 levels. The stat can also ignore the Base Relations Rule.">help</i>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-atk"> Stat Ace (ATK)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-def"> Stat Ace (DEF)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-spatk"> Stat Ace (SPATK)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-spdef"> Stat Ace (SPDEF)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="genmon-ace-spd"> Stat Ace (SPD)
+                            </label>
+                        </div>
+
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-lvl-caught">Level Caught</label>
+                            <input class="form-control" type="number" id="addmon-lvl-caught" min="1" max="100" value="1" />
+                            <p class="help-block">Only required if they have Top Percentage</p>
+                        </div>
+
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-lvl-caught">Unused Tutor Points</label>
+                            <input class="form-control" type="number" id="addmon-lvl-caught" min="0" value="0" />
+                            <p class="help-block">If you don't want all of the tutor points used, specify here</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="genmon-type">Type</label>
-                    <select class="form-control" id="genmon-type" required><option></option></select>
+                    <label class="control-label" for="addmon-discover">Discovered at</label>
+                    <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
+                    <p class="help-block">Keep track of where the Pokémon was found</p>
+                </div>
+
+                <h4>Step 3: Pokémon Settings</h4>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-lvlmin">Min Level</label>
+                            <input class="form-control" type="number" id="genmon-lvlmin" min="1" max="100" value="1" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-lvlmax">Max Level</label>
+                            <input class="form-control" type="number" id="genmon-lvlmax" min="1" max="100" value="100" required />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="genmon-habitat">Habitat</label>
-                    <select class="form-control" id="genmon-habitat" required><option></option></select>
+                    <label class="control-label" for="addmon-gender">Specific Gender</label>
+                    <select class="form-control" id="addmon-gender" data-field="gender">
+                        <option></option>
+                        <option>Genderless</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
                 </div>
 
-                <div class="form-group label-floating">
-                    <label class="control-label" for="genmon-gen">Generation</label>
-                    <select class="form-control" id="genmon-gen" required><option></option></select>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-tmmin">Min Leanred TMs</label>
+                            <input class="form-control" type="number" id="genmon-tmmin" min="0" max="9" value="0" required />
+                            <p class="help-block">Includes TMs, HMs, and Tutor Moves</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-tmmax">Max Learned TMs</label>
+                            <input class="form-control" type="number" id="genmon-tmmax" min="0" max="9" value="0" required />
+                            <p class="help-block">Includes TMs, HMs, and Tutor Moves</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-emmin">Min Egg Moves</label>
+                            <input class="form-control" type="number" id="genmon-emmin" min="0" max="9" value="0" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-emmax">Max Egg Moves</label>
+                            <input class="form-control" type="number" id="genmon-emmax" min="0" max="9" value="0" required />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="togglebutton">
@@ -300,24 +520,46 @@
                     </label>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-6">
+                <div class="togglebutton">
+                    <label>
+                        <input type="checkbox" id="genmon-weight-stats" onclick="$('#group-stat-weights').collapse('toggle')"> Weighted Stats
+                        <i class="material-icons help" data-toggle="tooltip" data-placement="top"
+                           title="Set certain stats to have priority over others by raising the number next to it. Set to all 1's to equally distribute stat points.">help</i>
+                    </label>
+                </div>
+
+                <div class="collapse" id="group-stat-weights">
+                    <div class="collapse-form">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="genmon-lvlmin">Min Level</label>
-                            <input class="form-control" type="number" id="genmon-lvlmin" required />
+                            <label class="control-label" for="genmon-hp">HP (Stat)</label>
+                            <input class="form-control" type="number" id="genmon-hp" value="1" />
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-atk">Attack</label>
+                            <input class="form-control" type="number" id="genmon-atk" value="1" />
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-def">Defense</label>
+                            <input class="form-control" type="number" id="genmon-def" value="1" />
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-spatk">Special Attack</label>
+                            <input class="form-control" type="number" id="genmon-spatk" value="1" />
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-spdef">Special Defense</label>
+                            <input class="form-control" type="number" id="genmon-spdef" value="1" />
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="genmon-speed">Speed</label>
+                            <input class="form-control" type="number" id="genmon-speed" value="1" />
                         </div>
                     </div>
-                    <div class="col-xs-6">
-                        <div class="form-group label-floating">
-                            <label class="control-label" for="genmon-lvlmax">Max Level</label>
-                            <input class="form-control" type="number" id="genmon-lvlmax" required />
-                        </div>
-                    </div>
-                    she's a work in progress y'all
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">done</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-success" onclick="alert('Feature coming soon')">generate</button>
             </div>
         </div>
     </div>

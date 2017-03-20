@@ -884,6 +884,52 @@ $("#btn-impmon").click(function () {
     }
 });
 
+/*
+    Pokemon Generator Bindings
+ */
+$(".input-enable .form-control-enabler").change(function () {
+    if ($(this).is(":checked")) {
+        $(this).closest(".input-enable").find("input:not(.form-control-enabler)").removeAttr("disabled");
+
+        if ($(this).attr("id") == "enable-species") {
+            $("#enable-type").attr("disabled", "");
+            $("#genmon-type").attr("disabled", "");
+            $("#enable-habitat").attr("disabled", "");
+            $("#genmon-habitat").attr("disabled", "");
+            $("#enable-gen").attr("disabled", "");
+            $("#genmon-gen").attr("disabled", "");
+        }
+    }
+    else {
+        $(this).closest(".input-enable").find("input:not(.form-control-enabler)").attr("disabled" , "");
+
+        if ($(this).attr("id") == "enable-species") {
+            $("#enable-type").removeAttr("disabled");
+            if ($("#enable-type").is(":checked"))
+                $("#genmon-type").removeAttr("disabled");
+            $("#enable-habitat").removeAttr("disabled");
+            if ($("#enable-habitat").is(":checked"))
+                $("#genmon-habitat").removeAttr("disabled");
+            $("#enable-gen").removeAttr("disabled");
+            if ($("#enable-gen").is(":checked"))
+                $("#genmon-gen").removeAttr("disabled");
+        }
+    }
+});
+
+$("#genmon-is-wild").change(function () {
+    $('#group-owner-settings').collapse('toggle');
+
+    if ($(this).is(":checked")) {
+        $("#genmon-tmmax").val("0");
+        $("#genmon-emmax").val("0");
+    }
+    else {
+        $("#genmon-tmmax").val("3");
+        $("#genmon-emmax").val("3");
+    }
+});
+
 function generatePmonId() {
     var pmon_id = "";
 
