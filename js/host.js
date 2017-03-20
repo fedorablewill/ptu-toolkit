@@ -850,14 +850,11 @@ function onRenderPokemonManage() {
                 .attr("disabled" , "").parent().find("label").animate({opacity:0.6});
 
             if ($(this).attr("id") == "enable-species") {
-                $("#enable-type").removeAttr("disabled");
-                if ($("#enable-type").is(":checked"))
+                if ($("#enable-type").removeAttr("disabled").is(":checked"))
                     $("#genmon-type").removeAttr("disabled").parent().find("label").animate({opacity:1});
-                $("#enable-habitat").removeAttr("disabled");
-                if ($("#enable-habitat").is(":checked"))
+                if ($("#enable-habitat").removeAttr("disabled").is(":checked"))
                     $("#genmon-habitat").removeAttr("disabled").parent().find("label").animate({opacity:1});
-                $("#enable-gen").removeAttr("disabled");
-                if ($("#enable-gen").is(":checked"))
+                if ($("#enable-gen").removeAttr("disabled").is(":checked"))
                     $("#genmon-gen").removeAttr("disabled").parent().find("label").animate({opacity:1});
             }
         }
