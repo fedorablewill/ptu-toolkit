@@ -378,6 +378,11 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
         else if (effect1 * effect2 < 1)
             doToast("It's not very effective.");
 
+        // Make sure it doesn't accidentally heal the target
+        if (damage < 0) {
+            damage = 1;
+        }
+
         // Subtract health
         gm_data["pokemon"][target_id]["health"] -= damage;
 
