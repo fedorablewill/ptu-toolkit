@@ -158,6 +158,8 @@ function renderBattler() {
                 '</div>';
         });
 
+        html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
+
         $("#view-holder").html(html);
     }
 }
@@ -284,6 +286,13 @@ function saveGM() {
     dlAnchorElem.setAttribute("href",     dataStr     );
     dlAnchorElem.setAttribute("download", "GMData.json");
     dlAnchorElem.click();
+}
+
+function endBattle() {
+    if (window.confirm("Are you sure you want to reset the battle?")) {
+        battle = {};
+        renderBattler();
+    }
 }
 
 /**
