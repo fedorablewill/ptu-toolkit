@@ -26,7 +26,7 @@
                     rgba(0, 0, 0, 0.45),
                     rgba(50, 50, 50, 0.88)
                 ),
-                url('img/pixel-art-Pokémon-wallpaper-2.jpg')
+                url('img/pixel-art-pokemon-wallpaper-2.jpg')
                 no-repeat fixed center bottom;
 
             background-size: cover !important;
@@ -83,7 +83,7 @@
             margin-top: 300px;
         }
 
-        .edit-Pokémon img {
+        .edit-pokemon img {
             height: 50px;
         }
 
@@ -167,7 +167,7 @@
         <br>
         <button class="btn btn-danger btn-raised" onclick="selectGM();">Upload Existing GM File</button>
     </div>
-    <div class="col-md-6 col-md-offset-3 Pokémon"></div>
+    <div class="col-md-6 col-md-offset-3 pokemon"></div>
 </div>
 
 <div class="bottom">
@@ -203,26 +203,21 @@
     </div>
 </footer>
 
-<div class="hidden" id="body-Pokémon">
+<div class="hidden" id="body-pokemon">
     <h2>Manage Pokémon</h2>
     <div class="list-Pokémon"></div>
     <br/>
-<<<<<<< HEAD
     <button class="btn btn-lg btn-danger btn-raised" onclick="onClickAddPokemon()">Add Pokémon</button>
     <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokémon</button>
-=======
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalAddPokemon">Add Pokemon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalGenPokemon">Generate Pokemon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokemon</button>
-    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokemon</button>
->>>>>>> origin/master
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalImpPokemon">Import Pokémon</button>
+    <button class="btn btn-lg btn-danger btn-raised" data-toggle="modal" data-target="#modalExpPokemon" onclick="fetchExistingPokemon();">Export Pokémon</button>
 </div>
 
 <div class="hidden" id="body-settings">
     <h1>Nothin' to see yet..</h1>
 </div>
 
-<!-- Modal dialog for exporting Pokemon -->
+<!-- Modal dialog for exporting Pokémon -->
 <div class="modal fade" id="modalExpPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -254,7 +249,7 @@
     </div>
 </div>
 
-<!-- Modal dialog for importing Pokemon -->
+<!-- Modal dialog for importing Pokémon -->
 <div class="modal fade" id="modalImpPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -284,7 +279,7 @@
 </div>
 
 
-<!-- Modal dialog for generating Pokemon -->
+<!-- Modal dialog for generating Pokémon -->
 <div class="modal fade" id="modalGenPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -565,7 +560,7 @@
     </div>
 </div>
 
-<!-- Modal dialog for adding/editing Pokemon -->
+<!-- Modal dialog for adding/editing Pokémon -->
 <div class="modal fade" id="modalAddPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -587,15 +582,15 @@
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="addmon-dex" data-field="dex" required />
+                    <input class="form-control" type="text" id="addmon-dex" data-field="dex" required data-populate="dex" />
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-type1">Type 1</label>
-                    <select class="form-control" id="addmon-type1" required><option></option></select>
+                    <select class="form-control" id="addmon-type1" required data-populate="type"><option></option></select>
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-type2">Type 2</label>
-                    <select class="form-control" id="addmon-type2"><option></option></select>
+                    <select class="form-control" id="addmon-type2" data-populate="type"><option></option></select>
                 </div>
 
                 <div class="form-group label-floating">
@@ -609,7 +604,9 @@
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-nature">Nature</label>
-                    <select class="form-control" id="addmon-nature" data-field="nature" required><option></option></select>
+                    <select class="form-control" id="addmon-nature" data-field="nature" required data-populate="nature">
+                        <option></option>
+                    </select>
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-gender">Gender</label>
@@ -623,7 +620,7 @@
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-discover">Discovered at</label>
                     <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
-                    <p class="help-block">Where was the Pokemon found</p>
+                    <p class="help-block">Where was the Pokémon found</p>
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-item">Held Item</label>
@@ -679,21 +676,21 @@
                 <!-- TODO: make moves add/remove -->
                 <label for="addmon-moves">Moves</label>
                 <div id="addmon-moves">
-                    <select class="form-control" title="Move 1" required></select>
-                    <select class="form-control" title="Move 2"></select>
-                    <select class="form-control" title="Move 3"></select>
-                    <select class="form-control" title="Move 4"></select>
-                    <select class="form-control" title="Move 5"></select>
-                    <select class="form-control" title="Move 6"></select>
-                    <select class="form-control" title="Move 7"></select>
-                    <select class="form-control" title="Move 8"></select>
-                    <select class="form-control" title="Move 9"></select>
+                    <select class="form-control" title="Move 1" required data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 2" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 3" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 4" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 5" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 6" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 7" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 8" data-populate="move"><option></option></select>
+                    <select class="form-control" title="Move 9" data-populate="move"><option></option></select>
                 </div>
                 <label for="addmon-moves">Abilities</label>
                 <div id="addmon-abilities">
-                    <select class="form-control" title="Ability 1" required></select>
-                    <select class="form-control" title="Ability 2"></select>
-                    <select class="form-control" title="Ability 3"></select>
+                    <select class="form-control" title="Ability 1" required data-populate="ability"><option></option></select>
+                    <select class="form-control" title="Ability 2" data-populate="ability"><option></option></select>
+                    <select class="form-control" title="Ability 3" data-populate="ability"><option></option></select>
                 </div>
 
             </div>

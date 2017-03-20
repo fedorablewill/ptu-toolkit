@@ -403,177 +403,118 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
  */
 $(function () {
 
-    /* Populate Options */
-
-    fetchPokemon(0, 50);
-
-    $.getJSON("api/v1/types", function(json) {
-        $.each(json, function (k, v) {
-            document.getElementById("addmon-type1").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
-            document.getElementById("addmon-type2").innerHTML += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
-        })
-    });
-
-    $.getJSON("api/v1/natures", function(json) {
-        $.each(json, function (k, v) {
-            document.getElementById("addmon-nature").innerHTML += "<option>" + k + "</option>";
-        })
-    });
-
-    $.getJSON("api/v1/moves", function(json) {
-        var html = "<option></option>";
-
-        $.each(json, function (k, v) {
-            html += "<option>" + k + "</option>";
-        });
-
-        $("#addmon-moves").find("select").each(function () {
-            $(this).html(html);
-        });
-    });
-
-    $.getJSON("api/v1/abilities", function(json) {
-        var html = "<option></option>";
-
-        $.each(json, function (k, v) {
-            html += "<option>" + k + "</option>";
-        });
-
-        $("#addmon-abilities").find("select").each(function () {
-            $(this).html(html);
-        });
-    });
-
     /* Add listeners */
 
     $(".form-addmon input").change(function () {
         updatePokemonEditor();
     });
+
+    $("#addmon-dex").change(onAddmonDexChange);
 });
 
-var mon_list = [];
+function onAddmonDexChange() {
+    if ($(this).val() != "") {
+        $("#addmon-dex").parent().removeClass("has-error");
+        $.getJSON("api/v1/pokemon/" + $(this).val(), function (entry) {
+            // Fields to change
+            var field_type1 = $("#addmon-type1");
+            var field_type2 = $("#addmon-type2");
 
-function fetchPokemon(offset, size) {
-    $.getJSON("api/v1/pokemon/?offset=" + offset + "&size=" + size, function(json) {
-        if ($.isEmptyObject(json)) {
-            $("#addmon-dex").autocomplete({
-                source: mon_list,
-                change: function( event, ui ) {
-                    if (ui.item != null) {
-                        $("#addmon-dex").parent().removeClass("has-error");
-                        $.getJSON("api/v1/pokemon/" + ui.item.value, function (entry) {
-                            // Fields to change
-                            var field_type1 = $("#addmon-type1");
-                            var field_type2 = $("#addmon-type2");
+            var field_hp = $("#addmon-hp");
+            var field_atk = $("#addmon-atk");
+            var field_def = $("#addmon-def");
+            var field_spatk = $("#addmon-spatk");
+            var field_spdef = $("#addmon-spdef");
+            var field_spd = $("#addmon-speed");
 
-                            var field_hp = $("#addmon-hp");
-                            var field_atk = $("#addmon-atk");
-                            var field_def = $("#addmon-def");
-                            var field_spatk = $("#addmon-spatk");
-                            var field_spdef = $("#addmon-spdef");
-                            var field_spd = $("#addmon-speed");
+            // Change type 1
+            field_type1.val(entry["Types"][0]);
+            field_type1.parent().removeClass("is-empty");
 
-                            // Change type 1
-                            field_type1.val(entry["Types"][0]);
-                            field_type1.parent().removeClass("is-empty");
+            // Change type 2
+            if (entry["Types"].length > 1) {
+                field_type2.val(entry["Types"][1]);
+                field_type2.parent().removeClass("is-empty");
+            }
+            else {
+                field_type2.val("");
+                field_type2.parent().addClass("is-empty");
+            }
 
-                            // Change type 2
-                            if (entry["Types"].length > 1) {
-                                field_type2.val(entry["Types"][1]);
-                                field_type2.parent().removeClass("is-empty");
-                            }
-                            else {
-                                field_type2.val("");
-                                field_type2.parent().addClass("is-empty");
-                            }
+            // Change base stats
+            if (field_hp.attr("data-base") != null)
+                field_hp.val(parseInt(field_hp.val()) - parseInt(field_hp.attr("data-base")));
 
-                            // Change base stats
-                            if (field_hp.attr("data-base") != null)
-                                field_hp.val(parseInt(field_hp.val()) - parseInt(field_hp.attr("data-base")));
+            if (field_hp.val() != "")
+                field_hp.val(parseInt(field_hp.val()) + entry["BaseStats"]["HP"]);
+            else
+                field_hp.val(entry["BaseStats"]["HP"]);
 
-                            if (field_hp.val() != "")
-                                field_hp.val(parseInt(field_hp.val()) + entry["BaseStats"]["HP"]);
-                            else
-                                field_hp.val(entry["BaseStats"]["HP"]);
+            field_hp.attr("data-base", entry["BaseStats"]["HP"]);
+            field_hp.parent().removeClass("is-empty");
 
-                            field_hp.attr("data-base", entry["BaseStats"]["HP"]);
-                            field_hp.parent().removeClass("is-empty");
+            if (field_def.attr("data-base") != null)
+                field_def.val(parseInt(field_def.val()) - parseInt(field_def.attr("data-base")));
 
-                            if (field_def.attr("data-base") != null)
-                                field_def.val(parseInt(field_def.val()) - parseInt(field_def.attr("data-base")));
+            if (field_def.val() != "")
+                field_def.val(parseInt(field_def.val()) + entry["BaseStats"]["Defense"]);
+            else
+                field_def.val(entry["BaseStats"]["Defense"]);
 
-                            if (field_def.val() != "")
-                                field_def.val(parseInt(field_def.val()) + entry["BaseStats"]["Defense"]);
-                            else
-                                field_def.val(entry["BaseStats"]["Defense"]);
+            field_def.attr("data-base", entry["BaseStats"]["Defense"]);
+            field_def.parent().removeClass("is-empty");
 
-                            field_def.attr("data-base", entry["BaseStats"]["Defense"]);
-                            field_def.parent().removeClass("is-empty");
+            if (field_atk.attr("data-base") != null)
+                field_atk.val(parseInt(field_atk.val()) - parseInt(field_atk.attr("data-base")));
 
-                            if (field_atk.attr("data-base") != null)
-                                field_atk.val(parseInt(field_atk.val()) - parseInt(field_atk.attr("data-base")));
+            if (field_atk.val() != "")
+                field_atk.val(parseInt(field_atk.val()) + entry["BaseStats"]["Attack"]);
+            else
+                field_atk.val(entry["BaseStats"]["Attack"]);
 
-                            if (field_atk.val() != "")
-                                field_atk.val(parseInt(field_atk.val()) + entry["BaseStats"]["Attack"]);
-                            else
-                                field_atk.val(entry["BaseStats"]["Attack"]);
+            field_atk.attr("data-base", entry["BaseStats"]["Attack"]);
+            field_atk.parent().removeClass("is-empty");
 
-                            field_atk.attr("data-base", entry["BaseStats"]["Attack"]);
-                            field_atk.parent().removeClass("is-empty");
+            if (field_spatk.attr("data-base") != null)
+                field_spatk.val(parseInt(field_spatk.val()) - parseInt(field_spatk.attr("data-base")));
 
-                            if (field_spatk.attr("data-base") != null)
-                                field_spatk.val(parseInt(field_spatk.val()) - parseInt(field_spatk.attr("data-base")));
+            if (field_spatk.val() != "")
+                field_spatk.val(parseInt(field_spatk.val()) + entry["BaseStats"]["SpecialAttack"]);
+            else
+                field_spatk.val(entry["BaseStats"]["SpecialAttack"]);
 
-                            if (field_spatk.val() != "")
-                                field_spatk.val(parseInt(field_spatk.val()) + entry["BaseStats"]["SpecialAttack"]);
-                            else
-                                field_spatk.val(entry["BaseStats"]["SpecialAttack"]);
+            field_spatk.attr("data-base", entry["BaseStats"]["SpecialAttack"]);
+            field_spatk.parent().removeClass("is-empty");
 
-                            field_spatk.attr("data-base", entry["BaseStats"]["SpecialAttack"]);
-                            field_spatk.parent().removeClass("is-empty");
+            if (field_spdef.attr("data-base") != null)
+                field_spdef.val(parseInt(field_spdef.val()) - parseInt(field_spdef.attr("data-base")));
 
-                            if (field_spdef.attr("data-base") != null)
-                                field_spdef.val(parseInt(field_spdef.val()) - parseInt(field_spdef.attr("data-base")));
+            if (field_spdef.val() != "")
+                field_spdef.val(parseInt(field_spdef.val()) + entry["BaseStats"]["SpecialDefense"]);
+            else
+                field_spdef.val(entry["BaseStats"]["SpecialDefense"]);
 
-                            if (field_spdef.val() != "")
-                                field_spdef.val(parseInt(field_spdef.val()) + entry["BaseStats"]["SpecialDefense"]);
-                            else
-                                field_spdef.val(entry["BaseStats"]["SpecialDefense"]);
+            field_spdef.attr("data-base", entry["BaseStats"]["SpecialDefense"]);
+            field_spdef.parent().removeClass("is-empty");
 
-                            field_spdef.attr("data-base", entry["BaseStats"]["SpecialDefense"]);
-                            field_spdef.parent().removeClass("is-empty");
+            if (field_spd.attr("data-base") != null)
+                field_spd.val(parseInt(field_spd.val()) - parseInt(field_spd.attr("data-base")));
 
-                            if (field_spd.attr("data-base") != null)
-                                field_spd.val(parseInt(field_spd.val()) - parseInt(field_spd.attr("data-base")));
+            if (field_spd.val() != "")
+                field_spd.val(parseInt(field_spd.val()) + entry["BaseStats"]["Speed"]);
+            else
+                field_spd.val(entry["BaseStats"]["Speed"]);
 
-                            if (field_spd.val() != "")
-                                field_spd.val(parseInt(field_spd.val()) + entry["BaseStats"]["Speed"]);
-                            else
-                                field_spd.val(entry["BaseStats"]["Speed"]);
+            field_spd.attr("data-base", entry["BaseStats"]["Speed"]);
+            field_spd.parent().removeClass("is-empty");
 
-                            field_spd.attr("data-base", entry["BaseStats"]["Speed"]);
-                            field_spd.parent().removeClass("is-empty");
+            updatePokemonEditor();
 
-                            updatePokemonEditor();
-
-                        });
-                    }
-                    else {
-                        $("#addmon-dex").val("").parent().addClass("has-error");
-                    }
-                }
-            });
-        }
-        else {
-            $.each(json, function (k, v) {
-                mon_list.push({
-                    label: k + " - " + v["Species"],
-                    value: k
-                });
-            });
-            fetchPokemon(offset + size, size);
-        }
-    });
+        });
+    }
+    else {
+        $("#addmon-dex").val("").parent().addClass("has-error");
+    }
 }
 
 function updatePokemonEditor() {
