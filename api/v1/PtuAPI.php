@@ -18,6 +18,7 @@ class PtuAPI extends API
     const ABILITIES_FILENAME = "abilities.json";
     const CAPABILITIES_FILENAME = "capabilities.json";
     const EDGES_FILENAME = "edges.json";
+    const EXPERIENCE_FILENAME = "experience.json";
     const FEATURES_FILENAME = "features.json";
     const POKEMON_FILENAME = "ptu_pokedex_1_05.json";
     const MOVES_FILENAME = "moves.json";
@@ -83,6 +84,16 @@ class PtuAPI extends API
         }
         $edgesData = $this->getJsonFromFile(self::EDGES_FILENAME);
         return $this->getBasicNamedStructure($edgesData);
+    }
+    
+    public function experience()
+    {
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
+        }
+        $experienceData = $this->getJsonFromFile(self::EXPERIENCE_FILENAME);
+        return $this->getBasicNamedStructure($experienceData);
     }
     
     public function features() 
