@@ -11,7 +11,7 @@ class PtuGenerator
     //$genType=[["Type","Fire"]];
     //$genType=[["Habitat","Urban"]];
     //$genType=[["Generation",1],["Type","Ice"]];
-    //$genType=[["Specific","Bulbasaur"]];
+    //$genType=[["Specific","001"]];
 
     //$legend = Boolean; if FALSE, no legndaries are allowed to generate
     private $legend = TRUE;
@@ -333,13 +333,7 @@ class PtuGenerator
             }
             //Selects one single species
         } elseif ($genType == "Specific"){
-            foreach ($dex as $key => $value){
-                if ($value["Species"]==$genData){
-                    $x=$key;
-                    break;
-                }
-            }
-            $arr[$x]=$dex[$x];
+            $arr[$x]=$dex[$genType];
             //Simply returns the original array
         } else {
             $arr = $dex;

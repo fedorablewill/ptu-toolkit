@@ -41,8 +41,11 @@ if (monIn.type2===""){
   monOut.type = monIn.type1 + " / " + monIn.type2;
 }
 
-
 //Handling things of variable number, like Moves and Abilities
+
+monOut.moves=[];
+monOut.abilities=[];
+
 $.each(monIn, function(key,value){
   //Handling Moves
   if (key.indexOf("Move")!==-1){
