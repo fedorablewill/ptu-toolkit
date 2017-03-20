@@ -172,13 +172,15 @@ function renderPokemonList() {
         html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
                 '<img src="img/pokemon/'+v["dex"]+'.gif"> '+v["name"]+
                 '<div class="btn-group-vertical pull-right">'+
-                    '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-raised text-info btn-xs"><i class="material-icons">edit</i></button>'+
-                    '<button onclick="onClickDeletePokemon(\''+k+'\')" class="btn btn-raised text-danger btn-xs"><i class="material-icons">delete</i></button>'+
+                    '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
+                    '<button onclick="onClickDeletePokemon(\''+k+'\')" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></button>'+
                 '</div>'+
             '</div>';
     });
 
     $("#view-holder").find(".list-pokemon").html(html);
+
+    onRenderPokemonManage();
 }
 
 function changeGMView(view) {
@@ -714,162 +716,164 @@ function onClickDeletePokemon(id) {
 
 }
 
-/**
- * Save Pokemon
- */
-$("#btn-addmon").click(function () {
+function onRenderPokemonManage() {
+    /**
+     * Save Pokemon
+     */
+    $("#btn-addmon").click(function () {
 
-    var form = $(".form-addmon");
-    var isValid = true;
+        var form = $(".form-addmon");
+        var isValid = true;
 
-    // Validate Form
-    form.find("[required]").each(function () {
-        if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
-            $(this).parent().addClass("has-error");
-            isValid = false;
-        }
-        else
-            $(this).parent().removeClass("has-error");
-    });
-
-    if (!isValid) {
-        doToast("One or more fields were not filled out properly. Please try again.")
-    }
-    else {
-        var data = {}, moves = [], abil = [];
-
-        form.find("input, select").each(function () {
-            if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities")) {
-                if ($(this).attr("type") == "number")
-                    data[$(this).attr("data-field")] = parseInt($(this).val());
-                else
-                    data[$(this).attr("data-field")] = $(this).val();
+        // Validate Form
+        form.find("[required]").each(function () {
+            if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+                $(this).parent().addClass("has-error");
+                isValid = false;
             }
+            else
+                $(this).parent().removeClass("has-error");
         });
 
-        var type1 = $("#addmon-type1").val();
-        var type2 = $("#addmon-type2").val();
-
-        if (type2 == "")
-            data["type"] = type1;
-        else
-            data["type"] = type1 + " / " + type2;
-
-        var i = 0;
-
-        form.find("#addmon-moves select").each(function () {
-            moves[i] = $(this).val();
-            i++;
-        });
-
-        i = 0;
-
-        form.find("#addmon-abilities select").each(function () {
-            abil[i] = $(this).val();
-            i++;
-        });
-
-        data["moves"] = moves;
-        data["abilities"] = abil;
-
-        var pmon_id = $("#addmon-id").val();
-
-        if (pmon_id == "") {
-            pmon_id = generatePmonId();
+        if (!isValid) {
+            doToast("One or more fields were not filled out properly. Please try again.")
         }
+        else {
+            var data = {}, moves = [], abil = [];
 
-        gm_data["pokemon"][pmon_id] = data;
+            form.find("input, select").each(function () {
+                if (!$(this).parent().hasClass("addmon-moves") && !$(this).parent().hasClass("addmon-abilities")) {
+                    if ($(this).attr("type") == "number")
+                        data[$(this).attr("data-field")] = parseInt($(this).val());
+                    else
+                        data[$(this).attr("data-field")] = $(this).val();
+                }
+            });
 
-        doToast(gm_data["pokemon"][pmon_id]["name"] + " was saved");
+            var type1 = $("#addmon-type1").val();
+            var type2 = $("#addmon-type2").val();
 
-        renderPokemonList();
-        $('#modalAddPokemon').modal('hide');
-    }
-});
+            if (type2 == "")
+                data["type"] = type1;
+            else
+                data["type"] = type1 + " / " + type2;
 
-$("#btn-impmon").click(function () {
+            var i = 0;
 
-    var form = $(".form-impmon");
-    var isValid = true;
+            form.find("#addmon-moves select").each(function () {
+                moves[i] = $(this).val();
+                i++;
+            });
 
-    // Validate Form
-    form.find("[required]").each(function () {
-        if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
-            $(this).parent().addClass("has-error");
-            isValid = false;
+            i = 0;
+
+            form.find("#addmon-abilities select").each(function () {
+                abil[i] = $(this).val();
+                i++;
+            });
+
+            data["moves"] = moves;
+            data["abilities"] = abil;
+
+            var pmon_id = $("#addmon-id").val();
+
+            if (pmon_id == "") {
+                pmon_id = generatePmonId();
+            }
+
+            gm_data["pokemon"][pmon_id] = data;
+
+            doToast(gm_data["pokemon"][pmon_id]["name"] + " was saved");
+
+            renderPokemonList();
+            $('#modalAddPokemon').modal('hide');
         }
-        else
-            $(this).parent().removeClass("has-error");
     });
 
-    if (!isValid) {
-        doToast("One or more fields were not filled out properly. Please try again.")
-    }
-    else {
+    $("#btn-impmon").click(function () {
 
-        var data = JSON.parse($("#impmon-JSON").val());
+        var form = $(".form-impmon");
+        var isValid = true;
 
-        data = JSONImport(data);
+        // Validate Form
+        form.find("[required]").each(function () {
+            if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+                $(this).parent().addClass("has-error");
+                isValid = false;
+            }
+            else
+                $(this).parent().removeClass("has-error");
+        });
 
-        var pmon_id = $("#impmon-id").val();
-
-        if (pmon_id == "") {
-            pmon_id = generatePmonId();
+        if (!isValid) {
+            doToast("One or more fields were not filled out properly. Please try again.")
         }
+        else {
 
-        gm_data["pokemon"][pmon_id] = data;
+            var data = JSON.parse($("#impmon-JSON").val());
 
-        doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+            data = JSONImport(data);
 
-        renderPokemonList();
-    }
-});
+            var pmon_id = $("#impmon-id").val();
 
-/*
-    Pokemon Generator Bindings
- */
-$(".input-enable .form-control-enabler").change(function () {
-    if ($(this).is(":checked")) {
-        $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").removeAttr("disabled");
+            if (pmon_id == "") {
+                pmon_id = generatePmonId();
+            }
 
-        if ($(this).attr("id") == "enable-species") {
-            $("#enable-type").attr("disabled", "");
-            $("#genmon-type").attr("disabled", "");
-            $("#enable-habitat").attr("disabled", "");
-            $("#genmon-habitat").attr("disabled", "");
-            $("#enable-gen").attr("disabled", "");
-            $("#genmon-gen").attr("disabled", "");
+            gm_data["pokemon"][pmon_id] = data;
+
+            doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+
+            renderPokemonList();
         }
-    }
-    else {
-        $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").attr("disabled" , "");
+    });
 
-        if ($(this).attr("id") == "enable-species") {
-            $("#enable-type").removeAttr("disabled");
-            if ($("#enable-type").is(":checked"))
-                $("#genmon-type").removeAttr("disabled");
-            $("#enable-habitat").removeAttr("disabled");
-            if ($("#enable-habitat").is(":checked"))
-                $("#genmon-habitat").removeAttr("disabled");
-            $("#enable-gen").removeAttr("disabled");
-            if ($("#enable-gen").is(":checked"))
-                $("#genmon-gen").removeAttr("disabled");
+    /*
+     Pokemon Generator Bindings
+     */
+    $(".input-enable .form-control-enabler").click(function () {
+        if ($(this).is(":checked")) {
+            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").removeAttr("disabled");
+
+            if ($(this).attr("id") == "enable-species") {
+                $("#enable-type").attr("disabled", "");
+                $("#genmon-type").attr("disabled", "");
+                $("#enable-habitat").attr("disabled", "");
+                $("#genmon-habitat").attr("disabled", "");
+                $("#enable-gen").attr("disabled", "");
+                $("#genmon-gen").attr("disabled", "");
+            }
         }
-    }
-});
+        else {
+            $(this).closest(".input-enable").find("select:not(.form-control-enabler), input:not(.form-control-enabler)").attr("disabled" , "");
 
-$("#genmon-is-wild").change(function () {
-    $('#group-owner-settings').collapse('toggle');
+            if ($(this).attr("id") == "enable-species") {
+                $("#enable-type").removeAttr("disabled");
+                if ($("#enable-type").is(":checked"))
+                    $("#genmon-type").removeAttr("disabled");
+                $("#enable-habitat").removeAttr("disabled");
+                if ($("#enable-habitat").is(":checked"))
+                    $("#genmon-habitat").removeAttr("disabled");
+                $("#enable-gen").removeAttr("disabled");
+                if ($("#enable-gen").is(":checked"))
+                    $("#genmon-gen").removeAttr("disabled");
+            }
+        }
+    });
 
-    if ($(this).is(":checked")) {
-        $("#genmon-tmmax").val("0");
-        $("#genmon-emmax").val("0");
-    }
-    else {
-        $("#genmon-tmmax").val("3");
-        $("#genmon-emmax").val("3");
-    }
-});
+    $("#genmon-is-wild").click(function () {
+        $('#group-owner-settings').collapse('toggle');
+
+        if ($(this).is(":checked")) {
+            $("#genmon-tmmax").val("0");
+            $("#genmon-emmax").val("0");
+        }
+        else {
+            $("#genmon-tmmax").val("3");
+            $("#genmon-emmax").val("3");
+        }
+    });
+}
 
 function generatePmonId() {
     var pmon_id = "";

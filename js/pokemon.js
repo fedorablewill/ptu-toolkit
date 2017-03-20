@@ -80,6 +80,15 @@ $(function () {
     $(".progress").click(function () {
         window.alert($(this).attr("data-hp"));
     });
+
+    $("input[type='checkbox']").parent().click(function () {
+        if ($(this).find("input").attr("checked") == "checked") {
+            $(this).find("input").removeAttr("checked").val("off").trigger("click").trigger("change");
+        }
+        else {
+            $(this).find("input").attr("checked", "checked").val("on").trigger("click").trigger("change");
+        }
+    });
 });
 
 

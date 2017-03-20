@@ -183,7 +183,7 @@ $(function () {
     }
 
     if ($("[data-populate='move']").length > 0){
-        $.getJSON("api/v1/types", function (json) {
+        $.getJSON("api/v1/moves", function (json) {
             var html = "";
             $.each(json, function (k, v) {
                 html += "<option>" + k + "</option>";
@@ -197,7 +197,7 @@ $(function () {
     }
 
     if ($("[data-populate='ability']").length > 0){
-        $.getJSON("api/v1/types", function (json) {
+        $.getJSON("api/v1/abilities", function (json) {
             var html = "";
             $.each(json, function (k, v) {
                 html += "<option>" + k + "</option>";
