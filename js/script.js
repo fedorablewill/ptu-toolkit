@@ -47,61 +47,61 @@ function rollDamageBase(base, rollMultiplier) {
     var damage = 0;
     switch (base) {
         case 1:
-            return roll(1, 6, rollMultiplier) + 1;
+            return roll(1*rollMultiplier, 6, 1) + 1*rollMultiplier;
         case 2:
-            return roll(1, 6, rollMultiplier) + 3;
+            return roll(1*rollMultiplier, 6, 1) + 3*rollMultiplier;
         case 3:
-            return roll(1, 6, rollMultiplier) + 5;
+            return roll(1*rollMultiplier, 6, 1) + 5*rollMultiplier;
         case 4:
-            return roll(1, 8, rollMultiplier) + 6;
+            return roll(1*rollMultiplier, 8, 1) + 6*rollMultiplier;
         case 5:
-            return roll(1, 8, rollMultiplier) + 8;
+            return roll(1*rollMultiplier, 8, 1) + 8*rollMultiplier;
         case 6:
-            return roll(2, 6, rollMultiplier) + 8;
+            return roll(2*rollMultiplier, 6, 1) + 8*rollMultiplier;
         case 7:
-            return roll(2, 6, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 6, 1) + 10*rollMultiplier;
         case 8:
-            return roll(2, 8, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 8, 1) + 10*rollMultiplier;
         case 9:
-            return roll(2, 10, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 10:
-            return roll(3, 8, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 8, 1) + 10*rollMultiplier;
         case 11:
-            return roll(3, 10, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 12:
-            return roll(3, 12, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 12, 1) + 10*rollMultiplier;
         case 13:
-            return roll(4, 10, rollMultiplier) + 10;
+            return roll(4*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 14:
-            return roll(4, 10, rollMultiplier) + 15;
+            return roll(4*rollMultiplier, 10, 1) + 15*rollMultiplier;
         case 15:
-            return roll(4, 10, rollMultiplier) + 20;
+            return roll(4*rollMultiplier, 10, 1) + 20*rollMultiplier;
         case 16:
-            return roll(5, 10, rollMultiplier) + 20;
+            return roll(5*rollMultiplier, 10, 1) + 20*rollMultiplier;
         case 17:
-            return roll(5, 12, rollMultiplier) + 25;
+            return roll(5*rollMultiplier, 12, 1) + 25*rollMultiplier;
         case 18:
-            return roll(6, 12, rollMultiplier) + 25;
+            return roll(6*rollMultiplier, 12, 1) + 25*rollMultiplier;
         case 19:
-            return roll(6, 12, rollMultiplier) + 30;
+            return roll(6*rollMultiplier, 12, 1) + 30*rollMultiplier;
         case 20:
-            return roll(6, 12, rollMultiplier) + 35;
+            return roll(6*rollMultiplier, 12, 1) + 35*rollMultiplier;
         case 21:
-            return roll(6, 12, rollMultiplier) + 40;
+            return roll(6*rollMultiplier, 12, 1) + 40*rollMultiplier;
         case 22:
-            return roll(6, 12, rollMultiplier) + 45;
+            return roll(6*rollMultiplier, 12, 1) + 45*rollMultiplier;
         case 23:
-            return roll(6, 12, rollMultiplier) + 50;
+            return roll(6*rollMultiplier, 12, 1) + 50*rollMultiplier;
         case 24:
-            return roll(6, 12, rollMultiplier) + 55;
+            return roll(6*rollMultiplier, 12, 1) + 55*rollMultiplier;
         case 25:
-            return roll(6, 12, rollMultiplier) + 60;
+            return roll(6*rollMultiplier, 12, 1) + 60*rollMultiplier;
         case 26:
-            return roll(7, 12, rollMultiplier) + 65;
+            return roll(7*rollMultiplier, 12, 1) + 65*rollMultiplier;
         case 27:
-            return roll(8, 12, rollMultiplier) + 70;
+            return roll(8*rollMultiplier, 12, 1) + 70*rollMultiplier;
         case 28:
-            return roll(8, 12, rollMultiplier) + 80;
+            return roll(8*rollMultiplier, 12, 1) + 80*rollMultiplier;
         default:
             return 0;
     }
@@ -109,13 +109,13 @@ function rollDamageBase(base, rollMultiplier) {
 
 function roll(num, die, multiplier) {
     var r = 0;
-    
+
     for (var i=0; i<num; i++) {
         r += Math.floor(Math.random() * (die + 1)) * multiplier;
     }
 
     console.log("rolled " + r + " on d" + die);
-    
+
     return r;
 }
 
