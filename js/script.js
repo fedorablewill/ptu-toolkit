@@ -16,6 +16,7 @@ var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 
 $(function () {
     $.material.init();
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function receiveMessages(name, callback) {
@@ -146,4 +147,90 @@ function doToast(content) {
     };
 
     $.snackbar(options);
+}
+
+/**
+ * Autopopulate attributed fields with data
+ */
+$(function () {
+
+    if ($("[data-populate='type']").length > 0){
+        $.getJSON("api/v1/types", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
+            });
+
+            $("select[data-populate='type']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='nature']").length > 0){
+        $.getJSON("api/v1/types", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='nature']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='move']").length > 0){
+        $.getJSON("api/v1/moves", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='move']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='ability']").length > 0){
+        $.getJSON("api/v1/abilities", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='ability']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='dex']").length > 0)
+        fetchPokemon(0, 50);
+});
+
+var mon_list = [];
+
+function fetchPokemon(offset, size) {
+    $.getJSON("api/v1/pokemon/?offset=" + offset + "&size=" + size, function(json) {
+        if ($.isEmptyObject(json)) {
+            $("[data-populate='dex']").autocomplete({
+                source: mon_list
+            });
+        }
+        else {
+            $.each(json, function (k, v) {
+                mon_list.push({
+                    label: k + " - " + v["Species"],
+                    value: k
+                });
+            });
+            fetchPokemon(offset + size, size);
+        }
+    });
 }
