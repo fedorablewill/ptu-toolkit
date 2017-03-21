@@ -352,9 +352,9 @@ function performMove(moveName, target_id, dealer_id) {
             }
             else {
                 if (move.hasOwnProperty("Triggers")){
-                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers);
+                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
                 } else {
-                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers);
+                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
                 }
             }
         }
@@ -368,7 +368,7 @@ function performMove(moveName, target_id, dealer_id) {
  * @param moveIsSpecial True when special, false when physical
  * @param damage The amount of damage
  */
-function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers) {
+function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, moveName) {
     if (moveIsSpecial)
         damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
     else
@@ -450,13 +450,13 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers) {
           if (trigger.hasOwnProperty("prereq")){
 
           } else if (trigger.hasOwnProperty("type")){
-            handleTrigger(trigger,dealer_id,target_id,damage_dealt);
+            handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
           }
         });
     });
 }
 
-function handleTrigger(trigger,dealer_id,target_id,damage_dealt){
+function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
   battle[target_id]{
       "client_id": this.from,
       "stage_atk": this.stage_atk,
@@ -577,6 +577,8 @@ function handleTrigger(trigger,dealer_id,target_id,damage_dealt){
     if (r <= 30+gm_data["pokemon"][dealer_id]['level']-gm_data["pokemon"][target_id]['level']){
       doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
       gm_data["pokemon"][target_id]["health"] = 0;
+    } else {
+      doToast(moveName+ " missed "+gm_data["pokemon"][target_id]["name"]+"!");
     }
   }
 }
