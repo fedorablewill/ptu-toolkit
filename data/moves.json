@@ -69,7 +69,7 @@
           "type":"CS",
           "stat":["def","spdef"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -92,7 +92,7 @@
                 "type":"CS",
                 "stat":["atk"],
                 "value":2,
-                "target":"USER"
+                "target":"SELF"
               }
           }
         }
@@ -221,7 +221,7 @@
           "type":"CS",
           "stat":["spatk","spdef","speed"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -284,7 +284,7 @@
               "type":"CS",
               "stat":["atk","def","spatk","spdef","speed"],
               "value":1,
-              "target":"USER"
+              "target":"SELF"
             },
             "20": 19
           }
@@ -419,7 +419,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":3,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -731,7 +731,7 @@
           "type":"CS",
           "stat":["atk","acc"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -787,7 +787,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -1079,7 +1079,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":-2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -1107,7 +1107,7 @@
           "type":"CS",
           "stat":["atk","speed"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -1266,7 +1266,7 @@
         {
            "type": "status",
            "stat": ["Rage","Confused"],
-           "target": "USER"
+           "target": "SELF"
         }
       ]
    },
@@ -1374,7 +1374,7 @@
           "type":"CS",
           "stat":["spdef"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -1398,7 +1398,7 @@
                 "type":"CS",
                 "stat":["spatk"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "8": 7,
             "9": 7,
@@ -2253,7 +2253,7 @@
           "type":"CS",
           "stat":["atk","def"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -2306,7 +2306,7 @@
           "type":"CS",
           "stat":["def","spdef"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -2528,7 +2528,7 @@
           "type":"CS",
           "stat":["speed"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -2550,7 +2550,7 @@
             "miss": {
                "type": "damage",
         	     "value": "1/4 HP",
-        	     "target": "Self"
+        	     "target": "SELF"
             }
           }
         },
@@ -2578,7 +2578,7 @@
             "miss": {
                "type": "damage",
         	     "value": "1/4 HP",
-        	     "target": "Self"
+        	     "target": "SELF"
             }
           }
         },
@@ -2683,7 +2683,7 @@
                 "type":"CS",
                 "stat":["atk"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               }
           }
         }
@@ -2920,7 +2920,7 @@
           "type":"CS",
           "stat":["atk","def"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -3264,7 +3264,7 @@
           "type":"CS",
           "stat":["speed"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -3528,7 +3528,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":-2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -3616,7 +3616,7 @@
           "type":"CS",
           "stat":["def","spdef","speed"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -3817,7 +3817,7 @@
           "type":"CS",
           "stat":["def","spdef"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -3951,7 +3951,7 @@
       "Triggers":[
         {
           "type":"heal",
-          "value":"1/2 DR",
+          "value":"1/2 Damage",
           "target":"SELF"
         }
       ]
@@ -4286,7 +4286,7 @@
               "type":"CS",
               "stat":["atk","def","spatk","spdef","speed"],
               "value":1,
-              "target":"USER"
+              "target":"SELF"
             },
             "20": 19
           }
@@ -4486,7 +4486,7 @@
           "type":"CS",
           "stat":["def"],
           "value":3,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -4712,7 +4712,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":-2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -4852,7 +4852,7 @@
         {
            "type": "status",
            "stat": ["Rage","Confused"],
-           "target": "USER"
+           "target": "SELF"
         }
       ]
    },
@@ -6013,12 +6013,12 @@
           "type":"CS",
           "stat":["atk"],
           "value":6,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type": "damage",
           "value": "1/2 HP",
-          "target": "USER"
+          "target": "SELF"
         }
       ]
    },
@@ -6892,7 +6892,7 @@
           "type":"CS",
           "stat":["atk","spatk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type": "action-needed",
@@ -6927,7 +6927,7 @@
           "type":"CS",
           "stat":["def"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -7081,7 +7081,7 @@
           "type":"CS",
           "stat":["atk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -7377,7 +7377,7 @@
           "type":"CS",
           "stat":["eva"],
           "value":4,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type": "action-needed",
@@ -7618,7 +7618,7 @@
         {
            "type": "status",
            "stat": ["Rage"],
-           "target": "User"
+           "target": "SELF"
         },
         {
           "type": "action-needed",
@@ -7964,7 +7964,7 @@
           "type":"CS",
           "stat":["atk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -7981,13 +7981,13 @@
           "type":"CS",
           "stat":["atk","spatk","speed"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type":"CS",
           "stat":["def","spdef"],
           "value":-1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -8362,7 +8362,7 @@
         {
           "type": "damage",
           "value":"1/4 HP",
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type": "action-needed",
@@ -8503,7 +8503,7 @@
           "type":"CS",
           "stat":["atk"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -8624,7 +8624,7 @@
         {
            "type": "status",
            "stat": ["Confused","Rage"],
-           "target": "USER"
+           "target": "SELF"
         }
       ]
    },
@@ -8797,7 +8797,7 @@
           "type":"CS",
           "stat":["atk","spatk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -8961,7 +8961,7 @@
           "type":"CS",
           "stat":["atk","def","acc"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9367,7 +9367,7 @@
           "type":"CS",
           "stat":["speed"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9399,7 +9399,7 @@
           "type":"CS",
           "stat":["spdef"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9431,7 +9431,7 @@
           "type":"CS",
           "stat":["spatk","spdef"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9473,7 +9473,7 @@
           "type":"CS",
           "stat":["def","spdef"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9818,7 +9818,7 @@
           "type":"CS",
           "stat":["atk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -9997,7 +9997,7 @@
           "type":"CS",
           "stat":["spatk"],
           "value":-2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -10130,8 +10130,8 @@
       "Triggers":[
         {
            "type": "heal",
-           "value":"HP",
-           "target": "USER"
+           "value":"1 HP",
+           "target": "SELF"
         },
         {
           "type": "action-needed",
@@ -10140,7 +10140,7 @@
         {
            "type": "status",
            "stat": ["Sleep"],
-           "target": "USER"
+           "target": "SELF"
         }
       ]
    },
@@ -10336,7 +10336,7 @@
               "type":"CS",
               "stat":["atk","def","spatk","spdef","speed"],
               "value":1,
-              "target":"USER"
+              "target":"SELF"
             },
             "20": 19
           }
@@ -10362,7 +10362,7 @@
                 "type":"CS",
                 "stat":["def"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               }
           }
         }
@@ -10424,7 +10424,7 @@
           "type":"CS",
           "stat":["speed"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -10726,7 +10726,7 @@
           "type":"CS",
           "stat":["def"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -10850,7 +10850,7 @@
                 "type":"CS",
                 "stat":["atk"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "19": 18,
             "20": 18
@@ -10895,7 +10895,7 @@
                 "type":"CS",
                 "stat":["atk"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "16": 15,
             "17": 15,
@@ -10948,13 +10948,13 @@
           "type":"CS",
           "stat":["atk"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type":"CS",
           "stat":["speed"],
           "value":2,
-          "target":"USER"
+          "target":"SELF"
         }
       ]
    },
@@ -10977,7 +10977,7 @@
                 "type":"CS",
                 "stat":["def"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "16": 15,
             "17": 15,
@@ -11755,7 +11755,7 @@
                 "type":"CS",
                 "stat":["spatk"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "20": 19
           }
@@ -11779,7 +11779,7 @@
                 "type":"CS",
                 "stat":["spdef"],
                 "value":1,
-                "target":"USER"
+                "target":"SELF"
               },
             "20": 19
           }
@@ -12037,7 +12037,7 @@
           "type":"CS",
           "stat":["acc"],
           "value":1,
-          "target":"USER"
+          "target":"SELF"
         },
         {
           "type": "action-needed",
