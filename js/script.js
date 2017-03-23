@@ -169,7 +169,7 @@ $(function () {
     }
 
     if ($("[data-populate='nature']").length > 0){
-        $.getJSON("api/v1/types", function (json) {
+        $.getJSON("api/v1/natures", function (json) {
             var html = "";
             $.each(json, function (k, v) {
                 html += "<option>" + k + "</option>";
