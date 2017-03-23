@@ -124,10 +124,10 @@ class PtuGenerator
         $level = mt_rand($this->levelRange[0],$this->levelRange[1]);        
 
 //Selects single entry from limited dex.
-        $dex = evoWeightRand($dex,$level);
+        $dex = $this->evoWeightRand($dex,$level);
         
 //Making $export, with "name" = species name, and "dex" the dex number;
-        $export = ["name" => $dex["Species"],"dex"=>(int)$num];
+        $export = ["name" => $dex["Species"],"dex"=>$dex["ID"]];
 
 //Setting $export["type"]
         if (sizeof($dex["Types"])==1){
@@ -253,6 +253,15 @@ class PtuGenerator
 
         $export["moves"]=$moves;
         $export["abilities"]=$abilities;
+
+        // Convert Pokedex ID to string
+
+        if ($export["dex"] < 10)
+            $export["dex"] = "00". (string) $export["dex"];
+        else if ($export["dex"] < 100)
+            $export["dex"] = "0". (string) $export["dex"];
+        else
+            $export["dex"] = (string) $export["dex"];
 
         return $export;
 // Save JSON (from array) to file
@@ -401,7 +410,9 @@ class PtuGenerator
              $x = $x - $value;
           }
         }
-        return $dex[$reverseDex[$x]];
+        $d = $dex[$reverseDex[$x]];
+        $d["ID"] = $reverseDex[$x];
+        return $d;
 	}
 
 //This function will get rid of legendaries from the dex, by directly eleminating their dex number.

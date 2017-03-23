@@ -302,7 +302,7 @@ class PtuAPI extends API
             array_key_exists("nature", $_GET) ? $_GET['nature'] : "Random",
             array_key_exists("location", $_GET) ? $_GET['location'] : "",
             array_key_exists("gender", $_GET) ? $_GET['gender'] : "",
-            array_key_exists("statWeights", $_GET) ? json_decode($_GET['statWeights'], true) :
+            array_key_exists("stat_weights", $_GET) ? json_decode($_GET['stat_weights'], true) :
                 ["HP"=>1,"Attack"=>1,"Defense"=>1,"SpecialAttack"=>1,"SpecialDefense"=>1,"Speed"=>1],
             array_key_exists("min_tm", $_GET) ? $_GET['min_tm'] : 0,
             array_key_exists("max_tm", $_GET) ? $_GET['max_tm'] : 3,
