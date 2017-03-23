@@ -255,13 +255,7 @@ class PtuGenerator
         $export["abilities"]=$abilities;
 
         // Convert Pokedex ID to string
-
-        if ($export["dex"] < 10)
-            $export["dex"] = "00". (string) $export["dex"];
-        else if ($export["dex"] < 100)
-            $export["dex"] = "0". (string) $export["dex"];
-        else
-            $export["dex"] = (string) $export["dex"];
+        $export["dex"] = (string) $export["dex"];
 
         return $export;
 // Save JSON (from array) to file
