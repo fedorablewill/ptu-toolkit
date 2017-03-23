@@ -457,16 +457,6 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, mov
 }
 
 function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
-  battle[target_id]{
-      "client_id": this.from,
-      "stage_atk": this.stage_atk,
-      "stage_def": this.stage_def,
-      "stage_spatk": this.stage_spatk,
-      "stage_spdef": this.stage_spdef,
-      "stage_speed": this.stage_speed,
-      "stage_acc": this.stage_acc,
-      "stage_eva": this.stage_eva
-  }
   //Making a variable for storing important ids
   var id;
   if (trigger.hasOwnProperty("target")){
