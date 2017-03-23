@@ -59,3 +59,7 @@
 [15-Mar-2017 17:24:39 America/Denver] PHP Notice:  Undefined index: Special Attack in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 209
 [15-Mar-2017 17:25:37 America/Denver] PHP Notice:  Undefined index:  in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 473
 [15-Mar-2017 17:30:05 America/Denver] PHP Fatal error:  Class 'PtuGenerator' not found in /home2/absorrco/public_html/ptu/api/v1/PtuAPI.php on line 272
+[23-Mar-2017 12:53:06 America/Denver] PHP Fatal error:  Call to undefined function evoWeightRand() in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 127
+[23-Mar-2017 12:53:39 America/Denver] PHP Fatal error:  Call to undefined function evoWeightRand() in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 127
+[23-Mar-2017 12:56:56 America/Denver] PHP Fatal error:  Call to undefined function evoWeightRand() in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 127
+[23-Mar-2017 12:57:18 America/Denver] PHP Fatal error:  Call to undefined function evoWeightRand() in /home2/absorrco/public_html/ptu/api/v1/PtuGenerator.php on line 127
