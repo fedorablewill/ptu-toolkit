@@ -528,7 +528,7 @@ function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
       dmg = gm_data["pokemon"][dealer_id]['level'];
     }
     else {
-      var arr = trigger.value.split(" ")[].split("/");
+      var arr = trigger.value.split(" ")[0].split("/");
       dmg = max_hp*parseInt(arr[0],10)/parseInt(arr[1],10);
     }
     // Getting max HP
