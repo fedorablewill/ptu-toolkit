@@ -1069,6 +1069,103 @@ function onRenderPokemonManage() {
     $("#genmon-lvlmax").on('change', function(){
         $("#genmon-lvl-slider").val([$("#genmon-lvlmin").val(), $(this).val()]);
     });
+
+    // Generate Pokemon
+    $("#btn-genmon").click(function () {
+        var args = {};
+
+        if ($("#enable-species").is(":checked")) {
+            args["specific"] = $("#genmon-species").val();
+        }
+        else {
+            if ($("#enable-type").is(":checked"))
+                args["type"] = $("#genmon-type").val();
+
+            if ($("#enable-habitat").is(":checked"))
+                args["habitat"] = $("#genmon-habitat").val();
+
+            if ($("#enable-gen").is(":checked"))
+                args["generation"] = $("#genmon-gen").val();
+        }
+
+        var val = $("#genmon-discover").val();
+        if (val != "")
+            args["location"] = val;
+
+        if (!$("#genmon-is-wild").is(":checked")) {
+            if ($("#genmon-tp").is(":checked")) {
+                args["top_percent"] = true;
+                args["level_caught"] = $("#genmon-lvl-caught");
+            }
+
+            if ($("#genmon-soul").is(":checked"))
+                args["enduring_soul"] = true;
+
+            if ($("#genmon-horiz").is(":checked"))
+                args["expand_horizons"] = true;
+
+            if ($("#genmon-guide").is(":checked"))
+                args["guidance"] = true;
+
+            var ace = [];
+
+            if ($("#genmon-ace-atk").is(":checked"))
+                ace.push("atk");
+
+            if ($("#genmon-ace-def").is(":checked"))
+                ace.push("def");
+
+            if ($("#genmon-ace-spatk").is(":checked"))
+                ace.push("spatk");
+
+            if ($("#genmon-ace-spdef").is(":checked"))
+                ace.push("spdef");
+
+            if ($("#genmon-ace-speed").is(":checked"))
+                ace.push("speed");
+
+            if (ace.length > 0)
+                args["stat_ace"] = ace;
+
+            args["save_tp"] = $("#genmon-tutor-unused").val();
+        }
+
+        val = $("#genmon-gender").val();
+        if (val != "")
+            args["gender"] = val;
+
+        args["min_level"] = $("#genmon-lvlmin").val().replace(".00", "");
+
+        args["max_level"] = $("#genmon-lvlmax").val().replace(".00", "");
+
+        args["min_tm"] = $("#genmon-tmmin").val();
+
+        args["max_tm"] = $("#genmon-tmmax").val();
+
+        args["min_em"] = $("#genmon-emmin").val();
+
+        args["max_em"] = $("#genmon-emmax").val();
+
+        args["legendary"] = $("#genmon-legend").is(":checked");
+
+        if ($("#genmon-weight-stats").is(":checked")) {
+            args["stat_weights"] = {
+                "HP": parseInt($("#genmon-hp").val()),
+                "Attack": parseInt($("#genmon-atk").val()),
+                "Defense": parseInt($("#genmon-def").val()),
+                "SpecialAttack": parseInt($("#genmon-spatk").val()),
+                "SpecialDefense": parseInt($("#genmon-spdef").val()),
+                "Speed": parseInt($("#genmon-speed").val())
+            };
+        }
+
+        alert(JSON.stringify(args));
+
+        // Call API to get generated Pokemon
+        $.getJSON("api/v1/generate", args, function (data) {
+            alert(JSON.stringify(data));
+        });
+    });
 }
 
 function generatePmonId() {

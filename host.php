@@ -406,12 +406,9 @@
                                            title="Pokémon from an owner with Guidance have an extra move">help</i>
                                     </label>
                                     <label>
-                                        <input type="checkbox" id="genmon-ace-hp"> Stat Ace (HP)
+                                        <input type="checkbox" id="genmon-ace-atk"> Stat Ace (ATK)
                                         <i class="material-icons help" data-toggle="tooltip" data-placement="top"
                                            title="Pokémon from an owner with Stat Ace gain an extra point to the bound stat with a bonus +1 per 10 levels. The stat can also ignore the Base Relations Rule.">help</i>
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" id="genmon-ace-atk"> Stat Ace (ATK)
                                     </label>
                                     <label>
                                         <input type="checkbox" id="genmon-ace-def"> Stat Ace (DEF)
@@ -429,13 +426,13 @@
 
                                 <div class="form-group label-floating">
                                     <label class="control-label" for="addmon-lvl-caught">Level Caught</label>
-                                    <input class="form-control" type="number" id="addmon-lvl-caught" min="1" max="100" value="1" />
+                                    <input class="form-control" type="number" id="genmon-lvl-caught" min="1" max="100" value="1" />
                                     <p class="help-block">Only required if they have Top Percentage</p>
                                 </div>
 
                                 <div class="form-group label-floating">
                                     <label class="control-label" for="addmon-lvl-caught">Unused Tutor Points</label>
-                                    <input class="form-control" type="number" id="addmon-lvl-caught" min="0" value="0" />
+                                    <input class="form-control" type="number" id="genmon-tutor-unused" min="0" value="0" />
                                     <p class="help-block">If you don't want all of the tutor points used, specify here</p>
                                 </div>
                             </div>
@@ -443,7 +440,7 @@
 
                         <div class="form-group label-floating">
                             <label class="control-label" for="addmon-discover">Discovered at</label>
-                            <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
+                            <input class="form-control" type="text" id="genmon-discover" />
                             <p class="help-block">Keep track of where the Pokémon was found</p>
                         </div>
 
@@ -469,8 +466,8 @@
                         </div>
 
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-gender">Specific Gender</label>
-                            <select class="form-control" id="addmon-gender" data-field="gender">
+                            <label class="control-label" for="genmon-gender">Specific Gender</label>
+                            <select class="form-control" id="genmon-gender" data-field="gender">
                                 <option></option>
                                 <option>Genderless</option>
                                 <option>Male</option>
@@ -554,7 +551,7 @@
                         </div>
 
                         <div class="row">
-                            <button class="btn btn-success pull-right">Generate</button>
+                            <button class="btn btn-success pull-right" id="btn-genmon">Generate</button>
                         </div>
                     </div>
                 </div>
