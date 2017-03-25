@@ -121,11 +121,11 @@ class PtuGenerator
         }
 
 //Picking level for the 'mon
-        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);        
+        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);
 
 //Selects single entry from limited dex.
         $dex = $this->evoWeightRand($dex,$level);
-        
+
 //Making $export, with "name" = species name, and "dex" the dex number;
         $export = ["name" => $dex["Species"],"dex"=>$dex["ID"]];
 
@@ -336,7 +336,7 @@ class PtuGenerator
             }
             //Selects one single species
         } elseif ($genType == "Specific"){
-            $arr[$x]=$dex[$genType];
+            $arr[$x]=$dex[$genData];
             //Simply returns the original array
         } else {
             $arr = $dex;
