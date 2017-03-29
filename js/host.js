@@ -10,130 +10,130 @@ var currentView = 0;
 /**
  * Receives commands/messages
  */
-function onUpdate() {
+peer.on('connection', function (c) {
+    receiveMessages(c, function (connection, data) {
+        var json = JSON.parse(data);
 
-    // Check for incoming requests
-    receiveMessages("host:" + host_id, function (data) {
-        $.each(data, function (message) {
-            /*
-                Snackbar Alert Received
-             */
-            if (this.type == "alert"){
-                doToast(message["content"]);
-            }
-            /*
-                Send Pokemon Data
-             */
-            else if (this.type == "pokemon_get") {
-                var msg = {
-                    "type": "pokemon",
-                    "pokemon": gm_data["pokemon"][this.pokemon_id]
-                };
-                sendMessage(this.from, JSON.stringify(msg));
-            }
-            /*
-                Send Pokemon List
-             */
-            else if (this.type == "pokemon_list") {
-                var msg1 = {
-                    "type": "pokemon_list",
-                    "pokemon": gm_data["pokemon"]
-                };
-                sendMessage(this.from, JSON.stringify(msg1));
-            }
-            /*
-                Add Pokemon to Battle
-             */
-            else if (this.type == "battle_add") {
+        /*
+         Snackbar Alert Received
+         */
+        if (json.type == "alert"){
+            doToast(message["content"]);
+        }
+        /*
+         Send Pokemon Data
+         */
+        else if (json.type == "pokemon_get") {
+            var msg = {
+                "type": "pokemon",
+                "pokemon": gm_data["pokemon"][json.pokemon_id]
+            };
+            connection.send(JSON.stringify(msg));
+        }
+        /*
+         Send Pokemon List
+         */
+        else if (json.type == "pokemon_list") {
+            var msg1 = {
+                "type": "pokemon_list",
+                "pokemon": gm_data["pokemon"]
+            };
+            connection.send(JSON.stringify(msg1));
+        }
+        /*
+         Add Pokemon to Battle
+         */
+        else if (json.type == "battle_add") {
 
-                var pokemon_id = this.pokemon, client_id = this.from;
+            var pokemon_id = json.pokemon;
 
-                $.each(battle, function (id, json) {
-                    sendMessage(json["client_id"], JSON.stringify({
-                        "type": "battle_added",
-                        "pokemon_id": pokemon_id,
-                        "pokemon_name": gm_data["pokemon"][pokemon_id]["name"]
-                    }));
-
-                    sendMessage(client_id, JSON.stringify({
-                        "type": "battle_added",
-                        "pokemon_id": id,
-                        "pokemon_name": gm_data["pokemon"][id]["name"]
-                    }));
-                });
-
-                battle[this.pokemon] = {
-                    "client_id": this.from,
-                    "stage_atk": this.stage_atk,
-                    "stage_def": this.stage_def,
-                    "stage_spatk": this.stage_spatk,
-                    "stage_spdef": this.stage_spdef,
-                    "stage_speed": this.stage_speed,
-                    "stage_acc": this.stage_acc,
-                    "stage_eva": this.stage_eva
-                };
-
-                sendMessage(client_id, JSON.stringify({
+            $.each(battle, function (id, json1) {
+                sendMessageToAll(JSON.stringify({
                     "type": "battle_added",
                     "pokemon_id": pokemon_id,
                     "pokemon_name": gm_data["pokemon"][pokemon_id]["name"]
                 }));
 
-                doToast(gm_data["pokemon"][this.pokemon]["name"] + " Appears!");
+                connection.send(JSON.stringify({
+                    "type": "battle_added",
+                    "pokemon_id": id,
+                    "pokemon_name": gm_data["pokemon"][id]["name"]
+                }));
+            });
 
-                renderBattler();
-            }
-            /*
-                Update Field Received
-             */
-            else if (this.type == "pokemon_update") {
-                gm_data["pokemon"][this.pokemon][this.field] = this.value;
+            battle[json.pokemon] = {
+                "client_id": json.from,
+                "stage_atk": json.stage_atk,
+                "stage_def": json.stage_def,
+                "stage_spatk": json.stage_spatk,
+                "stage_spdef": json.stage_spdef,
+                "stage_speed": json.stage_speed,
+                "stage_acc": json.stage_acc,
+                "stage_eva": json.stage_eva
+            };
 
-                if (this.field == "health") {
-                    var max_hp = gm_data["pokemon"][this.pokemon]['level'] + gm_data["pokemon"][this.pokemon]['hp'] * 3 + 10;
-                    var w = Math.floor((gm_data["pokemon"][this.pokemon]['health'] / max_hp) * 100);
+            connection.send(JSON.stringify({
+                "type": "battle_added",
+                "pokemon_id": pokemon_id,
+                "pokemon_name": gm_data["pokemon"][pokemon_id]["name"]
+            }));
 
-                    $("[data-name='"+this.pokemon+"']").find(".progress-bar").css("width", w + "%");
+            doToast(gm_data["pokemon"][json.pokemon]["name"] + " Appears!");
 
-                    sendMessage(battle[this.pokemon]["client_id"], JSON.stringify({
-                        "type": "health",
-                        "value": this.value
-                    }));
-                }
-            }
-            /*
-                Update Combat Stage Received
-             */
-            else if (this.type == "pokemon_setcs") {
-                battle[this.pokemon][this.field] = this.value;
-            }
-            /*
-                Attack Received
-             */
-            else if (this.type == "battle_move") {
-                performMove(this.move, this.target, this.dealer);
-            }
-            /*
-                Manual Damage Received
-             */
-            else if (this.type == "battle_damage") {
-                damagePokemon(this.target, this.moveType, this.isSpecial, this.damage);
-            }
-            /*
-                Request for Status
-             */
-            else if (this.type == "status") {
-                sendMessage(this.sender, JSON.stringify({
-                    "type": "gm_status",
-                    "value": "online"
+            renderBattler();
+        }
+        /*
+         Update Field Received
+         */
+        else if (json.type == "pokemon_update") {
+            gm_data["pokemon"][json.pokemon][json.field] = json.value;
+
+            if (this.field == "health") {
+                var max_hp = gm_data["pokemon"][json.pokemon]['level'] + gm_data["pokemon"][json.pokemon]['hp'] * 3 + 10;
+                var w = Math.floor((gm_data["pokemon"][json.pokemon]['health'] / max_hp) * 100);
+
+                $("[data-name='"+json.pokemon+"']").find(".progress-bar").css("width", w + "%");
+
+                sendMessage(battle[json.pokemon]["client_id"], JSON.stringify({
+                    "type": "health",
+                    "value": json.value
                 }));
             }
-        });
+        }
+        /*
+         Update Combat Stage Received
+         */
+        else if (json.type == "pokemon_setcs") {
+            battle[json.pokemon][json.field] = json.value;
+        }
+        /*
+         Attack Received
+         */
+        else if (json.type == "battle_move") {
+            performMove(json.move, json.target, json.dealer);
+        }
+        /*
+         Manual Damage Received
+         */
+        else if (json.type == "battle_damage") {
+            damagePokemon(json.target, json.moveType, json.isSpecial, json.damage);
+        }
+        /*
+         Request for Status
+         */
+        else if (json.type == "status") {
+            connection.send(JSON.stringify({
+                "type": "gm_status",
+                "value": "online"
+            }));
+        }
     });
 
-    // Recursion
-    setTimeout(onUpdate, 500);
-}
+    c.send(JSON.stringify({
+        "type": "pokemon_list",
+        "pokemon": gm_data["pokemon"]
+    }));
+});
 
 /**
  * Generates the Pokemon battle, primarilly the health visual
@@ -208,16 +208,16 @@ function GMID() {
     host_id = $("#battle-id").val();
 
     // Update display
-    $("#display-gmid").html(host_id);
+    $("#display-gmid").html(client_id);
     $(".content-init").css("display", "none");
     $(".content-select").css("display", "inline");
 }
 
 function newGM() {
     // Update display
+    $("#display-gmid").html(client_id);
     $(".content-select").css("display", "none");
     $(".footer-gm").removeClass("hidden");
-    onUpdate();
 
     //New blank gm_data object
     gm_data = {characters:{},pokemon:{},settings:{}};
@@ -266,9 +266,9 @@ $("#uploadAnchor").change(function() {
                     //console.log('e readAsText target = ', e.target);
                     try {
                         json = JSON.parse(e.target.result);
+                        $("#display-gmid").html(client_id);
                         $(".content-select").css("display", "none");
                         $(".footer-gm").removeClass("hidden");
-                        onUpdate();
                         gm_data = json;
                     } catch (ex) {
                         alert('ex when trying to parse json = ' + ex);
@@ -352,6 +352,7 @@ function performMove(moveName, target_id, dealer_id) {
             }
             else {
                 if (move.hasOwnProperty("Triggers")){
+                    var triggers = move["Triggers"];
                   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
                 } else {
                   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
@@ -1163,7 +1164,14 @@ function onRenderPokemonManage() {
 
         // Call API to get generated Pokemon
         $.getJSON("api/v1/generate", args, function (data) {
+            // DEBUG show returned data
             alert(JSON.stringify(data));
+
+            // Add Pokemon
+            gm_data['pokemon'][generatePmonId()] = data;
+
+            doToast(data['name'] + " was added.")
+            renderPokemonList();
         });
     });
 }
