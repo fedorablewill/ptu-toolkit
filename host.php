@@ -162,6 +162,19 @@
         .form-group.is-focused label, .form-group.is-focused label.control-label {
             color: #f44336;
         }
+
+        .snackbar {
+            background-color: #0ab1fc;
+            color: #ffffff;
+            border: 0;
+            border-radius: 0;
+            padding: 20px 15px;
+            line-height: 20px;
+        }
+
+        .snackbar-container {
+            padding-bottom: 65px;
+        }
     </style>
 </head>
 <body>
