@@ -6,7 +6,7 @@
 var host_id = null;
 var client_id = "";
 
-var peer = new Peer({key: '0ecbb01z4hkc5wmi'});
+var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 
 var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 110, 135, 160, 190, 220, 250, 285, 320, 260, 400,

@@ -203,54 +203,69 @@ function updateTargetList() {
 
 // SERVER FUNCTIONS
 
+peer.on('connection', function (c) {
+    window.alert("debug");
+});
+
 function onClickConnect() {
     host_id = $("#gm-id").val();
 
-    var c = peer.connect(host_id);
+    var c = peer.connect(host_id, {
+        label: 'chat',
+        serialization: 'none',
+        metadata: {message: 'connect to host'}
+    });
 
-    c.on('data', function(data) {
-        var json = JSON.parse(data);
+    c.on('open', function() {
+        c.on('data', function (data) {
+            var json = JSON.parse(data);
 
-        /*
-         Pokemon received
-         */
-        if (json.type == "pokemon") {
-            pokemon_data = json.pokemon;
-            fetchMoves();
-        }
-        /*
-         List of Pokemon received
-         */
-        else if (json.type == "pokemon_list") {
-            var html = "";
-            $.each(json.pokemon, function (id, pmon) {
-                html += '<option value="'+id+'">'+pmon['name']+'</option>';
-            });
-            $("#pokemonId").html(html);
+            /*
+             Pokemon received
+             */
+            if (json.type == "pokemon") {
+                pokemon_data = json.pokemon;
+                fetchMoves();
+            }
+            /*
+             List of Pokemon received
+             */
+            else if (json.type == "pokemon_list") {
+                var html = "";
+                $.each(json.pokemon, function (id, pmon) {
+                    html += '<option value="'+id+'">'+pmon['name']+'</option>';
+                });
+                $("#pokemonId").html(html);
 
-            $("#init-select").css("display", "block");
-            $("#init-connect").css("display", "none");
-        }
-        /*
-         Pokemon Added to Battle
-         */
-        else if (json.type == "battle_added") {
-            battle_data[json.pokemon_id] = json.pokemon_name;
-            updateTargetList();
-        }
-        /*
-         Health changed
-         */
-        else if (json.type == "health") {
-            pokemon_data["health"] = json.value;
-            updateStatus();
-        }
-        /*
-         Snackbar Alert Received
-         */
-        else if (json.type == "alert"){
-            doToast(message["content"]);
-        }
+                $("#init-select").css("display", "block");
+                $("#init-connect").css("display", "none");
+            }
+            /*
+             Pokemon Added to Battle
+             */
+            else if (json.type == "battle_added") {
+                battle_data[json.pokemon_id] = json.pokemon_name;
+                updateTargetList();
+            }
+            /*
+             Health changed
+             */
+            else if (json.type == "health") {
+                pokemon_data["health"] = json.value;
+                updateStatus();
+            }
+            /*
+             Snackbar Alert Received
+             */
+            else if (json.type == "alert"){
+                doToast(message["content"]);
+            }
+
+        });
+
+        c.send(JSON.stringify({
+            "type": "pokemon_list"
+        }));
     });
     c.on('error', function(err) { alert(err); });
 }
