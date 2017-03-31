@@ -4,6 +4,9 @@
  */
 
 var host_id = null;
+var client_id = "";
+
+var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 
 var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 110, 135, 160, 190, 220, 250, 285, 320, 260, 400,
@@ -14,33 +17,34 @@ var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 6110, 6360, 6610, 6868, 7125, 7390, 7660, 7925, 8205, 8485,
 8770, 9060]; //TODO: finish exp chart
 
+peer.on('open', function(id){
+    client_id = id;
+});
+
+peer.on('error', function(err) {
+    console.log(err);
+});
+
 $(function () {
     $.material.init();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-function receiveMessages(name, callback) {
-    if (host_id != null) {
-        $.getJSON("api/message/?id=" + host_id + "&name=" + name, callback);
-    }
+function receiveMessages(connection, callback) {
+    connection.on('data', function(data) {
+        callback(connection, data);
+    });
 }
 
 function sendMessage(to, message) {
-    if (host_id != null) {
-        $.ajax({
-            url: "/api/message/",
-            type:"post",
-            async: false,
-            data: {
-                "id": host_id,
-                "to": to,
-                "msg": message
-            },
-            success: function(response){
-            },
-            error:function(xhr, ajaxOptions, thrownError){alert(xhr.responseText); ShowMessage("??? ?? ?????? ??????? ????","fail");}
-        });
-    }
+    peer.connections[to][0].send(message);
+}
+
+function sendMessageToAll(message) {
+    $.each(peer.connections, function (k, v) {
+        for (var i=0; i < v.length; i++)
+            v[i].send(message);
+    });
 }
 
 function rollDamageBase(base, rollMultiplier) {

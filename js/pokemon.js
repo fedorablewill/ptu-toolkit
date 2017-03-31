@@ -9,18 +9,11 @@
  */
 var pokemon_data = {}, moves_data = [], battle_data = {};
 
-var client_id = "";
-
 
 /**
  * JQuery Bindings & Initialization
  */
 $(function () {
-
-    // GENERATE CLIENT ID
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 5; i++ )
-        client_id += chars.charAt(Math.floor(Math.random() * chars.length));
 
     // ON MOVE CLICKED
     $(".btn-move").click(function () {
@@ -34,11 +27,11 @@ $(function () {
             "move": move_name
         };
         
-        sendMessage("host:"+host_id, JSON.stringify(json));
+        sendMessage(host_id, JSON.stringify(json));
     });
 
     $("#btn-do-dmg").click(function () {
-        sendMessage("host:"+host_id, JSON.stringify({
+        sendMessage(host_id, JSON.stringify({
             "type": "battle_damage",
             "target": $("#pokemonId").val(),
             "moveType": $("#dmg-type").val(),
@@ -55,7 +48,7 @@ $(function () {
         if (pokemon_data["health"] > max_hp)
             pokemon_data["health"] = max_hp;
 
-        sendMessage("host:"+host_id, JSON.stringify({
+        sendMessage(host_id, JSON.stringify({
             "type": "pokemon_update",
             "pokemon": $("#pokemonId").val(),
             "field": "health",
@@ -64,7 +57,7 @@ $(function () {
     });
 
     $("#stages").find("input").change(function () {
-        sendMessage("host:"+host_id, JSON.stringify({
+        sendMessage(host_id, JSON.stringify({
             "type": "pokemon_setcs",
             "pokemon": $("#pokemonId").val(),
             "field": $(this).attr("data-target"),
@@ -210,21 +203,77 @@ function updateTargetList() {
 
 // SERVER FUNCTIONS
 
+peer.on('connection', function (c) {
+    window.alert("debug");
+});
+
 function onClickConnect() {
     host_id = $("#gm-id").val();
 
-    sendMessage("host:"+host_id, JSON.stringify({
-        "type": "pokemon_list",
-        "from": client_id
-    }));
+    var c = peer.connect(host_id, {
+        label: 'chat',
+        serialization: 'none',
+        metadata: {message: 'connect to host'}
+    });
 
-    onUpdate();
+    c.on('open', function() {
+        c.on('data', function (data) {
+            var json = JSON.parse(data);
+
+            /*
+             Pokemon received
+             */
+            if (json.type == "pokemon") {
+                pokemon_data = json.pokemon;
+                fetchMoves();
+            }
+            /*
+             List of Pokemon received
+             */
+            else if (json.type == "pokemon_list") {
+                var html = "";
+                $.each(json.pokemon, function (id, pmon) {
+                    html += '<option value="'+id+'">'+pmon['name']+'</option>';
+                });
+                $("#pokemonId").html(html);
+
+                $("#init-select").css("display", "block");
+                $("#init-connect").css("display", "none");
+            }
+            /*
+             Pokemon Added to Battle
+             */
+            else if (json.type == "battle_added") {
+                battle_data[json.pokemon_id] = json.pokemon_name;
+                updateTargetList();
+            }
+            /*
+             Health changed
+             */
+            else if (json.type == "health") {
+                pokemon_data["health"] = json.value;
+                updateStatus();
+            }
+            /*
+             Snackbar Alert Received
+             */
+            else if (json.type == "alert"){
+                doToast(message["content"]);
+            }
+
+        });
+
+        c.send(JSON.stringify({
+            "type": "pokemon_list"
+        }));
+    });
+    c.on('error', function(err) { alert(err); });
 }
 
 function onClickLoadFromSelected() {
     var pmon_id = $("#pokemonId").val();
 
-    sendMessage("host:"+host_id, JSON.stringify({
+    sendMessage(host_id, JSON.stringify({
         "type": "pokemon_get",
         "from": client_id,
         "pokemon_id": pmon_id
@@ -246,59 +295,7 @@ function addPokemonToBattle() {
         "stage_eva": $("#stage-eva").val()
     };
 
-    sendMessage("host:"+host_id, JSON.stringify(message));
-}
-
-function onUpdate() {
-
-    // Check for incoming requests
-    receiveMessages(client_id, function (data) {
-        $.each(data, function (message) {
-            /*
-                Pokemon received
-             */
-            if (this.type == "pokemon") {
-                pokemon_data = this.pokemon;
-                fetchMoves();
-            }
-            /*
-                List of Pokemon received
-             */
-            else if (this.type == "pokemon_list") {
-                var html = "";
-                $.each(this.pokemon, function (id, pmon) {
-                    html += '<option value="'+id+'">'+pmon['name']+'</option>';
-                });
-                $("#pokemonId").html(html);
-
-                $("#init-select").css("display", "block");
-                $("#init-connect").css("display", "none");
-            }
-            /*
-                Pokemon Added to Battle
-             */
-            else if (this.type == "battle_added") {
-                battle_data[this.pokemon_id] = this.pokemon_name;
-                updateTargetList();
-            }
-            /*
-                Health changed
-             */
-            else if (this.type == "health") {
-                pokemon_data["health"] = this.value;
-                updateStatus();
-            }
-            /*
-                Snackbar Alert Received
-             */
-            else if (this.type == "alert"){
-                doToast(message["content"]);
-            }
-        });
-    });
-
-    // Recursion
-    setTimeout(onUpdate, 500);
+    sendMessage(host_id, JSON.stringify(message));
 }
 
 function fetchMoves() {
