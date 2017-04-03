@@ -18,10 +18,6 @@
     <style>
         body {
             background:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.45),
-                    rgba(50, 50, 50, 0.88)
-                ),
                 url('img/pixel-art-pokemon-wallpaper-2.jpg')
                 no-repeat fixed center bottom;
 
@@ -72,6 +68,7 @@
             padding-right: 25px;
             background-color: #ffffff;
             border-radius: 0;
+            z-index: 1010;
         }
 
         .sidebar .btn-sidebar {
@@ -199,7 +196,8 @@
 
     </header>
 
-    <div class="sidebar well col-md-4 hidden-xs hidden-sm">
+    <!-- Sidebar Menu -->
+    <div class="sidebar well col-md-4 col-sm-8 col-xs-11 hidden-xs hidden-sm">
         <div class="content-header">
             <div class="row">
                 <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image" />

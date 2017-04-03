@@ -452,8 +452,8 @@ $.getJSON("/api/v1/types", function(json) {
 function onClickMenu() {
     var elem = $(".sidebar");
 
-    if (elem.css("display") == "none")
-        elem.css("display", "block");
+    if (elem.css("display").substring(0,4) == "none")
+        elem.css("display", "block", "important");
     else
         elem.css("display", "none");
 }
