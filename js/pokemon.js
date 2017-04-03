@@ -2,7 +2,7 @@
  * Scripts for Player Client
  * @author Will Stephenson
  */
-
+window.alert("Pardon us! We're currently redoing the layout of this page. It's probably usable?");
 /**
  * JSON data of loaded Pokemon
  * @type JSON
@@ -91,12 +91,12 @@ $(function () {
  * Display the imported Pokemon
  */
 function displayInit() {
-    var display = $("#mon1");
+    var display = $("#tab1");
 
     $(".content-header").find(".name").html(pokemon_data["name"] + ' <small>Level ' + pokemon_data['level'] + '</small>');
     $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
 
-    $("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
+    //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
     $("#speed").html(pokemon_data["speed"]);
 
@@ -324,7 +324,7 @@ function fetchMoves() {
 function setStage (field, attr) {
     var stage = parseInt(field.val());
 
-    var mon = $("#mon1");
+    var mon = $("#tab1");
 
     if (stage < -6) {
         stage = -6;
@@ -367,7 +367,7 @@ function damage(dmg, moveType, isSpecial) {
     moveType = moveType.toLocaleLowerCase();
 
     var progress = $(".progress");
-    var mon = $("#mon1");
+    var mon = $("#tab1");
 
     var maxHp = parseInt(progress.attr("data-max-hp"));
     var hp = parseInt(progress.attr("data-hp"));
@@ -420,6 +420,29 @@ $.getJSON("/api/v1/types", function(json) {
         document.getElementById("dmg-type").innerHTML += "<option>" + k + "</option>";
     })
 });
+
+
+
+// VIEW MANAGEMENT
+
+/**
+ * Called when the navbar menu icon is hit
+ */
+function onClickMenu() {
+    var elem = $(".sidebar");
+
+    if (elem.css("display") == "none")
+        elem.css("display", "block");
+    else
+        elem.css("display", "none");
+}
+
+function onClickTab(tab) {
+    $(".tab").css("display", "none");
+    $("#tab" + tab).css("display", "block");
+}
+
+
 
 // UTILITY FUNCTIONS
 

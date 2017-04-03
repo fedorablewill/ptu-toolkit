@@ -27,6 +27,7 @@
 
             background-size: cover !important;
             color: white;
+            padding-top: 60px;
         }
 
         .nav-pokemon {
@@ -59,6 +60,22 @@
             background: rgba(3, 169, 244, 0.9);
         }
 
+        .sidebar {
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .sidebar .btn-sidebar {
+            width: 100%;
+        }
+
         .content-init .well {
             color: #0f0f0f;
         }
@@ -79,6 +96,7 @@
 
         .content-header .name {
             display: inline-block;
+            color: #0f0f0f;
         }
 
         .content-header .name small {
@@ -128,9 +146,9 @@
 <body>
 
     <nav class="navbar navbar-danger navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="javascript:void(0)">PTU Pokémon Tools</a>
+                <a class="navbar-brand" href="javascript:onClickMenu()"><i class="material-icons">menu</i> PTU Player Tools</a>
             </div>
         </div>
     </nav>
@@ -146,18 +164,6 @@
         <p class="lead nav-status text-success">
             <span class="fa fa-circle"></span> Connected to Battle
         </p>
-
-        <a class="btn btn-raised pull-right nav-pokemon">
-            <div class="row">
-                <span id="dex-species">#DEX - Species</span>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger bar-hp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                </div>
-            </div>
-        </a>
     </div>
 
     <!-- Initial View (Join & Select) -->
@@ -178,63 +184,87 @@
 
     </header>
 
-    <!-- Main View (Battler) -->
-    <div class="container content-main" style="display: none;">
-        <div class="row content-header">
-            <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image" />
-            <h2 class="name"></h2>
-        </div>
-        <div class="row well">
-            <!-- Toolbar -->
-            <div class="col-md-3 toolbar">
-                <h4>Speed: <span id="speed">0</span></h4>
-                <hr/>
-                <div>
-                    <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle</button>
+    <div class="sidebar well col-md-4 hidden-xs hidden-sm">
+        <div class="content-header">
+            <div class="row">
+                <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image" />
+                <h2 class="name"></h2>
+            </div>
+
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger bar-hp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                 </div>
-                <hr style="margin-bottom: 0;"/>
-                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseAdv" aria-expanded="false" aria-controls="collapseExample">
-                    ADVANCED <i class="material-icons">arrow_drop_down</i>
-                </button>
-                <div class="collapse" id="collapseAdv">
-                    <div>
-                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
-                        <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
-                        <input type="number" id="do-dmg"/>
-                        <select id="dmg-type" title="Type"></select>
-                        <div class="togglebutton">
-                            <label>
-                                <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
-                            </label>
-                        </div>
-                    </div>
-                    <br/>
-                    <div>
-                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
-                        <label class="text-info" for="do-heal">Heal</label><br/>
-                        <input type="number" id="do-heal"/>
-                    </div>
-                    <hr/>
-                    <div id="stages">
-                        <label for="stage-atk">Attack Stage</label>
-                        <input type="number" id="stage-atk" value="0" data-target="stage_atk" /><br/>
-                        <label for="stage-def">Defense Stage</label>
-                        <input type="number" id="stage-def" value="0" data-target="stage_def" /><br/>
-                        <label for="stage-spatk">Special Atk Stage</label>
-                        <input type="number" id="stage-spatk" value="0" data-target="stage_spatk" /><br/>
-                        <label for="stage-spdef">Special Def Stage</label>
-                        <input type="number" id="stage-spdef" value="0" data-target="stage_spdef" /><br/>
-                        <label for="stage-speed">Speed Stage</label>
-                        <input type="number" id="stage-speed" value="0" data-target="stage_speed" /><br/>
-                        <label for="stage-acc">Accuracy Bonus</label>
-                        <input type="number" id="stage-acc" value="0" data-target="stage_acc" /><br/>
-                        <label for="stage-eva">Evasion Bonus</label>
-                        <input type="number" id="stage-eva" value="0" data-target="stage_eva" />
-                    </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                 </div>
             </div>
+
+            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(1)">Moves</button>
+
+            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(1)">Info</button>
+
+            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(2)">Advanced</button>
+
+            <h4>Speed: <span id="speed">0</span></h4>
+
+            <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle</button>
+        </div>
+    </div>
+
+    <!-- Main View (Battler) -->
+    <div class="container-fluid content-main" style="display: none;">
+        <div class="row well">
+            <!-- Toolbar -->
+<!--            <div class="col-md-3 toolbar">-->
+<!--                <h4>Speed: <span id="speed">0</span></h4>-->
+<!--                <hr/>-->
+<!--                <div>-->
+<!--                    <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle</button>-->
+<!--                </div>-->
+<!--                <hr style="margin-bottom: 0;"/>-->
+<!--                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseAdv" aria-expanded="false" aria-controls="collapseExample">-->
+<!--                    ADVANCED <i class="material-icons">arrow_drop_down</i>-->
+<!--                </button>-->
+<!--                <div class="collapse" id="collapseAdv">-->
+<!--                    <div>-->
+<!--                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>-->
+<!--                        <label class="text-info" for="do-dmg">Inflict Damage</label><br/>-->
+<!--                        <input type="number" id="do-dmg"/>-->
+<!--                        <select id="dmg-type" title="Type"></select>-->
+<!--                        <div class="togglebutton">-->
+<!--                            <label>-->
+<!--                                <input type="checkbox" title="Special" id="do-dmg-sp"/> Special-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <br/>-->
+<!--                    <div>-->
+<!--                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>-->
+<!--                        <label class="text-info" for="do-heal">Heal</label><br/>-->
+<!--                        <input type="number" id="do-heal"/>-->
+<!--                    </div>-->
+<!--                    <hr/>-->
+<!--                    <div id="stages">-->
+<!--                        <label for="stage-atk">Attack Stage</label>-->
+<!--                        <input type="number" id="stage-atk" value="0" data-target="stage_atk" /><br/>-->
+<!--                        <label for="stage-def">Defense Stage</label>-->
+<!--                        <input type="number" id="stage-def" value="0" data-target="stage_def" /><br/>-->
+<!--                        <label for="stage-spatk">Special Atk Stage</label>-->
+<!--                        <input type="number" id="stage-spatk" value="0" data-target="stage_spatk" /><br/>-->
+<!--                        <label for="stage-spdef">Special Def Stage</label>-->
+<!--                        <input type="number" id="stage-spdef" value="0" data-target="stage_spdef" /><br/>-->
+<!--                        <label for="stage-speed">Speed Stage</label>-->
+<!--                        <input type="number" id="stage-speed" value="0" data-target="stage_speed" /><br/>-->
+<!--                        <label for="stage-acc">Accuracy Bonus</label>-->
+<!--                        <input type="number" id="stage-acc" value="0" data-target="stage_acc" /><br/>-->
+<!--                        <label for="stage-eva">Evasion Bonus</label>-->
+<!--                        <input type="number" id="stage-eva" value="0" data-target="stage_eva" />-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <!-- Importing & Moves -->
-            <div class="col-md-9" id="mon1">
+            <div class="col-md-8 col-md-offset-4 tab" id="tab1">
                 <div class="new-form">
                     <h2>New Pokemon</h2>
                     <textarea class="form-control" id="input_mon1"></textarea>
@@ -332,6 +362,42 @@
                         <br/>
                         <span class="move-desc"></span>
                     </a>
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-4 tab" id="tab2">
+                <div>
+                    <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
+                    <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
+                    <input type="number" id="do-dmg"/>
+                    <select id="dmg-type" title="Type"></select>
+                    <div class="togglebutton">
+                        <label>
+                            <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
+                        </label>
+                    </div>
+                </div>
+                <br/>
+                <div>
+                    <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
+                    <label class="text-info" for="do-heal">Heal</label><br/>
+                    <input type="number" id="do-heal"/>
+                </div>
+                <hr/>
+                <div id="stages">
+                    <label for="stage-atk">Attack Stage</label>
+                    <input type="number" id="stage-atk" value="0" data-target="stage_atk" /><br/>
+                    <label for="stage-def">Defense Stage</label>
+                    <input type="number" id="stage-def" value="0" data-target="stage_def" /><br/>
+                    <label for="stage-spatk">Special Atk Stage</label>
+                    <input type="number" id="stage-spatk" value="0" data-target="stage_spatk" /><br/>
+                    <label for="stage-spdef">Special Def Stage</label>
+                    <input type="number" id="stage-spdef" value="0" data-target="stage_spdef" /><br/>
+                    <label for="stage-speed">Speed Stage</label>
+                    <input type="number" id="stage-speed" value="0" data-target="stage_speed" /><br/>
+                    <label for="stage-acc">Accuracy Bonus</label>
+                    <input type="number" id="stage-acc" value="0" data-target="stage_acc" /><br/>
+                    <label for="stage-eva">Evasion Bonus</label>
+                    <input type="number" id="stage-eva" value="0" data-target="stage_eva" />
                 </div>
             </div>
         </div>
