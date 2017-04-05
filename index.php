@@ -426,5 +426,13 @@
 
     <script src="js/script.js"></script>
     <script src="js/pokemon.js"></script>
+    <?php if (key_exists("host", $_GET)) : ?>
+    <script>
+        $(function () {
+            $("#gm-id").val('<?php echo $_GET['host']?>');
+            onClickConnect();
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>

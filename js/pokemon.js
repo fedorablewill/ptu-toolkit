@@ -82,6 +82,17 @@ $(function () {
             $(this).find("input").attr("checked", "checked").val("on").trigger("click").trigger("change");
         }
     });
+
+    $("#input-afflict").autocomplete({source:[
+        "Burned", "Frozen", "Paralysis", "Poisoned", "Bad Sleep", "Confused",
+        "Cursed", "Disabled", "Rage", "Flinch", "Infatuation", "Sleep", "Suppressed", "Temporary Hit Points",
+        "Fainted", "Blindness", "Total Blindness", "Slowed", "Stuck", "Trapped", "Tripped", "Vulnerable"
+    ]});
+
+    $("#btn-afflict").click(function () {
+        var a = $("#input-afflict").val();
+        $("#afflictions").append('<button class="btn btn-sm btn-info" data-target="afflict" data-type="'+a+'">'+a+'</button>');
+    });
 });
 
 
