@@ -112,6 +112,10 @@
             width: 100%;
         }
 
+        .has-btn-sm {
+            width: calc(100% - 50px);
+        }
+
         .input-enable .checkbox {
             display: inline-block;
             margin-right: 15px;
@@ -187,6 +191,9 @@
         <div>
             <div class="navbar-right navbar-gmid">
                 <strong>GM ID:</strong> <span id="display-gmid"></span>
+                <button class="btn btn-sm btn-white btn-simple btn-just-icon" data-toggle="modal" data-target="#modalShare">
+                    <i class="material-icons">share</i>
+                </button>
             </div>
         </div>
     </div>
@@ -196,15 +203,7 @@
 <a id="downloadAnchor" style="display:none"></a>
 
 <div class="container" id="view-holder">
-    <div class="col-md-6 col-md-offset-3 content-init">
-        <h2>Enter a desired GM ID</h2>
-        <div class="form-group label-floating">
-            <label class="control-label" for="battle-id">GM ID</label>
-            <input type="text" class="form-control col-md-8" id="battle-id"/>
-        </div>
-        <button class="btn btn-danger btn-raised" onclick="GMID();">GO</button>
-    </div>
-    <div class="col-md-6 col-md-offset-3 content-select" hidden>
+    <div class="col-md-6 col-md-offset-3 content-select">
         <h2>Create or Import a GM File</h2>
         <button class="btn btn-danger btn-raised" onclick="newGM();">Create Blank GM File</button>
         <br>
@@ -780,6 +779,29 @@
     </div>
 </div>
 
+<!-- Modal dialog for sharing -->
+<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-danger" id="impMonLabel">Share</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group label-floating">
+                    <button class="btn btn-just-icon btn-round btn-danger pull-right"
+                            data-clipboard-target="#link-sharable" onclick="doToast('Coppied to clipboard.')">
+                        <i class="material-icons">content_copy</i>
+                    </button>
+                    <label class="control-label" for="link-sharable">Link for players</label>
+                    <input type="text" class="form-control has-btn-sm" id="link-sharable" value="Please select data option" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- JavaScript Imports -->
 <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -792,6 +814,7 @@
     $.widget.bridge('uitooltip', $.ui.tooltip);
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
 <script src="dist/snackbar.min.js"></script>
 <script src="js/material.min.js"></script>
 <script src="js/nouislider.min.js"></script>
