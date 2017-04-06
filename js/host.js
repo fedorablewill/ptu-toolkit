@@ -216,27 +216,12 @@ function changeGMView(view) {
     }
 }
 
-/**
- * Used when a GM ID is submitted
- */
-function GMID() {
-    // Store selected GM ID
-    host_id = $("#battle-id").val();
-
-    // Update display
-    $("#display-gmid").html(client_id);
-    $(".content-init").css("display", "none");
-    $(".content-select").css("display", "inline");
-}
-
 function newGM() {
-    // Update display
-    $("#display-gmid").html(client_id);
-    $(".content-select").css("display", "none");
-    $(".footer-gm").removeClass("hidden");
-
     //New blank gm_data object
     gm_data = {characters:{},pokemon:{},settings:{}};
+
+    // Update display
+    onDataLoaded();
 }
 
 function selectGM() {
@@ -282,10 +267,9 @@ $("#uploadAnchor").change(function() {
                     //console.log('e readAsText target = ', e.target);
                     try {
                         json = JSON.parse(e.target.result);
-                        $("#display-gmid").html(client_id);
-                        $(".content-select").css("display", "none");
-                        $(".footer-gm").removeClass("hidden");
                         gm_data = json;
+
+                        onDataLoaded();
                     } catch (ex) {
                         alert('ex when trying to parse json = ' + ex);
                     }
@@ -295,6 +279,18 @@ $("#uploadAnchor").change(function() {
         }
     }
 });
+
+/**
+ * Called when the GM Data is created/uploaded
+ */
+function onDataLoaded() {
+    $("#display-gmid").html(client_id);
+    $(".content-select").css("display", "none");
+    $(".footer-gm").removeClass("hidden");
+
+    $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
+    new Clipboard('.btn');
+}
 
 function saveGM() {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gm_data));
@@ -903,7 +899,10 @@ function onClickEditPokemon(id) {
 }
 
 function onClickDeletePokemon(id) {
-
+    if (window.confirm("Are you sure you want to delete "+gm_data["pokemon"][id]["name"]+"?")) {
+        delete gm_data["pokemon"][id];
+        renderPokemonList();
+    }
 }
 
 function onRenderPokemonManage() {

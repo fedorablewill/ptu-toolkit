@@ -376,7 +376,9 @@
                         <h4>Afflictions</h4>
                         <div id="afflictions"></div>
                         <div class="form-group label-floating">
-                            <button class="btn btn-just-icon btn-round btn-danger pull-right"><i class="material-icons">add</i></button>
+                            <button class="btn btn-just-icon btn-round btn-danger pull-right" id="btn-afflict">
+                                <i class="material-icons">add</i>
+                            </button>
                             <label class="control-label" for="input-afflict">Add an Affliction</label>
                             <input type="text" class="form-control has-btn-sm" id="input-afflict" onclick="alert('feature is work in progress')">
                         </div>
