@@ -903,7 +903,10 @@ function onClickEditPokemon(id) {
 }
 
 function onClickDeletePokemon(id) {
-
+    if (window.confirm("Are you sure you want to delete "+gm_data["pokemon"][id]["name"]+"?")) {
+        delete gm_data["pokemon"][id];
+        renderPokemonList();
+    }
 }
 
 function onRenderPokemonManage() {
