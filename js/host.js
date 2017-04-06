@@ -107,6 +107,22 @@ peer.on('connection', function (c) {
             battle[json.pokemon][json.field] = json.value;
         }
         /*
+         Add an affliction
+         */
+        else if (json.type == "pokemon_afflict_add") {
+            if (json.affliction == "Burned" || json.affliction == "Frozen" ||
+                json.affliction == "Paralysis" || json.affliction == "Poisoned") {
+
+                if (gm_data['pokemon'][json.pokemon]['afflictions'] == null)
+                    gm_data['pokemon'][json.pokemon]['afflictions'] = [];
+
+                gm_data['pokemon'][json.pokemon]['afflictions'].push(json.affliction);
+            }
+            else {
+                battle[json.pokemon]['afflictions'][json.affliction] = json.value;
+            }
+        }
+        /*
          Attack Received
          */
         else if (json.type == "battle_move") {

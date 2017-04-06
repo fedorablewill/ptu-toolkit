@@ -2,7 +2,7 @@
  * Scripts for Player Client
  * @author Will Stephenson
  */
-window.alert("Pardon us! We're currently redoing the layout of this page. It's probably usable?");
+window.alert("Notice: We're currently redoing the layout of this page. It's probably usable?");
 /**
  * JSON data of loaded Pokemon
  * @type JSON
@@ -82,6 +82,17 @@ $(function () {
             $(this).find("input").attr("checked", "checked").val("on").trigger("click").trigger("change");
         }
     });
+
+    $("#input-afflict").autocomplete({source:[
+        "Burned", "Frozen", "Paralysis", "Poisoned", "Bad Sleep", "Confused",
+        "Cursed", "Disabled", "Rage", "Flinch", "Infatuation", "Sleep", "Suppressed", "Temporary Hit Points",
+        "Fainted", "Blindness", "Total Blindness", "Slowed", "Stuck", "Trapped", "Tripped", "Vulnerable"
+    ]});
+
+    $("#btn-afflict").click(function () {
+        var a = $("#input-afflict").val();
+        $("#afflictions").append('<button class="btn btn-sm btn-info" data-target="afflict" data-type="'+a+'">'+a+'</button>');
+    });
 });
 
 
@@ -108,74 +119,95 @@ function displayInit() {
 
         var title = move["Title"];
         var freq = move["Freq"];
-        var type = typeToNum(move["Type"].toLowerCase());
+        var type = move["Type"];
         var desc = move["Effect"];
         var dmgType = move["Class"];
 
-        movesEntry.find(".move-name").html(title);
-        movesEntry.find(".move-freq").html(freq);
-        movesEntry.find(".move-desc").html(desc);
-        movesEntry.find(".img-class").attr("src", "http://www.ptu.panda-games.net/images/types/" + dmgType + ".png");
-        movesEntry.find(".img-type").attr("src", "http://www.ptu.panda-games.net/images/types/" + type + ".png");
+        // Get color for type
 
-        //Stylize by Type
+        var color = "#000";
+
         switch (move["Type"]) {
             case "Bug":
-                movesEntry.css("background-color", "rgba(158, 173, 30, 0.5)");
+                color = "rgb(158, 173, 30)";
                 break;
             case "Dark":
-                movesEntry.css("background-color", "rgba(99, 78, 64, 0.5)");
+                color = "rgb(99, 78, 64)";
                 break;
             case "Dragon":
-                movesEntry.css("background-color", "rgba(94, 33, 243, 0.5)");
+                color = "rgb(94, 33, 243)";
                 break;
             case "Electric":
-                movesEntry.css("background-color", "rgba(244, 200, 26, 0.5)");
+                color = "rgb(244, 200, 26)";
                 break;
             case "Fairy":
-                movesEntry.css("background-color", "rgba(223, 116, 223, 0.5)");
+                color = "rgb(223, 116, 223)";
                 break;
             case "Fighting":
-                movesEntry.css("background-color", "rgba(179, 44, 37, 0.5)");
+                color = "rgb(179, 44, 37)";
                 break;
             case "Fire":
-                movesEntry.css("background-color", "rgba(232, 118, 36, 0.5)");
+                color = "rgb(232, 118, 36)";
                 break;
             case "Flying":
-                movesEntry.css("background-color", "rgba(156, 136, 218, 0.5)");
+                color = "rgb(156, 136, 218,)";
                 break;
             case "Ghost":
-                movesEntry.css("background-color", "rgba(98, 77, 134, 0.5)");
+                color = "rgb(98, 77, 134)";
                 break;
             case "Grass":
-                movesEntry.css("background-color", "rgba(112, 191, 72, 0.5)");
+                color = "rgb(112, 191, 72)";
                 break;
             case "Ground":
-                movesEntry.css("background-color", "rgba(217, 178, 71, 0.5)");
+                color = "rgb(217, 178, 71)";
                 break;
             case "Ice":
-                movesEntry.css("background-color", "rgba(130, 208, 208, 0.5)");
+                color = "rgb(130, 208, 208)";
                 break;
             case "Normal":
-                movesEntry.css("background-color", "rgba(158, 158, 109, 0.5)");
+                color = "rgb(158, 158, 109)";
                 break;
             case "Poison":
-                movesEntry.css("background-color", "rgba(149, 59, 149, 0.5)");
+                color = "rgb(149, 59, 149)";
                 break;
             case "Psychic":
-                movesEntry.css("background-color", "rgba(247, 64, 119, 0.5)");
+                color = "rgb(247, 64, 119)";
                 break;
             case "Rock":
-                movesEntry.css("background-color", "rgba(169, 147, 51, 0.5)");
+                color = "rgb(169, 147, 51)";
                 break;
             case "Steel":
-                movesEntry.css("background-color", "rgba(166, 166, 196, 0.5)");
+                color = "rgb(166, 166, 196)";
                 break;
             case "Water":
-                movesEntry.css("background-color", "rgba(82, 127, 238, 0.5)");
+                color = "rgb(82, 127, 238)";
                 break;
         }
+
+        // Get icon for frequency
+
+        var frqIco;
+
+        if (freq === "EOT")
+            frqIco = '<i class="material-icons">autorenew</i> Every Other Turn';
+        else if (freq === "At-Will")
+            frqIco = '<i class="material-icons">grade</i> At Will';
+        else if (freq === "Static")
+            frqIco = '<i class="material-icons">remove</i> Static';
+        else if (freq.indexOf("Scene") !== -1 || freq.indexOf("Daily") !== -1)
+            frqIco = '<i class="material-icons">alarm</i> ' + freq;
+        else
+            frqIco = '<i class="material-icons">fiber_manual_record</i> ' + freq;
+
+        // Put data on card
+
+        movesEntry.find(".move-name").html(title).css("color", color);
+        movesEntry.find(".label-type").html(type).css("background-color", color);
+        movesEntry.find(".move-freq").html(frqIco);
+        movesEntry.find(".move-desc").attr("data-content", dmgType + " Move. " + desc);
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
 
     display.find(".new-form").css("display", "none");
     display.find(".pokemon-enemy").css("display", "block");
@@ -431,8 +463,8 @@ $.getJSON("/api/v1/types", function(json) {
 function onClickMenu() {
     var elem = $(".sidebar");
 
-    if (elem.css("display") == "none")
-        elem.css("display", "block");
+    if (elem.css("display").substring(0,4) == "none")
+        elem.css("display", "block", "important");
     else
         elem.css("display", "none");
 }
