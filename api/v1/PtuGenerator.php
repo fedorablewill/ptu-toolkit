@@ -355,7 +355,7 @@ class PtuGenerator
             	$max = 0;
         		foreach($value["EvolutionStages"] as $k => $v){
         			if (strpos($v["Criteria"],"Minimum")!==FALSE){
-                		$req = (int)substr($v["Criteria"],strpos($v["Criteria"],"Minimum")+1);
+                		$req = (int)substr($v["Criteria"],strpos($v["Criteria"],"Minimum")+7);
                 		if (!array_key_exists($v["Stage"],$thresh)){
             				$thresh[$v["Stage"]]=$req;
             			}
