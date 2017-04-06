@@ -11,6 +11,8 @@ $.getJSON("api/v1/experience/", function (experience) {
 
 console.log(dex);
 console.log(monIn);
+console.log(monIn.dex);
+console.log(dex["001"]);
 console.log(dex[monIn.dex]);
 
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
