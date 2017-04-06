@@ -56,6 +56,8 @@ $.each(monIn, function(key,value){
   }
 });
 
+console.log(monOut);
+
 return monOut;
 });
 }
