@@ -115,13 +115,13 @@ class PtuGenerator
             $dex = $this->noLegend($dex);
         }
 
+//Picking level for the 'mon
+        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);
+
 //Throw exception if $dex is an empty array
         if ($dex === []){
             throw new Exception("Critera too limited; no such 'mon exist.");
         }
-
-//Picking level for the 'mon
-        $level = mt_rand($this->levelRange[0],$this->levelRange[1]);
 
 //Selects single entry from limited dex.
         $dex = $this->evoWeightRand($dex,$level);
