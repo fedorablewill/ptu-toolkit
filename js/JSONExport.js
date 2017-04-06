@@ -9,6 +9,10 @@ $.getJSON("api/v1/abilities/", function (abilities) {
 $.getJSON("api/v1/experience/", function (experience) {
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
+console.log(dex);
+console.log(monIn);
+console.log(dex[monIn.dex]);
+
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
 var monOut = {
   CharType: monIn.nickname,
