@@ -12,6 +12,7 @@ $.getJSON("api/v1/experience/", function (experience) {
 console.log(dex);
 console.log(monIn);
 console.log(monIn.dex);
+console.log(typeof monIn.dex);
 console.log(dex["001"]);
 console.log(dex[monIn.dex]);
 
