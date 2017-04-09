@@ -49,10 +49,10 @@ monOut.abilities=[];
 $.each(monIn, function(key,value){
   //Handling Moves
   if (key.indexOf("Move")!==-1){
-    monOut.moves.append(value.Name);
+    monOut.moves.push(value.Name);
   //Handling Abilities
   } else if (key.indexOf("Ability")!==-1){
-    monOut.abilities.append(value.name);
+    monOut.abilities.push(value.name);
   }
 });
 

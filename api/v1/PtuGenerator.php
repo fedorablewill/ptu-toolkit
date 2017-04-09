@@ -336,7 +336,7 @@ class PtuGenerator
             }
             //Selects one single species
         } elseif ($genType == "Specific"){
-            $arr[$x]=$dex[$genData];
+            $arr[$genData]=$dex[$genData];
             //Simply returns the original array
         } else {
             $arr = $dex;
