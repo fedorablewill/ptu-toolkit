@@ -7,7 +7,7 @@ window.alert("Notice: We're currently redoing the layout of this page. It's prob
  * JSON data of loaded Pokemon
  * @type JSON
  */
-var pokemon_data = {}, moves_data = [], battle_data = {};
+var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [];
 
 
 /**
@@ -91,7 +91,18 @@ $(function () {
 
     $("#btn-afflict").click(function () {
         var a = $("#input-afflict").val();
-        $("#afflictions").append('<button class="btn btn-sm btn-info" data-target="afflict" data-type="'+a+'">'+a+'</button>');
+
+        // Update locally
+        afflictions.push(a);
+        updateAfflictions();
+
+        // Update remotely
+        sendMessage(host_id, JSON.stringify({
+            "type": "pokemon_afflict_add",
+            "pokemon": $("#pokemonId").val(),
+            "affliction": a,
+            "value": null
+        }));
     });
 });
 
@@ -232,6 +243,13 @@ function updateTargetList() {
     $("#target").html(html);
 }
 
+/**
+ * Renders the afflictions
+ */
+function updateAfflictions() {
+    $("#afflictions").append('<button class="btn btn-sm btn-info" data-target="afflict" data-type="'+a+'">'+a+'</button>');
+}
+
 
 // SERVER FUNCTIONS
 
@@ -285,6 +303,18 @@ function onClickConnect() {
             else if (json.type == "health") {
                 pokemon_data["health"] = json.value;
                 updateStatus();
+            }
+            /*
+             Battle data changed
+             */
+            else if (json.type == "data_changed") {
+                if (json.field == "affliction") {
+                    afflictions = json.value;
+                    updateAfflictions();
+                }
+                else {
+                    $("#" + json.field).val(json.value);
+                }
             }
             /*
              Snackbar Alert Received

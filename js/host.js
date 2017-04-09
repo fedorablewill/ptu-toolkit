@@ -110,17 +110,13 @@ peer.on('connection', function (c) {
          Add an affliction
          */
         else if (json.type == "pokemon_afflict_add") {
-            if (json.affliction == "Burned" || json.affliction == "Frozen" ||
-                json.affliction == "Paralysis" || json.affliction == "Poisoned") {
-
-                if (gm_data['pokemon'][json.pokemon]['afflictions'] == null)
-                    gm_data['pokemon'][json.pokemon]['afflictions'] = [];
-
-                gm_data['pokemon'][json.pokemon]['afflictions'].push(json.affliction);
-            }
-            else {
-                battle[json.pokemon]['afflictions'][json.affliction] = json.value;
-            }
+            addAffliction(json.affliction, json.pokemon, json['value']);
+        }
+        /*
+         Remove an affliction
+         */
+        else if (json.type == "pokemon_afflict_delete") {
+            deleteAffliction(json.affliction, json.pokemon);
         }
         /*
          Attack Received
@@ -592,6 +588,102 @@ function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
       doToast(moveName+ " missed "+gm_data["pokemon"][target_id]["name"]+"!");
     }
   }
+}
+
+function addAffliction(affliction, monId, value) {
+    if (affliction == "Burned" || affliction == "Frozen" ||
+        affliction == "Paralysis" || affliction == "Poisoned") {
+
+        // Create array if not found
+        if (gm_data['pokemon'][monId]['afflictions'] == null)
+            gm_data['pokemon'][monId]['afflictions'] = [];
+
+        // Add affliction to list
+        gm_data['pokemon'][monId]['afflictions'].push(affliction);
+
+        // SPECIAL EFFECTS
+
+        // Burn: Defense -2 CS during burn
+        if (json.affliction == "Burned") {
+            battle[monId]['stage_def'] = parseInt(battle[monId]['stage_def']) - 2;
+
+            if (battle[monId]['stage_def'] < -6)
+                battle[monId]['stage_def'] = -6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-def",
+                "value": battle[monId]['stage_def']
+            }));
+        }
+    }
+    else {
+        // Set affliction in battle entry
+        battle[monId]['afflictions'][affliction] = value;
+    }
+}
+
+function deleteAffliction(affliction, monId) {
+    if (affliction == "Burned" || affliction == "Frozen" ||
+        affliction == "Paralysis" || affliction == "Poisoned") {
+
+        // Remove from array
+        var array = gm_data['pokemon'][monId]['afflictions'];
+        array.splice(array.indexOf(affliction), 1);
+
+        // SPECIAL EFFECTS
+
+        // Burn: Defense -2 CS during burn
+        if (json.affliction == "Burned") {
+            battle[monId]['defense'] = parseInt(battle[monId]['defense']) + 2;
+
+            if (battle[monId]['defense'] > 6)
+                battle[monId]['defense'] = 6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-def",
+                "value": battle[monId]['stage_def']
+            }));
+        }
+    }
+    else {
+        // Remove from battle entry
+        delete battle[monId]['afflictions'][affliction];
+    }
+}
+
+/**
+ * Handle the effects of an affliction when triggered
+ * @param affliction String affliction name
+ * @param monId Id of the Pokemon
+ */
+function handleAffliction(affliction, monId) {
+    // Afflictions that take a Tick of Hit Points
+    if (affliction == "Burned") {
+
+        // Calculating max_hp
+        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+
+        gm_data["pokemon"][monId]["health"] -= Math.floor(max_hp * 0.1);
+
+        // Check if fainted
+        if (gm_data["pokemon"][monId]["health"] <= 0) {
+            doToast(gm_data["pokemon"][monId]["name"] + " fainted!");
+            gm_data["pokemon"][monId]["health"] = 0;
+        }
+
+        // Update health bar
+        var w = Math.floor((gm_data["pokemon"][monId]['health'] / max_hp) * 100);
+
+        $("[data-name='"+monId+"']").find(".progress-bar").css("width", w + "%");
+
+        // Update Player client
+        sendMessage(battle[monId]["client_id"], JSON.stringify({
+            "type": "health",
+            "value": gm_data["pokemon"][monId]['health']
+        }));
+    }
 }
 
 /**
