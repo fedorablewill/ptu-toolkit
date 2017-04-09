@@ -169,6 +169,10 @@
         footer {
             padding-top: 20px;
         }
+
+        .center-vertical {
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>

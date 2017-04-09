@@ -119,6 +119,12 @@ peer.on('connection', function (c) {
             deleteAffliction(json.affliction, json.pokemon);
         }
         /*
+         Trigger an affliction's handler
+         */
+        else if (json.type == "pokemon_afflict_trigger") {
+            handleAffliction(json.affliction, json.pokemon);
+        }
+        /*
          Attack Received
          */
         else if (json.type == "battle_move") {
@@ -377,6 +383,14 @@ function performMove(moveName, target_id, dealer_id) {
                   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
                 }
             }
+        }
+
+        /*
+         Handle persistent afflictions triggered by move end
+         */
+        if (gm_data["pokemon"][dealer_id]['afflictions'] != null) {
+            if ($.inArray("Burned", gm_data["pokemon"][dealer_id]['afflictions']))
+                handleAffliction("Burned", dealer_id);
         }
     });
 }
@@ -666,7 +680,7 @@ function handleAffliction(affliction, monId) {
     if (affliction == "Burned") {
 
         // Calculating max_hp
-        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+        var max_hp = gm_data["pokemon"][monId]['level'] + gm_data["pokemon"][monId]['hp'] * 3 + 10;
 
         gm_data["pokemon"][monId]["health"] -= Math.floor(max_hp * 0.1);
 

@@ -244,10 +244,60 @@ function updateTargetList() {
 }
 
 /**
- * Renders the afflictions
+ * Renders the afflictions and handles actions
  */
 function updateAfflictions() {
-    $("#afflictions").append('<button class="btn btn-sm btn-info" data-target="afflict" data-type="'+a+'">'+a+'</button>');
+    // Table start
+    var html = '<table class="table">'+
+        '<thead>'+
+            '<tr>'+
+                '<th>Name</th>'+
+                '<th class="text-right">Actions</th>'+
+            '</tr>'+
+        '</thead>'+
+        '<tbody>';
+
+    // Add elements
+    $.each(afflictions, function (key, affliction) {
+        html += '<tr>' +
+                '<td class="center-vertical">'+affliction+'</td>' +
+                '<td class="td-actions text-right" data-target="affliction" data-value="'+affliction+'">' +
+                    '<button type="button" rel="tooltip" title="Trigger Affliction" class="btn btn-info btn-simple btn-xs btn-trigger">' +
+                        '<i class="material-icons">play_arrow</i>' +
+                    '</button>' +
+                    '<button type="button" rel="tooltip" title="Remove Affliction" class="btn btn-danger btn-simple btn-xs btn-delete">' +
+                        '<i class="material-icons">close</i>' +
+                    '</button>' +
+                '</td>' +
+            '</tr>';
+    });
+
+    // Close table
+    html += '</tbody></table>';
+
+    // Update table
+    $("#afflictions").html(html);
+
+    // Add listeners
+    $("#afflictions .btn-trigger").click(function () {
+        sendMessage(host_id, JSON.stringify({
+            "type": "pokemon_afflict_trigger",
+            "pokemon": $("#pokemonId").val(),
+            "affliction": $(this).parent().attr("data-value")
+        }));
+    });
+    $("#afflictions .btn-delete").click(function () {
+        sendMessage(host_id, JSON.stringify({
+            "type": "pokemon_afflict_delete",
+            "pokemon": $("#pokemonId").val(),
+            "affliction": $(this).parent().attr("data-value")
+        }));
+
+        afflictions.splice(afflictions.indexOf($(this).parent().attr("data-value")), 1);
+        updateAfflictions();
+    });
+
+    $('[rel="tooltip"]').tooltip();
 }
 
 
@@ -502,6 +552,9 @@ function onClickMenu() {
 function onClickTab(tab) {
     $(".tab").css("display", "none");
     $("#tab" + tab).css("display", "block");
+
+    if (tab == 3)
+        updateAfflictions();
 }
 
 
