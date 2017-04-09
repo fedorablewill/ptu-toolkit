@@ -1,7 +1,7 @@
 /*
 monIn: JSON from box.json
 */
-function JSONExport(monIn){
+function JSONExport(monIn,dex,moves,abilities,experience){
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
 console.log(dex);

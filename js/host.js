@@ -233,15 +233,12 @@ function selectGM() {
 }
 
 $("#expmon-mon").change(function(){
-  var id = $('#expmon-mon').find(":selected").val();
-  
+	var id = $('#expmon-mon').find(":selected").val();
   	$.getJSON("api/v1/pokemon/", function (dex) {//replace with single-entry call later
 	$.getJSON("api/v1/moves/", function (moves) {
 	$.getJSON("api/v1/abilities/", function (abilities) {
 	$.getJSON("api/v1/experience/", function (experience) {
-  
-  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id]));
-  
+  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience));
 	});
 	});
 	});
