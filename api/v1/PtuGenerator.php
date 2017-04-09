@@ -107,7 +107,7 @@ class PtuGenerator
 
 //Iterates over $genType for multi-step generation
         foreach ($this->genType as &$value){
-            $dex = $this->genstep($dex,$value[0],$value[1],$this->levelRange[1]);
+            $dex = $this->genstep($dex,$value[0],$value[1]);
         }
 
 //Remove legendaries if not allowed
@@ -124,7 +124,12 @@ class PtuGenerator
         }
 
 //Selects single entry from limited dex.
-        $dex = $this->evoWeightRand($dex,$level);
+		if (count($dex)==1){
+			$key = array_keys($dex)[0];
+			$dex = array_merge($dex[$key],["ID"=>$key]);
+		} else {
+        	$dex = $this->evoWeightRand($dex,$level);
+        }
 
 //Making $export, with "name" = species name, and "dex" the dex number;
         $export = ["name" => $dex["Species"],"dex"=>$dex["ID"]];
@@ -292,7 +297,7 @@ class PtuGenerator
     }
 
 //This function removes mon from an array that do not meet specific criteria. For multi-step generation, feed the results back into the function with further stipulations.
-    function genstep($dex,$genType,$genData,$maxLevel){
+    function genstep($dex,$genType,$genData){
         $arr = [];
         //Selects by an Elemental Type
         if ($genType == "Type"){

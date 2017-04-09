@@ -232,7 +232,18 @@ function selectGM() {
 
 $("#expmon-mon").change(function(){
   var id = $('#expmon-mon').find(":selected").val();
-  $('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id]));
+  
+  	$.getJSON("api/v1/pokemon/", function (dex) {//replace with single-entry call later
+	$.getJSON("api/v1/moves/", function (moves) {
+	$.getJSON("api/v1/abilities/", function (abilities) {
+	$.getJSON("api/v1/experience/", function (experience) {
+  
+  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id]));
+  
+	});
+	});
+	});
+	});
 });
 
 function fetchExistingPokemon(){
@@ -1000,20 +1011,23 @@ function onRenderPokemonManage() {
         else {
 
             var data = JSON.parse($("#impmon-JSON").val());
+            $.getJSON("api/v1/pokemon/", function (dex) {
+                data = JSONImport(data,dex);
 
-            data = JSONImport(data);
+                console.log("Second");
+                
+                var pmon_id = $("#impmon-id").val();
 
-            var pmon_id = $("#impmon-id").val();
+                if (pmon_id == "") {
+                    pmon_id = generatePmonId();
+                }
 
-            if (pmon_id == "") {
-                pmon_id = generatePmonId();
-            }
+                gm_data["pokemon"][pmon_id] = data;
 
-            gm_data["pokemon"][pmon_id] = data;
+                doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
 
-            doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
-
-            renderPokemonList();
+                renderPokemonList();
+            });
         }
     });
 

@@ -2,11 +2,6 @@
 monIn: JSON from box.json
 */
 function JSONExport(monIn){
-
-$.getJSON("api/v1/pokemon/", function (dex) {//replace with single-entry call later
-$.getJSON("api/v1/moves/", function (moves) {
-$.getJSON("api/v1/abilities/", function (abilities) {
-$.getJSON("api/v1/experience/", function (experience) {
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
 console.log(dex);
@@ -240,10 +235,5 @@ $.each(monOut.abilities,function(index,value){
 });
 
 return monOut;
-
-});
-});
-});
-});
 
 }

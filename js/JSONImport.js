@@ -1,9 +1,8 @@
 /*
 monIn: JSON from the Google Drive-based Fancy Sheet
 */
-function JSONImport(monIn){
 
-$.getJSON("api/v1/pokemon/", function (dex) {
+function JSONImport(monIn,dex){
 //monOut: box.json Pokémon; we'll define the easy stuff to start with:
 var monOut = {
   name: monIn.nickname,
@@ -56,8 +55,7 @@ $.each(monIn, function(key,value){
   }
 });
 
-console.log(monOut);
+console.log("First");
 
 return monOut;
-});
 }
