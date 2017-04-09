@@ -642,6 +642,12 @@ function deleteAffliction(affliction, monId) {
 
             if (battle[monId]['defense'] > 6)
                 battle[monId]['defense'] = 6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-def",
+                "value": battle[monId]['stage_def']
+            }));
         }
     }
     else {
@@ -656,7 +662,31 @@ function deleteAffliction(affliction, monId) {
  * @param monId Id of the Pokemon
  */
 function handleAffliction(affliction, monId) {
+    // Afflictions that take a Tick of Hit Points
+    if (affliction == "Burned") {
 
+        // Calculating max_hp
+        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+
+        gm_data["pokemon"][monId]["health"] -= Math.floor(max_hp * 0.1);
+
+        // Check if fainted
+        if (gm_data["pokemon"][monId]["health"] <= 0) {
+            doToast(gm_data["pokemon"][monId]["name"] + " fainted!");
+            gm_data["pokemon"][monId]["health"] = 0;
+        }
+
+        // Update health bar
+        var w = Math.floor((gm_data["pokemon"][monId]['health'] / max_hp) * 100);
+
+        $("[data-name='"+monId+"']").find(".progress-bar").css("width", w + "%");
+
+        // Update Player client
+        sendMessage(battle[monId]["client_id"], JSON.stringify({
+            "type": "health",
+            "value": gm_data["pokemon"][monId]['health']
+        }));
+    }
 }
 
 /**
