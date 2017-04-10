@@ -231,6 +231,6 @@ $.each(monIn.abilities,function(index,value){
   }
 });
 
-return monOut;
+return JSON.stringify(monOut);
 
 }
