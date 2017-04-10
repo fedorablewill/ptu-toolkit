@@ -78,6 +78,24 @@ peer.on('connection', function (c) {
                 "pokemon_name": gm_data["pokemon"][pokemon_id]["name"]
             }));
 
+            // Check persistent afflictions
+            if (gm_data["pokemon"][pokemon_id]["afflictions"] != null) {
+                // Pokemon has burn
+                if ($.inArray("Burned", gm_data["pokemon"][pokemon_id]["afflictions"])) {
+                    battle[monId]['stage_def'] = parseInt(battle[monId]['stage_def']) - 2;
+
+                    if (battle[monId]['stage_def'] < -6)
+                        battle[monId]['stage_def'] = -6;
+
+                    sendMessage(battle[monId]['client_id'], JSON.stringify({
+                        "type": "data_changed",
+                        "field": "stage-def",
+                        "value": battle[monId]['stage_def']
+                    }));
+                }
+            }
+
+            // Display Message
             doToast(gm_data["pokemon"][json.pokemon]["name"] + " Appears!");
 
             renderBattler();
@@ -371,15 +389,15 @@ function performMove(moveName, target_id, dealer_id) {
 
             if (target_id == "other") {
                 doToast("OUTGOING DAMAGE = " + damage);
-                handleTrigger(trigger,dealer_id,target_id,"N/A");
+                // handleTrigger(trigger,dealer_id,target_id,"N/A");
             }
             else {
-                if (move.hasOwnProperty("Triggers")){
-                    var triggers = move["Triggers"];
-                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
-                } else {
-                  damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
-                }
+                // if (move.hasOwnProperty("Triggers")){
+                //     var triggers = move["Triggers"];
+                //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
+                // } else {
+                //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
+                // }
             }
         }
 
@@ -478,13 +496,13 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, mov
         }));
 
         //Checking Triggers
-        $.each(triggers,function(trigger){
-          if (trigger.hasOwnProperty("prereq")){
-
-          } else if (trigger.hasOwnProperty("type")){
-            handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
-          }
-        });
+        // $.each(triggers,function(trigger){
+        //   if (trigger.hasOwnProperty("prereq")){
+        //
+        //   } else if (trigger.hasOwnProperty("type")){
+        //     handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
+        //   }
+        // });
     });
 }
 
@@ -619,7 +637,7 @@ function addAffliction(affliction, monId, value) {
         // SPECIAL EFFECTS
 
         // Burn: Defense -2 CS during burn
-        if (json.affliction == "Burned") {
+        if (affliction == "Burned") {
             battle[monId]['stage_def'] = parseInt(battle[monId]['stage_def']) - 2;
 
             if (battle[monId]['stage_def'] < -6)
@@ -649,7 +667,7 @@ function deleteAffliction(affliction, monId) {
         // SPECIAL EFFECTS
 
         // Burn: Defense -2 CS during burn
-        if (json.affliction == "Burned") {
+        if (affliction == "Burned") {
             battle[monId]['defense'] = parseInt(battle[monId]['defense']) + 2;
 
             if (battle[monId]['defense'] > 6)
