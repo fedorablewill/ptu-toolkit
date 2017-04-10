@@ -71,12 +71,9 @@ $.each(skills,function(index,value){
   if (value.indexOf("Education")===-1){
     skill = "1d6";
   }
-  var i; for (i=0;i<dex.Skills.length;i++){
-    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation"){
-      skill = dex.Skills[i].DiceRank;
-      break;
-    } else if (value.indexOf(dex.Skills[i].SkillName)){
-      skill = dex.Skills[i].DiceRank;
+  var i; for (i=0;i<dex[monIn.dex].Skills.length;i++){
+    if (dex[monIn.dex].Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation" || value.indexOf(dex[monIn.dex].Skills[i].SkillName)){
+      skill = dex[monIn.dex].Skills[i].DiceRank;
       break;
     }
   }
