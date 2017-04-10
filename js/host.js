@@ -1019,6 +1019,48 @@ function onClickDeletePokemon(id) {
     }
 }
 
+
+$("#btn-impmon").click(function () {
+
+        var form = $(".form-impmon");
+        var isValid = true;
+
+        // Validate Form
+        form.find("[required]").each(function () {
+            if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
+                $(this).parent().addClass("has-error");
+                isValid = false;
+            }
+            else
+                $(this).parent().removeClass("has-error");
+        });
+
+        if (!isValid) {
+            doToast("One or more fields were not filled out properly. Please try again.")
+        }
+        else {
+
+            var data = JSON.parse($("#impmon-JSON").val());
+            $.getJSON("api/v1/pokemon/", function (dex) {
+                data = JSONImport(data,dex);
+
+                console.log("Second");
+                
+                var pmon_id = $("#impmon-id").val();
+
+                if (pmon_id == "") {
+                    pmon_id = generatePmonId();
+                }
+
+                gm_data["pokemon"][pmon_id] = data;
+
+                doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+
+                renderPokemonList();
+            });
+        }
+});
+
 function onRenderPokemonManage() {
     /**
      * Save Pokemon
@@ -1090,47 +1132,6 @@ function onRenderPokemonManage() {
 
             renderPokemonList();
             $('#modalAddPokemon').modal('hide');
-        }
-    });
-
-    $("#btn-impmon").click(function () {
-
-        var form = $(".form-impmon");
-        var isValid = true;
-
-        // Validate Form
-        form.find("[required]").each(function () {
-            if ($(this).val() == null || $(this).val() == "" || $(this).val() == " ") {
-                $(this).parent().addClass("has-error");
-                isValid = false;
-            }
-            else
-                $(this).parent().removeClass("has-error");
-        });
-
-        if (!isValid) {
-            doToast("One or more fields were not filled out properly. Please try again.")
-        }
-        else {
-
-            var data = JSON.parse($("#impmon-JSON").val());
-            $.getJSON("api/v1/pokemon/", function (dex) {
-                data = JSONImport(data,dex);
-
-                console.log("Second");
-                
-                var pmon_id = $("#impmon-id").val();
-
-                if (pmon_id == "") {
-                    pmon_id = generatePmonId();
-                }
-
-                gm_data["pokemon"][pmon_id] = data;
-
-                doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
-
-                renderPokemonList();
-            });
         }
     });
 
