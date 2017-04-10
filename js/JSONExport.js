@@ -4,38 +4,31 @@ monIn: JSON from box.json
 function JSONExport(monIn,dex,moves,abilities,experience){
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
-console.log(dex);
-console.log(monIn);
-console.log(monIn.dex);
-console.log(typeof monIn.dex);
-console.log(dex["001"]);
-console.log(dex[monIn.dex]);
-
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
 var monOut = {
   CharType: monIn.nickname,
   nickname: monIn.name,
-  species: dex[monIn.dex].Species,
+  species: dex.Species,
   Level: monIn.level,
   EXP: monIn.EXP,
   EXP_max: experience.level,
   HeldItem: monIn["held-item"],
   Gender: monIn.gender,
   Nature: monIn.nature,
-  Height: dex[monIn.dex].Height.Category.Minimum,
-  WeightClass: dex[monIn.dex].Weight.WeightClass.Minimum,
-  base_HP: dex[monIn.dex].BaseStats.HP,
-  base_ATK: dex[monIn.dex].BaseStats.ATK,
-  base_DEF: dex[monIn.dex].BaseStats.DEF,
-  base_SPATK: dex[monIn.dex].BaseStats.SPATK,
-  base_SPDEF: dex[monIn.dex].BaseStats.SPDEF,
-  base_SPEED: dex[monIn.dex].BaseStats.SPEED,
-  HP: monIn.hp-dex[monIn.dex].BaseStats.HP,
-  ATK: monIn.atk-dex[monIn.dex].BaseStats.ATK,
-  DEF: monIn.def-dex[monIn.dex].BaseStats.DEF,
-  SPATK: monIn.spatk-dex[monIn.dex].BaseStats.SPATK,
-  SPDEF: monIn.spdef-dex[monIn.dex].BaseStats.SPDEF,
-  SPEED: monIn.speed-dex[monIn.dex].BaseStats.SPEED,
+  Height: dex.Height.Category.Minimum,
+  WeightClass: dex.Weight.WeightClass.Minimum,
+  base_HP: dex.BaseStats.HP,
+  base_ATK: dex.BaseStats.ATK,
+  base_DEF: dex.BaseStats.DEF,
+  base_SPATK: dex.BaseStats.SPATK,
+  base_SPDEF: dex.BaseStats.SPDEF,
+  base_SPEED: dex.BaseStats.SPEED,
+  HP: monIn.hp-dex.BaseStats.HP,
+  ATK: monIn.atk-dex.BaseStats.ATK,
+  DEF: monIn.def-dex.BaseStats.DEF,
+  SPATK: monIn.spatk-dex.BaseStats.SPATK,
+  SPDEF: monIn.spdef-dex.BaseStats.SPDEF,
+  SPEED: monIn.speed-dex.BaseStats.SPEED,
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
@@ -51,7 +44,7 @@ if (monIn.type.indexOf(" / ")===-1){
 
 //Building monOut.Capabilities
 monOut.Capabilities={};
-$.each(dex[monIn.dex].Capabilities,function(index,value){
+$.each(dex.Capabilities,function(index,value){
     if(value.CapabilityName=="Naturewalk"){
       monOut.Capabilities["Naturewalk("+value.Value+")"]=true;
     } else if (value.CapabilityName=="Jump") {
@@ -71,9 +64,9 @@ $.each(skills,function(index,value){
   if (value.indexOf("Education")===-1){
     skill = "1d6";
   }
-  var i; for (i=0;i<dex[monIn.dex].Skills.length;i++){
-    if (dex[monIn.dex].Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation" || value.indexOf(dex[monIn.dex].Skills[i].SkillName)){
-      skill = dex[monIn.dex].Skills[i].DiceRank;
+  var i; for (i=0;i<dex.Skills.length;i++){
+    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation" || value.indexOf(dex.Skills[i].SkillName)){
+      skill = dex.Skills[i].DiceRank;
       break;
     }
   }
