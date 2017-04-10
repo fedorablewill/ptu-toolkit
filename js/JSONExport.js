@@ -86,7 +86,7 @@ $.each(skills,function(index,value){
 });
 
 //Handling Moves
-$.each(monOut.moves,function(index,value){
+$.each(monIn.moves,function(index,value){
   var info = moves[value];
   monOut["Move"+(index+1)]={
     Name:value,
@@ -96,20 +96,20 @@ $.each(monOut.moves,function(index,value){
     Range: info.Range
   };
   if (info.hasOwnProperty("AC")){
-    monOut["Move"+index].AC=parseInt(info.AC,10);
+    monOut["Move"+(index+1)].AC=parseInt(info.AC,10);
   }
   if (info.hasOwnProperty("DB")){
-    monOut["Move"+index].DB=parseInt(info.DB,10);
+    monOut["Move"+(index+1)].DB=parseInt(info.DB,10);
   }
   if (info.hasOwnProperty("Effect")){
-    monOut["Move"+index].Effects=info.Effect;
+    monOut["Move"+(index+1)].Effects=info.Effect;
   }
 });
 //Handling  Abilities
 //Switches and such: Help the sheet know certain abilities are in effect
 monOut.sniper = 0;monOut.snipern = 0;monOut.twist = 0;monOut.flashfire = 0;monOut.weird = 0;monOut.damp = 0;monOut.aurastn = 0;monOut.defeat = 0;monOut.hustle = 0;monOut.courage = 0;monOut.lastctrue = 0;monOut.lastctype = "";
 
-$.each(monOut.abilities,function(index,value){
+$.each(monIn.abilities,function(index,value){
   var info = abilities[value];
   monOut["Ability"+(index+1)]={
     Name:value,
