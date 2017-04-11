@@ -69,7 +69,8 @@ peer.on('connection', function (c) {
                 "stage_spdef": json.stage_spdef,
                 "stage_speed": json.stage_speed,
                 "stage_acc": json.stage_acc,
-                "stage_eva": json.stage_eva
+                "stage_eva": json.stage_eva,
+                "afflictions": {}
             };
 
             connection.send(JSON.stringify({
@@ -367,6 +368,10 @@ function performMove(moveName, target_id, dealer_id) {
 
             doToast(gm_data["pokemon"][dealer_id]["name"] + " is frozen solid!");
         }
+        // Check if Fainted
+        else if ("Fainted" in battle[dealer_id][afflictions]) {
+            doToast("Fainted Pokemon cannot use actions, abilities, or features")
+        }
         else {
 
             var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
@@ -507,9 +512,11 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, mov
           gm_data["pokemon"][target_id]["health"] = (10-gm_data["pokemon"][target_id]["injuries"])/10;
         }
 
+        // Check if fainted
         if (gm_data["pokemon"][target_id]["health"] <= 0) {
             doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
             gm_data["pokemon"][target_id]["health"] = 0;
+            addAffliction("Fainted", target_id, 0);
         }
 
         // Update health bar
@@ -659,6 +666,12 @@ function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
 }
 
 function addAffliction(affliction, monId, value) {
+
+    // Create array if not found
+    if (gm_data['pokemon'][monId]['afflictions'] == null)
+        gm_data['pokemon'][monId]['afflictions'] = [];
+
+    // Persistent Afflictions
     if (affliction == "Burned" || affliction == "Frozen" ||
         affliction == "Paralysis" || affliction == "Poisoned") {
 
@@ -690,9 +703,42 @@ function addAffliction(affliction, monId, value) {
             doToast(gm_data["pokemon"][monId]['name'] + " is frozen solid!");
         }
     }
+    // Other Afflictions
     else {
         // Set affliction in battle entry
         battle[monId]['afflictions'][affliction] = value;
+
+        // Fainted: Cure of Persistent and Volatile afflictions
+        if (affliction == "Fainted") {
+            if ($.inArray("Frozen", gm_data["pokemon"][monId]['afflictions']) >= 0)
+                deleteAffliction("Frozen", monId);
+            if ($.inArray("Burned", gm_data["pokemon"][monId]['afflictions']) >= 0)
+                deleteAffliction("Burned", monId);
+            if ($.inArray("Paralysis", gm_data["pokemon"][monId]['afflictions']) >= 0)
+                deleteAffliction("Paralysis", monId);
+            if ($.inArray("Poisoned", gm_data["pokemon"][monId]['afflictions']) >= 0)
+                deleteAffliction("Poisoned", monId);
+            if ("Bad Sleep" in battle[monId]["afflictions"])
+                deleteAffliction("Bad Sleep", monId);
+            if ("Confused" in battle[monId]["afflictions"])
+                deleteAffliction("Confused", monId);
+            if ("Cursed" in battle[monId]["afflictions"])
+                deleteAffliction("Cursed", monId);
+            if ("Disabled" in battle[monId]["afflictions"])
+                deleteAffliction("Disabled", monId);
+            if ("Rage" in battle[monId]["afflictions"])
+                deleteAffliction("Rage", monId);
+            if ("Flinch" in battle[monId]["afflictions"])
+                deleteAffliction("Flinch", monId);
+            if ("Infatuation" in battle[monId]["afflictions"])
+                deleteAffliction("Infatuation", monId);
+            if ("Sleep" in battle[monId]["afflictions"])
+                deleteAffliction("Sleep", monId);
+            if ("Suppressed" in battle[monId]["afflictions"])
+                deleteAffliction("Suppressed", monId);
+            if ("Temporary Hit Points" in battle[monId]["afflictions"])
+                deleteAffliction("Temporary Hit Points", monId);
+        }
     }
 
     // Update Player client
