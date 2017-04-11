@@ -186,8 +186,22 @@ function renderBattler() {
                 console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
                     gm_data["pokemon"][id]['health'] + "/" + max_hp);
 
+            // Gather afflictions
+            var afflictions = "";
+
+            if (gm_data["pokemon"][id]['afflictions'] != null)
+                $.each(gm_data["pokemon"][id]['afflictions'], function (k, a) {
+                    afflictions += ' <span class="label label-danger">'+a+'</span>';
+                });
+
+            if (data['afflictions'] != null)
+                $.each(data['afflictions'], function (a, v) {
+                    afflictions += ' <span class="label label-danger">'+a+'</span>';
+                });
+
+            // Generate HTML
             html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
-                '<h2 class="name">' + gm_data["pokemon"][id]["name"] + '</h2>' +
+                '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
                 '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
                 '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
                 '</div>' +
@@ -686,6 +700,9 @@ function addAffliction(affliction, monId, value) {
         "type": "afflict_add",
         "affliction": affliction
     }));
+
+    if (currentView == 0)
+        renderBattler();
 }
 
 function deleteAffliction(affliction, monId) {
@@ -700,10 +717,10 @@ function deleteAffliction(affliction, monId) {
 
         // Burn: Defense -2 CS during burn
         if (affliction == "Burned") {
-            battle[monId]['defense'] = parseInt(battle[monId]['defense']) + 2;
+            battle[monId]['stage_def'] = parseInt(battle[monId]['stage_def']) + 2;
 
-            if (battle[monId]['defense'] > 6)
-                battle[monId]['defense'] = 6;
+            if (battle[monId]['stage_def'] > 6)
+                battle[monId]['stage_def'] = 6;
 
             sendMessage(battle[monId]['client_id'], JSON.stringify({
                 "type": "data_changed",
@@ -727,6 +744,9 @@ function deleteAffliction(affliction, monId) {
         "type": "afflict_delete",
         "affliction": affliction
     }));
+
+    if (currentView == 0)
+        renderBattler();
 }
 
 /**
