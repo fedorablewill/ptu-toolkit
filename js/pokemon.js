@@ -367,6 +367,26 @@ function onClickConnect() {
                 }
             }
             /*
+             Add affliction
+             */
+            else if (json.type == "afflict_add") {
+                // Check if affliction is already on Pokemon
+                if ($.inArray(json.affliction) < 0) {
+                    afflictions.push(json.affliction);
+                    updateAfflictions();
+                }
+            }
+            /*
+             Remove affliction
+             */
+            else if (json.type == "afflict_delete") {
+                // Check if affliction is on Pokemon
+                if ($.inArray(json.affliction) >= 0) {
+                    afflictions.splice(array.indexOf(json.affliction), 1);
+                    updateAfflictions();
+                }
+            }
+            /*
              Snackbar Alert Received
              */
             else if (json.type == "alert"){
