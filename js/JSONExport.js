@@ -17,12 +17,6 @@ var monOut = {
   Nature: monIn.nature,
   Height: dex.Height.Category.Minimum,
   WeightClass: dex.Weight.WeightClass.Minimum,
-  base_HP: dex.BaseStats.HP,
-  base_ATK: dex.BaseStats.ATK,
-  base_DEF: dex.BaseStats.DEF,
-  base_SPATK: dex.BaseStats.SPATK,
-  base_SPDEF: dex.BaseStats.SPDEF,
-  base_SPEED: dex.BaseStats.SPEED,
   HP: monIn.hp-dex.BaseStats.HP,
   ATK: monIn.atk-dex.BaseStats.ATK,
   DEF: monIn.def-dex.BaseStats.DEF,
@@ -32,6 +26,14 @@ var monOut = {
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
+
+//Adding in properties with underscores in their names.
+monOut["base_HP"]=dex.BaseStats.HP;
+monOut["base_ATK"]=dex.BaseStats.ATK;
+monOut["base_DEF"]=dex.BaseStats.DEF;
+monOut["base_SPATK"]=dex.BaseStats.SPATK;
+monOut["base_SPDEF"]=dex.BaseStats.SPDEF;
+monOut["base_SPEED"]=dex.BaseStats.SPEED;
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type.indexOf(" / ")===-1){
