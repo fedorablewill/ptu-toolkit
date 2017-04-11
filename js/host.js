@@ -81,7 +81,7 @@ peer.on('connection', function (c) {
             // Check persistent afflictions
             if (gm_data["pokemon"][pokemon_id]["afflictions"] != null) {
                 // Pokemon has burn
-                if ($.inArray("Burned", gm_data["pokemon"][pokemon_id]["afflictions"])) {
+                if ($.inArray("Burned", gm_data["pokemon"][pokemon_id]["afflictions"]) >= 0) {
                     battle[monId]['stage_def'] = parseInt(battle[monId]['stage_def']) - 2;
 
                     if (battle[monId]['stage_def'] < -6)
@@ -346,67 +346,81 @@ function performMove(moveName, target_id, dealer_id) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
-        var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
-        var crit = 20, evade = 0;
 
-        if (target_id != "other") {
-            //TODO: get evade
+        // Check if Frozen (but don't Let It Go)
+        if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
+            $.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+
+            doToast(gm_data["pokemon"][dealer_id]["name"] + " is frozen solid!");
         }
+        else {
 
-        if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
-            doToast("It missed!");
-            return;
-        }
+            var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
+            var crit = 20, evade = 0;
 
-        if (move["Class"] == "Physical" || move["Class"] == "Special") {
-            var db = parseInt(move["DB"]);
-
-            var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
-
-            if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
-                db += 2;
-
-            if (db > 28) db = 28;
-
-            var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
-            var damage = 0;
-
-            if (acRoll >= crit)
-                doToast("Critical hit!");
-
-            if (move["Class"] == "Physical") {
-                damage = rolledDmg +
-                    gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
-                if (target_id != "other")
-                    damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
-            }
-            else if (move["Class"] == "Special") {
-                damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
-                    gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
-                if (target_id != "other")
-                    damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
+            if (target_id != "other") {
+                //TODO: get evade
             }
 
-            if (target_id == "other") {
-                doToast("OUTGOING DAMAGE = " + damage);
-                // handleTrigger(trigger,dealer_id,target_id,"N/A");
+            if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
+                doToast("It missed!");
+                return;
             }
-            else {
-                // if (move.hasOwnProperty("Triggers")){
-                //     var triggers = move["Triggers"];
-                //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
-                // } else {
-                //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
-                // }
+
+            if (move["Class"] == "Physical" || move["Class"] == "Special") {
+                var db = parseInt(move["DB"]);
+
+                var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+
+                if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
+                    db += 2;
+
+                if (db > 28) db = 28;
+
+                var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
+                var damage = 0;
+
+                if (acRoll >= crit)
+                    doToast("Critical hit!");
+
+                if (move["Class"] == "Physical") {
+                    damage = rolledDmg +
+                        gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
+                    if (target_id != "other")
+                        damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
+                }
+                else if (move["Class"] == "Special") {
+                    damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
+                        gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
+                    if (target_id != "other")
+                        damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
+                }
+
+                if (target_id == "other") {
+                    doToast("OUTGOING DAMAGE = " + damage);
+                    // handleTrigger(trigger,dealer_id,target_id,"N/A");
+                }
+                else {
+                    // if (move.hasOwnProperty("Triggers")){
+                    //     var triggers = move["Triggers"];
+                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
+                    // } else {
+                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
+                    // }
+                }
             }
         }
 
         /*
-         Handle persistent afflictions triggered by move end
+         Afflictions (move end)
          */
+
+        // Persistent afflictions triggered by move end
         if (gm_data["pokemon"][dealer_id]['afflictions'] != null) {
-            if ($.inArray("Burned", gm_data["pokemon"][dealer_id]['afflictions']))
+            if ($.inArray("Burned", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
                 handleAffliction("Burned", dealer_id);
+            if ($.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
+                handleAffliction("Frozen", dealer_id);
         }
     });
 }
@@ -503,6 +517,13 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, mov
         //     handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
         //   }
         // });
+
+        // Check if cured target of Frozen
+        if ((moveType == "Fire" || moveType == "Fighting" || moveType == "Rock" || moveType == "Steel") &&
+            $.inArray("Frozen", gm_data["pokemon"][target_id]['afflictions']) >= 0) {
+
+            deleteAffliction("Frozen", target_id);
+        }
     });
 }
 
@@ -648,12 +669,23 @@ function addAffliction(affliction, monId, value) {
                 "field": "stage-def",
                 "value": battle[monId]['stage_def']
             }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " is being burned!");
+        }
+        else if (affliction == "Frozen") {
+            doToast(gm_data["pokemon"][monId]['name'] + " is frozen solid!");
         }
     }
     else {
         // Set affliction in battle entry
         battle[monId]['afflictions'][affliction] = value;
     }
+
+    // Update Player client
+    sendMessage(battle[monId]["client_id"], JSON.stringify({
+        "type": "afflict_add",
+        "affliction": affliction
+    }));
 }
 
 function deleteAffliction(affliction, monId) {
@@ -678,12 +710,23 @@ function deleteAffliction(affliction, monId) {
                 "field": "stage-def",
                 "value": battle[monId]['stage_def']
             }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of their burn");
+        }
+        else if (affliction == "Frozen") {
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of Frozen");
         }
     }
     else {
         // Remove from battle entry
         delete battle[monId]['afflictions'][affliction];
     }
+
+    // Update Player client
+    sendMessage(battle[monId]["client_id"], JSON.stringify({
+        "type": "afflict_delete",
+        "affliction": affliction
+    }));
 }
 
 /**
@@ -711,11 +754,27 @@ function handleAffliction(affliction, monId) {
 
         $("[data-name='"+monId+"']").find(".progress-bar").css("width", w + "%");
 
+        doToast(gm_data["pokemon"][monId]["name"] + " was damaged by their burn");
+
         // Update Player client
         sendMessage(battle[monId]["client_id"], JSON.stringify({
             "type": "health",
             "value": gm_data["pokemon"][monId]['health']
         }));
+    }
+    // Frozen save check
+    else if (affliction == "Frozen") {
+        // TODO: weather bonuses (+4 sunny, -2 hail)
+
+        // Save check roll
+        var check = roll(1, 20, 1);
+
+        // If rolled higher than 16, or 11 for Fire types, cure of Frozen
+        if (check >= 16 || (check >= 11 && (gm_data["pokemon"][monId]["type"] == "Fire" ||
+            $.inArray("Fire", gm_data["pokemon"][monId]["type"].split(" / ")) >= 0))) {
+
+            deleteAffliction("Frozen", monId);
+        }
     }
 }
 
