@@ -4,38 +4,31 @@ monIn: JSON from box.json
 function JSONExport(monIn,dex,moves,abilities,experience){
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
-console.log(dex);
-console.log(monIn);
-console.log(monIn.dex);
-console.log(typeof monIn.dex);
-console.log(dex["001"]);
-console.log(dex[monIn.dex]);
-
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
 var monOut = {
   CharType: monIn.nickname,
   nickname: monIn.name,
-  species: dex[monIn.dex].Species,
+  species: dex.Species,
   Level: monIn.level,
   EXP: monIn.EXP,
   EXP_max: experience.level,
   HeldItem: monIn["held-item"],
   Gender: monIn.gender,
   Nature: monIn.nature,
-  Height: dex[monIn.dex].Height.Category.Minimum,
-  WeightClass: dex[monIn.dex].Weight.WeightClass.Minimum,
-  base_HP: dex[monIn.dex].BaseStats.HP,
-  base_ATK: dex[monIn.dex].BaseStats.ATK,
-  base_DEF: dex[monIn.dex].BaseStats.DEF,
-  base_SPATK: dex[monIn.dex].BaseStats.SPATK,
-  base_SPDEF: dex[monIn.dex].BaseStats.SPDEF,
-  base_SPEED: dex[monIn.dex].BaseStats.SPEED,
-  HP: monIn.hp-dex[monIn.dex].BaseStats.HP,
-  ATK: monIn.atk-dex[monIn.dex].BaseStats.ATK,
-  DEF: monIn.def-dex[monIn.dex].BaseStats.DEF,
-  SPATK: monIn.spatk-dex[monIn.dex].BaseStats.SPATK,
-  SPDEF: monIn.spdef-dex[monIn.dex].BaseStats.SPDEF,
-  SPEED: monIn.speed-dex[monIn.dex].BaseStats.SPEED,
+  Height: dex.Height.Category.Minimum,
+  WeightClass: dex.Weight.WeightClass.Minimum,
+  base_HP: dex.BaseStats.HP,
+  base_ATK: dex.BaseStats.ATK,
+  base_DEF: dex.BaseStats.DEF,
+  base_SPATK: dex.BaseStats.SPATK,
+  base_SPDEF: dex.BaseStats.SPDEF,
+  base_SPEED: dex.BaseStats.SPEED,
+  HP: monIn.hp-dex.BaseStats.HP,
+  ATK: monIn.atk-dex.BaseStats.ATK,
+  DEF: monIn.def-dex.BaseStats.DEF,
+  SPATK: monIn.spatk-dex.BaseStats.SPATK,
+  SPDEF: monIn.spdef-dex.BaseStats.SPDEF,
+  SPEED: monIn.speed-dex.BaseStats.SPEED,
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
@@ -51,7 +44,7 @@ if (monIn.type.indexOf(" / ")===-1){
 
 //Building monOut.Capabilities
 monOut.Capabilities={};
-$.each(dex[monIn.dex].Capabilities,function(index,value){
+$.each(dex.Capabilities,function(index,value){
     if(value.CapabilityName=="Naturewalk"){
       monOut.Capabilities["Naturewalk("+value.Value+")"]=true;
     } else if (value.CapabilityName=="Jump") {
@@ -72,10 +65,7 @@ $.each(skills,function(index,value){
     skill = "1d6";
   }
   var i; for (i=0;i<dex.Skills.length;i++){
-    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation"){
-      skill = dex.Skills[i].DiceRank;
-      break;
-    } else if (value.indexOf(dex.Skills[i].SkillName)){
+    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation" || value.indexOf(dex.Skills[i].SkillName)){
       skill = dex.Skills[i].DiceRank;
       break;
     }
@@ -89,7 +79,7 @@ $.each(skills,function(index,value){
 });
 
 //Handling Moves
-$.each(monOut.moves,function(index,value){
+$.each(monIn.moves,function(index,value){
   var info = moves[value];
   monOut["Move"+(index+1)]={
     Name:value,
@@ -99,20 +89,20 @@ $.each(monOut.moves,function(index,value){
     Range: info.Range
   };
   if (info.hasOwnProperty("AC")){
-    monOut["Move"+index].AC=parseInt(info.AC,10);
+    monOut["Move"+(index+1)].AC=parseInt(info.AC,10);
   }
   if (info.hasOwnProperty("DB")){
-    monOut["Move"+index].DB=parseInt(info.DB,10);
+    monOut["Move"+(index+1)].DB=parseInt(info.DB,10);
   }
   if (info.hasOwnProperty("Effect")){
-    monOut["Move"+index].Effects=info.Effect;
+    monOut["Move"+(index+1)].Effects=info.Effect;
   }
 });
 //Handling  Abilities
 //Switches and such: Help the sheet know certain abilities are in effect
 monOut.sniper = 0;monOut.snipern = 0;monOut.twist = 0;monOut.flashfire = 0;monOut.weird = 0;monOut.damp = 0;monOut.aurastn = 0;monOut.defeat = 0;monOut.hustle = 0;monOut.courage = 0;monOut.lastctrue = 0;monOut.lastctype = "";
 
-$.each(monOut.abilities,function(index,value){
+$.each(monIn.abilities,function(index,value){
   var info = abilities[value];
   monOut["Ability"+(index+1)]={
     Name:value,
@@ -234,6 +224,6 @@ $.each(monOut.abilities,function(index,value){
   }
 });
 
-return monOut;
+return JSON.stringify(monOut);
 
 }
