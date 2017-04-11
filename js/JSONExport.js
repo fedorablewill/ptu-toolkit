@@ -18,22 +18,22 @@ var monOut = {
   Height: dex.Height.Category.Minimum,
   WeightClass: dex.Weight.WeightClass.Minimum,
   HP: monIn.hp-dex.BaseStats.HP,
-  ATK: monIn.atk-dex.BaseStats.ATK,
-  DEF: monIn.def-dex.BaseStats.DEF,
-  SPATK: monIn.spatk-dex.BaseStats.SPATK,
-  SPDEF: monIn.spdef-dex.BaseStats.SPDEF,
-  SPEED: monIn.speed-dex.BaseStats.SPEED,
+  ATK: monIn.atk-dex.BaseStats.Attack,
+  DEF: monIn.def-dex.BaseStats.Defense,
+  SPATK: monIn.spatk-dex.BaseStats.SpecialAttack,
+  SPDEF: monIn.spdef-dex.BaseStats.SpecialDefense,
+  SPEED: monIn.speed-dex.BaseStats.Speed,
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
 
 //Adding in properties with underscores in their names.
 monOut["base_HP"]=dex.BaseStats.HP;
-monOut["base_ATK"]=dex.BaseStats.ATK;
-monOut["base_DEF"]=dex.BaseStats.DEF;
-monOut["base_SPATK"]=dex.BaseStats.SPATK;
-monOut["base_SPDEF"]=dex.BaseStats.SPDEF;
-monOut["base_SPEED"]=dex.BaseStats.SPEED;
+monOut["base_ATK"]=dex.BaseStats.Attack;
+monOut["base_DEF"]=dex.BaseStats.Defense;
+monOut["base_SPATK"]=dex.BaseStats.SpecialAttack;
+monOut["base_SPDEF"]=dex.BaseStats.SpecialDefense;
+monOut["base_SPEED"]=dex.BaseStats.Speed;
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type.indexOf(" / ")===-1){
