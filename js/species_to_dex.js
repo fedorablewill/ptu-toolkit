@@ -1,3 +1,4 @@
+function species_to_dex(name){
 switch (name) {
 	case "Bulbasaur":
 		return "001";
@@ -1439,4 +1440,5 @@ switch (name) {
 		return "493";
 	case "Hoopa":
 		return "720";
+}
 }
