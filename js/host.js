@@ -280,6 +280,7 @@ $("#expmon-mon").change(function(){
 
 function fetchExistingPokemon(){
   document.getElementById("expmon-mon").options.length = 0;
+  document.getElementById("expmon-mon").innerHTML += "<option value = ''></option>";
   $.each(gm_data["pokemon"],function (k,v){
   	document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
   });
