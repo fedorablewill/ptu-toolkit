@@ -24,14 +24,7 @@ var monOut = {
 //The dash seems to give a spot of trouble, so we do it seperately:
 monOut["held-item"]=monIn.HeldItem;
 
-//Getting the dex entry:
-var keys = Object.keys(dex);
-var i; for (i=0;i<keys.length;i++){
-  if (dex[keys[i]].Species==monIn.species){
-    monOut.dex = keys[i];
-    break;
-  }
-}
+monOut.dex = dex;
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type2===""){

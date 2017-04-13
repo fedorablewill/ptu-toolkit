@@ -822,6 +822,7 @@
 <script src="js/script.js"></script>
 <script src="js/JSONImport.js"></script>
 <script src="js/JSONExport.js"></script>
+<script src="js/species_to_dex.js"></script>
 <script src="js/host.js"></script>
 </body>
 </html>
