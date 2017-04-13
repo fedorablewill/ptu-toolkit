@@ -271,7 +271,9 @@ $("#expmon-mon").change(function(){
 	$.getJSON("api/v1/moves/", function (moves) {
 	$.getJSON("api/v1/abilities/", function (abilities) {
 	$.getJSON("api/v1/experience/", function (experience) {
-  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience));
+	$.getJSON("api/v1/nature/"+gm_data["pokemon"][id].nature, function (nature) {
+  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience,nature));
+	});
 	});
 	});
 	});
