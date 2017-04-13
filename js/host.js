@@ -391,7 +391,7 @@ function performMove(moveName, target_id, dealer_id) {
                 // Check for triggers for if missed
                 if (move.hasOwnProperty("Triggers")) {
                     $.each(move["Triggers"], function (k, trigger) {
-                        if (trigger.hasOwnProperty("prereq") && trigger.prereq == "hit")
+                        if (trigger.hasOwnProperty("prereq") && trigger.prereq == "miss")
                             $.each(trigger["req"]["miss"], function (t) {
                                 handleTrigger(t, dealer_id, target_id, damageDone, moveName, acRoll);
                             });
