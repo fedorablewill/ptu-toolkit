@@ -9,6 +9,8 @@ window.alert("Notice: We're currently redoing the layout of this page. It's prob
  */
 var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [];
 
+var currentMove = null;
+
 
 /**
  * JQuery Bindings & Initialization
@@ -17,17 +19,9 @@ $(function () {
 
     // ON MOVE CLICKED
     $(".btn-move").click(function () {
-        var move_name = $(this).find(".move-name").html();
-        var target = $("#target").val();
-        
-        var json = {
-            "type": "battle_move",
-            "dealer": $("#pokemonId").val(),
-            "target": target,
-            "move": move_name
-        };
-        
-        sendMessage(host_id, JSON.stringify(json));
+        updateTargetList();
+        currentMove = $(this).find(".move-name").html();
+        $('#modalTarget').modal('show');
     });
 
     $("#btn-do-dmg").click(function () {
@@ -234,13 +228,27 @@ function updateStatus() {
 }
 
 function updateTargetList() {
-    var html = '<option value="other">Other Target</option>';
+    var html = '<button class="btn btn-danger btn-lg" data-target="other">Other Target</button>';
 
     $.each(battle_data, function (id, name) {
-        html += '<option value="'+id+'">'+name+'</option>';
+        html += '<button class="btn btn-danger btn-lg" data-target="'+id+'">'+name+'</button>';
     });
 
-    $("#target").html(html);
+    $("#select-target-body").html(html);
+
+    $("#select-target-body .btn").click(function () {
+
+        sendMessage(host_id, JSON.stringify({
+            "type": "battle_move",
+            "dealer": $("#pokemonId").val(),
+            "target": $(this).attr("data-target"),
+            "move": currentMove
+        }));
+
+        currentMove = null;
+
+        $('#modalTarget').modal('hide');
+    });
 }
 
 /**

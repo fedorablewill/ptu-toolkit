@@ -150,6 +150,14 @@
             border-top-color: #777;
         }
 
+        #select-target-body {
+            text-align: center;
+        }
+
+        #select-target-body .btn {
+            width: 100%;
+        }
+
         input, select, button:not(.btn) {
             color: #000000;
         }
@@ -258,11 +266,6 @@
                 <label for="pokemonId">From Box by Pokemon ID</label>
                 <input type="text" id="pokemonId" onsubmit="onClickLoadFromBox()" />
                 <button onclick="onClickLoadFromBox();">Load</button>
-            </div>
-            <div class="pokemon-enemy" style="display: none;">
-                <div class="effects"></div>
-                <label for="target">Select Target</label>
-                <select id="target"><option value="other">Other Target</option></select>
             </div>
             <div class="moves">
                 <a class="btn btn-raised btn-move btn-move-1">
@@ -410,6 +413,22 @@
                             <input type="number" id="do-heal"/>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dialog for picking target -->
+    <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title text-danger" id="impMonLabel">Select Target</h3>
+                </div>
+
+                <div class="modal-body" id="select-target-body">
+                    <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
                 </div>
             </div>
         </div>
