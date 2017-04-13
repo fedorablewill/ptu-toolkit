@@ -362,6 +362,8 @@ function performMove(moveName, target_id, dealer_id) {
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
 
+        var damageDone = 0;
+
         // Check if Frozen (but don't Let It Go)
         if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
             $.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
@@ -381,51 +383,72 @@ function performMove(moveName, target_id, dealer_id) {
                 //TODO: get evade
             }
 
+            // Move missed
             if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
                 doToast("It missed!");
-                return;
+
+                // Check for triggers for if missed
+                if (move.hasOwnProperty("Triggers")) {
+                    $.each(move["Triggers"], function (k, trigger) {
+                        if (trigger.hasOwnProperty("prereq") && trigger.prereq == "hit")
+                            $.each(trigger["req"]["miss"], function (t) {
+                                handleTrigger(t, dealer_id, target_id, damageDone, moveName, acRoll);
+                            });
+                    });
+                }
             }
+            // Move hit
+            else {
 
-            if (move["Class"] == "Physical" || move["Class"] == "Special") {
-                var db = parseInt(move["DB"]);
+                if (move["Class"] == "Physical" || move["Class"] == "Special") {
+                    var db = parseInt(move["DB"]);
 
-                var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+                    // STAB: if same type, increase damage base
 
-                if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
-                    db += 2;
+                    var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+                    if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
+                        db += 2;
 
-                if (db > 28) db = 28;
+                    if (db > 28) db = 28;
 
-                var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
-                var damage = 0;
+                    // Roll for damage
 
-                if (acRoll >= crit)
-                    doToast("Critical hit!");
+                    var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
+                    var damage = 0;
 
-                if (move["Class"] == "Physical") {
-                    damage = rolledDmg +
-                        gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
-                    if (target_id != "other")
-                        damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
+                    // Declare if critical hit
+                    if (acRoll >= crit)
+                        doToast("Critical hit!");
+
+                    // Add stat bonus to damage
+                    if (move["Class"] == "Physical") {
+                        damage = rolledDmg +
+                            gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
+                    }
+                    else if (move["Class"] == "Special") {
+                        damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
+                            gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
+                    }
+
+                    // Distribute damage
+
+                    if (target_id == "other") {
+                        doToast("OUTGOING DAMAGE = " + damage);
+                        damageDone = damage;
+                    }
+                    else {
+                        damageDone = damagePokemon(target_id, move["Type"], move["Class"] == "Special", damage);
+                    }
                 }
-                else if (move["Class"] == "Special") {
-                    damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
-                        gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
-                    if (target_id != "other")
-                        damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
-                }
 
-                if (target_id == "other") {
-                    doToast("OUTGOING DAMAGE = " + damage);
-                    // handleTrigger(trigger,dealer_id,target_id,"N/A");
-                }
-                else {
-                    // if (move.hasOwnProperty("Triggers")){
-                    //     var triggers = move["Triggers"];
-                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
-                    // } else {
-                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
-                    // }
+                /*
+                Triggers
+                 */
+
+                if (move.hasOwnProperty("Triggers")) {
+                    $.each(move["Triggers"], function (k, trigger) {
+                        handleTrigger(trigger, dealer_id, target_id, damageDone, moveName, acRoll);
+                    });
                 }
             }
         }
@@ -444,6 +467,11 @@ function performMove(moveName, target_id, dealer_id) {
     });
 }
 
+var typeEffects = {};
+$.getJSON("/api/v1/types", function (json) {
+    typeEffects = json;
+});
+
 /**
  * Inflict incoming damage onto a specified Pokemon
  * @param target_id The ID of the Pokemon taking damage
@@ -451,182 +479,41 @@ function performMove(moveName, target_id, dealer_id) {
  * @param moveIsSpecial True when special, false when physical
  * @param damage The amount of damage
  */
-function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, moveName) {
+function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     if (moveIsSpecial)
         damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
     else
         damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
 
-    $.getJSON("/api/v1/types", function (json) {
-        var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
+    var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
-        var effect1 = json[moveType.toLowerCase()][target_types[0].toLowerCase()];
-        var effect2 = 1;
+    var effect1 = typeEffects[moveType.toLowerCase()][target_types[0].toLowerCase()];
+    var effect2 = 1;
 
-        if (target_types.length > 1)
-            effect2 = json[moveType.toLowerCase()][target_types[1].toLowerCase()];
+    if (target_types.length > 1)
+        effect2 = typeEffects[moveType.toLowerCase()][target_types[1].toLowerCase()];
 
-        damage = damage * effect1 * effect2;
+    damage = damage * effect1 * effect2;
 
-        if (effect1 * effect2 == 0)
-            doToast("No effect!");
-        else if (effect1 * effect2 >= 2)
-            doToast("It's super effective!");
-        else if (effect1 * effect2 < 1)
-            doToast("It's not very effective.");
+    if (effect1 * effect2 == 0)
+        doToast("No effect!");
+    else if (effect1 * effect2 >= 2)
+        doToast("It's super effective!");
+    else if (effect1 * effect2 < 1)
+        doToast("It's not very effective.");
 
-        // Make sure it doesn't accidentally heal the target
-        if (damage < 0) {
-            damage = 1;
-        }
-
-        // Calculating max_hp
-        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
-
-        // Checking for injuries
-        if (damage >= max_hp/2){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        if (gm_data["pokemon"][target_id]["health"] > max_hp/2 && gm_data["pokemon"][target_id]["health"] - damage <= max_hp/2){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        if (gm_data["pokemon"][target_id]["health"] > 0 && gm_data["pokemon"][target_id]["health"] - damage <= 0){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        if (gm_data["pokemon"][target_id]["health"] > -max_hp/2 && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp/2){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        if (gm_data["pokemon"][target_id]["health"] > -max_hp && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        if (gm_data["pokemon"][target_id]["health"] > -max_hp*3/2 && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp*3/2){
-          gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
-        }
-        //No need to go to other thresholds, as you'd be dead at that point
-
-        // Subtract health
-        gm_data["pokemon"][target_id]["health"] -= damage;
-
-        //Limiting health by number of injuries if appropriate
-        if ((10-gm_data["pokemon"][target_id]["injuries"])/10 * max_hp < gm_data["pokemon"][target_id]["health"]){
-          gm_data["pokemon"][target_id]["health"] = (10-gm_data["pokemon"][target_id]["injuries"])/10;
-        }
-
-        // Check if fainted
-        if (gm_data["pokemon"][target_id]["health"] <= 0) {
-            doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
-            gm_data["pokemon"][target_id]["health"] = 0;
-            addAffliction("Fainted", target_id, 0);
-        }
-
-        // Update health bar
-        var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
-
-        $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
-
-        // Update Player client
-        sendMessage(battle[target_id]["client_id"], JSON.stringify({
-            "type": "health",
-            "value": gm_data["pokemon"][target_id]['health']
-        }));
-
-        //Checking Triggers
-        // $.each(triggers,function(trigger){
-        //   if (trigger.hasOwnProperty("prereq")){
-        //
-        //   } else if (trigger.hasOwnProperty("type")){
-        //     handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
-        //   }
-        // });
-
-        // Check if cured target of Frozen
-        if ((moveType == "Fire" || moveType == "Fighting" || moveType == "Rock" || moveType == "Steel") &&
-            $.inArray("Frozen", gm_data["pokemon"][target_id]['afflictions']) >= 0) {
-
-            deleteAffliction("Frozen", target_id);
-        }
-    });
-}
-
-function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
-  //Making a variable for storing important ids
-  var id;
-  if (trigger.hasOwnProperty("target")){
-    if (trigger.target=="SELF"){
-      id = dealer_id;
-    } else {
-      id = target_id;
-    }
-  }
-
-  //Handling trigger by type
-  if (trigger.type=="action-needed"){
-    doToast(trigger.text)
-  }
-  else if (trigger.type=="CS"){
-    //Raising/lowering stats
-    $.each(trigger.stat, function(stat){
-      battle[id]["stage_"+stat]+=trigger.value;
-    });
-  }
-  else if (trigger.type=="heal"){
-    //Seeing what type of healing is needed
-    var arr = trigger.value.split(" ");
-
-    // Getting max HP
-    var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-
-    //Getting multiplier
-    var mult
-    if (arr[0]=="1/2"){
-      mult = 0.5;
-    } else {
-      mult = parseInt(arr[0],10);
+    // Make sure it doesn't accidentally heal the target
+    if (damage < 0) {
+        damage = 1;
     }
 
-    //Checking type of healing and setting HP
-    if (arr[1]=="HP"){
-      gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,gm_data["pokemon"][id]['health']+mult*max_hp)
-    } else if (arr[1]=="Damage"){
-      gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,gm_data["pokemon"][id]['health']+mult*damage_dealt)
-    }
+    // Calculating max_hp
+    var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
 
-    //Setting Health bar
-    var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
-    $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
-  }
-  else if (trigger.type=="vortex"){
-    //Figure out vortex
-  }
-  else if (trigger.type=="push"){
-    //Wait until map is implemented
-  }
-  else if (trigger.type=="switch"){
-    //Not really a mechanism for this at present
-  }
-  else if (trigger.type=="status"){
-    //Need statuses to exist first
-  }
-  else if (trigger.type=="damage"){
-    // Setting up for changing HP
-    var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-
-    //Getting damage to do
-    var dmg;
-    if (typeof trigger.value == "number"){
-      dmg = trigger.value;
+    // Checking for injuries
+    if (damage >= max_hp/2){
+      gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
     }
-    else if (trigger.value=="User Level"){
-      dmg = gm_data["pokemon"][dealer_id]['level'];
-    }
-    else {
-      var arr = trigger.value.split(" ")[0].split("/");
-      dmg = max_hp*parseInt(arr[0],10)/parseInt(arr[1],10);
-    }
-    // Getting max HP
-    var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-
-    //Checking for threshhold injuries; Massive Damage doesn't apply for flat damage sources
     if (gm_data["pokemon"][target_id]["health"] > max_hp/2 && gm_data["pokemon"][target_id]["health"] - damage <= max_hp/2){
       gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
     }
@@ -644,25 +531,166 @@ function handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName){
     }
     //No need to go to other thresholds, as you'd be dead at that point
 
-    //Lowering health
-    gm_data["pokemon"][id]['health'] = Math.min(gm_data["pokemon"][id]['health'] - dmg,max_hp*(10-gm_data["pokemon"][id]['injuries'])/10);
+    // Subtract health
+    gm_data["pokemon"][target_id]["health"] -= damage;
 
-    //Setting Health bar
-    var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
-    $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
-  }
-  else if (trigger.type=="protect"){
-    //Need ability to interrupt to implement
-  }
-  else if (trigger.type=="execute"){
-    var r = roll(1,100,1);
-    if (r <= 30+gm_data["pokemon"][dealer_id]['level']-gm_data["pokemon"][target_id]['level']){
-      doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
-      gm_data["pokemon"][target_id]["health"] = 0;
-    } else {
-      doToast(moveName+ " missed "+gm_data["pokemon"][target_id]["name"]+"!");
+    //Limiting health by number of injuries if appropriate
+    if ((10-gm_data["pokemon"][target_id]["injuries"])/10 * max_hp < gm_data["pokemon"][target_id]["health"]){
+      gm_data["pokemon"][target_id]["health"] = (10-gm_data["pokemon"][target_id]["injuries"])/10;
     }
-  }
+
+    // Check if fainted
+    if (gm_data["pokemon"][target_id]["health"] <= 0) {
+        doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
+        gm_data["pokemon"][target_id]["health"] = 0;
+        addAffliction("Fainted", target_id, 0);
+    }
+
+    // Update health bar
+    var w = Math.floor((gm_data["pokemon"][target_id]['health'] / max_hp) * 100);
+
+    $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
+
+    // Update Player client
+    sendMessage(battle[target_id]["client_id"], JSON.stringify({
+        "type": "health",
+        "value": gm_data["pokemon"][target_id]['health']
+    }));
+
+    // Check if cured target of Frozen
+    if ((moveType == "Fire" || moveType == "Fighting" || moveType == "Rock" || moveType == "Steel") &&
+        $.inArray("Frozen", gm_data["pokemon"][target_id]['afflictions']) >= 0) {
+
+        deleteAffliction("Frozen", target_id);
+    }
+
+    return damage;
+}
+
+function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, accuracy){
+
+    // If trigger is a prereq
+    if (trigger.hasOwnProperty("prereq")) {
+
+        // Accuracy prerequisite
+        if (trigger.prereq == "accuracy" && trigger.req.hasOwnProperty(String(accuracy))) {
+            // If not pointing to other entry
+            if (typeof trigger.req[String(accuracy)] == "object")
+                handleTrigger(trigger.req[String(accuracy)], dealer_id, target_id, damage_dealt, moveName, accuracy);
+            else
+                handleTrigger(trigger.req[String(trigger.req[String(accuracy)])], dealer_id, target_id, damage_dealt, moveName, accuracy);
+        }
+    }
+    // Not a prereq
+    else {
+        //Making a variable for storing important ids
+        var id;
+        if (trigger.hasOwnProperty("target")){
+            id = trigger.target == "SELF" ? dealer_id : target_id;
+        }
+
+        //Handling trigger by type
+        if (trigger.type=="action-needed"){
+            doToast(trigger.text)
+        }
+        else if (trigger.type=="CS"){
+            //Raising/lowering stats
+            $.each(trigger.stat, function(stat){
+                battle[id]["stage_"+stat]+=trigger.value;
+            });
+        }
+        else if (trigger.type=="heal"){
+            //Seeing what type of healing is needed
+            var arr = trigger.value.split(" ");
+
+            // Getting max HP
+            var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+
+            //Getting multiplier
+            var mult = arr[0] == "1/2" ? 0.5 : parseInt(arr[0], 10);
+
+            //Checking type of healing and setting HP
+            if (arr[1]=="HP"){
+                gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,gm_data["pokemon"][id]['health']+mult*max_hp)
+            } else if (arr[1]=="Damage"){
+                gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,gm_data["pokemon"][id]['health']+mult*damage_dealt)
+            }
+
+            //Setting Health bar
+            var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+            $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
+        }
+        else if (trigger.type=="vortex"){
+            //TODO: Figure out vortex
+        }
+        else if (trigger.type=="push"){
+            //TODO: Wait until map is implemented
+        }
+        else if (trigger.type=="switch"){
+            //TODO: Not really a mechanism for this at present
+        }
+        else if (trigger.type=="status"){
+            $.each(trigger.stat, function (k, status) {
+                addAffliction(status, id, 0);
+            });
+        }
+        else if (trigger.type=="damage"){
+            // Setting up for changing HP
+            var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+
+            //Getting damage to do
+            var dmg;
+            if (typeof trigger.value == "number"){
+                dmg = trigger.value;
+            }
+            else if (trigger.value=="User Level"){
+                dmg = gm_data["pokemon"][dealer_id]['level'];
+            }
+            else {
+                var arr = trigger.value.split(" ")[0].split("/");
+                dmg = max_hp*parseInt(arr[0],10)/parseInt(arr[1],10);
+            }
+            // Getting max HP
+            var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+
+            //Checking for threshhold injuries; Massive Damage doesn't apply for flat damage sources
+            if (gm_data["pokemon"][target_id]["health"] > max_hp/2 && gm_data["pokemon"][target_id]["health"] - damage <= max_hp/2){
+                gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
+            }
+            if (gm_data["pokemon"][target_id]["health"] > 0 && gm_data["pokemon"][target_id]["health"] - damage <= 0){
+                gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
+            }
+            if (gm_data["pokemon"][target_id]["health"] > -max_hp/2 && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp/2){
+                gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
+            }
+            if (gm_data["pokemon"][target_id]["health"] > -max_hp && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp){
+                gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
+            }
+            if (gm_data["pokemon"][target_id]["health"] > -max_hp*3/2 && gm_data["pokemon"][target_id]["health"] - damage <= -max_hp*3/2){
+                gm_data["pokemon"][target_id]["injuries"] = parseInt(gm_data["pokemon"][target_id]["injuries"],10) + 1;
+            }
+            //No need to go to other thresholds, as you'd be dead at that point
+
+            //Lowering health
+            gm_data["pokemon"][id]['health'] = Math.min(gm_data["pokemon"][id]['health'] - dmg,max_hp*(10-gm_data["pokemon"][id]['injuries'])/10);
+
+            //Setting Health bar
+            var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+            $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
+        }
+        else if (trigger.type=="protect"){
+            //TODO: Need ability to interrupt to implement
+        }
+        else if (trigger.type=="execute"){
+            var r = roll(1,100,1);
+            if (r <= 30+gm_data["pokemon"][dealer_id]['level']-gm_data["pokemon"][target_id]['level']){
+                doToast(gm_data["pokemon"][target_id]["name"] + " fainted!");
+                gm_data["pokemon"][target_id]["health"] = 0;
+            } else {
+                doToast(moveName+ " missed "+gm_data["pokemon"][target_id]["name"]+"!");
+            }
+        }
+    }
 }
 
 function addAffliction(affliction, monId, value) {
