@@ -372,7 +372,7 @@ function performMove(moveName, target_id, dealer_id) {
             doToast(gm_data["pokemon"][dealer_id]["name"] + " is frozen solid!");
         }
         // Check if Fainted
-        else if ("Fainted" in battle[dealer_id][afflictions]) {
+        else if ("Fainted" in battle[dealer_id]['afflictions']) {
             doToast("Fainted Pokemon cannot use actions, abilities, or features")
         }
         else {
@@ -596,8 +596,19 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
         }
         else if (trigger.type=="CS"){
             //Raising/lowering stats
-            $.each(trigger.stat, function(stat){
-                battle[id]["stage_"+stat]+=trigger.value;
+            $.each(trigger.stat, function(k, stat){
+                battle[id]["stage_"+stat] = parseInt(battle[id]["stage_"+stat]) + trigger.value;
+
+                if (battle[id]["stage_"+stat] > 6)
+                    battle[id]["stage_"+stat] = 6;
+                else if (battle[id]["stage_"+stat] < -6)
+                    battle[id]["stage_"+stat] = -6;
+
+                sendMessage(battle[id]['client_id'], JSON.stringify({
+                    "type": "data_changed",
+                    "field": "stage-"+stat,
+                    "value": battle[id]['stage_'+stat]
+                }));
             });
         }
         else if (trigger.type=="heal"){
