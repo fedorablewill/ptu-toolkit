@@ -386,6 +386,16 @@ function performMove(moveName, target_id, dealer_id) {
             // Move missed
             if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
                 doToast("It missed!");
+
+                // Check for triggers for if missed
+                if (move.hasOwnProperty("Triggers")) {
+                    $.each(move["Triggers"], function (k, trigger) {
+                        if (trigger.hasOwnProperty("prereq") && trigger.prereq == "hit")
+                            $.each(trigger["req"]["miss"], function (t) {
+                                handleTrigger(t, dealer_id, target_id, damageDone, moveName, acRoll);
+                            });
+                    });
+                }
             }
             // Move hit
             else {
