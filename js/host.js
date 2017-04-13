@@ -598,6 +598,17 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
             //Raising/lowering stats
             $.each(trigger.stat, function(stat){
                 battle[id]["stage_"+stat]+=trigger.value;
+
+                if (battle[id]["stage_"+stat] > 6)
+                    battle[id]["stage_"+stat] = 6;
+                else if (battle[id]["stage_"+stat] < -6)
+                    battle[id]["stage_"+stat] = -6;
+
+                sendMessage(battle[monId]['client_id'], JSON.stringify({
+                    "type": "data_changed",
+                    "field": "stage-"+stat,
+                    "value": battle[monId]['stage_'+stat]
+                }));
             });
         }
         else if (trigger.type=="heal"){
