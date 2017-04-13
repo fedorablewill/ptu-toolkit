@@ -271,7 +271,9 @@ $("#expmon-mon").change(function(){
 	$.getJSON("api/v1/moves/", function (moves) {
 	$.getJSON("api/v1/abilities/", function (abilities) {
 	$.getJSON("api/v1/experience/", function (experience) {
-  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience));
+	$.getJSON("api/v1/nature/"+gm_data["pokemon"][id].nature, function (nature) {
+  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience,nature));
+	});
 	});
 	});
 	});
@@ -1225,23 +1227,22 @@ $("#btn-impmon").click(function () {
         else {
 
             var data = JSON.parse($("#impmon-JSON").val());
-            $.getJSON("api/v1/pokemon/", function (dex) {
-                data = JSONImport(data,dex);
+            var dexNo=species_to_dex(data.species);
+            data = JSONImport(data,dex,dexNo);
 
-                console.log("Second");
+            console.log("Second");
                 
-                var pmon_id = $("#impmon-id").val();
+            var pmon_id = $("#impmon-id").val();
 
-                if (pmon_id == "") {
-                    pmon_id = generatePmonId();
-                }
+            if (pmon_id == "") {
+                pmon_id = generatePmonId();
+            }
 
-                gm_data["pokemon"][pmon_id] = data;
+            gm_data["pokemon"][pmon_id] = data;
 
-                doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
+            doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
 
-                renderPokemonList();
-            });
+            renderPokemonList();
         }
 });
 

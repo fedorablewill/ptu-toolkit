@@ -1,7 +1,7 @@
 /*
 monIn: JSON from box.json
 */
-function JSONExport(monIn,dex,moves,abilities,experience){
+function JSONExport(monIn,dex,moves,abilities,experience,nature){
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
@@ -17,12 +17,6 @@ var monOut = {
   Nature: monIn.nature,
   Height: dex.Height.Category.Minimum,
   WeightClass: dex.Weight.WeightClass.Minimum,
-  HP: monIn.hp-dex.BaseStats.HP,
-  ATK: monIn.atk-dex.BaseStats.Attack,
-  DEF: monIn.def-dex.BaseStats.Defense,
-  SPATK: monIn.spatk-dex.BaseStats.SpecialAttack,
-  SPDEF: monIn.spdef-dex.BaseStats.SpecialDefense,
-  SPEED: monIn.speed-dex.BaseStats.Speed,
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
@@ -34,6 +28,28 @@ monOut["base_DEF"]=dex.BaseStats.Defense;
 monOut["base_SPATK"]=dex.BaseStats.SpecialAttack;
 monOut["base_SPDEF"]=dex.BaseStats.SpecialDefense;
 monOut["base_SPEED"]=dex.BaseStats.Speed;
+
+if (!(nature.Raise==nature.Lower)){
+	if (nature.Raise=="HP"){
+		monOut["base_HP"]+=1
+	} else {
+		monOut["base_"+nature.Raise]+=2
+	}
+	if (nature.Lower=="HP"){
+		monOut["base_HP"]-=1
+		monOut["base_HP"]=Math.max(monOut["base_HP"],1)
+	} else {
+		monOut["base_"+nature.Raise]-=2
+		monOut["base_"+nature.Raise]=Math.max(monOut["base_"+nature.Raise],1)
+	}
+}
+
+monOut["HP"]=monIn.hp-monOut["base_HP"];
+monOut["ATK"]=monIn.atk-monOut["base_ATK"];
+monOut["DEF"]=monIn.def-monOut["base_DEF"];
+monOut["SPATK"]=monIn.spatk-monOut["base_SPATK"]k;
+monOut["SPDEF"]=monIn.spdef-monOut["base_SPDEF"];
+monOut["SPEED"]=monIn.speed-monOut["base_SPEED"];
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type.indexOf(" / ")===-1){
