@@ -19,8 +19,13 @@ $(function () {
 
     // ON MOVE CLICKED
     $(".btn-move").click(function () {
-        updateTargetList();
         currentMove = $(this).find(".move-name").html();
+
+        $(".modal-move .move-desc").html($(this).find(".move-desc").attr("data-content"));
+        $(".modal-move .move-name").html(currentMove).css("color", $(this).find(".move-name").css("color"));
+
+        updateTargetList();
+
         $('#modalTarget').modal('show');
     });
 

@@ -181,6 +181,18 @@
         .center-vertical {
             vertical-align: middle;
         }
+
+        .modal-move {
+            text-align: left;
+            width: 100%;
+            background-color: #FFF;
+            color: #999;
+            padding-top: 16px;
+            padding-right: 24px;
+            padding-bottom: 16px;
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -421,6 +433,10 @@
     <!-- Modal dialog for picking target -->
     <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
+            <div class="modal-content modal-move">
+                <h4 class="move-name"></h4>
+                <p class="move-desc"></p>
+            </div>
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
