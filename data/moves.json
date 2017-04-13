@@ -2095,19 +2095,18 @@
       "Contest Type":"Cute",
       "Contest Effect":"Excitement",
       "Triggers":[
+      	{
+        	"type": "status",
+        	"stat": ["Confused"],
+        	"target": "TARGET"
+      	},
         {
-          "prereq": "hit",
+          "prereq": "miss",
           "req": {
-            "hit": {
-               "type": "status",
-        	     "stat": ["Confused"],
-        	     "target": "TARGET"
-              },
-            "miss": {
+        	"miss": [{
               "type": "action-needed",
               "text": "The target suffers a -2 penalty to Accuracy Rolls for one full round."
-              }
-          }
+              }]
         }
       ]
    },
@@ -2545,13 +2544,13 @@
       "Crits On":20,
       "Triggers":[
         {
-          "prereq": "hit",
+          "prereq": "miss",
           "req": {
-            "miss": {
+            "miss": [{
                "type": "damage",
         	     "value": "1/4 HP",
         	     "target": "SELF"
-            }
+            }]
           }
         },
         {
@@ -2573,13 +2572,13 @@
       "Crits On":20,
       "Triggers":[
         {
-          "prereq": "hit",
+          "prereq": "miss",
           "req": {
-            "miss": {
+            "miss": [{
                "type": "damage",
         	     "value": "1/4 HP",
         	     "target": "SELF"
-            }
+            }]
           }
         },
         {
@@ -8017,14 +8016,14 @@
       "Contest Type":"Cute",
       "Contest Effect":"Excitement",
       "Triggers":[
+      	{
+          "type": "status",
+          "stat": ["Sleep"],
+          "target": "TARGET"
+      	},
         {
-          "prereq": "hit",
+          "prereq": "miss",
           "req": {
-            "hit": {
-              "type": "status",
-        	     "stat": ["Sleep"],
-        	     "target": "TARGET"
-              },
             "miss": [{
                 "type":"CS",
                 "stat":["eva"],
@@ -8399,20 +8398,20 @@
       "Contest Type":"Smart",
       "Contest Effect":"Excitement",
       "Triggers":[
+      	{
+          "type": "status",
+          "stat": ["Confused"],
+          "target": "TARGET"
+    	},
         {
-          "prereq": "hit",
+          "prereq": "miss",
           "req": {
-            "hit": {
-              "type": "status",
-        	     "stat": ["Confused"],
-        	     "target": "TARGET"
-              },
-            "miss": {
+            "miss": [{
               "type":"CS",
               "stat":["acc"],
               "value":-2,
               "target":"TARGET"
-            }
+            }]
           }
         }
       ]
