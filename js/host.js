@@ -381,51 +381,57 @@ function performMove(moveName, target_id, dealer_id) {
                 //TODO: get evade
             }
 
+            // Move missed
             if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
                 doToast("It missed!");
-                return;
             }
+            // Move hit
+            else {
 
-            if (move["Class"] == "Physical" || move["Class"] == "Special") {
-                var db = parseInt(move["DB"]);
+                if (move["Class"] == "Physical" || move["Class"] == "Special") {
+                    var db = parseInt(move["DB"]);
 
-                var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+                    // STAB: if same type, increase damage base
 
-                if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
-                    db += 2;
+                    var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+                    if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
+                        db += 2;
 
-                if (db > 28) db = 28;
+                    if (db > 28) db = 28;
 
-                var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
-                var damage = 0;
+                    // Roll for damage
 
-                if (acRoll >= crit)
-                    doToast("Critical hit!");
+                    var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
+                    var damage = 0;
 
-                if (move["Class"] == "Physical") {
-                    damage = rolledDmg +
-                        gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
-                    if (target_id != "other")
-                        damage -= gm_data["pokemon"][target_id]["def"] * getStageMultiplier(battle[target_id]["stage_def"]);
-                }
-                else if (move["Class"] == "Special") {
-                    damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
-                        gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
-                    if (target_id != "other")
-                        damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
-                }
+                    // Declare if critical hit
+                    if (acRoll >= crit)
+                        doToast("Critical hit!");
 
-                if (target_id == "other") {
-                    doToast("OUTGOING DAMAGE = " + damage);
-                    // handleTrigger(trigger,dealer_id,target_id,"N/A");
-                }
-                else {
-                    // if (move.hasOwnProperty("Triggers")){
-                    //     var triggers = move["Triggers"];
-                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
-                    // } else {
-                    //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
-                    // }
+                    // Add stat bonus to damage
+                    if (move["Class"] == "Physical") {
+                        damage = rolledDmg +
+                            gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
+                    }
+                    else if (move["Class"] == "Special") {
+                        damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
+                            gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
+                    }
+
+                    // Distribute damage
+
+                    if (target_id == "other") {
+                        doToast("OUTGOING DAMAGE = " + damage);
+                        // handleTrigger(trigger,dealer_id,target_id,"N/A");
+                    }
+                    else {
+                        // if (move.hasOwnProperty("Triggers")){
+                        //     var triggers = move["Triggers"];
+                        //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, triggers, moveName);
+                        // } else {
+                        //   damagePokemon(target_id, move["Type"].toLowerCase(), move["Class"] == "Special", damage, [], moveName);
+                        // }
+                    }
                 }
             }
         }
@@ -451,7 +457,7 @@ function performMove(moveName, target_id, dealer_id) {
  * @param moveIsSpecial True when special, false when physical
  * @param damage The amount of damage
  */
-function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, moveName) {
+function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     if (moveIsSpecial)
         damage -= gm_data["pokemon"][target_id]["spdef"] * getStageMultiplier(battle[target_id]["stage_spdef"]);
     else
@@ -529,15 +535,6 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage, triggers, mov
             "type": "health",
             "value": gm_data["pokemon"][target_id]['health']
         }));
-
-        //Checking Triggers
-        // $.each(triggers,function(trigger){
-        //   if (trigger.hasOwnProperty("prereq")){
-        //
-        //   } else if (trigger.hasOwnProperty("type")){
-        //     handleTrigger(trigger,dealer_id,target_id,damage_dealt, moveName);
-        //   }
-        // });
 
         // Check if cured target of Frozen
         if ((moveType == "Fire" || moveType == "Fighting" || moveType == "Rock" || moveType == "Steel") &&
