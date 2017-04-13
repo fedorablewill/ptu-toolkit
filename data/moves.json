@@ -2103,10 +2103,10 @@
         	     "stat": ["Confused"],
         	     "target": "TARGET"
               },
-            "miss": {
+            "miss": [{
               "type": "action-needed",
               "text": "The target suffers a -2 penalty to Accuracy Rolls for one full round."
-              }
+              }]
           }
         }
       ]
@@ -2547,11 +2547,11 @@
         {
           "prereq": "hit",
           "req": {
-            "miss": {
+            "miss": [{
                "type": "damage",
         	     "value": "1/4 HP",
         	     "target": "SELF"
-            }
+            }]
           }
         },
         {
@@ -2575,11 +2575,11 @@
         {
           "prereq": "hit",
           "req": {
-            "miss": {
+            "miss": [{
                "type": "damage",
         	     "value": "1/4 HP",
         	     "target": "SELF"
-            }
+            }]
           }
         },
         {
@@ -8407,12 +8407,12 @@
         	     "stat": ["Confused"],
         	     "target": "TARGET"
               },
-            "miss": {
+            "miss": [{
               "type":"CS",
               "stat":["acc"],
               "value":-2,
               "target":"TARGET"
-            }
+            }]
           }
         }
       ]
