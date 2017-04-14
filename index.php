@@ -438,14 +438,14 @@
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <!-- Moves Learnt From Level Up Go Here-->
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                           aria-expanded="true" aria-controls="collapseOne">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                       aria-expanded="true" aria-controls="collapseOne">
+                        <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 Level Up Moves
                             </h4>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
                          aria-labelledby="headingOne">
                         <div class="panel-body">
@@ -465,14 +465,14 @@
                 </div>
                 <!-- Moves Learnt From Tutor Go Here -->
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
                                 Tutor Moves
-                            </a>
-                        </h4>
-                    </div>
+                            </h4>
+                        </div>
+                    </a>
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body">
                             <table class="table" id="DexData_Moves_Tutor">
@@ -490,14 +490,14 @@
                 </div>
                 <!-- Moves Learnt From Tutor Go Here -->
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
                                 Egg Moves
-                            </a>
-                        </h4>
-                    </div>
+                            </h4>
+                        </div>
+                    </a>
                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="headingThree">
                         <div class="panel-body">
@@ -516,14 +516,14 @@
                 </div>
                 <!-- Moves Learnt From Tutor Go Here -->
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFour">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
                                 TM/HM Moves
-                            </a>
-                        </h4>
-                    </div>
+                            </h4>
+                        </div>
+                    </a>
                     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="headingFour">
                         <div class="panel-body">
@@ -543,14 +543,14 @@
                 </div>
                 <!-- Pokemon Evolutions and Forms Go Here -->
                 <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFive">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                               href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                            <h4 class="panel-title">
                                 Evolutions and Forms
-                            </a>
-                        </h4>
-                    </div>
+                            </h4>
+                        </div>
+                    </a>
                     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="headingFive">
                         <div class="panel-body">
