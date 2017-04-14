@@ -2,7 +2,6 @@
  * Scripts for Player Client
  * @author Will Stephenson
  */
-window.alert("Notice: We're currently redoing the layout of this page. It's probably usable?");
 /**
  * JSON data of loaded Pokemon
  * @type JSON
