@@ -7,7 +7,8 @@
 
     <title>PTU Tools</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400'
+          rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -17,9 +18,7 @@
 
     <style>
         body {
-            background:
-                url('img/pixel-art-pokemon-wallpaper-2.jpg')
-                no-repeat fixed center bottom;
+            background: url('img/pixel-art-pokemon-wallpaper-2.jpg') no-repeat fixed center bottom;
 
             background-size: cover !important;
             color: white;
@@ -69,10 +68,9 @@
             background-color: #ffffff;
             border-radius: 0;
             z-index: 1010;
-            box-shadow:
-                0 5px 10px -6px rgba(0, 0, 0, 0.42),
-                0 3px 10px 0px rgba(0, 0, 0, 0.12),
-                0 4px 5px -3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.42),
+            0 3px 10px 0px rgba(0, 0, 0, 0.12),
+            0 4px 5px -3px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar .btn-sidebar {
@@ -193,17 +191,40 @@
             padding-left: 24px;
             margin-bottom: 16px;
         }
+
+        .dexdata-move-colsep {
+            background-color: black;
+            width: 5px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .dexdata-move-list {
+            border: 1px solid black;
+            width: auto;
+            text-align: center;
+        }
+
+        .dexdata-move-desc {
+            border: 1px solid black;
+            width: 500px;
+            text-align: center;
+        }
+
+        .dexdata-move-row {
+            width: 1100px;
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-danger navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="javascript:onClickMenu()"><i class="material-icons">menu</i> PTU Player Tools</a>
-            </div>
+<nav class="navbar navbar-danger navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:onClickMenu()"><i class="material-icons">menu</i> PTU Player Tools</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <!--    <div class="container">-->
 <!--<!--        <ul class="nav nav-tabs">-->-->
@@ -218,326 +239,392 @@
 <!--        </p>-->
 <!--    </div>-->
 
-    <!-- Initial View (Join & Select) -->
-    <div class="container content-init">
-        <div class="well col-sm-4 col-sm-offset-4" id="init-connect">
-            <h1>Enter GM ID</h1>
-            <input type="text" class="form-control" id="gm-id" placeholder="GM ID" />
-            <button class="btn btn-danger btn-raised" onclick="onClickConnect();">Connect</button>
-        </div>
-        <div class="well col-sm-4 col-sm-offset-4" id="init-select" style="display: none;">
-            <h1>Select Pokémon</h1>
-            <select id="pokemonId"></select>
-            <button class="btn btn-danger btn-raised" onclick="onClickLoadFromSelected();">Select</button>
-        </div>
+<!-- Initial View (Join & Select) -->
+<div class="container content-init">
+    <div class="well col-sm-4 col-sm-offset-4" id="init-connect">
+        <h1>Enter GM ID</h1>
+        <input type="text" class="form-control" id="gm-id" placeholder="GM ID"/>
+        <button class="btn btn-danger btn-raised" onclick="onClickConnect();">Connect</button>
     </div>
-
-    <header class="container">
-
-    </header>
-
-    <!-- Sidebar Menu -->
-    <div class="sidebar well col-lg-3 col-md-4 col-sm-6 col-xs-11 hidden-xs hidden-sm">
-        <div class="content-header">
-            <div class="row">
-                <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image" />
-                <h2 class="name"></h2>
-            </div>
-
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger bar-hp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                </div>
-            </div>
-
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(1)">Moves</button>
-
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(2)">Info</button>
-
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(3)">Advanced</button>
-
-            <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle</button>
-        </div>
+    <div class="well col-sm-4 col-sm-offset-4" id="init-select" style="display: none;">
+        <h1>Select Pokémon</h1>
+        <select id="pokemonId"></select>
+        <button class="btn btn-danger btn-raised" onclick="onClickLoadFromSelected();">Select</button>
     </div>
+</div>
 
-    <!-- Main View (Battler) -->
-    <div class="container-fluid content-main" style="display: none;">
-        <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab1">
-            <div class="new-form">
-                <h2>New Pokemon</h2>
-                <textarea class="form-control" id="input_mon1"></textarea>
-                <span class="btn-group-import">
+<header class="container">
+
+</header>
+
+<!-- Sidebar Menu -->
+<div class="sidebar well col-lg-3 col-md-4 col-sm-6 col-xs-11 hidden-xs hidden-sm">
+    <div class="content-header">
+        <div class="row">
+            <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image"/>
+            <h2 class="name"></h2>
+        </div>
+
+        <div class="row">
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger bar-hp" role="progressbar" aria-valuenow="100"
+                     aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100"
+                     aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(1)">Moves</button>
+
+        <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(2)">Info</button>
+
+        <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(3)">Advanced</button>
+
+        <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle
+        </button>
+    </div>
+</div>
+
+<!-- Main View (Battler) -->
+<div class="container-fluid content-main" style="display: none;">
+    <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab1">
+        <div class="new-form">
+            <h2>New Pokemon</h2>
+            <textarea class="form-control" id="input_mon1"></textarea>
+            <span class="btn-group-import">
                     <button onclick="onClickFromGenerator(1);">From Generated</button>
                     <button onclick="onClickFromSheet(1);">From Sheet</button>
                 </span>
-                <button class="btn-add-move" onclick="onClickLoadMoves(1);" style="display: none">Add Moves</button>
-                <br/>
-                <label for="pokemonId">From Box by Pokemon ID</label>
-                <input type="text" id="pokemonId" onsubmit="onClickLoadFromBox()" />
-                <button onclick="onClickLoadFromBox();">Load</button>
-            </div>
-            <div class="moves">
-                <a class="btn btn-raised btn-move btn-move-1">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-2" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-3" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-4" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-5" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-6" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                            <span class="label label-warning label-type"></span>
-                        </span>
-                    </div>
-                    <div class="btn-move-footer">
-                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                            <i class="material-icons">info</i>
-                        </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-            </div>
+            <button class="btn-add-move" onclick="onClickLoadMoves(1);" style="display: none">Add Moves</button>
+            <br/>
+            <label for="pokemonId">From Box by Pokemon ID</label>
+            <input type="text" id="pokemonId" onsubmit="onClickLoadFromBox()"/>
+            <button onclick="onClickLoadFromBox();">Load</button>
         </div>
-        <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab2" style="display: none;">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" id="pokemonStats">
-                        <h4>Speed: <span id="speed">0</span></h4>
-                    </div>
+        <div class="moves">
+            <a class="btn btn-raised btn-move btn-move-1">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" id="pokedexData_Basic">
-                        <h3><b>Pokemon Information</b></h3>
-                        <h4><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></h4>
-                        <h4><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></h4>
-                        <h4><b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span> <span
-                                    id="DexData_Basic_TypeSep">&</span> <span id="DexData_Basic_Type2">{Type 2}</span>
-                        </h4>
-                        <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
-                        <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
-                    </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card" id="pokedexData_SBS">
-                        <h3><b>Species Base Stats</b></h3>
-                        <h4><b>HP:</b> <span id="DexData_Stats_HP">{HP}</span></h4>
-                        <h4><b>Attack:</b> <span id="DexData_Stats_Attack">{Attack}</span></h4>
-                        <h4><b>Defense:</b> <span id="DexData_Stats_Defense">{Defense}</span></h4>
-                        <h4><b>Sp. Attack:</b> <span id="DexData_Stats_SpAttack">{Sp. Attack}</span></h4>
-                        <h4><b>Sp. Defense:</b> <span id="DexData_Stats_SpDefense">{Sp. Defense}</span></h4>
-                        <h4><b>Speed:</b> <span id="DexData_Stats_Speed">{Speed}</span></h4>
-                    </div>
+            </a>
+            <a class="btn btn-raised btn-move btn-move-2" style="display: none;">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card" id="pokedexData_Breeding">
-                        <h3><b>Breeding Information</b></h3>
-                        <h4><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span
-                                        id="DexData_Breed_Male">{Value}</span>% Male</span>, <span
-                                    style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)
-                        </h4>
-                        <h4><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></h4>
-                        <h4><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></h4>
-                    </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <h3><b>Levelup Move List</b></h3>
-                        <h4><b>Not Complete</b></h4>
-                    </div>
+            </a>
+            <a class="btn btn-raised btn-move btn-move-3" style="display: none;">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <h3><b>Tutor Move List</b></h3>
-                        <h4><b>Not Complete</b></h4>
-                    </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <h3><b>TM/HM Move List</b></h3>
-                        <h4><b>Not Complete</b></h4>
-                    </div>
+            </a>
+            <a class="btn btn-raised btn-move btn-move-4" style="display: none;">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
+                </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
+                </div>
+            </a>
+            <a class="btn btn-raised btn-move btn-move-5" style="display: none;">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
+                </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
+                </div>
+            </a>
+            <a class="btn btn-raised btn-move btn-move-6" style="display: none;">
+                <div>
+                    <h4 class="move-name"></h4>
+                    <span class="pull-right">
+                            <span class="label label-warning label-type"></span>
+                        </span>
+                </div>
+                <div class="btn-move-footer">
+                        <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
+                            <i class="material-icons">info</i>
+                        </span>
+                    <span class="move-freq"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab2" style="display: none;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" id="pokemonStats">
+                    <h4>Speed: <span id="speed">0</span></h4>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab3" style="display: none;">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" id="stages">
-                        <h4>Modifiers</h4>
-                        <label for="stage-atk">Attack Stage</label>
-                        <input type="number" id="stage-atk" value="0" data-target="stage_atk" /><br/>
-                        <label for="stage-def">Defense Stage</label>
-                        <input type="number" id="stage-def" value="0" data-target="stage_def" /><br/>
-                        <label for="stage-spatk">Special Atk Stage</label>
-                        <input type="number" id="stage-spatk" value="0" data-target="stage_spatk" /><br/>
-                        <label for="stage-spdef">Special Def Stage</label>
-                        <input type="number" id="stage-spdef" value="0" data-target="stage_spdef" /><br/>
-                        <label for="stage-speed">Speed Stage</label>
-                        <input type="number" id="stage-speed" value="0" data-target="stage_speed" /><br/>
-                        <label for="stage-acc">Accuracy Bonus</label>
-                        <input type="number" id="stage-acc" value="0" data-target="stage_acc" /><br/>
-                        <label for="stage-eva">Evasion Bonus</label>
-                        <input type="number" id="stage-eva" value="0" data-target="stage_eva" />
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" id="pokedexData_Basic">
+                    <h3><b>Pokemon Information</b></h3>
+                    <h4><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></h4>
+                    <h4><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></h4>
+                    <h4><b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span> <span
+                                id="DexData_Basic_TypeSep">&</span> <span id="DexData_Basic_Type2">{Type 2}</span>
+                    </h4>
+                    <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
+                    <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" id="pokedexData_SBS">
+                    <h3><b>Species Base Stats</b></h3>
+                    <h4><b>HP:</b> <span id="DexData_Stats_HP">{HP}</span></h4>
+                    <h4><b>Attack:</b> <span id="DexData_Stats_Attack">{Attack}</span></h4>
+                    <h4><b>Defense:</b> <span id="DexData_Stats_Defense">{Defense}</span></h4>
+                    <h4><b>Sp. Attack:</b> <span id="DexData_Stats_SpAttack">{Sp. Attack}</span></h4>
+                    <h4><b>Sp. Defense:</b> <span id="DexData_Stats_SpDefense">{Sp. Defense}</span></h4>
+                    <h4><b>Speed:</b> <span id="DexData_Stats_Speed">{Speed}</span></h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" id="pokedexData_Breeding">
+                    <h3><b>Breeding Information</b></h3>
+                    <h4><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span id="DexData_Breed_Male">{Value}</span>% Male</span>,
+                        <span style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)</h4>
+                    <h4><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></h4>
+                    <h4><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></h4>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="card dexdata-move-row">
+                <h3><b>Level UP Move List</b></h3>
+                <table>
+                    <tr>
+                        <th class="dexdata-move-list">Move Name</th>
+                        <th class="dexdata-move-list">Description</th>
+                        <th class="dexdata-move-list">Move Type</th>
+                        <th class="dexdata-move-list">Move Class</th>
+                        <th class="dexdata-move-list">Move DB</th>
+                        <th class="dexdata-move-list">Move AC</th>
+                        <th class="dexdata-move-colsep"></th>
+                        <th class="dexdata-move-list">Level Learn</th>
+                    </tr>
+                    <span id="DexData_Moves_LVup"></span>
+                    <tr>
+                        <td class="dexdata-move-list">Sample Move Name</td>
+                        <td class="dexdata-move-desc">Sample Move Description</td>
+                        <td class="dexdata-move-list">Normal</td>
+                        <td class="dexdata-move-list">Status</td>
+                        <td class="dexdata-move-list">28</td>
+                        <td class="dexdata-move-list">10</td>
+                        <td class="dexdata-move-colsep"></td>
+                        <td class="dexdata-move-list">25</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="card dexdata-move-row">
+                <h3><b>Tutor Move List</b></h3>
+                <table>
+                    <tr>
+                        <th class="dexdata-move-list">Move Name</th>
+                        <th class="dexdata-move-list">Description</th>
+                        <th class="dexdata-move-list">Move Type</th>
+                        <th class="dexdata-move-list">Move Class</th>
+                        <th class="dexdata-move-list">Move DB</th>
+                        <th class="dexdata-move-list">Move AC</th>
+                    </tr>
+                    <span id="DexData_Moves_Tutor"></span>
+                    <tr>
+                        <td class="dexdata-move-list">Sample Move Name</td>
+                        <td class="dexdata-move-desc">Sample Move Description</td>
+                        <td class="dexdata-move-list">Normal</td>
+                        <td class="dexdata-move-list">Status</td>
+                        <td class="dexdata-move-list">28</td>
+                        <td class="dexdata-move-list">10</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="card dexdata-move-row">
+                <h3><b>TM/HM Move List</b></h3>
+                <table>
+                    <tr>
+                        <th class="dexdata-move-list">Move Name</th>
+                        <th class="dexdata-move-list">Description</th>
+                        <th class="dexdata-move-list">Move Type</th>
+                        <th class="dexdata-move-list">Move Class</th>
+                        <th class="dexdata-move-list">Move DB</th>
+                        <th class="dexdata-move-list">Move AC</th>
+                        <th class="dexdata-move-colsep"></th>
+                        <th class="dexdata-move-list">TM ID</th>
+                    </tr>
+                    <span id="DexData_Moves_TM"></span>
+                    <tr>
+                        <td class="dexdata-move-list">Sample Move Name</td>
+                        <td class="dexdata-move-desc">Sample Move Description</td>
+                        <td class="dexdata-move-list">Normal</td>
+                        <td class="dexdata-move-list">Status</td>
+                        <td class="dexdata-move-list">28</td>
+                        <td class="dexdata-move-list">10</td>
+                        <td class="dexdata-move-colsep"></td>
+                        <td class="dexdata-move-list">25</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab3" style="display: none;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" id="stages">
+                    <h4>Modifiers</h4>
+                    <label for="stage-atk">Attack Stage</label>
+                    <input type="number" id="stage-atk" value="0" data-target="stage_atk"/><br/>
+                    <label for="stage-def">Defense Stage</label>
+                    <input type="number" id="stage-def" value="0" data-target="stage_def"/><br/>
+                    <label for="stage-spatk">Special Atk Stage</label>
+                    <input type="number" id="stage-spatk" value="0" data-target="stage_spatk"/><br/>
+                    <label for="stage-spdef">Special Def Stage</label>
+                    <input type="number" id="stage-spdef" value="0" data-target="stage_spdef"/><br/>
+                    <label for="stage-speed">Speed Stage</label>
+                    <input type="number" id="stage-speed" value="0" data-target="stage_speed"/><br/>
+                    <label for="stage-acc">Accuracy Bonus</label>
+                    <input type="number" id="stage-acc" value="0" data-target="stage_acc"/><br/>
+                    <label for="stage-eva">Evasion Bonus</label>
+                    <input type="number" id="stage-eva" value="0" data-target="stage_eva"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h4>Afflictions</h4>
+                    <div id="afflictions"></div>
+                    <div class="form-group label-floating">
+                        <button class="btn btn-just-icon btn-round btn-danger pull-right" id="btn-afflict">
+                            <i class="material-icons">add</i>
+                        </button>
+                        <label class="control-label" for="input-afflict">Add an Affliction</label>
+                        <input type="text" class="form-control has-btn-sm" id="input-afflict"
+                               onclick="alert('feature is work in progress')">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <h4>Afflictions</h4>
-                        <div id="afflictions"></div>
-                        <div class="form-group label-floating">
-                            <button class="btn btn-just-icon btn-round btn-danger pull-right" id="btn-afflict">
-                                <i class="material-icons">add</i>
-                            </button>
-                            <label class="control-label" for="input-afflict">Add an Affliction</label>
-                            <input type="text" class="form-control has-btn-sm" id="input-afflict" onclick="alert('feature is work in progress')">
-                        </div>
-                    </div>
 
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <h4>Damage/Heal</h4>
-                        <div>
-                            <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
-                            <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
-                            <input type="number" id="do-dmg"/>
-                            <select id="dmg-type" title="Type"></select>
-                            <div class="togglebutton">
-                                <label>
-                                    <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
-                                </label>
-                            </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h4>Damage/Heal</h4>
+                    <div>
+                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
+                        <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
+                        <input type="number" id="do-dmg"/>
+                        <select id="dmg-type" title="Type"></select>
+                        <div class="togglebutton">
+                            <label>
+                                <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
+                            </label>
                         </div>
-                        <br/>
-                        <div>
-                            <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
-                            <label class="text-info" for="do-heal">Heal</label><br/>
-                            <input type="number" id="do-heal"/>
-                        </div>
+                    </div>
+                    <br/>
+                    <div>
+                        <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
+                        <label class="text-info" for="do-heal">Heal</label><br/>
+                        <input type="number" id="do-heal"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal dialog for picking target -->
-    <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-move">
-                <h4 class="move-name"></h4>
-                <p class="move-desc"></p>
+<!-- Modal dialog for picking target -->
+<div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-move">
+            <h4 class="move-name"></h4>
+            <p class="move-desc"></p>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-danger" id="impMonLabel">Select Target</h3>
             </div>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title text-danger" id="impMonLabel">Select Target</h3>
-                </div>
 
-                <div class="modal-body" id="select-target-body">
-                    <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
-                </div>
+            <div class="modal-body" id="select-target-body">
+                <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- JavaScript Imports -->
-    <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-    <script>
-        //Remove JQuery UI conflicts with Bootstrap
-        $.widget.bridge('uibutton', $.ui.button);
-        $.widget.bridge('uitooltip', $.ui.tooltip);
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="dist/snackbar.min.js"></script>
-    <script src="js/material.min.js"></script>
+<!-- JavaScript Imports -->
+<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet"
+      type="text/css"/>
+<script>
+    //Remove JQuery UI conflicts with Bootstrap
+    $.widget.bridge('uibutton', $.ui.button);
+    $.widget.bridge('uitooltip', $.ui.tooltip);
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="dist/snackbar.min.js"></script>
+<script src="js/material.min.js"></script>
 
-    <script src="js/script.js"></script>
-    <script src="js/pokemon.js"></script>
-    <?php if (key_exists("host", $_GET)) : ?>
+<script src="js/script.js"></script>
+<script src="js/pokemon.js"></script>
+<?php if (key_exists("host", $_GET)) : ?>
     <script>
         $(function () {
             $("#gm-id").val('<?php echo $_GET['host']?>');
             onClickConnect();
         });
     </script>
-    <?php endif; ?>
+<?php endif; ?>
 </body>
 </html>

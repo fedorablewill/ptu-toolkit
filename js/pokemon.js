@@ -192,7 +192,25 @@ function displayInit() {
             EGString = EGString + dex.BreedingData.EggGroups[i];
         }
         $("#DexData_Breed_EggGroups").html(EGString);
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Move Information
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Levelup Moves
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+
+        /*
+         <tr>
+         <td class="dexdata-move-list"></td>
+         <td class="dexdata-move-desc"></td>
+         <td class="dexdata-move-list"></td>
+         <td class="dexdata-move-list"></td>
+         <td class="dexdata-move-list"></td>
+         <td class="dexdata-move-list"></td>
+         <td class="dexdata-move-colsep"></td>
+         <td class="dexdata-move-list"></td>
+         </tr>
+         */
     });
 
     //Speed Stat is set here
