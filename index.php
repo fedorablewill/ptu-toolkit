@@ -212,7 +212,7 @@
         }
 
         .dexdata-move-row {
-            width: 1100px;
+            color: #000000;
         }
     </style>
 </head>
@@ -434,88 +434,133 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="card dexdata-move-row">
-                <h3><b>Level UP Move List</b></h3>
-                <table>
-                    <tr>
-                        <th class="dexdata-move-list">Move Name</th>
-                        <th class="dexdata-move-list">Description</th>
-                        <th class="dexdata-move-list">Move Type</th>
-                        <th class="dexdata-move-list">Move Class</th>
-                        <th class="dexdata-move-list">Move DB</th>
-                        <th class="dexdata-move-list">Move AC</th>
-                        <th class="dexdata-move-colsep"></th>
-                        <th class="dexdata-move-list">Level Learn</th>
-                    </tr>
-                    <span id="DexData_Moves_LVup"></span>
-                    <tr>
-                        <td class="dexdata-move-list">Sample Move Name</td>
-                        <td class="dexdata-move-desc">Sample Move Description</td>
-                        <td class="dexdata-move-list">Normal</td>
-                        <td class="dexdata-move-list">Status</td>
-                        <td class="dexdata-move-list">28</td>
-                        <td class="dexdata-move-list">10</td>
-                        <td class="dexdata-move-colsep"></td>
-                        <td class="dexdata-move-list">25</td>
-                    </tr>
-                </table>
+        <div class="row dexdata-move-row">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <!-- Moves Learnt From Level Up Go Here-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                           aria-expanded="true" aria-controls="collapseOne">
+                            <h4 class="panel-title">
+                                Level Up Moves
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <table class="table" id="DexData_Moves_LVup">
+                                <tr>
+                                    <th style="width: auto">Move Name</th>
+                                    <th>Description</th>
+                                    <th>Move Type</th>
+                                    <th>Move Class</th>
+                                    <th>Move DB</th>
+                                    <th>Move AC</th>
+                                    <th>Level Learn</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Moves Learnt From Tutor Go Here -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Tutor Moves
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <table class="table" id="DexData_Moves_Tutor">
+                                <tr>
+                                    <th>Move Name</th>
+                                    <th>Description</th>
+                                    <th>Move Type</th>
+                                    <th>Move Class</th>
+                                    <th>Move DB</th>
+                                    <th>Move AC</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Moves Learnt From Tutor Go Here -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Egg Moves
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <table class="table" id="DexData_Moves_Egg">
+                                <tr>
+                                    <th>Move Name</th>
+                                    <th>Description</th>
+                                    <th>Move Type</th>
+                                    <th>Move Class</th>
+                                    <th>Move DB</th>
+                                    <th>Move AC</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Moves Learnt From Tutor Go Here -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                TM/HM Moves
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <table class="table" id="DexData_Moves_TM">
+                                <tr>
+                                    <th>Move Name</th>
+                                    <th>Description</th>
+                                    <th>Move Type</th>
+                                    <th>Move Class</th>
+                                    <th>Move DB</th>
+                                    <th>Move AC</th>
+                                    <th>TM/HM ID</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pokemon Evolutions and Forms Go Here -->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFive">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Evolutions and Forms
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingFive">
+                        <div class="panel-body">
+                            This Feature is in development... Try Again Latter :p
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="card dexdata-move-row">
-                <h3><b>Tutor Move List</b></h3>
-                <table>
-                    <tr>
-                        <th class="dexdata-move-list">Move Name</th>
-                        <th class="dexdata-move-list">Description</th>
-                        <th class="dexdata-move-list">Move Type</th>
-                        <th class="dexdata-move-list">Move Class</th>
-                        <th class="dexdata-move-list">Move DB</th>
-                        <th class="dexdata-move-list">Move AC</th>
-                    </tr>
-                    <span id="DexData_Moves_Tutor"></span>
-                    <tr>
-                        <td class="dexdata-move-list">Sample Move Name</td>
-                        <td class="dexdata-move-desc">Sample Move Description</td>
-                        <td class="dexdata-move-list">Normal</td>
-                        <td class="dexdata-move-list">Status</td>
-                        <td class="dexdata-move-list">28</td>
-                        <td class="dexdata-move-list">10</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="card dexdata-move-row">
-                <h3><b>TM/HM Move List</b></h3>
-                <table>
-                    <tr>
-                        <th class="dexdata-move-list">Move Name</th>
-                        <th class="dexdata-move-list">Description</th>
-                        <th class="dexdata-move-list">Move Type</th>
-                        <th class="dexdata-move-list">Move Class</th>
-                        <th class="dexdata-move-list">Move DB</th>
-                        <th class="dexdata-move-list">Move AC</th>
-                        <th class="dexdata-move-colsep"></th>
-                        <th class="dexdata-move-list">TM ID</th>
-                    </tr>
-                    <span id="DexData_Moves_TM"></span>
-                    <tr>
-                        <td class="dexdata-move-list">Sample Move Name</td>
-                        <td class="dexdata-move-desc">Sample Move Description</td>
-                        <td class="dexdata-move-list">Normal</td>
-                        <td class="dexdata-move-list">Status</td>
-                        <td class="dexdata-move-list">28</td>
-                        <td class="dexdata-move-list">10</td>
-                        <td class="dexdata-move-colsep"></td>
-                        <td class="dexdata-move-list">25</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
     </div>
     <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab3" style="display: none;">
         <div class="row">

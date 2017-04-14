@@ -82,11 +82,13 @@ $(function () {
         }
     });
 
-    $("#input-afflict").autocomplete({source:[
-        "Burned", "Frozen", "Paralysis", "Poisoned", "Bad Sleep", "Confused",
-        "Cursed", "Disabled", "Rage", "Flinch", "Infatuation", "Sleep", "Suppressed", "Temporary Hit Points",
-        "Fainted", "Blindness", "Total Blindness", "Slowed", "Stuck", "Trapped", "Tripped", "Vulnerable"
-    ]});
+    $("#input-afflict").autocomplete({
+        source: [
+            "Burned", "Frozen", "Paralysis", "Poisoned", "Bad Sleep", "Confused",
+            "Cursed", "Disabled", "Rage", "Flinch", "Infatuation", "Sleep", "Suppressed", "Temporary Hit Points",
+            "Fainted", "Blindness", "Total Blindness", "Slowed", "Stuck", "Trapped", "Tripped", "Vulnerable"
+        ]
+    });
 
     $("#btn-afflict").click(function () {
         var a = $("#input-afflict").val();
@@ -115,7 +117,7 @@ function displayInit() {
     var display = $("#tab1");
 
     $(".content-header").find(".name").html(pokemon_data["name"] + ' <small>Level ' + pokemon_data['level'] + '</small>');
-    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
+    $(".pokemon-image").attr("src", "img/pokemon/" + pokemon_data["dex"] + ".gif");
 
     //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
@@ -198,19 +200,34 @@ function displayInit() {
         // Levelup Moves
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-
-        /*
-         <tr>
-         <td class="dexdata-move-list"></td>
-         <td class="dexdata-move-desc"></td>
-         <td class="dexdata-move-list"></td>
-         <td class="dexdata-move-list"></td>
-         <td class="dexdata-move-list"></td>
-         <td class="dexdata-move-list"></td>
-         <td class="dexdata-move-colsep"></td>
-         <td class="dexdata-move-list"></td>
-         </tr>
-         */
+        for (var i = 0; i < dex.LevelUpMoves.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/moves/" + dex.LevelUpMoves[i].Name, function (Moves_dd) {
+                    $("#DexData_Moves_LVup").append("<tr id='DexData_Move_LVU_" + i + "'> <td id='DexData_Move_LVU_" + i + "_Name'>" + dex.LevelUpMoves[i].Name + "</td> <td id='DexData_Move_LVU_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_LVU_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_LVU_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_LVU_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_LVU_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_LVU_" + i + "_LV'></td>" + dex.LevelUpMoves[i].LevelLearned + " </tr>");
+                });
+            })(i);
+        }
+        for (var i = 0; i < dex.TutorMoves.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/moves/" + dex.TutorMoves[i].Name, function (Moves_dd) {
+                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Tutor_LVU_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> </tr>");
+                });
+            })(i);
+        }
+        for (var i = 0; i < dex.EggMoves.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/moves/" + dex.EggMoves[i].Name, function (Moves_dd) {
+                    $("#DexData_Moves_Egg").append("<tr id='DexData_Move_Egg_" + i + "'> <td id='DexData_Move_Egg_" + i + "_Name'>" + dex.EggMoves[i].Name + "</td> <td id='DexData_Move_Egg_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Egg_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Egg_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Egg_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Egg_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Egg_" + i + "_LV'></td>" + dex.EggMoves[i].LevelLearned + " </tr>");
+                });
+            })(i);
+        }
+        for (var i = 0; i < dex.TmHmMoves.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/moves/" + dex.TmHmMoves[i].Name, function (Moves_dd) {
+                    $("#DexData_Moves_TM").append("<tr id='DexData_Move_TM_" + i + "'> <td id='DexData_Move_TM_" + i + "_Name'>" + dex.TmHmMoves[i].Name + "</td> <td id='DexData_Move_TM_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_TM_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_TM_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_TM_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_TM_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_TM_" + i + "_LV'></td>" + dex.TmHmMoves[i].LevelLearned + " </tr>");
+                });
+            })(i);
+        }
     });
 
     //Speed Stat is set here
@@ -273,7 +290,7 @@ function updateTargetList() {
     var html = '<button class="btn btn-danger btn-lg" data-target="other">Other Target</button>';
 
     $.each(battle_data, function (id, name) {
-        html += '<button class="btn btn-danger btn-lg" data-target="'+id+'">'+name+'</button>';
+        html += '<button class="btn btn-danger btn-lg" data-target="' + id + '">' + name + '</button>';
     });
 
     $("#select-target-body").html(html);
@@ -298,27 +315,27 @@ function updateTargetList() {
  */
 function updateAfflictions() {
     // Table start
-    var html = '<table class="table">'+
-        '<thead>'+
-            '<tr>'+
-                '<th>Name</th>'+
-                '<th class="text-right">Actions</th>'+
-            '</tr>'+
-        '</thead>'+
+    var html = '<table class="table">' +
+        '<thead>' +
+        '<tr>' +
+        '<th>Name</th>' +
+        '<th class="text-right">Actions</th>' +
+        '</tr>' +
+        '</thead>' +
         '<tbody>';
 
     // Add elements
     $.each(afflictions, function (key, affliction) {
         html += '<tr>' +
-                '<td class="center-vertical">'+affliction+'</td>' +
-                '<td class="td-actions text-right" data-target="affliction" data-value="'+affliction+'">' +
-                    '<button type="button" rel="tooltip" title="Trigger Affliction" class="btn btn-info btn-simple btn-xs btn-trigger">' +
-                        '<i class="material-icons">play_arrow</i>' +
-                    '</button>' +
-                    '<button type="button" rel="tooltip" title="Remove Affliction" class="btn btn-danger btn-simple btn-xs btn-delete">' +
-                        '<i class="material-icons">close</i>' +
-                    '</button>' +
-                '</td>' +
+            '<td class="center-vertical">' + affliction + '</td>' +
+            '<td class="td-actions text-right" data-target="affliction" data-value="' + affliction + '">' +
+            '<button type="button" rel="tooltip" title="Trigger Affliction" class="btn btn-info btn-simple btn-xs btn-trigger">' +
+            '<i class="material-icons">play_arrow</i>' +
+            '</button>' +
+            '<button type="button" rel="tooltip" title="Remove Affliction" class="btn btn-danger btn-simple btn-xs btn-delete">' +
+            '<i class="material-icons">close</i>' +
+            '</button>' +
+            '</td>' +
             '</tr>';
     });
 
@@ -366,7 +383,7 @@ function onClickConnect() {
         metadata: {message: 'connect to host'}
     });
 
-    c.on('open', function() {
+    c.on('open', function () {
         c.on('data', function (data) {
             var json = JSON.parse(data);
 
@@ -383,7 +400,7 @@ function onClickConnect() {
             else if (json.type == "pokemon_list") {
                 var html = "";
                 $.each(json.pokemon, function (id, pmon) {
-                    html += '<option value="'+id+'">'+pmon['name']+'</option>';
+                    html += '<option value="' + id + '">' + pmon['name'] + '</option>';
                 });
                 $("#pokemonId").html(html);
 
@@ -439,7 +456,7 @@ function onClickConnect() {
             /*
              Snackbar Alert Received
              */
-            else if (json.type == "alert"){
+            else if (json.type == "alert") {
                 doToast(message["content"]);
             }
 
@@ -449,7 +466,9 @@ function onClickConnect() {
             "type": "pokemon_list"
         }));
     });
-    c.on('error', function(err) { alert(err); });
+    c.on('error', function (err) {
+        alert(err);
+    });
 }
 
 function onClickLoadFromSelected() {
@@ -481,7 +500,7 @@ function addPokemonToBattle() {
 }
 
 function fetchMoves() {
-    $.getJSON("/api/v1/moves/?names="+encodeURIComponent(JSON.stringify(pokemon_data["moves"])), function (json) {
+    $.getJSON("/api/v1/moves/?names=" + encodeURIComponent(JSON.stringify(pokemon_data["moves"])), function (json) {
         var i = 0;
         $.each(json, function (name, move) {
             if (name != "") {
@@ -503,7 +522,7 @@ function fetchMoves() {
 
 // MANAGEMENT FUNCTIONS
 
-function setStage (field, attr) {
+function setStage(field, attr) {
     var stage = parseInt(field.val());
 
     var mon = $("#tab1");
@@ -572,7 +591,7 @@ function damage(dmg, moveType, isSpecial) {
 
     var effect1 = 1, effect2 = 1;
 
-    $.getJSON("/api/v1/types", function(json) {
+    $.getJSON("/api/v1/types", function (json) {
         effect1 = json[moveType][monType1];
 
         if (monType2 != null)
@@ -597,12 +616,11 @@ function damage(dmg, moveType, isSpecial) {
     });
 }
 
-$.getJSON("/api/v1/types", function(json) {
+$.getJSON("/api/v1/types", function (json) {
     $.each(json, function (k, v) {
         document.getElementById("dmg-type").innerHTML += "<option>" + k + "</option>";
     })
 });
-
 
 
 // VIEW MANAGEMENT
@@ -613,7 +631,7 @@ $.getJSON("/api/v1/types", function(json) {
 function onClickMenu() {
     var elem = $(".sidebar");
 
-    if (elem.css("display").substring(0,4) == "none")
+    if (elem.css("display").substring(0, 4) == "none")
         elem.css("display", "block", "important");
     else
         elem.css("display", "none");
@@ -626,7 +644,6 @@ function onClickTab(tab) {
     if (tab == 3)
         updateAfflictions();
 }
-
 
 
 // UTILITY FUNCTIONS
