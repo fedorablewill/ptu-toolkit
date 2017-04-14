@@ -2,12 +2,13 @@
  * Scripts for Player Client
  * @author Will Stephenson
  */
-window.alert("Notice: We're currently redoing the layout of this page. It's probably usable?");
 /**
  * JSON data of loaded Pokemon
  * @type JSON
  */
 var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [];
+
+var currentMove = null;
 
 
 /**
@@ -17,17 +18,14 @@ $(function () {
 
     // ON MOVE CLICKED
     $(".btn-move").click(function () {
-        var move_name = $(this).find(".move-name").html();
-        var target = $("#target").val();
-        
-        var json = {
-            "type": "battle_move",
-            "dealer": $("#pokemonId").val(),
-            "target": target,
-            "move": move_name
-        };
-        
-        sendMessage(host_id, JSON.stringify(json));
+        currentMove = $(this).find(".move-name").html();
+
+        $(".modal-move .move-desc").html($(this).find(".move-desc").attr("data-content"));
+        $(".modal-move .move-name").html(currentMove).css("color", $(this).find(".move-name").css("color"));
+
+        updateTargetList();
+
+        $('#modalTarget').modal('show');
     });
 
     $("#btn-do-dmg").click(function () {
@@ -115,8 +113,9 @@ $(function () {
 function displayInit() {
     var display = $("#tab1");
 
-    $(".content-header").find(".name").html(pokemon_data["name"] + ' <small>Level ' + pokemon_data['level'] + '</small>');
-    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
+    $(".name").html(pokemon_data["name"]);
+    $(".level").html('Level ' + pokemon_data['level']);
+    //$(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
 
     //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
@@ -234,13 +233,27 @@ function updateStatus() {
 }
 
 function updateTargetList() {
-    var html = '<option value="other">Other Target</option>';
+    var html = '<button class="btn btn-danger btn-lg" data-target="other">Other Target</button>';
 
     $.each(battle_data, function (id, name) {
-        html += '<option value="'+id+'">'+name+'</option>';
+        html += '<button class="btn btn-danger btn-lg" data-target="'+id+'">'+name+'</button>';
     });
 
-    $("#target").html(html);
+    $("#select-target-body").html(html);
+
+    $("#select-target-body .btn").click(function () {
+
+        sendMessage(host_id, JSON.stringify({
+            "type": "battle_move",
+            "dealer": $("#pokemonId").val(),
+            "target": $(this).attr("data-target"),
+            "move": currentMove
+        }));
+
+        currentMove = null;
+
+        $('#modalTarget').modal('hide');
+    });
 }
 
 /**
@@ -569,13 +582,20 @@ function onClickMenu() {
         elem.css("display", "none");
 }
 
-function onClickTab(tab) {
+$("[data-toggle='tab']").click(function () {
+    var tab = $(this).attr("data-target");
+
+    // Change out tab content
     $(".tab").css("display", "none");
     $("#tab" + tab).css("display", "block");
 
+    // Change out button classes
+    $("[data-toggle='tab']:not(.btn-simple)").addClass("btn-simple", 1000);
+    $(this).removeClass("btn-simple", 1000);
+
     if (tab == 3)
         updateAfflictions();
-}
+});
 
 
 

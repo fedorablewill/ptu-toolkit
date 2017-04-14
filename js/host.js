@@ -204,7 +204,7 @@ function renderBattler() {
             html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
                 '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
                 '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                '<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
+                '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
                 '</div>' +
                 '</div>';
         });
