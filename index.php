@@ -367,7 +367,71 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab2" style="display: none;">
-            <h4>Speed: <span id="speed">0</span></h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card" id="pokemonStats">
+                        <h4>Speed: <span id="speed">0</span></h4>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card" id="pokedexData_Basic">
+                        <h3><b>Pokemon Information</b></h3>
+                        <h4><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></h4>
+                        <h4><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></h4>
+                        <h4><b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span> <span
+                                    id="DexData_Basic_TypeSep">&</span> <span id="DexData_Basic_Type2">{Type 2}</span>
+                        </h4>
+                        <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
+                        <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" id="pokedexData_SBS">
+                        <h3><b>Species Base Stats</b></h3>
+                        <h4><b>HP:</b> <span id="DexData_Stats_HP">{HP}</span></h4>
+                        <h4><b>Attack:</b> <span id="DexData_Stats_Attack">{Attack}</span></h4>
+                        <h4><b>Defense:</b> <span id="DexData_Stats_Defense">{Defense}</span></h4>
+                        <h4><b>Sp. Attack:</b> <span id="DexData_Stats_SpAttack">{Sp. Attack}</span></h4>
+                        <h4><b>Sp. Defense:</b> <span id="DexData_Stats_SpDefense">{Sp. Defense}</span></h4>
+                        <h4><b>Speed:</b> <span id="DexData_Stats_Speed">{Speed}</span></h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" id="pokedexData_Breeding">
+                        <h3><b>Breeding Information</b></h3>
+                        <h4><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span
+                                        id="DexData_Breed_Male">{Value}</span>% Male</span>, <span
+                                    style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)
+                        </h4>
+                        <h4><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></h4>
+                        <h4><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></h4>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3><b>Levelup Move List</b></h3>
+                        <h4><b>Not Complete</b></h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3><b>Tutor Move List</b></h3>
+                        <h4><b>Not Complete</b></h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3><b>TM/HM Move List</b></h3>
+                        <h4><b>Not Complete</b></h4>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab3" style="display: none;">
             <div class="row">

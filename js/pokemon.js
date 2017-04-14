@@ -119,6 +119,83 @@ function displayInit() {
 
     //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
+    //Pokedex Data is set here
+    $.getJSON("api/v1/pokemon/" + pokemon_data['dex'], function (dex) {
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Basic Pokemon information
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+        $("#DexData_Basic_ID").html(pokemon_data["dex"]);
+        $("#DexData_Basic_SpeciesName").html(dex.Species);
+
+        //Sets the Pokemons Type on the Dex Screen.
+        if (dex.Types.length == 1) {
+            $("#DexData_Basic_Type1").html(dex.Types[0]); //Gets the pokemons Type
+            $("#DexData_Basic_Type1").css("color", typeColor(dex.Types[0])); //Sets the Color of the Type
+            $("#DexData_Basic_Type2").html(""); //Hide this if there is only one Type
+            $("#DexData_Basic_TypeSep").html(""); //Hide this if there is only one Type
+        } else {
+            $("#DexData_Basic_Type1").html(dex.Types[0]); //Gets the pokemons 1st Type
+            $("#DexData_Basic_Type1").css("color", typeColor(dex.Types[0])); //Sets the Color of the pokemons 1st Type
+            $("#DexData_Basic_Type2").html(dex.Types[1]); //Gets the pokemons 2nd Type
+            $("#DexData_Basic_Type2").css("color", typeColor(dex.Types[1])); //Sets the Color of the pokemons 2nd Type
+        }
+
+        //Gets and Builds a string listing all the Diet Types (Seperated by a Comma)
+        var DietString = "";
+        for (var i = 0; i < dex.Environment.Diet.length; i++) {
+            if (i != 0) {
+                DietString = DietString + ", ";
+            }
+            DietString = DietString + dex.Environment.Diet[i];
+        }
+        //Gets and Builds a string listing all the Habitat Types (Seperated by a Comma)
+        var HabString = "";
+        for (var i = 0; i < dex.Environment.Habitats.length; i++) {
+            if (i != 0) {
+                HabString = HabString + ", ";
+            }
+            HabString = HabString + dex.Environment.Habitats[i];
+        }
+        //Applys the Habitats and Diet Data to the Dex Screen
+        $("#DexData_Basic_Diet").html(DietString);
+        $("#DexData_Basic_Habitats").html(HabString);
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Base Stat information
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        $("#DexData_Stats_HP").html(dex.BaseStats.HP);
+        $("#DexData_Stats_Attack").html(dex.BaseStats.Attack);
+        $("#DexData_Stats_Defense").html(dex.BaseStats.Defense);
+        $("#DexData_Stats_SpAttack").html(dex.BaseStats.SpecialAttack);
+        $("#DexData_Stats_SpDefense").html(dex.BaseStats.SpecialDefense);
+        $("#DexData_Stats_Speed").html(dex.BaseStats.Speed);
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Breeding information
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-
+        if (dex.BreedingData.HasGender) {
+            $("#DexData_Breed_Male").html(dex.BreedingData.MaleChance * 100);
+            $("#DexData_Breed_Female").html(dex.BreedingData.FemaleChance * 100);
+        } else {
+            $("#DexData_Breed_Male").html("0");
+            $("#DexData_Breed_Female").html("0");
+        }
+        $("#DexData_Breed_HatchRate").html(dex.BreedingData.HatchRate + " Days");
+
+        var EGString = "";
+        for (var i = 0; i < dex.BreedingData.EggGroups.length; i++) {
+            if (i != 0) {
+                EGString = EGString + ", ";
+            }
+            EGString = EGString + dex.BreedingData.EggGroups[i];
+        }
+        $("#DexData_Breed_EggGroups").html(EGString);
+
+    });
+
+    //Speed Stat is set here
     $("#speed").html(pokemon_data["speed"]);
 
     $.each(moves_data, function (i, move) {
@@ -134,65 +211,7 @@ function displayInit() {
         var dmgType = move["Class"];
 
         // Get color for type
-
-        var color = "#000";
-
-        switch (move["Type"]) {
-            case "Bug":
-                color = "rgb(158, 173, 30)";
-                break;
-            case "Dark":
-                color = "rgb(99, 78, 64)";
-                break;
-            case "Dragon":
-                color = "rgb(94, 33, 243)";
-                break;
-            case "Electric":
-                color = "rgb(244, 200, 26)";
-                break;
-            case "Fairy":
-                color = "rgb(223, 116, 223)";
-                break;
-            case "Fighting":
-                color = "rgb(179, 44, 37)";
-                break;
-            case "Fire":
-                color = "rgb(232, 118, 36)";
-                break;
-            case "Flying":
-                color = "rgb(156, 136, 218,)";
-                break;
-            case "Ghost":
-                color = "rgb(98, 77, 134)";
-                break;
-            case "Grass":
-                color = "rgb(112, 191, 72)";
-                break;
-            case "Ground":
-                color = "rgb(217, 178, 71)";
-                break;
-            case "Ice":
-                color = "rgb(130, 208, 208)";
-                break;
-            case "Normal":
-                color = "rgb(158, 158, 109)";
-                break;
-            case "Poison":
-                color = "rgb(149, 59, 149)";
-                break;
-            case "Psychic":
-                color = "rgb(247, 64, 119)";
-                break;
-            case "Rock":
-                color = "rgb(169, 147, 51)";
-                break;
-            case "Steel":
-                color = "rgb(166, 166, 196)";
-                break;
-            case "Water":
-                color = "rgb(82, 127, 238)";
-                break;
-        }
+        var color = typeColor(move["Type"]);
 
         // Get icon for frequency
 
@@ -674,4 +693,66 @@ function typeToNum(type) {
         case "water":
             return 18;
     }
+}
+
+function typeColor(type) {
+    var color = "#000";
+
+    switch (type) {
+        case "Bug":
+            color = "rgb(158, 173, 30)";
+            break;
+        case "Dark":
+            color = "rgb(99, 78, 64)";
+            break;
+        case "Dragon":
+            color = "rgb(94, 33, 243)";
+            break;
+        case "Electric":
+            color = "rgb(244, 200, 26)";
+            break;
+        case "Fairy":
+            color = "rgb(223, 116, 223)";
+            break;
+        case "Fighting":
+            color = "rgb(179, 44, 37)";
+            break;
+        case "Fire":
+            color = "rgb(232, 118, 36)";
+            break;
+        case "Flying":
+            color = "rgb(156, 136, 218,)";
+            break;
+        case "Ghost":
+            color = "rgb(98, 77, 134)";
+            break;
+        case "Grass":
+            color = "rgb(112, 191, 72)";
+            break;
+        case "Ground":
+            color = "rgb(217, 178, 71)";
+            break;
+        case "Ice":
+            color = "rgb(130, 208, 208)";
+            break;
+        case "Normal":
+            color = "rgb(158, 158, 109)";
+            break;
+        case "Poison":
+            color = "rgb(149, 59, 149)";
+            break;
+        case "Psychic":
+            color = "rgb(247, 64, 119)";
+            break;
+        case "Rock":
+            color = "rgb(169, 147, 51)";
+            break;
+        case "Steel":
+            color = "rgb(166, 166, 196)";
+            break;
+        case "Water":
+            color = "rgb(82, 127, 238)";
+            break;
+    }
+    return color;
 }
