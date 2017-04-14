@@ -114,8 +114,9 @@ $(function () {
 function displayInit() {
     var display = $("#tab1");
 
-    $(".content-header").find(".name").html(pokemon_data["name"] + ' <small>Level ' + pokemon_data['level'] + '</small>');
-    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
+    $(".name").html(pokemon_data["name"]);
+    $(".level").html('Level ' + pokemon_data['level']);
+    //$(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
 
     //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
@@ -582,13 +583,20 @@ function onClickMenu() {
         elem.css("display", "none");
 }
 
-function onClickTab(tab) {
+$("[data-toggle='tab']").click(function () {
+    var tab = $(this).attr("data-target");
+
+    // Change out tab content
     $(".tab").css("display", "none");
     $("#tab" + tab).css("display", "block");
 
+    // Change out button classes
+    $("[data-toggle='tab']:not(.btn-simple)").addClass("btn-simple", 1000);
+    $(this).removeClass("btn-simple", 1000);
+
     if (tab == 3)
         updateAfflictions();
-}
+});
 
 
 

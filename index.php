@@ -62,10 +62,7 @@
             left: 0;
             top: 0;
             bottom: 0;
-            padding-top: 100px;
-            padding-bottom: 20px;
-            padding-left: 25px;
-            padding-right: 25px;
+            padding: 0;
             background-color: #ffffff;
             border-radius: 0;
             z-index: 1010;
@@ -92,14 +89,33 @@
             min-height: 20px;
         }
 
+        .content-header {
+            padding: 10px;
+        }
+
         .content-header .pokemon-image {
             margin-right: 15px;
             margin-left: 15px;
         }
 
-        .content-header .name {
+        .sidebar .name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            max-width: 100%;
+            color: #4f4f4f;
+            margin: 0;
+        }
+
+        .sidebar .progress {
+            height: 8px;
+        }
+
+        .sidebar-header {
+            width: 100%;
+            padding-top: 100px;
+            background-color: #f3f3f3;
             display: inline-block;
-            color: #0f0f0f;
         }
 
         .content-header .name small {
@@ -238,26 +254,25 @@
 
     <!-- Sidebar Menu -->
     <div class="sidebar well col-lg-3 col-md-4 col-sm-6 col-xs-11 hidden-xs hidden-sm">
-        <div class="content-header">
-            <div class="row">
-                <img src="http://www.ptu.panda-games.net/images/pokemon/133.png" class="pokemon-image" />
-                <h2 class="name"></h2>
-            </div>
-
-            <div class="row">
+        <div class="sidebar-header">
+            <div class="col-xs-12">
+                <h3 class="name">Booplesnoot the Great and Long Named</h3>
+                <p class="text-muted level">Level 8</p>
                 <div class="progress">
                     <div class="progress-bar progress-bar-danger bar-hp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                    <div class="progress-bar progress-bar-info bar-exp" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                 </div>
             </div>
+        </div>
+        <div class="content-header">
 
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(1)">Moves</button>
+            <button class="btn btn-danger btn-lg btn-sidebar" data-toggle="tab" data-target="1">Moves</button>
 
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(2)">Info</button>
+            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="2">Info</button>
 
-            <button class="btn btn-danger btn-lg btn-sidebar active" onclick="onClickTab(3)">Advanced</button>
+            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="3">Advanced</button>
 
             <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle</button>
         </div>
