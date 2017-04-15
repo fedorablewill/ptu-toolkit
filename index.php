@@ -410,8 +410,8 @@
                         </h4>
                         <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
                         <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
-                        <h4><b>Pokemon Weight:</b> <span id="DexData_basic_Weight">{Data}</span></h4>
-                        <h4><b>Pokemon Size:</b> <span id="DexData_basic_Size">{Data}</span></h4>
+                        <h4><b>Pokemon Weight:</b> <span id="DexData_Basic_Weight">{Data}</span></h4>
+                        <h4><b>Pokemon Size:</b> <span id="DexData_Basic_Size">{Data}</span></h4>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -581,9 +581,7 @@
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingSix">
                             <div class="panel-body">
-                                <p>Let there be columns! and a new column appeared named Type... It kind of works so
-                                    here is a preview :P</p>
-                                <p>Squashing bugs that like to annoy programmers! Please try again latter...</p>
+                                <p>Why are the types listed in bold? we dont know :P</p>
                                 <table class="table" id="DexData_EvoForms">
                                     <tr>
                                         <th></th>
@@ -610,9 +608,6 @@
                         <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingSeven">
                             <div class="panel-body">
-                                <p>Well, here we are again... The dreaded in development message, I hope you like it
-                                    :P</p>
-                                <p>This tab is in development, Please try again latter...</p>
                                 <table class="table" id="DexData_MegaForms">
                                     <tr>
                                         <th></th>
