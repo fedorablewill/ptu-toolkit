@@ -548,8 +548,27 @@ switch (name) {
 		return "143";
 	case "Burmy":
 		return "412";
-	case "Wormadam":
+	case "Wormadam P":
+	case "Wormadam (P)":
+	case "Wormadam-P":
+	case "Wormadam Plant":
+	case "Wormadam (Plant)":
+	case "Wormadam-Plant":
 		return "413";
+	case "Wormadam S":
+	case "Wormadam (S)":
+	case "Wormadam-S":
+	case "Wormadam Sand":
+	case "Wormadam (Sand)":
+	case "Wormadam-Sand":
+		return "413:S";
+	case "Wormadam T":
+	case "Wormadam (T)":
+	case "Wormadam-T":
+	case "Wormadam Trash":
+	case "Wormadam (Trash)":
+	case "Wormadam-Trash":
+		return "413:S";
 	case "Mothim":
 		return "414";
 	case "Nincada":
@@ -1088,10 +1107,62 @@ switch (name) {
 		return "708";
 	case "Trevenant":
 		return "709";
-	case "Pumpkaboo":
+	case "Pumpkaboo A":
+	case "Pumpkaboo (A)":
+	case "Pumpkaboo-A":
+	case "Pumpkaboo Average":
+	case "Pumpkaboo (Average)":
+	case "Pumpkaboo-Average":
 		return "710";
-	case "Gourgeist":
+	case "Pumpkaboo Sm":
+	case "Pumpkaboo (Sm)":
+	case "Pumpkaboo-Sm":
+	case "Pumpkaboo Small":
+	case "Pumpkaboo (Small)":
+	case "Pumpkaboo-Small":
+		return "710:S";
+	case "Pumpkaboo L":
+	case "Pumpkaboo (L)":
+	case "Pumpkaboo-L":
+	case "Pumpkaboo Large":
+	case "Pumpkaboo (Large)":
+	case "Pumpkaboo-Large":
+		return "710:L";
+	case "Pumpkaboo Su":
+	case "Pumpkaboo (Su)":
+	case "Pumpkaboo-Su":
+	case "Pumpkaboo Super":
+	case "Pumpkaboo (Super)":
+	case "Pumpkaboo-Super":
+		return "710:SS";
+	case "Gourgeist A":
+	case "Gourgeist (A)":
+	case "Gourgeist-A":
+	case "Gourgeist Average":
+	case "Gourgeist (Average)":
+	case "Gourgeist-Average":
 		return "711";
+	case "Gourgeist Sm":
+	case "Gourgeist (Sm)":
+	case "Gourgeist-Sm":
+	case "Gourgeist Small":
+	case "Gourgeist (Small)":
+	case "Gourgeist-Small":
+		return "711:S";
+	case "Gourgeist L":
+	case "Gourgeist (L)":
+	case "Gourgeist-L":
+	case "Gourgeist Large":
+	case "Gourgeist (Large)":
+	case "Gourgeist-Large":
+		return "711:L";
+	case "Gourgeist Su":
+	case "Gourgeist (Su)":
+	case "Gourgeist-Su":
+	case "Gourgeist Super":
+	case "Gourgeist (Super)":
+	case "Gourgeist-Super":
+		return "711:SS";
 	case "Spritzee":
 		return "682";
 	case "Aromatisse":
@@ -1187,7 +1258,48 @@ switch (name) {
 	case "Stunfisk":
 		return "618";
 	case "Rotom":
+	case "Rotom N":
+	case "Rotom (N)":
+	case "Rotom-N":
+	case "Rotom Normal":
+	case "Rotom (Normal)":
+	case "Rotom-Normal":
 		return "479";
+	case "Rotom H":
+	case "Rotom (H)":
+	case "Rotom-H":
+	case "Rotom Heat":
+	case "Rotom (Heat)":
+	case "Rotom-Heat":
+		return "479:H";
+	case "Rotom W":
+	case "Rotom (W)":
+	case "Rotom-W":
+	case "Rotom Wash":
+	case "Rotom (Wash)":
+	case "Rotom-Wash":
+		return "479:W";
+	case "Rotom Fr":
+	case "Rotom (Fr)":
+	case "Rotom-Fr":
+	case "Rotom Frost":
+	case "Rotom (Frost)":
+	case "Rotom-Frost":
+		return "479:Fr";
+	case "Rotom Fn":
+	case "Rotom (Fn)":
+	case "Rotom-Fn":
+	case "Rotom Fan":
+	case "Rotom (Fan)":
+	case "Rotom-Fan":
+		return "479:Fa";
+	case "Rotom M":
+	case "Rotom (M)":
+	case "Rotom-M":
+	case "Rotom Mow":
+	case "Rotom (Mow)":
+	case "Rotom-Mow":
+		return "479:M";
 	case "Dedenne":
 		return "702";
 	case "Girafarig":
@@ -1376,12 +1488,48 @@ switch (name) {
 		return "481";
 	case "Azelf":
 		return "482";
-	case "Tornadus":
+	case "Tornadus I":
+	case "Tornadus (I)":
+	case "Tornadus-I":
+	case "Tornadus Incarnate":
+	case "Tornadus (Incarnate)":
+	case "Tornadus-Incarnate":
 		return "641";
-	case "Thundurus":
+	case "Tornadus T":
+	case "Tornadus (T)":
+	case "Tornadus-T":
+	case "Tornadus Therian":
+	case "Tornadus (Therian)":
+	case "Tornadus-Therian":
+		return "641:T";
+	case "Thundurus I":
+	case "Thundurus (I)":
+	case "Thundurus-I":
+	case "Thundurus Incarnate":
+	case "Thundurus (Incarnate)":
+	case "Thundurus-Incarnate":
 		return "642";
-	case "Landorus":
+	case "Thundurus T":
+	case "Thundurus (T)":
+	case "Thundurus-T":
+	case "Thundurus Therian":
+	case "Thundurus (Therian)":
+	case "Thundurus-Therian":
+		return "642:T";
+	case "Landorus I":
+	case "Landorus (I)":
+	case "Landorus-I":
+	case "Landorus Incarnate":
+	case "Landorus (Incarnate)":
+	case "Landorus-Incarnate":
 		return "645";
+	case "Landorus T":
+	case "Landorus (T)":
+	case "Landorus-T":
+	case "Landorus Therian":
+	case "Landorus (Therian)":
+	case "Landorus-Therian":
+		return "645:T";
 	case "Lugia":
 		return "249";
 	case "Ho-Oh":
@@ -1400,14 +1548,70 @@ switch (name) {
 		return "385";
 	case "Victini":
 		return "494";
-	case "Shaymin":
+	case "Shaymin L":
+	case "Shaymin (L)":
+	case "Shaymin-L":
+	case "Shaymin Land":
+	case "Shaymin (Land)":
+	case "Shaymin-Land":
 		return "492";
+	case "Shaymin S":
+	case "Shaymin (S)":
+	case "Shaymin-S":
+	case "Shaymin Sky":
+	case "Shaymin (Sky)":
+	case "Shaymin-Sky":
+		return "492:S";
 	case "Diancie":
 		return "719";
-	case "Meloetta":
+	case "Meloetta A":
+	case "Meloetta (A)":
+	case "Meloetta-A":
+	case "Meloetta Aria":
+	case "Meloetta (Aria)":
+	case "Meloetta-Aria":
 		return "648";
-	case "Deoxys":
+	case "Meloetta S":
+	case "Meloetta (S)":
+	case "Meloetta-S":
+	case "Meloetta Step":
+	case "Meloetta (Step)":
+	case "Meloetta-Step":
+	case "Meloetta P":
+	case "Meloetta (P)":
+	case "Meloetta-P":
+	case "Meloetta Pirouette":
+	case "Meloetta (Pirouette)":
+	case "Meloetta-Pirouette":
+		return "648:S";
+	case "Deoxys N":
+	case "Deoxys (N)":
+	case "Deoxys-N":
+	case "Deoxys Normal":
+	case "Deoxys (Normal)":
+	case "Deoxys-Normal":
 		return "386";
+	case "Deoxys A":
+	case "Deoxys (A)":
+	case "Deoxys-A":
+	case "Deoxys Attack":
+	case "Deoxys (Attack)":
+	case "Deoxys-Attack":
+		return "386:A";
+	case "Deoxys D":
+	case "Deoxys (D)":
+	case "Deoxys-D":
+	case "Deoxys Defense":
+	case "Deoxys (Defense)":
+	case "Deoxys-Defense":
+		return "386:D";
+	case "Deoxys S":
+	case "Deoxys (S)":
+	case "Deoxys-S":
+	case "Deoxys Speed":
+	case "Deoxys (Speed)":
+	case "Deoxys-Speed":
+		return "386:S";
 	case "Darkrai":
 		return "491";
 	case "Cresselia":
@@ -1424,12 +1628,38 @@ switch (name) {
 		return "644";
 	case "Kyurem":
 		return "646";
+	case "Kyurem Z":
+	case "Kyurem (Z)":
+	case "Kyurem-Z":
+	case "Kyurem Zekrom":
+	case "Kyurem (Zekrom)":
+	case "Kyurem-Zekrom":
+		return "646:Z";
+	case "Kyurem R":
+	case "Kyurem (R)":
+	case "Kyurem-R":
+	case "Kyurem Reshiram":
+	case "Kyurem (Reshiram)":
+	case "Kyurem-Reshiram":
+		return "646:R";
 	case "Dialga":
 		return "483";
 	case "Palkia":
 		return "484";
-	case "Giratina":
+	case "Giratina A":
+	case "Giratina (A)":
+	case "Giratina-A":
+	case "Giratina Altered":
+	case "Giratina (Altered)":
+	case "Giratina-Altered":
 		return "487";
+	case "Giratina O":
+	case "Giratina (O)":
+	case "Giratina-O":
+	case "Giratina Origin":
+	case "Giratina (Origin)":
+	case "Giratina-Origin":
+		return "487:O";
 	case "Xerneas":
 		return "716";
 	case "Yveltal":
@@ -1439,6 +1669,25 @@ switch (name) {
 	case "Arceus":
 		return "493";
 	case "Hoopa":
+	case "Hoopa C":
+	case "Hoopa (C)":
+	case "Hoopa-C":
+	case "Hoopa Confined":
+	case "Hoopa (Confined)":
+	case "Hoopa-Confined":
+	case "Hoopa B":
+	case "Hoopa (B)":
+	case "Hoopa-B":
+	case "Hoopa Bound":
+	case "Hoopa (Bound)":
+	case "Hoopa-Bound":
 		return "720";
+	case "Hoopa U":
+	case "Hoopa (U)":
+	case "Hoopa-U":
+	case "Hoopa Unbound":
+	case "Hoopa (Unbound)":
+	case "Hoopa-Unbound":
+		return "720:U";
 }
 }

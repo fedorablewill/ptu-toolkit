@@ -21,10 +21,6 @@
 
         body {
             background:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.45),
-                    rgba(50, 50, 50, 0.88)
-                ),
                 url('img/pixel-art-pokemon-wallpaper-2.jpg')
                 no-repeat fixed center bottom;
 
@@ -43,6 +39,15 @@
 
         .content-init input {
             color: white;
+        }
+
+        .pokemon {
+            color: #4f4f4f;
+        }
+
+        .pokemon .progress {
+            height: 8px;
+            background: #bababa;
         }
 
         .effects {
