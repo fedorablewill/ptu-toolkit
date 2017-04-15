@@ -579,8 +579,6 @@
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingSix">
                             <div class="panel-body">
-                                <p>This Feature is in development...</p>
-                                <p>Are they out of order!?!? i think they may be... Sorry for that :p</p>
                                 <table class="table" id="DexData_EvoForms">
                                     <tr>
                                         <th></th>
