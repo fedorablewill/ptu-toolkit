@@ -410,6 +410,8 @@
                         </h4>
                         <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
                         <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
+                        <h4><b>Pokemon Weight:</b> <span id="DexData_basic_Weight">{Data}</span></h4>
+                        <h4><b>Pokemon Size:</b> <span id="DexData_basic_Size">{Data}</span></h4>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -579,12 +581,50 @@
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
                              aria-labelledby="headingSix">
                             <div class="panel-body">
+                                <p>Let there be columns! and a new column appeared named Type... It kind of works so
+                                    here is a preview :P</p>
+                                <p>Squashing bugs that like to annoy programmers! Please try again latter...</p>
                                 <table class="table" id="DexData_EvoForms">
                                     <tr>
                                         <th></th>
                                         <th>Pokemon Name</th>
+                                        <th>Type</th>
                                         <th>Evolution Stage</th>
                                         <th>Criteria</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pokemon Mega Evolutions Go Here -->
+                    <div class="panel panel-default">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <div class="panel-heading" role="tab" id="headingSeven">
+                                <h4 class="panel-title">
+                                    Mega Evolutions
+                                </h4>
+                            </div>
+                        </a>
+                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel"
+                             aria-labelledby="headingSeven">
+                            <div class="panel-body">
+                                <p>Well, here we are again... The dreaded in development message, I hope you like it
+                                    :P</p>
+                                <p>This tab is in development, Please try again latter...</p>
+                                <table class="table" id="DexData_MegaForms">
+                                    <tr>
+                                        <th></th>
+                                        <th>Pokemon Name</th>
+                                        <th>Pokemon Type</th>
+                                        <th>Abilities</th>
+                                        <th style="width: 15px">HP</th>
+                                        <th style="width: 15px">Attack</th>
+                                        <th style="width: 15px">Defence</th>
+                                        <th style="width: 15px">Sp. Attack</th>
+                                        <th style="width: 15px">Sp. Defence</th>
+                                        <th style="width: 15px">Speed</th>
                                     </tr>
                                 </table>
                             </div>

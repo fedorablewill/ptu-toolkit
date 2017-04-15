@@ -238,8 +238,19 @@ function displayInit() {
         }
 
         for (var i = 0; i < dex.EvolutionStages.length; i++) {
-            $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Evolution_" + i + "_Stage'> " + dex.EvolutionStages[i].Stage + " </td> <td id='DexData_Evolution_" + i + "_Criteria'> " + dex.EvolutionStages[i].Criteria + " </td> </tr>");
+            $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <th id='DexData_Evolution_" + i + "_Type'></th> <td id='DexData_Evolution_" + i + "_Stage'> " + dex.EvolutionStages[i].Stage + " </td> <td id='DexData_Evolution_" + i + "_Criteria'> " + dex.EvolutionStages[i].Criteria + " </td> </tr>");
+
+            (function (i) {
+                $.getJSON("api/v1/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species), function (Evo_dd) {
+                    for (var t = 0; i < Evo_dd.Types.length; i++) {
+                        $("#DexData_Evolution_" + i + "_Type").append("<span style='color: " + typeColor(Evo_dd.Types[t]) + "'>" + Evo_dd.Types[t] + "</span>");
+                    }
+                });
+            })(i);
         }
+        /*for (var i = 0; i < dex.MegaEvolutions.length; i++) {
+         $("#DexData_MegaForms").append("<tr id='DexData_Mega_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Mega_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Mega_" + i + "_Stage'> " + dex.EvolutionStages[i].Stage + " </td> <td id='DexData_Mega_" + i + "_Criteria'> " + dex.EvolutionStages[i].Criteria + " </td> </tr>");
+         }*/
     });
 
     //Speed Stat is set here
