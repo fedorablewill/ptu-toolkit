@@ -237,13 +237,13 @@ function displayInit() {
             })(i);
         }
 
-        /*for (var i = 0; i < dex.Abilities.length; i++) {
-         (function (i) {
-         $.getJSON("api/v1/abilities/" + dex.Abilities[i].Name, function (Abilities_dd) {
-         $("#DexData_Abilities").append("<tr id='DexData_Abilities_" + i + "'> <td id='DexData_Abilities_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Abilities_" + i + "_Effect'>" + Abilities_dd.Effect + "</td> <td id='DexData_Abilitie_" + i + "_Trigger'>" + Abilities_dd.Trigger + "</td> </tr>");
-         });
-         })(i);
-         }*/
+        for (var i = 0; i < dex.EvolutionStages.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/pokemon/" + dex.EvolutionStages[i].Species, function (Evo_dd) {
+                    $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Evolution_" + i + "_Stage'>" + Evo_dd.Stage + "</td> <td id='DexData_Abilitie_" + i + "_Criteria'>" + Evo_dd.Criteria + "</td> </tr>");
+                });
+            })(i);
+        }
     });
 
     //Speed Stat is set here

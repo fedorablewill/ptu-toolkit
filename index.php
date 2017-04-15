@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="/js/species_to_dex.js"></script>
     <title>PTU Tools</title>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400'
@@ -555,7 +555,6 @@
                     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="headingFive">
                         <div class="panel-body">
-                            This Feature is in development... Try Again Latter :p
                             <table class="table" id="DexData_Abilities">
                                 <tr>
                                     <th>Ability Name</th>
@@ -580,20 +579,16 @@
                     <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="headingSix">
                         <div class="panel-body">
-                            This Feature is in development... Try Again Latter :p
-                            <!--
+                            <p>This Feature is in development...</p>
+                            <p>Are they out of order!?!? i think they may be... Sorry for that :p</p>
                             <table class="table" id="DexData_EvoForms">
                                 <tr>
-                                    <th>Move Name</th>
-                                    <th>Description</th>
-                                    <th>Move Type</th>
-                                    <th>Move Class</th>
-                                    <th>Move DB</th>
-                                    <th>Move AC</th>
-                                    <th>TM/HM ID</th>
+                                    <th></th>
+                                    <th>Pokemon Name</th>
+                                    <th>Evolution Stage</th>
+                                    <th>Criteria</th>
                                 </tr>
                             </table>
-                            -->
                         </div>
                     </div>
                 </div>
