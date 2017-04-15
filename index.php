@@ -557,7 +557,7 @@
                         <div class="panel-body">
                             <table class="table" id="DexData_Abilities">
                                 <tr>
-                                    <th>Ability Name</th>
+                                    <th>Abilitie Name</th>
                                     <th>Effect</th>
                                     <th>Trigger</th>
                                 </tr>

@@ -210,7 +210,7 @@ function displayInit() {
         for (var i = 0; i < dex.TutorMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.TutorMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Move_Tutor_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Tutor_" + i + "_LV'></td>" + dex.TutorHmMoves[i].LevelLearned + " </tr>");
+                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Move_Tutor_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Tutor_" + i + "_LV'></td>" + dex.TutorMoves[i].LevelLearned + " </tr>");
                 });
             })(i);
         }
@@ -238,9 +238,12 @@ function displayInit() {
         }
 
         for (var i = 0; i < dex.EvolutionStages.length; i++) {
+            $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Evolution_" + i + "_Stage'>Loading Data</td> <td id='DexData_Abilitie_" + i + "_Criteria'>Loading Data</td> </tr>");
+
             (function (i) {
-                $.getJSON("api/v1/pokemon/" + dex.EvolutionStages[i].Species, function (Evo_dd) {
-                    $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Evolution_" + i + "_Stage'>" + Evo_dd.Stage + "</td> <td id='DexData_Abilitie_" + i + "_Criteria'>" + Evo_dd.Criteria + "</td> </tr>");
+                $.getJSON("api/v1/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species), function (Evo_dd) {
+                    $('#DexData_Evolution_' + i + '_Stage').html(Evo_dd.Stage);
+                    $('#DexData_Abilitie_' + i + '_Criteria').html(Evo_dd.Criteria);
                 });
             })(i);
         }
