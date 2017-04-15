@@ -210,7 +210,7 @@ function displayInit() {
         for (var i = 0; i < dex.TutorMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.TutorMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Tutor_LVU_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> </tr>");
+                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Move_Tutor_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Tutor_" + i + "_LV'></td>" + dex.TutorHmMoves[i].LevelLearned + " </tr>");
                 });
             })(i);
         }
@@ -228,6 +228,22 @@ function displayInit() {
                 });
             })(i);
         }
+
+        for (var i = 0; i < dex.Abilities.length; i++) {
+            (function (i) {
+                $.getJSON("api/v1/abilities/" + dex.Abilities[i].Name, function (Abilities_dd) {
+                    $("#DexData_Abilities").append("<tr id='DexData_Abilities_" + i + "'> <td id='DexData_Abilities_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Abilities_" + i + "_Effect'>" + Abilities_dd.Effect + "</td> <td id='DexData_Abilitie_" + i + "_Trigger'>" + Abilities_dd.Trigger + "</td> </tr>");
+                });
+            })(i);
+        }
+
+        /*for (var i = 0; i < dex.Abilities.length; i++) {
+         (function (i) {
+         $.getJSON("api/v1/abilities/" + dex.Abilities[i].Name, function (Abilities_dd) {
+         $("#DexData_Abilities").append("<tr id='DexData_Abilities_" + i + "'> <td id='DexData_Abilities_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Abilities_" + i + "_Effect'>" + Abilities_dd.Effect + "</td> <td id='DexData_Abilitie_" + i + "_Trigger'>" + Abilities_dd.Trigger + "</td> </tr>");
+         });
+         })(i);
+         }*/
     });
 
     //Speed Stat is set here

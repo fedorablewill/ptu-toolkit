@@ -541,13 +541,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- Pokemon Evolutions and Forms Go Here -->
+
+                <!-- Pokemon Abilitys Go Here -->
                 <div class="panel panel-default">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                         <div class="panel-heading" role="tab" id="headingFive">
                             <h4 class="panel-title">
-                                Evolutions and Forms
+                                Abilities
                             </h4>
                         </div>
                     </a>
@@ -555,6 +556,44 @@
                          aria-labelledby="headingFive">
                         <div class="panel-body">
                             This Feature is in development... Try Again Latter :p
+                            <table class="table" id="DexData_Abilities">
+                                <tr>
+                                    <th>Ability Name</th>
+                                    <th>Effect</th>
+                                    <th>Trigger</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pokemon Evolutions and Forms Go Here -->
+                <div class="panel panel-default">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        <div class="panel-heading" role="tab" id="headingSix">
+                            <h4 class="panel-title">
+                                Evolutions and Forms
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingSix">
+                        <div class="panel-body">
+                            This Feature is in development... Try Again Latter :p
+                            <!--
+                            <table class="table" id="DexData_EvoForms">
+                                <tr>
+                                    <th>Move Name</th>
+                                    <th>Description</th>
+                                    <th>Move Type</th>
+                                    <th>Move Class</th>
+                                    <th>Move DB</th>
+                                    <th>Move AC</th>
+                                    <th>TM/HM ID</th>
+                                </tr>
+                            </table>
+                            -->
                         </div>
                     </div>
                 </div>
