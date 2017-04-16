@@ -174,6 +174,29 @@ function displayInit() {
         $("#DexData_Stats_SpDefense").html(dex.BaseStats.SpecialDefense);
         $("#DexData_Stats_Speed").html(dex.BaseStats.Speed);
 
+        // Chart stuff
+        var dataCompletedTasksChart = {
+            labels: ['HP', 'ATK', 'DEF', 'SPATK', 'SPDEF', 'SPD'],
+            series: [
+                [dex.BaseStats.HP, dex.BaseStats.Attack, dex.BaseStats.Defense, dex.BaseStats.SpecialAttack,
+                    dex.BaseStats.SpecialDefense, dex.BaseStats.Speed]
+            ]
+        };
+
+        var optionsChart = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            low: 0,
+            high: 15,
+            chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
+        };
+
+        var completedTasksChart = new Chartist.Bar('#graphBaseStats', dataCompletedTasksChart, optionsChart);
+
+        // start animation for the Completed Tasks Chart - Line Chart
+        md.startAnimationForBarChart(completedTasksChart);
+
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Breeding information
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
