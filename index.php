@@ -15,6 +15,7 @@
 
     <!-- Bootstrap Material Design -->
     <link href="css/material-kit.css" rel="stylesheet">
+    <link href="css/material-dashboard.css" rel="stylesheet">
 
     <style>
         body {
@@ -55,7 +56,7 @@
             background: rgba(3, 169, 244, 0.9);
         }
 
-        .sidebar {
+        .sidebar-nav {
             height: 100%;
             position: fixed;
             left: 0;
@@ -70,7 +71,7 @@
             0 4px 5px -3px rgba(0, 0, 0, 0.2);
         }
 
-        .sidebar .btn-sidebar {
+        .sidebar-nav .btn-sidebar {
             width: 100%;
         }
 
@@ -96,7 +97,7 @@
             margin-left: 15px;
         }
 
-        .sidebar .name {
+        .sidebar-nav .name {
             white-space: nowrap;
             overflow: hidden;
             text-overflow:ellipsis;
@@ -105,7 +106,7 @@
             margin: 0;
         }
 
-        .sidebar .progress {
+        .sidebar-nav .progress {
             height: 8px;
         }
 
@@ -192,6 +193,10 @@
             padding-top: 20px;
         }
 
+        a, a:hover, a:focus {
+            color: #03a9f4;
+        }
+
         .center-vertical {
             vertical-align: middle;
         }
@@ -229,6 +234,15 @@
 
         .dexdata-move-row {
             color: #000000;
+            padding: 0 15px;
+        }
+
+        .row-dex-cards .card {
+            min-height: 275px;
+        }
+
+        .card-content {
+            position: inherit !important;
         }
     </style>
 </head>
@@ -274,7 +288,7 @@
 </header>
 
     <!-- Sidebar Menu -->
-    <div class="sidebar well col-lg-3 col-md-4 col-sm-6 col-xs-11 hidden-xs hidden-sm">
+    <div class="sidebar-nav well col-lg-3 col-md-4 col-sm-6 col-xs-11 hidden-xs hidden-sm">
         <div class="sidebar-header">
             <div class="col-xs-12">
                 <h3 class="name">Booplesnoot the Great and Long Named</h3>
@@ -402,36 +416,44 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" id="pokedexData_Basic">
-                        <h3><b>Pokemon Information</b></h3>
-                        <h4><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></h4>
-                        <h4><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></h4>
-                        <h4><b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span> <span
-                                    id="DexData_Basic_TypeSep">&amp;</span> <span id="DexData_Basic_Type2">{Type 2}</span>
-                        </h4>
-                        <h4><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></h4>
-                        <h4><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></h4>
-                        <h4><b>Pokemon Weight:</b> <span id="DexData_Basic_Weight">{Data}</span></h4>
-                        <h4><b>Pokemon Size:</b> <span id="DexData_Basic_Size">{Data}</span></h4>
+                        <h3>Pokemon Information</h3>
+                        <p><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></p>
+                        <p><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></p>
+                        <p>
+                            <b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span>
+                            <span id="DexData_Basic_TypeSep">&amp;</span> <span id="DexData_Basic_Type2">{Type 2}</span>
+                        </p>
+                        <p><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></p>
+                        <p><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card" id="pokedexData_SBS">
-                        <h3><b>Species Base Stats</b></h3>
-                        <h4><b>HP:</b> <span id="DexData_Stats_HP">{HP}</span></h4>
-                        <h4><b>Attack:</b> <span id="DexData_Stats_Attack">{Attack}</span></h4>
-                        <h4><b>Defense:</b> <span id="DexData_Stats_Defense">{Defense}</span></h4>
-                        <h4><b>Sp. Attack:</b> <span id="DexData_Stats_SpAttack">{Sp. Attack}</span></h4>
-                        <h4><b>Sp. Defense:</b> <span id="DexData_Stats_SpDefense">{Sp. Defense}</span></h4>
-                        <h4><b>Speed:</b> <span id="DexData_Stats_Speed">{Speed}</span></h4>
+                        <div class="card-header card-chart" data-background-color="red">
+                            <div class="ct-chart" id="graphBaseStats"></div>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="title">Species Base Stats</h4>
+                            <div class="col-xs-6">
+                                <p><b>HP:</b> <span id="DexData_Stats_HP">{HP}</span></p>
+                                <p><b>Attack:</b> <span id="DexData_Stats_Attack">{Attack}</span></p>
+                                <p><b>Defense:</b> <span id="DexData_Stats_Defense">{Defense}</span></p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p><b>Sp. Attack:</b> <span id="DexData_Stats_SpAttack">{Sp. Attack}</span></p>
+                                <p><b>Sp. Defense:</b> <span id="DexData_Stats_SpDefense">{Sp. Defense}</span></p>
+                                <p><b>Speed:</b> <span id="DexData_Stats_Speed">{Speed}</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card" id="pokedexData_Breeding">
-                        <h3><b>Breeding Information</b></h3>
-                        <h4><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span id="DexData_Breed_Male">{Value}</span>% Male</span>,
-                            <span style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)</h4>
-                        <h4><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></h4>
-                        <h4><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></h4>
+                        <h3>Breeding Information</h3>
+                        <p><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span id="DexData_Breed_Male">{Value}</span>% Male</span>,
+                            <span style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)</p>
+                        <p><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></p>
+                        <p><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></p>
                     </div>
                 </div>
             </div>
@@ -445,6 +467,7 @@
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
                                     Level Up Moves
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -472,6 +495,7 @@
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     Tutor Moves
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -497,6 +521,7 @@
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     Egg Moves
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -523,6 +548,7 @@
                             <div class="panel-heading" role="tab" id="headingFour">
                                 <h4 class="panel-title">
                                     TM/HM Moves
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -551,6 +577,7 @@
                             <div class="panel-heading" role="tab" id="headingFive">
                                 <h4 class="panel-title">
                                     Abilities
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -575,6 +602,7 @@
                             <div class="panel-heading" role="tab" id="headingSix">
                                 <h4 class="panel-title">
                                     Evolutions and Forms
+                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
                                 </h4>
                             </div>
                         </a>
@@ -726,7 +754,9 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="dist/snackbar.min.js"></script>
+    <script src="js/chartist.min.js"></script>
     <script src="js/material.min.js"></script>
+    <script src="js/material-dashboard.js"></script>
 
     <script src="js/script.js"></script>
     <script src="js/pokemon.js"></script>
