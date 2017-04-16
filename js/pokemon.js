@@ -143,6 +143,8 @@ function displayInit() {
             $("#DexData_Basic_Type2").html(dex.Types[1]); //Gets the pokemons 2nd Type
             $("#DexData_Basic_Type2").css("color", typeColor(dex.Types[1])); //Sets the Color of the pokemons 2nd Type
         }
+        $("#DexData_Basic_Weight").html(dex.Weight.WeightClass.Minimum + " -> " + dex.Weight.WeightClass.Maximum);
+        $("#DexData_Basic_Size").html(dex.Height.Category.Minimum + " -> " + dex.Height.Category.Maximum);
 
         //Gets and Builds a string listing all the Diet Types (Seperated by a Comma)
         var DietString = "";
@@ -226,28 +228,32 @@ function displayInit() {
         for (var i = 0; i < dex.LevelUpMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.LevelUpMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_LVup").append("<tr id='DexData_Move_LVU_" + i + "'> <td id='DexData_Move_LVU_" + i + "_Name'>" + dex.LevelUpMoves[i].Name + "</td> <td id='DexData_Move_LVU_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_LVU_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_LVU_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_LVU_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_LVU_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_LVU_" + i + "_LV'></td>" + dex.LevelUpMoves[i].LevelLearned + " </tr>");
+                    //Add New Row to the list containing Move Data
+                    $("#DexData_Moves_LVup").append("<tr id='DexData_Move_LVU_" + i + "'> <td id='DexData_Move_LVU_" + i + "_Name'>" + dex.LevelUpMoves[i].Name + "</td> <td id='DexData_Move_LVU_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_LVU_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_LVU_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_LVU_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_LVU_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_LVU_" + i + "_LV'> " + dex.LevelUpMoves[i].LevelLearned + " </td> </tr>");
                 });
             })(i);
         }
         for (var i = 0; i < dex.TutorMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.TutorMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Move_Tutor_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Tutor_" + i + "_LV'></td>" + dex.TutorMoves[i].LevelLearned + " </tr>");
+                    //Add New Row to the list containing Move Data
+                    $("#DexData_Moves_Tutor").append("<tr id='DexData_Move_Tutor_" + i + "'> <td id='DexData_Move_Tutor_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Move_Tutor_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Tutor_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Tutor_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Tutor_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Tutor_" + i + "_AC'>" + Moves_dd.AC + "</td> </tr>");
                 });
             })(i);
         }
         for (var i = 0; i < dex.EggMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.EggMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_Egg").append("<tr id='DexData_Move_Egg_" + i + "'> <td id='DexData_Move_Egg_" + i + "_Name'>" + dex.EggMoves[i].Name + "</td> <td id='DexData_Move_Egg_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Egg_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Egg_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Egg_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Egg_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_Egg_" + i + "_LV'></td>" + dex.EggMoves[i].LevelLearned + " </tr>");
+                    //Add New Row to the list containing Move Data
+                    $("#DexData_Moves_Egg").append("<tr id='DexData_Move_Egg_" + i + "'> <td id='DexData_Move_Egg_" + i + "_Name'>" + dex.EggMoves[i].Name + "</td> <td id='DexData_Move_Egg_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_Egg_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_Egg_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_Egg_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_Egg_" + i + "_AC'>" + Moves_dd.AC + "</td> </tr>");
                 });
             })(i);
         }
         for (var i = 0; i < dex.TmHmMoves.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/moves/" + dex.TmHmMoves[i].Name, function (Moves_dd) {
-                    $("#DexData_Moves_TM").append("<tr id='DexData_Move_TM_" + i + "'> <td id='DexData_Move_TM_" + i + "_Name'>" + dex.TmHmMoves[i].Name + "</td> <td id='DexData_Move_TM_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_TM_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_TM_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_TM_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_TM_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_TM_" + i + "_LV'></td>" + dex.TmHmMoves[i].LevelLearned + " </tr>");
+                    //Add New Row to the list containing Move Data
+                    $("#DexData_Moves_TM").append("<tr id='DexData_Move_TM_" + i + "'> <td id='DexData_Move_TM_" + i + "_Name'>" + dex.TmHmMoves[i].Name + "</td> <td id='DexData_Move_TM_" + i + "_Desc'>" + Moves_dd.Effect + "</td> <td id='DexData_Move_TM_" + i + "_Type' style='color: " + typeColor(Moves_dd.Type) + "'>" + Moves_dd.Type + "</td> <td id='DexData_Move_TM_" + i + "_Class'>" + Moves_dd.Class + "</td> <td id='DexData_Move_TM_" + i + "_DB'>" + Moves_dd.DB + "</td> <td id='DexData_Move_TM_" + i + "_AC'>" + Moves_dd.AC + "</td> <td id='DexData_Move_TM_" + i + "_LV'>" + dex.TmHmMoves[i].TechnicalMachineId + "</td> </tr>");
                 });
             })(i);
         }
@@ -255,20 +261,48 @@ function displayInit() {
         for (var i = 0; i < dex.Abilities.length; i++) {
             (function (i) {
                 $.getJSON("api/v1/abilities/" + dex.Abilities[i].Name, function (Abilities_dd) {
+                    //Add New Row to the list containing Abilitie Data
                     $("#DexData_Abilities").append("<tr id='DexData_Abilities_" + i + "'> <td id='DexData_Abilities_" + i + "_Name'>" + dex.TutorMoves[i].Name + "</td> <td id='DexData_Abilities_" + i + "_Effect'>" + Abilities_dd.Effect + "</td> <td id='DexData_Abilitie_" + i + "_Trigger'>" + Abilities_dd.Trigger + "</td> </tr>");
                 });
             })(i);
         }
 
         for (var i = 0; i < dex.EvolutionStages.length; i++) {
-            $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <td id='DexData_Evolution_" + i + "_Stage'>Loading Data</td> <td id='DexData_Abilitie_" + i + "_Criteria'>Loading Data</td> </tr>");
+            //Add New Row to the list containing Evolution Data
+            $("#DexData_EvoForms").append("<tr id='DexData_Evolution_" + i + "'> <td><img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'></td> <td id='DexData_Evolution_" + i + "_Species'>" + dex.EvolutionStages[i].Species + "</td> <th id='DexData_Evolution_" + i + "_Type'></th> <td id='DexData_Evolution_" + i + "_Stage'> " + dex.EvolutionStages[i].Stage + " </td> <td id='DexData_Evolution_" + i + "_Criteria'> " + dex.EvolutionStages[i].Criteria + " </td> </tr>");
 
             (function (i) {
+                //Update Row to add Type Data
                 $.getJSON("api/v1/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species), function (Evo_dd) {
-                    $('#DexData_Evolution_' + i + '_Stage').html(Evo_dd.Stage);
-                    $('#DexData_Abilitie_' + i + '_Criteria').html(Evo_dd.Criteria);
+                    for (var t = 0; t < Evo_dd.Types.length; t++) {
+                        if (t != 0) {
+                            $("#DexData_Evolution_" + i + "_Type").append(" & ")
+                        }
+                        $("#DexData_Evolution_" + i + "_Type").append("<span style='color: " + typeColor(Evo_dd.Types[t]) + "'>" + Evo_dd.Types[t] + "</span>");
+                    }
                 });
             })(i);
+        }
+        for (var i = 0; i < dex.MegaEvolutions.length; i++) {
+            //Add New Row to the list containing Mega Evolution Data
+            $("#DexData_MegaForms").append("<tr id='DexData_Mega_" + i + "'> <td>Cant get Sprites at this time<!--<img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'>-->" +
+                "</td> <td id='DexData_Mega_" + i + "_Name'>" + dex.MegaEvolutions[i].Name + "</td>" +
+                "<td id='DexData_Mega_" + i + "_Type'></td>" +
+                "<td id='DexData_Mega_" + i + "_Abilitie'>" + dex.MegaEvolutions[i].Ability.Name + "</td>" +
+                "<td id='DexData_Mega_" + i + "_HP'>" + (dex.MegaEvolutions[i].StatBonuses.HP + dex.BaseStats.HP) + "</td>" +
+                "<td id='DexData_Mega_" + i + "_Attack'>" + (dex.MegaEvolutions[i].StatBonuses.Attack + dex.BaseStats.Attack) + "</td>" +
+                "<td id='DexData_Mega_" + i + "_Defence'>" + (dex.MegaEvolutions[i].StatBonuses.Defense + dex.BaseStats.Defense) + "</td>" +
+                "<td id='DexData_Mega_" + i + "_ApAttack'>" + (dex.MegaEvolutions[i].StatBonuses.SpecialAttack + dex.BaseStats.SpecialAttack) + "</td>" +
+                "<td id='DexData_Mega_" + i + "_SpDefence'>" + (dex.MegaEvolutions[i].StatBonuses.SpecialDefense + dex.BaseStats.SpecialDefense) + "</td>" +
+                "<td id='DexData_Mega_" + i + "_Speed'>" + (dex.MegaEvolutions[i].StatBonuses.Speed + dex.BaseStats.Speed) + "</td></tr>");
+
+            //Update Row to add Type Data
+            for (var t = 0; t < dex.MegaEvolutions[i].Types.length; t++) {
+                if (t != 0) {
+                    $("#DexData_Mega_" + i + "_Type").append(" & ")
+                }
+                $("#DexData_Mega_" + i + "_Type").append("<span style='color: " + typeColor(dex.MegaEvolutions[i].Types[t]) + "'>" + dex.MegaEvolutions[i].Types[t] + "</span>")
+            }
         }
     });
 
