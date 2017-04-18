@@ -266,8 +266,8 @@ function displayInit() {
         }
         for (var i = 0; i < dex.MegaEvolutions.length; i++) {
             //Add New Row to the list containing Mega Evolution Data
-            $("#DexData_MegaForms").append("<tr id='DexData_Mega_" + i + "'> <td>Cant get Sprites at this time<!--<img src='/img/pokemon/" + species_to_dex(dex.EvolutionStages[i].Species) + ".gif'>-->" +
-                "</td> <td id='DexData_Mega_" + i + "_Name'>" + dex.MegaEvolutions[i].Name + "</td>" +
+            $("#DexData_MegaForms").append("<tr id='DexData_Mega_" + i + "'> <td id='DexData_Mega_" + i + "_IMG'> </td>" +
+                "<td id='DexData_Mega_" + i + "_Name'>" + dex.MegaEvolutions[i].Name + "</td>" +
                 "<td id='DexData_Mega_" + i + "_Type'></td>" +
                 "<td id='DexData_Mega_" + i + "_Abilitie'>" + dex.MegaEvolutions[i].Ability.Name + "</td>" +
                 "<td id='DexData_Mega_" + i + "_HP'>" + (dex.MegaEvolutions[i].StatBonuses.HP + dex.BaseStats.HP) + "</td>" +
@@ -276,6 +276,19 @@ function displayInit() {
                 "<td id='DexData_Mega_" + i + "_ApAttack'>" + (dex.MegaEvolutions[i].StatBonuses.SpecialAttack + dex.BaseStats.SpecialAttack) + "</td>" +
                 "<td id='DexData_Mega_" + i + "_SpDefence'>" + (dex.MegaEvolutions[i].StatBonuses.SpecialDefense + dex.BaseStats.SpecialDefense) + "</td>" +
                 "<td id='DexData_Mega_" + i + "_Speed'>" + (dex.MegaEvolutions[i].StatBonuses.Speed + dex.BaseStats.Speed) + "</td></tr>");
+
+            //Adds the Image
+            if (dex.MegaEvolutions[i].Name.toLowerCase() == "mega charizard x") {
+                $("#DexData_Mega_" + i + "_IMG").html("<img src='/img/pokemon/006-mega-x.gif'>");
+            } else if (dex.MegaEvolutions[i].Name.toLowerCase() == "mega charizard y") {
+                $("#DexData_Mega_" + i + "_IMG").html("<img src='/img/pokemon/006-mega-y.gif'>");
+            } else if (dex.MegaEvolutions[i].Name.toLowerCase() == "mega mewtwo x") {
+                $("#DexData_Mega_" + i + "_IMG").html("<img src='/img/pokemon/150-mega-x.gif'>");
+            } else if (dex.MegaEvolutions[i].Name.toLowerCase() == "mega mewtwo y") {
+                $("#DexData_Mega_" + i + "_IMG").html("<img src='/img/pokemon/150-mega-y.gif'>");
+            } else {
+                $("#DexData_Mega_" + i + "_IMG").html("<img src='/img/pokemon/" + species_to_dex(dex.Species) + "-mega.gif'>");
+            }
 
             //Update Row to add Type Data
             for (var t = 0; t < dex.MegaEvolutions[i].Types.length; t++) {
