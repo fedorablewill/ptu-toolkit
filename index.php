@@ -44,18 +44,6 @@
             top: 75px;
         }
 
-        .nav-tabs li.active {
-            background: rgb(3, 169, 244);
-        }
-
-        .nav-tabs li:not(.active) {
-            background: rgba(3, 169, 244, 0.5);
-        }
-
-        .nav-tabs li:hover {
-            background: rgba(3, 169, 244, 0.9);
-        }
-
         .sidebar-nav {
             height: 100%;
             position: fixed;
@@ -75,6 +63,10 @@
             width: 100%;
         }
 
+        .nav-tabs {
+            background: none !important;
+        }
+
         .content-init .well {
             color: #0f0f0f;
         }
@@ -90,11 +82,6 @@
 
         .content-header {
             padding: 10px;
-        }
-
-        .content-header .pokemon-image {
-            margin-right: 15px;
-            margin-left: 15px;
         }
 
         .sidebar-nav .name {
@@ -123,10 +110,6 @@
 
         #data1, #data2, #data3, #data4 {
             display: none;
-        }
-
-        .content-main .card {
-            padding: 10px 15px;
         }
 
         .btn-move {
@@ -243,6 +226,20 @@
 
         .card-content {
             position: inherit !important;
+        }
+
+        .card-avatar {
+            width: 130px;
+            height: 130px;
+            line-height: 130px;
+            background: #ffffff;
+        }
+
+        .card-avatar img {
+            vertical-align: middle;
+            height: 70%;
+            width: 70%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -406,9 +403,15 @@
         </div>
         <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab2" style="display: none;">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card" id="pokemonStats">
-                        <h4>Speed: <span id="speed">0</span></h4>
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="card card-profile" id="pokemonStats">
+                        <div class="card-avatar">
+                            <img src="img/pokemon/001.gif" class="pokemon-image" />
+                        </div>
+                        <div class="content">
+                            <h6 class="category text-gray"><span id="DexData_Basic_ID">{ID}</span></h6>
+                            <h4 class="card-title"><span id="DexData_Basic_SpeciesName">{Name}</span></h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -416,15 +419,17 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" id="pokedexData_Basic">
-                        <h3>Pokemon Information</h3>
-                        <p><b>Pokedex ID:</b> <span id="DexData_Basic_ID">{ID}</span></p>
-                        <p><b>Species Name:</b> <span id="DexData_Basic_SpeciesName">{Name}</span></p>
-                        <p>
-                            <b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span>
-                            <span id="DexData_Basic_TypeSep">&amp;</span> <span id="DexData_Basic_Type2">{Type 2}</span>
-                        </p>
-                        <p><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></p>
-                        <p><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></p>
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title">Pokemon Information</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>
+                                <b>Pokemon Type:</b> <span id="DexData_Basic_Type1">{Type 1}</span>
+                                <span id="DexData_Basic_TypeSep">&amp;</span> <span id="DexData_Basic_Type2">{Type 2}</span>
+                            </p>
+                            <p><b>Pokemon Diets:</b> <span id="DexData_Basic_Diet">{Data}</span></p>
+                            <p><b>Pokemon Habitats:</b> <span id="DexData_Basic_Habitats">{Data}</span></p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -449,31 +454,69 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card" id="pokedexData_Breeding">
-                        <h3>Breeding Information</h3>
-                        <p><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span id="DexData_Breed_Male">{Value}</span>% Male</span>,
-                            <span style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)</p>
-                        <p><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></p>
-                        <p><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></p>
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title">Breeding Information</h4>
+                        </div>
+                        <div class="card-content">
+                            <p><b>Gender Ratio:</b> (<span style="color: #42aaf4"><span id="DexData_Breed_Male">{Value}</span>% Male</span>,
+                                <span style="color: #f441e2"><span id="DexData_Breed_Female">{Value}</span>% Female</span>)</p>
+                            <p><b>Hatching Rate:</b> <span id="DexData_Breed_HatchRate">{Value}</span></p>
+                            <p><b>Egg Groups:</b> <span id="DexData_Breed_EggGroups">{Groups}</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <br>
             <div class="row dexdata-move-row">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    <!-- Moves Learnt From Level Up Go Here-->
-                    <div class="panel panel-default">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                           aria-expanded="true" aria-controls="collapseOne">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    Level Up Moves
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
+                <div class="card" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card-header" data-background-color="red">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#dex-tab1" data-toggle="tab">
+                                            <i class="material-icons">list</i>
+                                            Level Up Moves
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#dex-tab2" data-toggle="tab">
+                                            <i class="material-icons">list</i>
+                                            Egg Moves
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#dex-tab3" data-toggle="tab">
+                                            <i class="material-icons">list</i>
+                                            TM/HM Moves
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#dex-tab5" data-toggle="tab">
+                                            <i class="material-icons">list</i>
+                                            Abilities
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#dex-tab6" data-toggle="tab">
+                                            <i class="material-icons">view_list</i>
+                                            Evolutions/Forms
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#dex-tab7" data-toggle="tab">
+                                            <i class="material-icons">view_list</i>
+                                            Mega Evolutions
+                                            <div class="ripple-container"></div></a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body">
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="dex-tab1">
                                 <table class="table" id="DexData_Moves_LVup">
                                     <tr>
                                         <th style="width: auto">Move Name</th>
@@ -486,21 +529,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Moves Learnt From Tutor Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    Tutor Moves
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
+                            <div class="tab-pane" id="dex-tab2">
                                 <table class="table" id="DexData_Moves_Tutor">
                                     <tr>
                                         <th>Move Name</th>
@@ -512,22 +541,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Moves Learnt From Tutor Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    Egg Moves
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingThree">
-                            <div class="panel-body">
+                            <div class="tab-pane" id="dex-tab3">
                                 <table class="table" id="DexData_Moves_Egg">
                                     <tr>
                                         <th>Move Name</th>
@@ -539,22 +553,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Moves Learnt From Tutor Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    TM/HM Moves
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingFour">
-                            <div class="panel-body">
+                            <div class="tab-pane" id="dex-tab4">
                                 <table class="table" id="DexData_Moves_TM">
                                     <tr>
                                         <th>Move Name</th>
@@ -567,23 +566,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Pokemon Abilitys Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            <div class="panel-heading" role="tab" id="headingFive">
-                                <h4 class="panel-title">
-                                    Abilities
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingFive">
-                            <div class="panel-body">
+                            <div class="tab-pane" id="dex-tab5">
                                 <table class="table" id="DexData_Abilities">
                                     <tr>
                                         <th>Abilitie Name</th>
@@ -592,24 +575,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Pokemon Evolutions and Forms Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                            <div class="panel-heading" role="tab" id="headingSix">
-                                <h4 class="panel-title">
-                                    Evolutions and Forms
-                                    <i class="material-icons pull-right">keyboard_arrow_down</i>
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingSix">
-                            <div class="panel-body">
-                                <p>Why are the types listed in bold? we dont know :P</p>
+                            <div class="tab-pane" id="dex-tab6">
                                 <table class="table" id="DexData_EvoForms">
                                     <tr>
                                         <th></th>
@@ -620,22 +586,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Pokemon Mega Evolutions Go Here -->
-                    <div class="panel panel-default">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                            <div class="panel-heading" role="tab" id="headingSeven">
-                                <h4 class="panel-title">
-                                    Mega Evolutions
-                                </h4>
-                            </div>
-                        </a>
-                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel"
-                             aria-labelledby="headingSeven">
-                            <div class="panel-body">
+                            <div class="tab-pane" id="dex-tab7">
                                 <table class="table" id="DexData_MegaForms">
                                     <tr>
                                         <th></th>
@@ -651,6 +602,7 @@
                                     </tr>
                                 </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -661,57 +613,63 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" id="stages">
-                        <h4>Modifiers</h4>
-                        <label for="stage-atk">Attack Stage</label>
-                        <input type="number" id="stage-atk" value="0" data-target="stage_atk"/><br/>
-                        <label for="stage-def">Defense Stage</label>
-                        <input type="number" id="stage-def" value="0" data-target="stage_def"/><br/>
-                        <label for="stage-spatk">Special Atk Stage</label>
-                        <input type="number" id="stage-spatk" value="0" data-target="stage_spatk"/><br/>
-                        <label for="stage-spdef">Special Def Stage</label>
-                        <input type="number" id="stage-spdef" value="0" data-target="stage_spdef"/><br/>
-                        <label for="stage-speed">Speed Stage</label>
-                        <input type="number" id="stage-speed" value="0" data-target="stage_speed"/><br/>
-                        <label for="stage-acc">Accuracy Bonus</label>
-                        <input type="number" id="stage-acc" value="0" data-target="stage_acc"/><br/>
-                        <label for="stage-eva">Evasion Bonus</label>
-                        <input type="number" id="stage-eva" value="0" data-target="stage_eva"/>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <h4>Afflictions</h4>
-                        <div id="afflictions"></div>
-                        <div class="form-group label-floating">
-                            <button class="btn btn-just-icon btn-round btn-danger pull-right" id="btn-afflict">
-                                <i class="material-icons">add</i>
-                            </button>
-                            <label class="control-label" for="input-afflict">Add an Affliction</label>
-                            <input type="text" class="form-control has-btn-sm" id="input-afflict"
-                                   onclick="alert('feature is work in progress')">
+                        <div class="card-content">
+                            <h4>Modifiers</h4>
+                            <label for="stage-atk">Attack Stage</label>
+                            <input type="number" id="stage-atk" value="0" data-target="stage_atk"/><br/>
+                            <label for="stage-def">Defense Stage</label>
+                            <input type="number" id="stage-def" value="0" data-target="stage_def"/><br/>
+                            <label for="stage-spatk">Special Atk Stage</label>
+                            <input type="number" id="stage-spatk" value="0" data-target="stage_spatk"/><br/>
+                            <label for="stage-spdef">Special Def Stage</label>
+                            <input type="number" id="stage-spdef" value="0" data-target="stage_spdef"/><br/>
+                            <label for="stage-speed">Speed Stage</label>
+                            <input type="number" id="stage-speed" value="0" data-target="stage_speed"/><br/>
+                            <label for="stage-acc">Accuracy Bonus</label>
+                            <input type="number" id="stage-acc" value="0" data-target="stage_acc"/><br/>
+                            <label for="stage-eva">Evasion Bonus</label>
+                            <input type="number" id="stage-eva" value="0" data-target="stage_eva"/>
+                            <h4>Speed: <span id="speed">0</span></h4>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <h4>Damage/Heal</h4>
-                        <div>
-                            <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
-                            <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
-                            <input type="number" id="do-dmg"/>
-                            <select id="dmg-type" title="Type"></select>
-                            <div class="togglebutton">
-                                <label>
-                                    <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
-                                </label>
+                        <div class="card-content">
+                            <h4>Afflictions</h4>
+                            <div id="afflictions"></div>
+                            <div class="form-group label-floating">
+                                <button class="btn btn-just-icon btn-round btn-danger pull-right" id="btn-afflict">
+                                    <i class="material-icons">add</i>
+                                </button>
+                                <label class="control-label" for="input-afflict">Add an Affliction</label>
+                                <input type="text" class="form-control has-btn-sm" id="input-afflict"
+                                       onclick="alert('feature is work in progress')">
                             </div>
                         </div>
-                        <br/>
-                        <div>
-                            <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
-                            <label class="text-info" for="do-heal">Heal</label><br/>
-                            <input type="number" id="do-heal"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4>Damage/Heal</h4>
+                            <div>
+                                <button class="btn btn-danger btn-raised pull-right" id="btn-do-dmg">GO</button>
+                                <label class="text-info" for="do-dmg">Inflict Damage</label><br/>
+                                <input type="number" id="do-dmg"/>
+                                <select id="dmg-type" title="Type"></select>
+                                <div class="togglebutton">
+                                    <label>
+                                        <input type="checkbox" title="Special" id="do-dmg-sp"/> Special
+                                    </label>
+                                </div>
+                            </div>
+                            <br/>
+                            <div>
+                                <button class="btn btn-danger btn-raised pull-right" id="btn-do-heal">GO</button>
+                                <label class="text-info" for="do-heal">Heal</label><br/>
+                                <input type="number" id="do-heal"/>
+                            </div>
                         </div>
                     </div>
                 </div>

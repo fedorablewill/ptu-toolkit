@@ -6,7 +6,7 @@
  * JSON data of loaded Pokemon
  * @type JSON
  */
-var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [];
+var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [], dex_data = {};
 
 var currentMove = null;
 
@@ -117,12 +117,14 @@ function displayInit() {
 
     $(".name").html(pokemon_data["name"]);
     $(".level").html('Level ' + pokemon_data['level']);
-    //$(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
+    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
 
     //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
 
     //Pokedex Data is set here
     $.getJSON("api/v1/pokemon/" + pokemon_data['dex'], function (dex) {
+
+        dex_data = dex;
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Basic Pokemon information
@@ -176,28 +178,7 @@ function displayInit() {
         $("#DexData_Stats_SpDefense").html(dex.BaseStats.SpecialDefense);
         $("#DexData_Stats_Speed").html(dex.BaseStats.Speed);
 
-        // Chart stuff
-        var dataCompletedTasksChart = {
-            labels: ['HP', 'ATK', 'DEF', 'SPATK', 'SPDEF', 'SPD'],
-            series: [
-                [dex.BaseStats.HP, dex.BaseStats.Attack, dex.BaseStats.Defense, dex.BaseStats.SpecialAttack,
-                    dex.BaseStats.SpecialDefense, dex.BaseStats.Speed]
-            ]
-        };
-
-        var optionsChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 15,
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-        };
-
-        var completedTasksChart = new Chartist.Bar('#graphBaseStats', dataCompletedTasksChart, optionsChart);
-
-        // start animation for the Completed Tasks Chart - Line Chart
-        md.startAnimationForBarChart(completedTasksChart);
+        updateInfoPage();
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Breeding information
@@ -353,6 +334,31 @@ function displayInit() {
     display.find(".pokemon-enemy").css("display", "block");
 
     updateStatus();
+}
+
+function updateInfoPage() {
+    // Chart stuff
+    var dataCompletedTasksChart = {
+        labels: ['HP', 'ATK', 'DEF', 'SPATK', 'SPDEF', 'SPD'],
+        series: [
+            [dex_data.BaseStats.HP, dex_data.BaseStats.Attack, dex_data.BaseStats.Defense, dex_data.BaseStats.SpecialAttack,
+                dex_data.BaseStats.SpecialDefense, dex_data.BaseStats.Speed]
+        ]
+    };
+
+    var optionsChart = {
+        lineSmooth: Chartist.Interpolation.cardinal({
+            tension: 0
+        }),
+        low: 0,
+        high: 15,
+        chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
+    };
+
+    var completedTasksChart = new Chartist.Bar('#graphBaseStats', dataCompletedTasksChart, optionsChart);
+
+    // start animation for the Completed Tasks Chart - Line Chart
+    md.startAnimationForBarChart(completedTasksChart);
 }
 
 function updateStatus() {
@@ -713,7 +719,7 @@ function onClickMenu() {
         elem.css("display", "none");
 }
 
-$("[data-toggle='tab']").click(function () {
+$(".btn-sidebar").click(function () {
     var tab = $(this).attr("data-target");
 
     // Change out tab content
@@ -724,7 +730,9 @@ $("[data-toggle='tab']").click(function () {
     $("[data-toggle='tab']:not(.btn-simple)").addClass("btn-simple", 1000);
     $(this).removeClass("btn-simple", 1000);
 
-    if (tab == 3)
+    if (tab == 2)
+        updateInfoPage();
+    else if (tab == 3)
         updateAfflictions();
 });
 
