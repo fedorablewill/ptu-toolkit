@@ -241,6 +241,23 @@
             width: 70%;
             object-fit: contain;
         }
+
+        .card-profile {
+            background: linear-gradient(60deg, #ef5350, #e53935);
+            box-shadow: 0 12px 20px -10px rgba(244, 67, 54, 0.28),
+                0 4px 20px 0px rgba(0, 0, 0, 0.12),
+                0 7px 8px -5px rgba(244, 67, 54, 0.2);
+        }
+
+        .card-profile h3 {
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .card-profile .category {
+            color: #cfcfcf !important;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -410,7 +427,7 @@
                         </div>
                         <div class="content">
                             <h6 class="category text-gray"><span id="DexData_Basic_ID">{ID}</span></h6>
-                            <h4 class="card-title"><span id="DexData_Basic_SpeciesName">{Name}</span></h4>
+                            <h3><span id="DexData_Basic_SpeciesName">{Name}</span></h3>
                         </div>
                     </div>
                 </div>
