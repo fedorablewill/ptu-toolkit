@@ -728,8 +728,11 @@ function addAffliction(affliction, monId, value) {
         gm_data['pokemon'][monId]['afflictions'] = [];
 
     // Persistent Afflictions
-    if (affliction == "Burned" || affliction == "Frozen" ||
-        affliction == "Paralysis" || affliction == "Poisoned") {
+    if ((affliction == "Burned" && $.inArray("Fire", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Frozen" && $.inArray("Ice", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Paralysis" && $.inArray("Electric", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Poisoned"  && $.inArray("Poison", gm_data['pokemon'][monId]['type'].split(" / ")) < 0 &&
+        $.inArray("Steel", gm_data['pokemon'][monId]['type'].split(" / ")) < 0)) {
 
         // Create array if not found
         if (gm_data['pokemon'][monId]['afflictions'] == null)
@@ -757,6 +760,23 @@ function addAffliction(affliction, monId, value) {
         }
         else if (affliction == "Frozen") {
             doToast(gm_data["pokemon"][monId]['name'] + " is frozen solid!");
+        }
+        else if (affliction == "Paralysis") {
+            doToast(gm_data["pokemon"][monId]['name'] + " has been paralyzed!");
+        }
+        else if (affliction == "Poisoned") {
+            battle[monId]['stage_spdef'] = parseInt(battle[monId]['stage_spdef']) - 2;
+
+            if (battle[monId]['stage_spdef'] < -6)
+                battle[monId]['stage_spdef'] = -6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-spdef",
+                "value": battle[monId]['stage_spdef']
+            }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " has been poisoned!");
         }
     }
     // Other Afflictions
@@ -835,6 +855,23 @@ function deleteAffliction(affliction, monId) {
         else if (affliction == "Frozen") {
             doToast(gm_data["pokemon"][monId]['name'] + " was cured of Frozen");
         }
+        else if (affliction == "Paralysis") {
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of Paralysis");
+        }
+        else if (affliction == "Poisoned") {
+            battle[monId]['stage_spdef'] = parseInt(battle[monId]['stage_spdef']) + 2;
+
+            if (battle[monId]['stage_spdef'] > 6)
+                battle[monId]['stage_spdef'] = 6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-spdef",
+                "value": battle[monId]['stage_spdef']
+            }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of Poison");
+        }
     }
     else {
         // Remove from battle entry
@@ -858,12 +895,19 @@ function deleteAffliction(affliction, monId) {
  */
 function handleAffliction(affliction, monId) {
     // Afflictions that take a Tick of Hit Points
-    if (affliction == "Burned") {
+    if (affliction == "Burned" || affliction == "Poisoned") {
 
         // Calculating max_hp
         var max_hp = gm_data["pokemon"][monId]['level'] + gm_data["pokemon"][monId]['hp'] * 3 + 10;
 
+        // Subtract health
         gm_data["pokemon"][monId]["health"] -= Math.floor(max_hp * 0.1);
+
+        // Show message
+        if (affliction == "Burned")
+            doToast(gm_data["pokemon"][monId]["name"] + " was damaged by their burn");
+        else if (affliction == "Poisoned")
+            doToast(gm_data["pokemon"][monId]["name"] + " was damaged from poison");
 
         // Check if fainted
         if (gm_data["pokemon"][monId]["health"] <= 0) {
@@ -875,8 +919,6 @@ function handleAffliction(affliction, monId) {
         var w = Math.floor((gm_data["pokemon"][monId]['health'] / max_hp) * 100);
 
         $("[data-name='"+monId+"']").find(".progress-bar").css("width", w + "%");
-
-        doToast(gm_data["pokemon"][monId]["name"] + " was damaged by their burn");
 
         // Update Player client
         sendMessage(battle[monId]["client_id"], JSON.stringify({
