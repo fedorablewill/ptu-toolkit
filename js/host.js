@@ -381,6 +381,10 @@ function performMove(moveName, target_id, dealer_id) {
             }
         }
 
+        // Confusion check
+        if (canMove && "Confused" in battle[dealer_id]['afflictions'])
+            canMove = handleAffliction("Confused", dealer_id);
+
         // Check if Frozen (but don't Let It Go)
         if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
             $.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
@@ -815,6 +819,9 @@ function addAffliction(affliction, monId, value) {
             if ("Temporary Hit Points" in battle[monId]["afflictions"])
                 deleteAffliction("Temporary Hit Points", monId);
         }
+        else if (affliction == "Confused") {
+            doToast(gm_data["pokemon"][monId]['name'] + " is Confused!");
+        }
     }
 
     // Update Player client
@@ -876,6 +883,9 @@ function deleteAffliction(affliction, monId) {
     else {
         // Remove from battle entry
         delete battle[monId]['afflictions'][affliction];
+
+        // Toast
+        doToast(gm_data["pokemon"][monId]['name'] + " was cured of " + affliction);
     }
 
     // Update Player client
@@ -892,6 +902,7 @@ function deleteAffliction(affliction, monId) {
  * Handle the effects of an affliction when triggered
  * @param affliction String affliction name
  * @param monId Id of the Pokemon
+ * @return boolean Returns true if allowed to perform an action
  */
 function handleAffliction(affliction, monId) {
     // Afflictions that take a Tick of Hit Points
@@ -938,8 +949,29 @@ function handleAffliction(affliction, monId) {
             $.inArray("Fire", gm_data["pokemon"][monId]["type"].split(" / ")) >= 0))) {
 
             deleteAffliction("Frozen", monId);
+
+            return true;
         }
+
+        return false;
     }
+    // Confused save check
+    else if (affliction == "Confused") {
+        // Save check roll
+        var check_cf = roll(1, 20, 1);
+
+        // If rolled higher than 16, cure of Confusion
+        if (check_cf <= 8) {
+            doPhysicalStruggle(monId);
+            doToast(gm_data["pokemon"][monId]["name"] + " hurt itself in confusion!");
+
+            return false;
+        }
+        else if (check_cf >= 16)
+            deleteAffliction("Confused", monId);
+    }
+
+    return true;
 }
 
 /**
