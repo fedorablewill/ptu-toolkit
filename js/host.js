@@ -366,6 +366,20 @@ function performMove(moveName, target_id, dealer_id) {
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
 
         var damageDone = 0;
+        var canMove = true;
+
+        // Paralysis check
+        if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
+            $.inArray("Paralysis", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+
+            // Save check roll
+            var check = roll(1, 20, 1);
+
+            if (check < 5) {
+                canMove = false;
+                doToast(gm_data["pokemon"][dealer_id]['name'] + " is paralyzed! They can't move!");
+            }
+        }
 
         // Check if Frozen (but don't Let It Go)
         if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
@@ -377,7 +391,7 @@ function performMove(moveName, target_id, dealer_id) {
         else if ("Fainted" in battle[dealer_id]['afflictions']) {
             doToast("Fainted Pokemon cannot use actions, abilities, or features")
         }
-        else {
+        else if (canMove) {
 
             var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
             var crit = 20, evade = 0;
