@@ -6,6 +6,7 @@
 var gm_data = {};
 var battle = {};
 var currentView = 0;
+var pokedex = "pokemon";
 
 /**
  * Receives commands/messages
@@ -267,11 +268,11 @@ function selectGM() {
 
 $("#expmon-mon").change(function(){
 	var id = $('#expmon-mon').find(":selected").val();
-  	$.getJSON("api/v1/pokemon/"+gm_data["pokemon"][id].dex, function (dex) {
+  	$.getJSON("api/v1/"+pokedex+"/"+gm_data["pokemon"][id].dex, function (dex) {
 	$.getJSON("api/v1/moves/", function (moves) {
 	$.getJSON("api/v1/abilities/", function (abilities) {
 	$.getJSON("api/v1/experience/", function (experience) {
-	$.getJSON("api/v1/nature/"+gm_data["pokemon"][id].nature, function (nature) {
+	$.getJSON("api/v1/natures/"+gm_data["pokemon"][id].nature, function (nature) {
   		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience,nature));
 	});
 	});
@@ -903,7 +904,7 @@ $(function () {
 function onAddmonDexChange() {
     if ($(this).val() != "") {
         $("#addmon-dex").parent().removeClass("has-error");
-        $.getJSON("api/v1/pokemon/" + $(this).val(), function (entry) {
+        $.getJSON("api/v1/"+pokedex+"/" + $(this).val(), function (entry) {
             // Fields to change
             var field_type1 = $("#addmon-type1");
             var field_type2 = $("#addmon-type2");
@@ -1009,7 +1010,7 @@ function updatePokemonEditor() {
     var dex = $("#addmon-dex").val();
 
     if (dex != "")
-        $.getJSON("api/v1/pokemon/" + dex, function (entry) {
+        $.getJSON("api/v1/"+pokedex+"/" + dex, function (entry) {
             // Fields to edit/view
             var field_level = $("#addmon-level");
             var field_health = $("#addmon-health");
