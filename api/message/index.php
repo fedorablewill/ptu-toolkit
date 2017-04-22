@@ -24,7 +24,7 @@ if (array_key_exists("id", $_POST)) {
     fwrite($handle, $data);
     fclose($handle);
 
-    echo $data;
+    echo $fname;
 }
 else if (array_key_exists("id", $_GET)) {
     $id = $_GET['id'];

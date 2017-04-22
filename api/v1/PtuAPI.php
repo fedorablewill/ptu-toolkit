@@ -18,6 +18,7 @@ class PtuAPI extends API
     const ABILITIES_FILENAME = "abilities.json";
     const CAPABILITIES_FILENAME = "capabilities.json";
     const EDGES_FILENAME = "edges.json";
+    const EXPERIENCE_FILENAME = "experience.json";
     const FEATURES_FILENAME = "features.json";
     const POKEMON_FILENAME = "ptu_pokedex_1_05.json";
     const MOVES_FILENAME = "moves.json";
@@ -83,6 +84,16 @@ class PtuAPI extends API
         }
         $edgesData = $this->getJsonFromFile(self::EDGES_FILENAME);
         return $this->getBasicNamedStructure($edgesData);
+    }
+    
+    public function experience()
+    {
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
+        }
+        $experienceData = $this->getJsonFromFile(self::EXPERIENCE_FILENAME);
+        return $this->getBasicNamedStructure($experienceData);
     }
     
     public function features() 
@@ -291,7 +302,7 @@ class PtuAPI extends API
             array_key_exists("nature", $_GET) ? $_GET['nature'] : "Random",
             array_key_exists("location", $_GET) ? $_GET['location'] : "",
             array_key_exists("gender", $_GET) ? $_GET['gender'] : "",
-            array_key_exists("statWeights", $_GET) ? json_decode($_GET['statWeights'], true) :
+            array_key_exists("stat_weights", $_GET) ? json_decode($_GET['stat_weights'], true) :
                 ["HP"=>1,"Attack"=>1,"Defense"=>1,"SpecialAttack"=>1,"SpecialDefense"=>1,"Speed"=>1],
             array_key_exists("min_tm", $_GET) ? $_GET['min_tm'] : 0,
             array_key_exists("max_tm", $_GET) ? $_GET['max_tm'] : 3,

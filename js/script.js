@@ -4,6 +4,9 @@
  */
 
 var host_id = null;
+var client_id = "";
+
+var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 
 var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 110, 135, 160, 190, 220, 250, 285, 320, 260, 400,
@@ -14,93 +17,95 @@ var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
 6110, 6360, 6610, 6868, 7125, 7390, 7660, 7925, 8205, 8485,
 8770, 9060]; //TODO: finish exp chart
 
-$(function () {
-    $.material.init();
+peer.on('open', function(id){
+    client_id = id;
 });
 
-function receiveMessages(name, callback) {
-    if (host_id != null) {
-        $.getJSON("api/message/?id=" + host_id + "&name=" + name, callback);
-    }
+peer.on('error', function(err) {
+    console.log(err);
+});
+
+$(function () {
+    $.material.init();
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+function receiveMessages(connection, callback) {
+    connection.on('data', function(data) {
+        callback(connection, data);
+    });
 }
 
 function sendMessage(to, message) {
-    if (host_id != null) {
-        $.ajax({
-            url: "/api/message/",
-            type:"post",
-            async: false,
-            data: {
-                "id": host_id,
-                "to": to,
-                "msg": message
-            },
-            success: function(response){
-            },
-            error:function(xhr, ajaxOptions, thrownError){alert(xhr.responseText); ShowMessage("??? ?? ?????? ??????? ????","fail");}
-        });
-    }
+    peer.connections[to][0].send(message);
+}
+
+function sendMessageToAll(message) {
+    $.each(peer.connections, function (k, v) {
+        for (var i=0; i < v.length; i++)
+            v[i].send(message);
+    });
 }
 
 function rollDamageBase(base, rollMultiplier) {
     var damage = 0;
     switch (base) {
         case 1:
-            return roll(1, 6, rollMultiplier) + 1;
+            return roll(1*rollMultiplier, 6, 1) + 1*rollMultiplier;
         case 2:
-            return roll(1, 6, rollMultiplier) + 3;
+            return roll(1*rollMultiplier, 6, 1) + 3*rollMultiplier;
         case 3:
-            return roll(1, 6, rollMultiplier) + 5;
+            return roll(1*rollMultiplier, 6, 1) + 5*rollMultiplier;
         case 4:
-            return roll(1, 8, rollMultiplier) + 6;
+            return roll(1*rollMultiplier, 8, 1) + 6*rollMultiplier;
         case 5:
-            return roll(1, 8, rollMultiplier) + 8;
+            return roll(1*rollMultiplier, 8, 1) + 8*rollMultiplier;
         case 6:
-            return roll(2, 6, rollMultiplier) + 8;
+            return roll(2*rollMultiplier, 6, 1) + 8*rollMultiplier;
         case 7:
-            return roll(2, 6, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 6, 1) + 10*rollMultiplier;
         case 8:
-            return roll(2, 8, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 8, 1) + 10*rollMultiplier;
         case 9:
-            return roll(2, 10, rollMultiplier) + 10;
+            return roll(2*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 10:
-            return roll(3, 8, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 8, 1) + 10*rollMultiplier;
         case 11:
-            return roll(3, 10, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 12:
-            return roll(3, 12, rollMultiplier) + 10;
+            return roll(3*rollMultiplier, 12, 1) + 10*rollMultiplier;
         case 13:
-            return roll(4, 10, rollMultiplier) + 10;
+            return roll(4*rollMultiplier, 10, 1) + 10*rollMultiplier;
         case 14:
-            return roll(4, 10, rollMultiplier) + 15;
+            return roll(4*rollMultiplier, 10, 1) + 15*rollMultiplier;
         case 15:
-            return roll(4, 10, rollMultiplier) + 20;
+            return roll(4*rollMultiplier, 10, 1) + 20*rollMultiplier;
         case 16:
-            return roll(5, 10, rollMultiplier) + 20;
+            return roll(5*rollMultiplier, 10, 1) + 20*rollMultiplier;
         case 17:
-            return roll(5, 12, rollMultiplier) + 25;
+            return roll(5*rollMultiplier, 12, 1) + 25*rollMultiplier;
         case 18:
-            return roll(6, 12, rollMultiplier) + 25;
+            return roll(6*rollMultiplier, 12, 1) + 25*rollMultiplier;
         case 19:
-            return roll(6, 12, rollMultiplier) + 30;
+            return roll(6*rollMultiplier, 12, 1) + 30*rollMultiplier;
         case 20:
-            return roll(6, 12, rollMultiplier) + 35;
+            return roll(6*rollMultiplier, 12, 1) + 35*rollMultiplier;
         case 21:
-            return roll(6, 12, rollMultiplier) + 40;
+            return roll(6*rollMultiplier, 12, 1) + 40*rollMultiplier;
         case 22:
-            return roll(6, 12, rollMultiplier) + 45;
+            return roll(6*rollMultiplier, 12, 1) + 45*rollMultiplier;
         case 23:
-            return roll(6, 12, rollMultiplier) + 50;
+            return roll(6*rollMultiplier, 12, 1) + 50*rollMultiplier;
         case 24:
-            return roll(6, 12, rollMultiplier) + 55;
+            return roll(6*rollMultiplier, 12, 1) + 55*rollMultiplier;
         case 25:
-            return roll(6, 12, rollMultiplier) + 60;
+            return roll(6*rollMultiplier, 12, 1) + 60*rollMultiplier;
         case 26:
-            return roll(7, 12, rollMultiplier) + 65;
+            return roll(7*rollMultiplier, 12, 1) + 65*rollMultiplier;
         case 27:
-            return roll(8, 12, rollMultiplier) + 70;
+            return roll(8*rollMultiplier, 12, 1) + 70*rollMultiplier;
         case 28:
-            return roll(8, 12, rollMultiplier) + 80;
+            return roll(8*rollMultiplier, 12, 1) + 80*rollMultiplier;
         default:
             return 0;
     }
@@ -108,13 +113,13 @@ function rollDamageBase(base, rollMultiplier) {
 
 function roll(num, die, multiplier) {
     var r = 0;
-    
+
     for (var i=0; i<num; i++) {
         r += Math.floor(Math.random() * (die + 1)) * multiplier;
     }
 
     console.log("rolled " + r + " on d" + die);
-    
+
     return r;
 }
 
@@ -146,4 +151,90 @@ function doToast(content) {
     };
 
     $.snackbar(options);
+}
+
+/**
+ * Autopopulate attributed fields with data
+ */
+$(function () {
+
+    if ($("[data-populate='type']").length > 0){
+        $.getJSON("api/v1/types", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k.charAt(0).toUpperCase() + k.slice(1) + "</option>";
+            });
+
+            $("select[data-populate='type']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='nature']").length > 0){
+        $.getJSON("api/v1/natures", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='nature']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='move']").length > 0){
+        $.getJSON("api/v1/moves", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='move']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='ability']").length > 0){
+        $.getJSON("api/v1/abilities", function (json) {
+            var html = "";
+            $.each(json, function (k, v) {
+                html += "<option>" + k + "</option>";
+            });
+
+            $("select[data-populate='ability']").each(function () {
+                $(this).html($(this).html() + html);
+                $(this).removeAttr("data-populate");
+            });
+        });
+    }
+
+    if ($("[data-populate='dex']").length > 0)
+        fetchPokemon(0, 50);
+});
+
+var mon_list = [];
+
+function fetchPokemon(offset, size) {
+    $.getJSON("api/v1/pokemon/?offset=" + offset + "&size=" + size, function(json) {
+        if ($.isEmptyObject(json)) {
+            $("[data-populate='dex']").autocomplete({
+                source: mon_list
+            });
+        }
+        else {
+            $.each(json, function (k, v) {
+                mon_list.push({
+                    label: k + " - " + v["Species"],
+                    value: k
+                });
+            });
+            fetchPokemon(offset + size, size);
+        }
+    });
 }

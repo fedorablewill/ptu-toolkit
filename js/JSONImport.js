@@ -2,7 +2,7 @@
 monIn: JSON from the Google Drive-based Fancy Sheet
 */
 
-$.getJSON("api/v1/pokemon/", function (dex) {
+function JSONImport(monIn,dex){
 //monOut: box.json Pokémon; we'll define the easy stuff to start with:
 var monOut = {
   name: monIn.nickname,
@@ -24,14 +24,7 @@ var monOut = {
 //The dash seems to give a spot of trouble, so we do it seperately:
 monOut["held-item"]=monIn.HeldItem;
 
-//Getting the dex entry:
-var keys = dex.keys();
-var i; for (i=0;i<keys.length;i++){
-  if (dex[keys[i]].Species==monIn.species){
-    monOut.dex = keys[i];
-    break;
-  }
-}
+monOut.dex = dex;
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type2===""){
@@ -40,16 +33,22 @@ if (monIn.type2===""){
   monOut.type = monIn.type1 + " / " + monIn.type2;
 }
 
-
 //Handling things of variable number, like Moves and Abilities
+
+monOut.moves=[];
+monOut.abilities=[];
+
 $.each(monIn, function(key,value){
   //Handling Moves
   if (key.indexOf("Move")!==-1){
-    monOut.moves.append(value.Name);
+    monOut.moves.push(value.Name);
   //Handling Abilities
   } else if (key.indexOf("Ability")!==-1){
-    monOut.abilities.append(value.name);
+    monOut.abilities.push(value.name);
   }
 });
 
-});
+console.log("First");
+
+return monOut;
+}

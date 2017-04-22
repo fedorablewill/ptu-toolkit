@@ -1,41 +1,55 @@
 /*
 monIn: JSON from box.json
 */
-
-$.getJSON("api/v1/pokemon/", function (dex) {//replace with single-entry call later
-$.getJSON("api/v1/moves/", function (moves) {
-$.getJSON("api/v1/abilities/", function (abilities) {
-$.getJSON("api/v1/experience/", function (experience) {
+function JSONExport(monIn,dex,moves,abilities,experience,nature){
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
 var monOut = {
   CharType: monIn.nickname,
   nickname: monIn.name,
-  species: dex[monIn.dex].Species,
+  species: dex.Species,
   Level: monIn.level,
   EXP: monIn.EXP,
   EXP_max: experience.level,
   HeldItem: monIn["held-item"],
   Gender: monIn.gender,
   Nature: monIn.nature,
-  Height: dex[monIn.dex].Height.Category.Minimum,
-  WeightClass: dex[monIn.dex].Weight.WeightClass.Minimum,
-  base_HP: dex[monIn.dex].BaseStats.HP,
-  base_ATK: dex[monIn.dex].BaseStats.ATK,
-  base_DEF: dex[monIn.dex].BaseStats.DEF,
-  base_SPATK: dex[monIn.dex].BaseStats.SPATK,
-  base_SPDEF: dex[monIn.dex].BaseStats.SPDEF,
-  base_SPEED: dex[monIn.dex].BaseStats.SPEED,
-  HP: monIn.hp-dex[monIn.dex].BaseStats.HP,
-  ATK: monIn.atk-dex[monIn.dex].BaseStats.ATK,
-  DEF: monIn.def-dex[monIn.dex].BaseStats.DEF,
-  SPATK: monIn.spatk-dex[monIn.dex].BaseStats.SPATK,
-  SPDEF: monIn.spdef-dex[monIn.dex].BaseStats.SPDEF,
-  SPEED: monIn.speed-dex[monIn.dex].BaseStats.SPEED,
+  Height: dex.Height.Category.Minimum,
+  WeightClass: dex.Weight.WeightClass.Minimum,
   TutorPoints: Math.floor(monIn.level/5)+1,
   TutorPoints_max: Math.floor(monIn.level/5)+1
 };
+
+//Adding in properties with underscores in their names.
+monOut["base_HP"]=dex.BaseStats.HP;
+monOut["base_ATK"]=dex.BaseStats.Attack;
+monOut["base_DEF"]=dex.BaseStats.Defense;
+monOut["base_SPATK"]=dex.BaseStats.SpecialAttack;
+monOut["base_SPDEF"]=dex.BaseStats.SpecialDefense;
+monOut["base_SPEED"]=dex.BaseStats.Speed;
+
+if (!(nature.Raise==nature.Lower)){
+	if (nature.Raise=="HP"){
+		monOut["base_HP"]+=1
+	} else {
+		monOut["base_"+nature.Raise]+=2
+	}
+	if (nature.Lower=="HP"){
+		monOut["base_HP"]-=1
+		monOut["base_HP"]=Math.max(monOut["base_HP"],1)
+	} else {
+		monOut["base_"+nature.Raise]-=2
+		monOut["base_"+nature.Raise]=Math.max(monOut["base_"+nature.Raise],1)
+	}
+}
+
+monOut["HP"]=monIn.hp-monOut["base_HP"];
+monOut["ATK"]=monIn.atk-monOut["base_ATK"];
+monOut["DEF"]=monIn.def-monOut["base_DEF"];
+monOut["SPATK"]=monIn.spatk-monOut["base_SPATK"]k;
+monOut["SPDEF"]=monIn.spdef-monOut["base_SPDEF"];
+monOut["SPEED"]=monIn.speed-monOut["base_SPEED"];
 
 //Checking for single or dual type, and acting accordingly
 if (monIn.type.indexOf(" / ")===-1){
@@ -48,7 +62,7 @@ if (monIn.type.indexOf(" / ")===-1){
 
 //Building monOut.Capabilities
 monOut.Capabilities={};
-$.each(dex[monIn.dex].Capabilities,function(index,value){
+$.each(dex.Capabilities,function(index,value){
     if(value.CapabilityName=="Naturewalk"){
       monOut.Capabilities["Naturewalk("+value.Value+")"]=true;
     } else if (value.CapabilityName=="Jump") {
@@ -69,10 +83,7 @@ $.each(skills,function(index,value){
     skill = "1d6";
   }
   var i; for (i=0;i<dex.Skills.length;i++){
-    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation"){
-      skill = dex.Skills[i].DiceRank;
-      break;
-    } else if (value.indexOf(dex.Skills[i].SkillName)){
+    if (dex.Skills[i].SkillName=="Edu: Tech"&&value=="TechnologyEducation" || value.indexOf(dex.Skills[i].SkillName)){
       skill = dex.Skills[i].DiceRank;
       break;
     }
@@ -86,7 +97,7 @@ $.each(skills,function(index,value){
 });
 
 //Handling Moves
-$.each(monOut.moves,function(index,value){
+$.each(monIn.moves,function(index,value){
   var info = moves[value];
   monOut["Move"+(index+1)]={
     Name:value,
@@ -96,20 +107,20 @@ $.each(monOut.moves,function(index,value){
     Range: info.Range
   };
   if (info.hasOwnProperty("AC")){
-    monOut["Move"+index].AC=parseInt(info.AC,10);
+    monOut["Move"+(index+1)].AC=parseInt(info.AC,10);
   }
   if (info.hasOwnProperty("DB")){
-    monOut["Move"+index].DB=parseInt(info.DB,10);
+    monOut["Move"+(index+1)].DB=parseInt(info.DB,10);
   }
   if (info.hasOwnProperty("Effect")){
-    monOut["Move"+index].Effects=info.Effect;
+    monOut["Move"+(index+1)].Effects=info.Effect;
   }
 });
 //Handling  Abilities
 //Switches and such: Help the sheet know certain abilities are in effect
 monOut.sniper = 0;monOut.snipern = 0;monOut.twist = 0;monOut.flashfire = 0;monOut.weird = 0;monOut.damp = 0;monOut.aurastn = 0;monOut.defeat = 0;monOut.hustle = 0;monOut.courage = 0;monOut.lastctrue = 0;monOut.lastctype = "";
 
-$.each(monOut.abilities,function(index,value){
+$.each(monIn.abilities,function(index,value){
   var info = abilities[value];
   monOut["Ability"+(index+1)]={
     Name:value,
@@ -230,9 +241,7 @@ $.each(monOut.abilities,function(index,value){
     monOut.lastctype+="Poison";
   }
 });
-console.log(monOut);
 
-});
-});
-});
-});
+return JSON.stringify(monOut);
+
+}
