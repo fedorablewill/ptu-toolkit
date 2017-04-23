@@ -5,6 +5,12 @@ var ptuApiData = {
         requestData: {},
         urlDescription: ["pokemon/pokedexId", "pokemon/pokemonName", "pokemon/?offset=20&size=5"]
     },
+    "pokemon+": {
+        url: "pokemonPlus/",
+        verbs: ["1", "bulbasaur"],
+        requestData: {},
+        urlDescription: ["pokemonPlus/pokedexId", "pokemonPlus/pokemonName", "pokemonPlus/?offset=20&size=5"]
+    },
     types: {
         url: "types/",
         verbs: ["electric/water", "fire"],
