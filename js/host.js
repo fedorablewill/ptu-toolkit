@@ -178,6 +178,36 @@ peer.on('connection', function (c) {
  */
 function renderBattler() {
     if (currentView == 0) {
+        // Create Grid
+        var i,
+            columns = parseInt($("#grid-w").val()),
+            rows = parseInt($("#grid-h").val()),
+            size = $("#zoom-slider").val(),
+            width = columns * size,
+            height = rows * size,
+            ratioW = Math.floor(width/size),
+            ratioH = Math.floor(height/size);
+
+        for (i=0; i<= ratioW; i++)  // vertical grid lines
+            $('<div />').css({
+                'top': 1,
+                'left': i * size,
+                'width': 1,
+                'height': height })
+                .addClass('grid')
+                .appendTo('battle-grid');
+
+        for (i=0; i<= ratioH; i++) // horizontal grid lines
+            $('<div />').css({
+                'top': 1 + i * size,
+                'left': 0,
+                'width': width,
+                'height': 1 })
+                .addClass('grid')
+                .appendTo('battle-grid');
+
+        $('.grid').show();
+
         var html = '';
 
         $.each(battle, function (id, data) {
@@ -338,6 +368,16 @@ function onDataLoaded() {
 
     $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
     new Clipboard('.btn');
+
+    $("#zoom-slider").noUiSlider({
+        start: [10] ,
+        step: 1,
+        connect: false,
+        range: {
+            min: 1,
+            max: 20
+        }
+    });
 }
 
 function saveGM() {
@@ -346,6 +386,10 @@ function saveGM() {
     dlAnchorElem.setAttribute("href",     dataStr     );
     dlAnchorElem.setAttribute("download", "GMData.json");
     dlAnchorElem.click();
+}
+
+function startBattle() {
+    battle = {};
 }
 
 function endBattle() {
