@@ -661,7 +661,8 @@
                                 </button>
                                 <label class="control-label" for="input-afflict">Add an Affliction</label>
                                 <input type="text" class="form-control has-btn-sm" id="input-afflict"
-                                       onclick="alert('feature is work in progress')">
+                                       onclick="alert('Feature is work in progress. Implemeted afflictions: Burned, ' +
+                                        'Poison, Paralysis, Poisoned, Confused, Fainted.')">
                             </div>
                         </div>
                     </div>
