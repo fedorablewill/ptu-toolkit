@@ -182,7 +182,7 @@ function renderBattler() {
         var i,
             columns = parseInt($("#grid-w").val()),
             rows = parseInt($("#grid-h").val()),
-            size = $("#zoom-slider").val(),
+            size = parseInt($("#zoom-slider").val()) * 6,
             width = columns * size,
             height = rows * size,
             ratioW = Math.floor(width/size),
@@ -190,21 +190,21 @@ function renderBattler() {
 
         for (i=0; i<= ratioW; i++)  // vertical grid lines
             $('<div />').css({
-                'top': 1,
-                'left': i * size,
+                'margin-top': 1,
+                'margin-left': i * size,
                 'width': 1,
                 'height': height })
                 .addClass('grid')
-                .appendTo('battle-grid');
+                .appendTo('.battle-grid');
 
         for (i=0; i<= ratioH; i++) // horizontal grid lines
             $('<div />').css({
-                'top': 1 + i * size,
-                'left': 0,
+                'margin-top': 1 + i * size,
+                'margin-left': 0,
                 'width': width,
                 'height': 1 })
                 .addClass('grid')
-                .appendTo('battle-grid');
+                .appendTo('.battle-grid');
 
         $('.grid').show();
 

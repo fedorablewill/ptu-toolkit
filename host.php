@@ -226,7 +226,7 @@
 <input id = "uploadAnchor" type="file" style="display: none"/>
 <a id="downloadAnchor" style="display:none"></a>
 
-<div class="container" id="view-holder">
+<div class="container">
     <div id="view-holder">
         <div class="col-md-6 col-md-offset-3 content-select">
             <h2>Create or Import a GM File</h2>
