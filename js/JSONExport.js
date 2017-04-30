@@ -47,7 +47,7 @@ if (!(nature.Raise==nature.Lower)){
 monOut["HP"]=monIn.hp-monOut["base_HP"];
 monOut["ATK"]=monIn.atk-monOut["base_ATK"];
 monOut["DEF"]=monIn.def-monOut["base_DEF"];
-monOut["SPATK"]=monIn.spatk-monOut["base_SPATK"]k;
+monOut["SPATK"]=monIn.spatk-monOut["base_SPATK"];
 monOut["SPDEF"]=monIn.spdef-monOut["base_SPDEF"];
 monOut["SPEED"]=monIn.speed-monOut["base_SPEED"];
 
