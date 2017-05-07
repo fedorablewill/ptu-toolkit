@@ -179,7 +179,10 @@ peer.on('connection', function (c) {
 function renderBattler() {
     if (currentView == 0) {
         // Create Grid
-        var i,
+
+        $(".battle-grid").html("");
+
+        var i, j,
             columns = parseInt($("#grid-w").val()),
             rows = parseInt($("#grid-h").val()),
             size = parseInt($("#zoom-slider").val()) * 6,
@@ -188,23 +191,20 @@ function renderBattler() {
             ratioW = Math.floor(width/size),
             ratioH = Math.floor(height/size);
 
-        for (i=0; i<= ratioW; i++)  // vertical grid lines
-            $('<div />').css({
-                'margin-top': 1,
-                'margin-left': i * size,
-                'width': 1,
-                'height': height })
-                .addClass('grid')
-                .appendTo('.battle-grid');
+        for (i=0; i < rows; i++) {
+            var r = $('<div />').addClass("grid-row").appendTo('.battle-grid');
 
-        for (i=0; i<= ratioH; i++) // horizontal grid lines
-            $('<div />').css({
-                'margin-top': 1 + i * size,
-                'margin-left': 0,
-                'width': width,
-                'height': 1 })
-                .addClass('grid')
-                .appendTo('.battle-grid');
+            for (j = 0; j < columns; j++) {
+                $('<div />').css({
+                    'width': size,
+                    'height': size,
+                    'border': 'solid 2px #444',
+                    'display': 'inline-block'
+                })
+                    .addClass('grid')
+                    .appendTo(r);
+            }
+        }
 
         $('.grid').show();
 
@@ -377,6 +377,8 @@ function onDataLoaded() {
             min: 1,
             max: 20
         }
+    }).on("change", function () {
+        renderBattler();
     });
 }
 

@@ -243,12 +243,12 @@
 
     <div class="hidden" id="body-battle">
         <div class="row">
+            <button class="btn btn-danger btn-raised pull-right" onclick="endBattle()">End Battle</button>
+
             <div class="battle-slider">
                 <label class="control-label" for="zoom-slider">Zoom Level</label>
                 <div class="slider slider-danger" id="zoom-slider"></div>
             </div>
-
-            <button class="btn btn-danger btn-raised pull-right" onclick="endBattle()">End Battle</button>
         </div>
         <div class="row">
             <div class="battle-grid"></div>
