@@ -54,10 +54,19 @@
             background: #f0f0f0;
         }
 
+        .grid-row {
+            display: flex;
+        }
+
+        .grid-piece {
+            position: relative;
+        }
+
         .grid{
             display: none;
-            position:absolute;
-            background-color:#ccc;
+            background-color: #eaeaea;
+            border: 1px solid rgb(142, 142, 142);
+            display: inline-block;
         }
 
         .pokemon {

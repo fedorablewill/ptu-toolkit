@@ -202,11 +202,48 @@ function renderBattler() {
                     'display': 'inline-block'
                 })
                     .addClass('grid')
+                    .attr("data-x", j)
+                    .attr("data-y", i)
                     .appendTo(r);
             }
         }
 
         $('.grid').show();
+
+        // Create grid pieces
+
+        var unplaced_id = '';
+
+        $.each(battle, function (id, data) {
+            $.getJSON("/api/v1/pokemon/" + gm_data["pokemon"][id]['dex'], function (dex) {
+                // TODO: determine size
+
+                if ('x' in data) {
+                    $('<div />').css({
+                        'width': size,
+                        'height': size,
+                        'background': 'url(img/pokemon/' + gm_data["pokemon"][id]["dex"] + '.gif) no-repeat center',
+                        'background-size': 'contain',
+                        'left': data['x'] * size,
+                        'top': data['y'] * size
+                    }).addClass('grid-piece').prependTo('.battle-grid');
+                }
+                else if (unplaced_id === '') {
+                    unplaced_id = id;
+
+                    //alert("Click a tile to place " + gm_data["pokemon"][id]["name"]);
+
+                    $(".grid").click(function () {
+                        battle[unplaced_id]['x'] = parseInt($(this).attr("data-x"));
+                        battle[unplaced_id]['y'] = parseInt($(this).attr("data-y"));
+
+                        renderBattler();
+                    });
+                }
+            });
+        });
+
+        // Create health bars
 
         var html = '';
 
