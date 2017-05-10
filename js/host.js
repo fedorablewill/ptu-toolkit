@@ -145,6 +145,27 @@ peer.on('connection', function (c) {
             handleAffliction(json.affliction, json.pokemon);
         }
         /*
+         Request for battle grid
+         */
+        else if (json.type == "battle_grid") {
+            // Get grid size
+            var size = (json.max_width / parseInt($("#grid-w").val())) - 2;
+            // Create parent
+            var grid = $('<div />');
+
+            // Create ready callback
+            grid.ready_callback = function () {
+                // Send result
+                connection.send(JSON.stringify({
+                    'type': 'battle_grid',
+                    'html': grid.html()
+                }));
+            };
+
+            // Generate grid
+            generateGrid(grid, size);
+        }
+        /*
          Attack Received
          */
         else if (json.type == "battle_move") {
@@ -178,70 +199,8 @@ peer.on('connection', function (c) {
  */
 function renderBattler() {
     if (currentView == 0) {
-        // Create Grid
-
-        $(".battle-grid").html("");
-
-        var i, j,
-            columns = parseInt($("#grid-w").val()),
-            rows = parseInt($("#grid-h").val()),
-            size = parseInt($("#zoom-slider").val()) * 6,
-            width = columns * size,
-            height = rows * size,
-            ratioW = Math.floor(width/size),
-            ratioH = Math.floor(height/size);
-
-        for (i=0; i < rows; i++) {
-            var r = $('<div />').addClass("grid-row").appendTo('.battle-grid');
-
-            for (j = 0; j < columns; j++) {
-                $('<div />').css({
-                    'width': size,
-                    'height': size,
-                    'border': 'solid 2px #444',
-                    'display': 'inline-block'
-                })
-                    .addClass('grid')
-                    .attr("data-x", j)
-                    .attr("data-y", i)
-                    .appendTo(r);
-            }
-        }
-
-        $('.grid').show();
-
-        // Create grid pieces
-
-        var unplaced_id = '';
-
-        $.each(battle, function (id, data) {
-            $.getJSON("/api/v1/pokemon/" + gm_data["pokemon"][id]['dex'], function (dex) {
-                // TODO: determine size
-
-                if ('x' in data) {
-                    $('<div />').css({
-                        'width': size,
-                        'height': size,
-                        'background': 'url(img/pokemon/' + gm_data["pokemon"][id]["dex"] + '.gif) no-repeat center',
-                        'background-size': 'contain',
-                        'left': data['x'] * size,
-                        'top': data['y'] * size
-                    }).addClass('grid-piece').prependTo('.battle-grid');
-                }
-                else if (unplaced_id === '') {
-                    unplaced_id = id;
-
-                    //alert("Click a tile to place " + gm_data["pokemon"][id]["name"]);
-
-                    $(".grid").click(function () {
-                        battle[unplaced_id]['x'] = parseInt($(this).attr("data-x"));
-                        battle[unplaced_id]['y'] = parseInt($(this).attr("data-y"));
-
-                        renderBattler();
-                    });
-                }
-            });
-        });
+        // Create grid
+        generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
 
         // Create health bars
 
@@ -281,6 +240,80 @@ function renderBattler() {
 
         $("#view-holder").html(html);
     }
+}
+
+function generateGrid(parent, size) {
+    // Create Grid
+
+    parent.html("");
+
+    var i, j,
+        columns = parseInt($("#grid-w").val()),
+        rows = parseInt($("#grid-h").val()),
+        width = columns * size,
+        height = rows * size,
+        ratioW = Math.floor(width/size),
+        ratioH = Math.floor(height/size);
+
+    for (i=0; i < rows; i++) {
+        var r = $('<div />').addClass("grid-row").appendTo(parent);
+
+        for (j = 0; j < columns; j++) {
+            $('<div />').css({
+                'width': size,
+                'height': size,
+                'border': 'solid 2px #444',
+                'display': 'inline-block'
+            })
+                .addClass('grid')
+                .attr("data-x", j)
+                .attr("data-y", i)
+                .appendTo(r);
+        }
+    }
+
+    $('.grid').show();
+
+    // Create grid pieces
+
+    var unplaced_id = '', p = 0, done = false;
+
+    $.each(battle, function (id, data) {
+        p++;
+        $.getJSON("/api/v1/pokemon/" + gm_data["pokemon"][id]['dex'], function (dex) {
+            // TODO: determine size
+
+            if ('x' in data) {
+                $('<div />').css({
+                    'width': size,
+                    'height': size,
+                    'background': 'url(img/pokemon/' + gm_data["pokemon"][id]["dex"] + '.gif) no-repeat center',
+                    'background-size': 'contain',
+                    'left': data['x'] * size,
+                    'top': data['y'] * size
+                }).addClass('grid-piece').prependTo(parent);
+            }
+            else if (unplaced_id === '') {
+                unplaced_id = id;
+
+                //alert("Click a tile to place " + gm_data["pokemon"][id]["name"]);
+
+                $(".grid").click(function () {
+                    battle[unplaced_id]['x'] = parseInt($(this).attr("data-x"));
+                    battle[unplaced_id]['y'] = parseInt($(this).attr("data-y"));
+
+                    renderBattler();
+                });
+            }
+
+            p--;
+
+            if (done && p == 0 && parent.ready_callback != null)
+                parent.ready_callback()
+        });
+    });
+
+    done = true;
 }
 
 /**

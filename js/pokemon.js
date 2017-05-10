@@ -349,6 +349,10 @@ function displayInit() {
     updateStatus();
 }
 
+function onTargetGridLoaded() {
+    // TODO
+}
+
 function updateInfoPage() {
     // Chart stuff
     var dataCompletedTasksChart = {
@@ -508,6 +512,13 @@ function onClickConnect() {
             else if (json.type == "battle_added") {
                 battle_data[json.pokemon_id] = json.pokemon_name;
                 updateTargetList();
+            }
+            /*
+             Grid returned
+             */
+            else if (json.type == "battle_grid") {
+                $(".battle-grid").html(json.html);
+                onTargetGridLoaded();
             }
             /*
              Health changed
@@ -749,6 +760,15 @@ $(".btn-sidebar").click(function () {
         updateAfflictions();
 });
 
+$('#modalTargetDEBUG').on('shown.bs.modal', function () {
+    sendMessage(host_id, JSON.stringify({
+        'type': 'battle_grid',
+        //'max_width': $("#select-target-body").width()
+        'max_width': 500
+    }));
+
+    $('.battle-grid').html('<div class="loading-holder"><div class="loading-50px"></div></div>');
+});
 
 // UTILITY FUNCTIONS
 

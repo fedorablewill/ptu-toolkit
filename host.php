@@ -66,7 +66,6 @@
             display: none;
             background-color: #eaeaea;
             border: 1px solid rgb(142, 142, 142);
-            display: inline-block;
         }
 
         .pokemon {

@@ -18,6 +18,11 @@
     <link href="css/material-dashboard.css" rel="stylesheet">
 
     <style>
+        @keyframes loading-pulse-50px {
+            0%   {height: 0;}
+            100% {height: 50px;}
+        }
+
         body {
             background: url('img/pixel-art-pokemon-wallpaper-2.jpg') no-repeat fixed center bottom;
 
@@ -257,6 +262,37 @@
         .card-profile .category {
             color: #cfcfcf !important;
             margin: 0;
+        }
+
+        .loading-holder {
+            text-align: center;
+            min-height: 86px;
+            background-color: #efefef;
+            padding: 15px;
+        }
+
+        .loading-50px {
+            animation: loading-pulse-50px;
+            background: url('img/ic-loading.png') center top;
+            background-size: 50px 50px;
+            width: 50px;
+            display: inline-block;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        .grid-row {
+            display: flex;
+        }
+
+        .grid-piece {
+            position: relative;
+        }
+
+        .grid{
+            display: none;
+            background-color: #eaeaea;
+            border: 1px solid rgb(142, 142, 142);
         }
     </style>
 </head>
@@ -711,6 +747,27 @@
 
                 <div class="modal-body" id="select-target-body">
                     <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEBUG Modal dialog for picking target -->
+    <div class="modal fade" id="modalTargetDEBUG" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-move">
+                <h4 class="move-name"></h4>
+                <p class="move-desc"></p>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title text-danger" id="impMonLabel">Select Target</h3>
+                </div>
+
+                <div class="modal-body" id="select-target-body">
+                    <div class="battle-grid"></div>
                 </div>
             </div>
         </div>
