@@ -357,7 +357,7 @@
 
             <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="2">Info</button>
 
-            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="3">Advanced</button>
+            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="3">Manage</button>
 
             <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle
             </button>
@@ -622,7 +622,7 @@
                             <div class="tab-pane" id="dex-tab5">
                                 <table class="table" id="DexData_Abilities">
                                     <tr>
-                                        <th>Abilitie Name</th>
+                                        <th>Ability Name</th>
                                         <th>Effect</th>
                                         <th>Trigger</th>
                                     </tr>
@@ -738,7 +738,8 @@
                 <h4 class="move-name"></h4>
                 <p class="move-desc"></p>
             </div>
-            <div class="modal-content">
+
+            <div class="modal-content hidden" id="modalTarget-select">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
@@ -747,6 +748,15 @@
 
                 <div class="modal-body" id="select-target-body">
                     <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
+                </div>
+            </div>
+
+            <div class="modal-content" id="modalTarget-join">
+
+                <div class="modal-body" id="select-target-body">
+                    <button class="btn btn-danger btn-raised btn-lg" id="btn-set-battle" onclick="addPokemonToBattle()">
+                        Join Battle
+                    </button>
                 </div>
             </div>
         </div>

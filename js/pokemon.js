@@ -521,6 +521,18 @@ function onClickConnect() {
             else if (json.type == "battle_added") {
                 battle_data[json.pokemon_id] = json.pokemon_name;
                 updateTargetList();
+
+                // Show target list
+                $("#modalTarget-join").addClass("hidden");
+                $("#modalTarget-select").removeClass("hidden");
+            }
+            /*
+             Battle ended
+             */
+            else if (json.type == "battle_end") {
+                // Hide target list
+                $("#modalTarget-join").addClass("hidden");
+                $("#modalTarget-select").removeClass("hidden");
             }
             /*
              Grid returned

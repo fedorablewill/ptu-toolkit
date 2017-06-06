@@ -470,7 +470,18 @@ function startBattle() {
 
 function endBattle() {
     if (window.confirm("Are you sure you want to reset the battle?")) {
+
+        // Notify player clients
+        $.each(battle, function (k, v) {
+            sendMessage(v['client_id'], JSON.stringify({
+                "type": "battle_end"
+            }));
+        });
+
+        // Reset data
         battle = {};
+
+        // Redraw battler
         renderBattler();
     }
 }
