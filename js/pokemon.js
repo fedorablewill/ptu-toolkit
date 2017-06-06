@@ -531,8 +531,8 @@ function onClickConnect() {
              */
             else if (json.type == "battle_end") {
                 // Hide target list
-                $("#modalTarget-join").addClass("hidden");
-                $("#modalTarget-select").removeClass("hidden");
+                $("#modalTarget-join").removeClass("hidden");
+                $("#modalTarget-select").addClass("hidden");
             }
             /*
              Grid returned
