@@ -117,6 +117,10 @@
             display: none;
         }
 
+        .moves, .actions {
+            display: grid;
+        }
+
         .btn-move {
             text-align: left;
             width: 100%;
@@ -126,6 +130,7 @@
             max-width: 570px;
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 0;
         }
 
         .btn-move .move-name {
@@ -294,6 +299,12 @@
             background-color: #eaeaea;
             border: 1px solid rgb(142, 142, 142);
         }
+
+        hr.sm {
+            max-width: 300px;
+            width: 80%;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -353,7 +364,7 @@
         </div>
         <div class="content-header">
 
-            <button class="btn btn-danger btn-lg btn-sidebar" data-toggle="tab" data-target="1">Moves</button>
+            <button class="btn btn-danger btn-lg btn-sidebar" data-toggle="tab" data-target="1">Actions</button>
 
             <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="2">Info</button>
 
@@ -367,6 +378,8 @@
     <!-- Main View (Battler) -->
     <div class="container-fluid content-main" style="display: none;">
         <div class="col-md-8 col-lg-9 col-md-offset-4 col-lg-offset-3 tab" id="tab1">
+            <h2 class="text-center text-muted">Moves</h2>
+            <hr class="sm"/>
             <div class="moves">
                 <a class="btn btn-raised btn-move btn-move-1">
                     <div>
@@ -450,6 +463,18 @@
                                 <i class="material-icons">info</i>
                             </span>
                         <span class="move-freq"></span>
+                    </div>
+                </a>
+            </div>
+            <h2 class="text-center text-muted">Other Actions</h2>
+            <hr class="sm"/>
+            <div class="actions">
+                <a class="btn btn-raised btn-move btn-action-shift">
+                    <div>
+                        <h4 class="move-name">Shift Action</h4>
+                    </div>
+                    <div class="btn-move-footer">
+                        <span class="move-freq"><strong>FEATURE COMING SOON</strong></span>
                     </div>
                 </a>
             </div>
