@@ -350,7 +350,16 @@ function displayInit() {
 }
 
 function onTargetGridLoaded() {
-    // TODO
+    $(".grid-piece").click(function () {
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(".grid[data-x='"+$(this).attr("data-x")+"'][data-y='"+$(this).attr("data-y")+"']").removeClass("active");
+        }
+        else {
+            $(this).addClass("active");
+            $(".grid[data-x='"+$(this).attr("data-x")+"'][data-y='"+$(this).attr("data-y")+"']").addClass("active");
+        }
+    });
 }
 
 function updateInfoPage() {
@@ -735,12 +744,12 @@ $.getJSON("/api/v1/types", function (json) {
  * Called when the navbar menu icon is hit
  */
 function onClickMenu() {
-    var elem = $(".sidebar");
+    var elem = $(".sidebar-nav");
 
     if (elem.css("display").substring(0, 4) == "none")
-        elem.css("display", "block", "important");
+        elem.css("display", "block", "important").removeClass("hidden-xs").addClass("hidden-sm");
     else
-        elem.css("display", "none");
+        elem.css("display", "none").addClass("hidden-xs").addClass("hidden-sm");
 }
 
 $(".btn-sidebar").click(function () {

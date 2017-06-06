@@ -291,7 +291,11 @@ function generateGrid(parent, size) {
                     'background-size': 'contain',
                     'left': data['x'] * size,
                     'top': data['y'] * size
-                }).addClass('grid-piece').prependTo(parent);
+                }).addClass('grid-piece')
+                    .attr("data-id", id)
+                    .attr("data-x", data['x'])
+                    .attr("data-y", data['y'])
+                    .prependTo(parent);
             }
             else if (unplaced_id === '') {
                 unplaced_id = id;

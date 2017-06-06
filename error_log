@@ -1,2 +1,5 @@
 [15-Feb-2017 15:38:38 America/Denver] PHP Warning:  include(generator.php): failed to open stream: No such file or directory in /home2/absorrco/public_html/ptu/index.php on line 225
 [15-Feb-2017 15:38:38 America/Denver] PHP Warning:  include(): Failed opening 'generator.php' for inclusion (include_path='.:/usr/php/56/usr/lib64:/usr/php/56/usr/share/pear') in /home2/absorrco/public_html/ptu/index.php on line 225
+[29-Mar-2017 12:56:00 America/Denver] PHP Warning:  require_once(./users.php): failed to open stream: No such file or directory in /home2/absorrco/public_html/ptu/lib/websockets.php on line 4
+[29-Mar-2017 12:56:00 America/Denver] PHP Fatal error:  require_once(): Failed opening required './users.php' (include_path='.:/usr/php/56/usr/lib64:/usr/php/56/usr/share/pear') in /home2/absorrco/public_html/ptu/lib/websockets.php on line 4
+[29-Mar-2017 12:58:11 America/Denver] PHP Warning:  socket_bind(): unable to bind address [98]: Address already in use in /home2/absorrco/public_html/ptu/lib/websockets.php on line 23
