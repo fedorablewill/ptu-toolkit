@@ -21,6 +21,7 @@ class PtuAPI extends API
     const EXPERIENCE_FILENAME = "experience.json";
     const FEATURES_FILENAME = "features.json";
     const POKEMON_FILENAME = "ptu_pokedex_1_05.json";
+    const POKEMON_PLUS_FILENAME = "ptu_pokedex_1_05_plus.json";
     const MOVES_FILENAME = "moves.json";
     const NATURES_FILENAME = "natures.json";
     const TYPE_FILENAME = "type-effects.json";
@@ -197,6 +198,54 @@ class PtuAPI extends API
         
         // Get Pokemon Data
         $pokemonData = $this->getJsonFromFile(self::POKEMON_FILENAME);
+        
+        // Get List of Pokemon
+        if ($this->checkBasicRequest()) {
+            // Sort by dex id
+            ksort($pokemonData);
+            // Grab a chunk
+            $offset = (!empty($_GET['offset'])) ? $_GET['offset'] : 0;
+            $size = (!empty($_GET['size'])) ? $_GET['size'] : self::DEFAULT_CHUNK_SIZE;
+            $data = array_slice($pokemonData, $offset, $size, true);
+            return $data;
+        }
+        
+        // Get Pokemon by Dex id (/1,/53,/421)
+        if (array_key_exists(0,$this->args) && is_numeric($this->args[0])) {
+            $dexId = str_pad($this->args[0], 3, "0", STR_PAD_LEFT);
+            if (array_key_exists($dexId, $pokemonData)) {
+                return $pokemonData[$dexId];
+            }
+            return "Not Found";
+        }
+        
+        // Get Pokemon by name
+        if (!empty($this->verb)) {
+            $pokemonName = strtolower($this->verb);
+            foreach ($pokemonData as $id => $pokemon) {
+                if (strtolower($pokemon["Species"]) == $pokemonName) {
+                    return $pokemonData[$id];
+                }
+            }
+            return "Not Found";
+        }
+    }
+    
+    /** pokemon_plus
+     * api/v1/pokemon_plus/
+     * api/v1/pokemon_plus/id
+     * api/v1/pokemon_plus/name/
+     * api/v1/pokemon_plus/?offset=20&size=3
+     */
+    public function pokemon_plus()
+    {
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
+        }
+        
+        // Get Pokemon Data
+        $pokemonData = $this->getJsonFromFile(self::POKEMON_PLUS_FILENAME);
         
         // Get List of Pokemon
         if ($this->checkBasicRequest()) {
