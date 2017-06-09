@@ -372,6 +372,7 @@ function selectGM() {
 
 $("#expmon-mon").change(function(){
 	var id = $('#expmon-mon').find(":selected").val();
+	if (gm_data["pokemon"][id].dex){
   	$.getJSON("api/v1/"+pokedex+"/"+gm_data["pokemon"][id].dex, function (dex) {
 	$.getJSON("api/v1/moves/", function (moves) {
 	$.getJSON("api/v1/abilities/", function (abilities) {
@@ -383,6 +384,7 @@ $("#expmon-mon").change(function(){
 	});
 	});
 	});
+	}
 });
 
 function fetchExistingPokemon(){
