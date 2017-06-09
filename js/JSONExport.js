@@ -2,6 +2,21 @@
 monIn: JSON from box.json
 */
 function JSONExport(monIn,dex,moves,abilities,experience,nature){
+function natureRead(nat){
+	switch(nat){
+		case: "Attack":
+			return "ATK";
+		case: "Defense":
+			return "DEF";
+		case: "SpecialAttack":
+			return "SPATK";
+		case: "SpecialDefense":
+			return "SPDEF";
+		default:
+			return nat.toUpperCase();
+	}
+}
+
 //monOut: Fancy Sheet-style JSON to export; setting the easy stuff first
 
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
@@ -33,14 +48,12 @@ if (!(nature.Raise==nature.Lower)){
 	if (nature.Raise=="HP"){
 		monOut["base_HP"]+=1
 	} else {
-		monOut["base_"+nature.Raise]+=2
+		monOut["base_"+natureRead(nature.Raise)]+=2
 	}
 	if (nature.Lower=="HP"){
-		monOut["base_HP"]-=1
-		monOut["base_HP"]=Math.max(monOut["base_HP"],1)
+		monOut["base_HP"]=Math.max(monOut["base_HP"]-1,1)
 	} else {
-		monOut["base_"+nature.Raise]-=2
-		monOut["base_"+nature.Raise]=Math.max(monOut["base_"+nature.Raise],1)
+		monOut["base_"+natureRead(nature.Raise)]=Math.max(monOut["base_"+natureRead(nature.Raise)]-2,1)
 	}
 }
 
