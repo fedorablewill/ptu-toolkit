@@ -145,6 +145,27 @@ peer.on('connection', function (c) {
             handleAffliction(json.affliction, json.pokemon);
         }
         /*
+         Request for battle grid
+         */
+        else if (json.type == "battle_grid") {
+            // Get grid size
+            var size = (json.max_width / parseInt($("#grid-w").val())) - 2;
+            // Create parent
+            var grid = $('<div />');
+
+            // Create ready callback
+            grid.ready_callback = function () {
+                // Send result
+                connection.send(JSON.stringify({
+                    'type': 'battle_grid',
+                    'html': grid.html()
+                }));
+            };
+
+            // Generate grid
+            generateGrid(grid, size);
+        }
+        /*
          Attack Received
          */
         else if (json.type == "battle_move") {
@@ -178,6 +199,11 @@ peer.on('connection', function (c) {
  */
 function renderBattler() {
     if (currentView == 0) {
+        // Create grid
+        generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
+
+        // Create health bars
+
         var html = '';
 
         $.each(battle, function (id, data) {
@@ -214,6 +240,84 @@ function renderBattler() {
 
         $("#view-holder").html(html);
     }
+}
+
+function generateGrid(parent, size) {
+    // Create Grid
+
+    parent.html("");
+
+    var i, j,
+        columns = parseInt($("#grid-w").val()),
+        rows = parseInt($("#grid-h").val()),
+        width = columns * size,
+        height = rows * size,
+        ratioW = Math.floor(width/size),
+        ratioH = Math.floor(height/size);
+
+    for (i=0; i < rows; i++) {
+        var r = $('<div />').addClass("grid-row").appendTo(parent);
+
+        for (j = 0; j < columns; j++) {
+            $('<div />').css({
+                'width': size,
+                'height': size,
+                'border': 'solid 2px #444',
+                'display': 'inline-block'
+            })
+                .addClass('grid')
+                .attr("data-x", j)
+                .attr("data-y", i)
+                .appendTo(r);
+        }
+    }
+
+    $('.grid').show();
+
+    // Create grid pieces
+
+    var unplaced_id = '', p = 0, done = false;
+
+    $.each(battle, function (id, data) {
+        p++;
+        $.getJSON("/api/v1/pokemon/" + gm_data["pokemon"][id]['dex'], function (dex) {
+            // TODO: determine size
+
+            if ('x' in data) {
+                $('<div />').css({
+                    'width': size,
+                    'height': size,
+                    'background': 'url(img/pokemon/' + gm_data["pokemon"][id]["dex"] + '.gif) no-repeat center',
+                    'background-size': 'contain',
+                    'left': data['x'] * size,
+                    'top': data['y'] * size
+                }).addClass('grid-piece')
+                    .attr("data-id", id)
+                    .attr("data-x", data['x'])
+                    .attr("data-y", data['y'])
+                    .prependTo(parent);
+            }
+            else if (unplaced_id === '') {
+                unplaced_id = id;
+
+                //alert("Click a tile to place " + gm_data["pokemon"][id]["name"]);
+
+                $(".grid").click(function () {
+                    battle[unplaced_id]['x'] = parseInt($(this).attr("data-x"));
+                    battle[unplaced_id]['y'] = parseInt($(this).attr("data-y"));
+
+                    renderBattler();
+                });
+            }
+
+            p--;
+
+            if (done && p == 0 && parent.ready_callback != null)
+                parent.ready_callback()
+        });
+    });
+
+    done = true;
 }
 
 /**
@@ -338,6 +442,18 @@ function onDataLoaded() {
 
     $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
     new Clipboard('.btn');
+
+    $("#zoom-slider").noUiSlider({
+        start: [10] ,
+        step: 1,
+        connect: false,
+        range: {
+            min: 1,
+            max: 20
+        }
+    }).on("change", function () {
+        renderBattler();
+    });
 }
 
 function saveGM() {
@@ -348,9 +464,24 @@ function saveGM() {
     dlAnchorElem.click();
 }
 
+function startBattle() {
+    battle = {};
+}
+
 function endBattle() {
     if (window.confirm("Are you sure you want to reset the battle?")) {
+
+        // Notify player clients
+        $.each(battle, function (k, v) {
+            sendMessage(v['client_id'], JSON.stringify({
+                "type": "battle_end"
+            }));
+        });
+
+        // Reset data
         battle = {};
+
+        // Redraw battler
         renderBattler();
     }
 }
@@ -367,6 +498,24 @@ function performMove(moveName, target_id, dealer_id) {
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
 
         var damageDone = 0;
+        var canMove = true;
+
+        // Paralysis check
+        if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
+            $.inArray("Paralysis", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+
+            // Save check roll
+            var check = roll(1, 20, 1);
+
+            if (check < 5) {
+                canMove = false;
+                doToast(gm_data["pokemon"][dealer_id]['name'] + " is paralyzed! They can't move!");
+            }
+        }
+
+        // Confusion check
+        if (canMove && "Confused" in battle[dealer_id]['afflictions'])
+            canMove = handleAffliction("Confused", dealer_id);
 
         // Check if Frozen (but don't Let It Go)
         if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
@@ -378,7 +527,7 @@ function performMove(moveName, target_id, dealer_id) {
         else if ("Fainted" in battle[dealer_id]['afflictions']) {
             doToast("Fainted Pokemon cannot use actions, abilities, or features")
         }
-        else {
+        else if (canMove) {
 
             var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
             var crit = 20, evade = 0;
@@ -715,8 +864,11 @@ function addAffliction(affliction, monId, value) {
         gm_data['pokemon'][monId]['afflictions'] = [];
 
     // Persistent Afflictions
-    if (affliction == "Burned" || affliction == "Frozen" ||
-        affliction == "Paralysis" || affliction == "Poisoned") {
+    if ((affliction == "Burned" && $.inArray("Fire", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Frozen" && $.inArray("Ice", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Paralysis" && $.inArray("Electric", gm_data['pokemon'][monId]['type'].split(" / ")) < 0) ||
+        (affliction == "Poisoned"  && $.inArray("Poison", gm_data['pokemon'][monId]['type'].split(" / ")) < 0 &&
+        $.inArray("Steel", gm_data['pokemon'][monId]['type'].split(" / ")) < 0)) {
 
         // Create array if not found
         if (gm_data['pokemon'][monId]['afflictions'] == null)
@@ -744,6 +896,23 @@ function addAffliction(affliction, monId, value) {
         }
         else if (affliction == "Frozen") {
             doToast(gm_data["pokemon"][monId]['name'] + " is frozen solid!");
+        }
+        else if (affliction == "Paralysis") {
+            doToast(gm_data["pokemon"][monId]['name'] + " has been paralyzed!");
+        }
+        else if (affliction == "Poisoned") {
+            battle[monId]['stage_spdef'] = parseInt(battle[monId]['stage_spdef']) - 2;
+
+            if (battle[monId]['stage_spdef'] < -6)
+                battle[monId]['stage_spdef'] = -6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-spdef",
+                "value": battle[monId]['stage_spdef']
+            }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " has been poisoned!");
         }
     }
     // Other Afflictions
@@ -781,6 +950,9 @@ function addAffliction(affliction, monId, value) {
                 deleteAffliction("Suppressed", monId);
             if ("Temporary Hit Points" in battle[monId]["afflictions"])
                 deleteAffliction("Temporary Hit Points", monId);
+        }
+        else if (affliction == "Confused") {
+            doToast(gm_data["pokemon"][monId]['name'] + " is Confused!");
         }
     }
 
@@ -822,10 +994,30 @@ function deleteAffliction(affliction, monId) {
         else if (affliction == "Frozen") {
             doToast(gm_data["pokemon"][monId]['name'] + " was cured of Frozen");
         }
+        else if (affliction == "Paralysis") {
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of Paralysis");
+        }
+        else if (affliction == "Poisoned") {
+            battle[monId]['stage_spdef'] = parseInt(battle[monId]['stage_spdef']) + 2;
+
+            if (battle[monId]['stage_spdef'] > 6)
+                battle[monId]['stage_spdef'] = 6;
+
+            sendMessage(battle[monId]['client_id'], JSON.stringify({
+                "type": "data_changed",
+                "field": "stage-spdef",
+                "value": battle[monId]['stage_spdef']
+            }));
+
+            doToast(gm_data["pokemon"][monId]['name'] + " was cured of Poison");
+        }
     }
     else {
         // Remove from battle entry
         delete battle[monId]['afflictions'][affliction];
+
+        // Toast
+        doToast(gm_data["pokemon"][monId]['name'] + " was cured of " + affliction);
     }
 
     // Update Player client
@@ -842,15 +1034,23 @@ function deleteAffliction(affliction, monId) {
  * Handle the effects of an affliction when triggered
  * @param affliction String affliction name
  * @param monId Id of the Pokemon
+ * @return boolean Returns true if allowed to perform an action
  */
 function handleAffliction(affliction, monId) {
     // Afflictions that take a Tick of Hit Points
-    if (affliction == "Burned") {
+    if (affliction == "Burned" || affliction == "Poisoned") {
 
         // Calculating max_hp
         var max_hp = gm_data["pokemon"][monId]['level'] + gm_data["pokemon"][monId]['hp'] * 3 + 10;
 
+        // Subtract health
         gm_data["pokemon"][monId]["health"] -= Math.floor(max_hp * 0.1);
+
+        // Show message
+        if (affliction == "Burned")
+            doToast(gm_data["pokemon"][monId]["name"] + " was damaged by their burn");
+        else if (affliction == "Poisoned")
+            doToast(gm_data["pokemon"][monId]["name"] + " was damaged from poison");
 
         // Check if fainted
         if (gm_data["pokemon"][monId]["health"] <= 0) {
@@ -862,8 +1062,6 @@ function handleAffliction(affliction, monId) {
         var w = Math.floor((gm_data["pokemon"][monId]['health'] / max_hp) * 100);
 
         $("[data-name='"+monId+"']").find(".progress-bar").css("width", w + "%");
-
-        doToast(gm_data["pokemon"][monId]["name"] + " was damaged by their burn");
 
         // Update Player client
         sendMessage(battle[monId]["client_id"], JSON.stringify({
@@ -883,8 +1081,29 @@ function handleAffliction(affliction, monId) {
             $.inArray("Fire", gm_data["pokemon"][monId]["type"].split(" / ")) >= 0))) {
 
             deleteAffliction("Frozen", monId);
+
+            return true;
         }
+
+        return false;
     }
+    // Confused save check
+    else if (affliction == "Confused") {
+        // Save check roll
+        var check_cf = roll(1, 20, 1);
+
+        // If rolled higher than 16, cure of Confusion
+        if (check_cf <= 8) {
+            doPhysicalStruggle(monId);
+            doToast(gm_data["pokemon"][monId]["name"] + " hurt itself in confusion!");
+
+            return false;
+        }
+        else if (check_cf >= 16)
+            deleteAffliction("Confused", monId);
+    }
+
+    return true;
 }
 
 /**

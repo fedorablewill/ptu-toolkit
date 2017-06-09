@@ -21,6 +21,7 @@ class PtuAPI extends API
     const EXPERIENCE_FILENAME = "experience.json";
     const FEATURES_FILENAME = "features.json";
     const POKEMON_FILENAME = "ptu_pokedex_1_05.json";
+    const POKEMON_PLUS_FILENAME = 'ptu_pokedex_1_05_plus.json';
     const MOVES_FILENAME = "moves.json";
     const NATURES_FILENAME = "natures.json";
     const TYPE_FILENAME = "type-effects.json";
@@ -197,37 +198,29 @@ class PtuAPI extends API
         
         // Get Pokemon Data
         $pokemonData = $this->getJsonFromFile(self::POKEMON_FILENAME);
-        
-        // Get List of Pokemon
-        if ($this->checkBasicRequest()) {
-            // Sort by dex id
-            ksort($pokemonData);
-            // Grab a chunk
-            $offset = (!empty($_GET['offset'])) ? $_GET['offset'] : 0;
-            $size = (!empty($_GET['size'])) ? $_GET['size'] : self::DEFAULT_CHUNK_SIZE;
-            $data = array_slice($pokemonData, $offset, $size, true);
-            return $data;
+
+        return $this->getPokemonData($pokemonData);
+
+    }
+
+    /** pokemon Plus
+     * Grabs Pokemon from playtest data
+     * api/v1/pokemon/
+     * api/v1/pokemon/id
+     * api/v1/pokemon/name/
+     * api/v1/pokemon/?offset=20&size=3
+     */
+    public function pokemonPlus()
+    {
+        // Only handle gets
+        if ($this->method != 'GET') {
+            return self::NOT_GET_RESPONSE;
         }
-        
-        // Get Pokemon by Dex id (/1,/53,/421)
-        if (array_key_exists(0,$this->args) && is_numeric($this->args[0])) {
-            $dexId = str_pad($this->args[0], 3, "0", STR_PAD_LEFT);
-            if (array_key_exists($dexId, $pokemonData)) {
-                return $pokemonData[$dexId];
-            }
-            return "Not Found";
-        }
-        
-        // Get Pokemon by name
-        if (!empty($this->verb)) {
-            $pokemonName = strtolower($this->verb);
-            foreach ($pokemonData as $id => $pokemon) {
-                if (strtolower($pokemon["Species"]) == $pokemonName) {
-                    return $pokemonData[$id];
-                }
-            }
-            return "Not Found";
-        }
+
+        // Get Pokemon Plus Data
+        $pokemonData = $this->getJsonFromFile(self::POKEMON_PLUS_FILENAME);
+
+        return $this->getPokemonData($pokemonData);
     }
     
     /** types
@@ -379,5 +372,48 @@ class PtuAPI extends API
         $file = file_get_contents(self::JSON_DATA_PATH . $filename)
                 or die("Could not open file: $filename");
         return json_decode($file, true);
+    }
+
+    /**
+     * Get Pokemon Data function
+     * Since we now have multiple pokemon files from different versions
+     *   and want to allow calls to different versions this function
+     *   consolidates some of the logic around fetching pokemon from a
+     *   similar container
+     * @param array $pokemonData
+     * @return array|string
+     */
+    private function getPokemonData($pokemonData)
+    {
+        // Get List of Pokemon
+        if ($this->checkBasicRequest()) {
+            // Sort by dex id
+            ksort($pokemonData);
+            // Grab a chunk
+            $offset = (!empty($_GET['offset'])) ? $_GET['offset'] : 0;
+            $size = (!empty($_GET['size'])) ? $_GET['size'] : self::DEFAULT_CHUNK_SIZE;
+            $data = array_slice($pokemonData, $offset, $size, true);
+            return $data;
+        }
+
+        // Get Pokemon by Dex id (/1,/53,/421)
+        if (array_key_exists(0,$this->args) && is_numeric($this->args[0])) {
+            $dexId = str_pad($this->args[0], 3, "0", STR_PAD_LEFT);
+            if (array_key_exists($dexId, $pokemonData)) {
+                return $pokemonData[$dexId];
+            }
+            return "Not Found";
+        }
+
+        // Get Pokemon by name
+        if (!empty($this->verb)) {
+            $pokemonName = strtolower($this->verb);
+            foreach ($pokemonData as $id => $pokemon) {
+                if (strtolower($pokemon["Species"]) == $pokemonName) {
+                    return $pokemonData[$id];
+                }
+            }
+            return "Not Found";
+        }
     }
 }
