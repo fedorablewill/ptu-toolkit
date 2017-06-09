@@ -21,7 +21,7 @@ function natureRead(nat){
 
 //If playtest rules are an option in the future, we can add those in as parameters later, for certain abilities and such
 var monOut = {
-  CharType: monIn.nickname,
+  CharType: 0,
   nickname: monIn.name,
   species: dex.Species,
   Level: monIn.level,
