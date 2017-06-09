@@ -98,22 +98,24 @@ $.each(skills,function(index,value){
 
 //Handling Moves
 $.each(monIn.moves,function(index,value){
+  if (value!==""){
   var info = moves[value];
   monOut["Move"+(index+1)]={
-    Name:value,
-    Type:info.Type,
-    DType:info.Class,
+   	Name:value,
+   	Type:info.Type,
+   	DType:info.Class,
     Freq:info.Freq,
-    Range: info.Range
+   	Range: info.Range
   };
   if (info.hasOwnProperty("AC")){
-    monOut["Move"+(index+1)].AC=parseInt(info.AC,10);
+   	monOut["Move"+(index+1)].AC=parseInt(info.AC,10);
   }
   if (info.hasOwnProperty("DB")){
-    monOut["Move"+(index+1)].DB=parseInt(info.DB,10);
+   	monOut["Move"+(index+1)].DB=parseInt(info.DB,10);
   }
   if (info.hasOwnProperty("Effect")){
-    monOut["Move"+(index+1)].Effects=info.Effect;
+   	monOut["Move"+(index+1)].Effects=info.Effect;
+  }
   }
 });
 //Handling  Abilities
@@ -121,6 +123,7 @@ $.each(monIn.moves,function(index,value){
 monOut.sniper = 0;monOut.snipern = 0;monOut.twist = 0;monOut.flashfire = 0;monOut.weird = 0;monOut.damp = 0;monOut.aurastn = 0;monOut.defeat = 0;monOut.hustle = 0;monOut.courage = 0;monOut.lastctrue = 0;monOut.lastctype = "";
 
 $.each(monIn.abilities,function(index,value){
+  if (value!==""){
   var info = abilities[value];
   monOut["Ability"+(index+1)]={
     Name:value,
@@ -239,6 +242,7 @@ $.each(monIn.abilities,function(index,value){
   if (value=="Venom"){
     monOut.lastctrue=1;
     monOut.lastctype+="Poison";
+  }
   }
 });
 
