@@ -4,13 +4,13 @@ monIn: JSON from box.json
 function JSONExport(monIn,dex,moves,abilities,experience,nature){
 function natureRead(nat){
 	switch(nat){
-		case: "Attack":
+		case "Attack":
 			return "ATK";
-		case: "Defense":
+		case "Defense":
 			return "DEF";
-		case: "SpecialAttack":
+		case "SpecialAttack":
 			return "SPATK";
-		case: "SpecialDefense":
+		case "SpecialDefense":
 			return "SPDEF";
 		default:
 			return nat.toUpperCase();
