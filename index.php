@@ -774,6 +774,24 @@
                 <div class="modal-body" id="select-target-body">
                     <button class="btn btn-simple btn-danger btn-lg" data-target="other">Other Target</button>
                 </div>
+
+                <div class="modal-body" id="move-advanced-body">
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-dmg-bonus">Damage Bonus</label>
+                                <input class="form-control" type="number" value="0" id="move-dmg-bonus" />
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-acc-bonus">Accuracy Bonus</label>
+                                <input class="form-control" type="number" value="0" id="move-acc-bonus" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-content" id="modalTarget-join">

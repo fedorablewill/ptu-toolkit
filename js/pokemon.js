@@ -62,10 +62,18 @@ $(function () {
             "value": $(this).val()
         }));
 
+        if ($(this).attr("id") == "stage-acc")
+            $("#move-acc-bonus").val($(this).val());
+
         if ($(this).attr("id") == "stage-speed") {
             var s = pokemon_data["speed"] * getStageMultiplier(parseInt($(this).val()));
             $("#speed").html(s);
         }
+    });
+
+    // Link Move Accuracy Bonus with Accuracy 'Stage'
+    $("#move-acc-bonus").change(function () {
+        $("#stage-acc").val($(this).val());
     });
 
     $(".progress").click(function () {
@@ -409,7 +417,9 @@ function updateTargetList() {
             "type": "battle_move",
             "dealer": $("#pokemonId").val(),
             "target": $(this).attr("data-target"),
-            "move": currentMove
+            "move": currentMove,
+            "bonus_dmg": $("#move-dmg-bonus").val(),
+            "bonus_acc": $("#move-acc-bonus").val()
         }));
 
         currentMove = null;

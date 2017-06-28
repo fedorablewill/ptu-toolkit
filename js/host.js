@@ -169,7 +169,7 @@ peer.on('connection', function (c) {
          Attack Received
          */
         else if (json.type == "battle_move") {
-            performMove(json.move, json.target, json.dealer);
+            performMove(json.move, json.target, json.dealer, json.bonus_acc, json.bonus_dmg);
         }
         /*
          Manual Damage Received
@@ -493,8 +493,10 @@ function endBattle() {
  * @param moveName The name of the move used
  * @param target_id The Pokemon id of the target
  * @param dealer_id The Pokemon id of the user
+ * @param acc_bonus Value added to accuracy roll
+ * @param dmg_bonus Value added to damage
  */
-function performMove(moveName, target_id, dealer_id) {
+function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
     doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
@@ -527,19 +529,38 @@ function performMove(moveName, target_id, dealer_id) {
         }
         // Check if Fainted
         else if ("Fainted" in battle[dealer_id]['afflictions']) {
-            doToast("Fainted Pokemon cannot use actions, abilities, or features")
+            doToast("Fainted Pokemon cannot use actions, abilities, or features");
         }
         else if (canMove) {
 
-            var acRoll = roll(1, 20, 1) + battle[dealer_id]["stage_acc"];
-            var crit = 20, evade = 0;
+            var acRoll = roll(1, 20, 1);
+            var crit = 20, acCheck = acRoll + battle[dealer_id]["stage_acc"];
+
+            // Subtract target evade
 
             if (target_id != "other") {
-                //TODO: get evade
+                // Find speed evade
+                var speed_evade = Math.floor(gm_data["pokemon"][dealer_id]["speed"] / 5);
+
+                // Apply evade bonus
+                acCheck -= battle[dealer_id]["stage_eva"];
+
+                if (move["Class"] == "Physical") {
+                    var phy_evade = Math.floor(gm_data["pokemon"][dealer_id]["def"] / 5);
+
+                    acCheck -= speed_evade > phy_evade ? speed_evade : phy_evade;
+                }
+                else if (move["Class"] == "Special") {
+                    var spc_evade = Math.floor(gm_data["pokemon"][dealer_id]["spdef"] / 5);
+
+                    acCheck -= speed_evade > spc_evade ? speed_evade : spc_evade;
+                }
+                else
+                    acCheck -= speed_evade;
             }
 
             // Move missed
-            if (move.hasOwnProperty('AC') && acRoll < parseInt(move["AC"]) + evade) {
+            if (move.hasOwnProperty('AC') && acCheck < parseInt(move["AC"])) {
                 doToast("It missed!");
 
                 // Check for triggers for if missed
@@ -581,11 +602,13 @@ function performMove(moveName, target_id, dealer_id) {
                             gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
                     }
                     else if (move["Class"] == "Special") {
-                        damage = rolledDmg * (acRoll >= crit ? 2 : 1) +
+                        damage = rolledDmg +
                             gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
                     }
 
                     // Distribute damage
+
+                    damage += parseInt(dmg_bonus);
 
                     if (target_id == "other") {
                         doToast("OUTGOING DAMAGE = " + damage);
