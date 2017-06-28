@@ -211,6 +211,11 @@
         .snackbar-container {
             padding-bottom: 65px;
         }
+
+        .snackbar:not(.snackbar-opened) {
+            z-index: -200;
+            display: none;
+        }
     </style>
 </head>
 <body>

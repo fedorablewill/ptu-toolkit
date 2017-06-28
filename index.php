@@ -305,6 +305,10 @@
             width: 80%;
             margin-top: 0;
         }
+
+        .snackbar:not(.snackbar-opened) {
+            z-index: -200;
+        }
     </style>
 </head>
 <body>
