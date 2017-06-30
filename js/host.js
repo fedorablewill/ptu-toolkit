@@ -9,6 +9,14 @@ var currentView = 0;
 var pokedex = "pokemon";
 
 /**
+ * Enable "Are you sure" dialog before close
+ * @returns {boolean}
+ */
+window.onbeforeunload = function() {
+    return true;
+};
+
+/**
  * Receives commands/messages
  */
 peer.on('connection', function (c) {
