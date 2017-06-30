@@ -8,6 +8,7 @@
     <title>PTU Battle Viewer</title>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -41,6 +42,20 @@
             color: white;
         }
 
+        #battle-tutorial {
+            text-shadow: #444 0px 0px 8px;
+        }
+
+        #battle-tutorial h3 {
+            font-family: "Roboto Slab", "Roboto", "Helvetica", "Arial", sans-serif;
+            font-weight: 500;
+            text-shadow: #444 1px 1px 6px;
+        }
+
+        #battle-tutorial h2, #battle-tutorial h3, #battle-tutorial h4, #battle-tutorial h5, #battle-tutorial h6 {
+            margin-top: 5px;
+        }
+
         .battle-slider {
             width: 300px;
             max-width: calc(100% - 45px);
@@ -54,6 +69,10 @@
             background: #f0f0f0;
         }
 
+        .card-battle .content {
+            padding: 15px 45px;
+        }
+
         .grid-row {
             display: flex;
         }
@@ -64,7 +83,7 @@
 
         .grid{
             display: none;
-            background-color: #eaeaea;
+            background-color: #fcfcfc;
             border: 1px solid rgb(142, 142, 142);
         }
 
@@ -112,6 +131,10 @@
 
         .content-generator {
             margin-top: 300px;
+        }
+
+        .edit-pokemon {
+            text-align: left;
         }
 
         .edit-pokemon img {
@@ -256,15 +279,62 @@
 
     <div class="hidden" id="body-battle">
         <div class="row">
-            <button class="btn btn-danger btn-raised pull-right" onclick="endBattle()">End Battle</button>
-
-            <div class="battle-slider">
-                <label class="control-label" for="zoom-slider">Zoom Level</label>
-                <div class="slider slider-danger" id="zoom-slider"></div>
+            <div class="col-sm-3" id="battle-actions">
+                <div id="battle-tutorial" class="text-center">
+                    <img src="img/eevee_waving_by_kittycateevee-d9ex8gh.png" height="100" />
+                    <h3 class="text-primary">WELCOME</h3>
+                    <h4>We're glad you're here!</h4>
+                    <hr/>
+                    <h6>NEED HELP?</h6>
+                    <a href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
+                    <br/>
+                    <a href="https://github.com/absorr/ptu-toolkit/issues" target="_blank">Bug/Issue Reporting</a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="battle-grid"></div>
+            <div class="col-sm-9">
+                <div class="card card-battle card-nav-tabs">
+                    <div class="header header-danger">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="active">
+                                        <a href="#tab-battle-list" data-toggle="tab">
+                                            <i class="material-icons">list</i>
+                                            Health
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab-battle-grid" data-toggle="tab" onclick="alert('Grid/Range features are coming soon!')">
+                                            <i class="material-icons">view_module</i>
+                                            Battle Grid
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-battle-list">
+
+                            </div>
+                            <div class="tab-pane" id="tab-battle-grid">
+                                <div class="row">
+                                    <button class="btn btn-danger btn-raised pull-right" onclick="endBattle()">End Battle</button>
+
+                                    <div class="battle-slider">
+                                        <label class="control-label" for="zoom-slider">Zoom Level</label>
+                                        <div class="slider slider-danger" id="zoom-slider"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="battle-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

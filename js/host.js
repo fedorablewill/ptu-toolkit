@@ -246,7 +246,8 @@ function renderBattler() {
 
         html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
 
-        $("#view-holder").html(html);
+        //$("#view-holder").html(html);
+        $("#tab-battle-list").html(html);
     }
 }
 
@@ -335,7 +336,7 @@ function renderPokemonList() {
     var html = '';
 
     $.each(gm_data['pokemon'], function (k, v) {
-        html += '<div class="edit-pokemon col-sm-4 col-md-3">'+
+        html += '<div class="edit-pokemon col-sm-6">'+
                 '<img src="img/pokemon/'+v["dex"]+'.gif"> '+v["name"]+
                 '<div class="btn-group-vertical pull-right">'+
                     '<button onclick="onClickEditPokemon(\''+k+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
@@ -344,7 +345,7 @@ function renderPokemonList() {
             '</div>';
     });
 
-    $("#view-holder").find(".list-pokemon").html(html);
+    $("#body-pokemon").find(".list-pokemon").html(html);
 
     onRenderPokemonManage();
 }
@@ -353,14 +354,21 @@ function changeGMView(view) {
     currentView = view;
 
     if (view == 0) {
+        $("#body-battle").removeClass("hidden");
+        $("#body-pokemon").addClass("hidden");
+        $("#body-settings").addClass("hidden");
         renderBattler();
     }
     else if (view == 1) {
-        $("#view-holder").html($("#body-pokemon").html());
+        $("#body-battle").addClass("hidden");
+        $("#body-pokemon").removeClass("hidden");
+        $("#body-settings").addClass("hidden");
         renderPokemonList();
     }
     else if (view == 2) {
-        $("#view-holder").html($("#body-settings").html());
+        $("#body-battle").addClass("hidden");
+        $("#body-pokemon").addClass("hidden");
+        $("#body-settings").removeClass("hidden");
     }
 }
 
@@ -464,6 +472,9 @@ function onDataLoaded() {
     }).on("change", function () {
         renderBattler();
     });
+
+    $("#view-holder").addClass("hidden");
+    changeGMView(0);
 }
 
 function saveGM() {
