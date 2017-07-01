@@ -309,7 +309,7 @@
                     <h4>We're glad you're here!</h4>
                 </div>
                 <hr/>
-                <div id="battle-help card" class="text-center">
+                <div id="battle-help" class="text-center card">
                     <h6>NEED HELP?</h6>
                     <a class="text-info" href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
                     <br/>
@@ -341,7 +341,9 @@
                     <div class="content">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-battle-list">
-
+                                <h3 class="text-muted">No one's here yet 😟</h3>
+                                <h4 class="text-muted">Send your <a data-toggle="modal" data-target="#modalShare">customized link</a> to your players.
+                                    Then, have them hit "Join Battle" when they're ready.</h4>
                             </div>
                             <div class="tab-pane" id="tab-battle-grid">
                                 <div class="row">

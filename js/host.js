@@ -210,41 +210,50 @@ function renderBattler() {
         // Create grid
         generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
 
-        // Create health bars
-
         var html = '';
 
-        $.each(battle, function (id, data) {
-            var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-            var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+        // If no one is in battle
+        if (battle.length === undefined || battle.length === 0) {
+            html = '<h3 class="text-muted">No one\'s here yet 😟</h3>' +
+                '<h4 class="text-muted">Send your <a data-toggle="modal" data-target="#modalShare">customized link</a> to your players. ' +
+                'Then, have them hit "Join Battle" when they\'re ready.</h4>';
+        }
+        else {
 
-            if (w > 100)
-                console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
-                    gm_data["pokemon"][id]['health'] + "/" + max_hp);
+            // Create health bars
 
-            // Gather afflictions
-            var afflictions = "";
+            $.each(battle, function (id, data) {
+                var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+                var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
 
-            if (gm_data["pokemon"][id]['afflictions'] != null)
-                $.each(gm_data["pokemon"][id]['afflictions'], function (k, a) {
-                    afflictions += ' <span class="label label-danger">'+a+'</span>';
-                });
+                if (w > 100)
+                    console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
+                        gm_data["pokemon"][id]['health'] + "/" + max_hp);
 
-            if (data['afflictions'] != null)
-                $.each(data['afflictions'], function (a, v) {
-                    afflictions += ' <span class="label label-danger">'+a+'</span>';
-                });
+                // Gather afflictions
+                var afflictions = "";
 
-            // Generate HTML
-            html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
-                '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
-                '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
-                '</div>' +
-                '</div>';
-        });
+                if (gm_data["pokemon"][id]['afflictions'] != null)
+                    $.each(gm_data["pokemon"][id]['afflictions'], function (k, a) {
+                        afflictions += ' <span class="label label-danger">' + a + '</span>';
+                    });
 
-        html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
+                if (data['afflictions'] != null)
+                    $.each(data['afflictions'], function (a, v) {
+                        afflictions += ' <span class="label label-danger">' + a + '</span>';
+                    });
+
+                // Generate HTML
+                html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
+                    '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
+                    '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
+                    '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
+                    '</div>' +
+                    '</div>';
+            });
+
+            html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
+        }
 
         //$("#view-holder").html(html);
         $("#tab-battle-list").html(html);
