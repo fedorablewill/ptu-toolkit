@@ -213,7 +213,7 @@ function renderBattler() {
         var html = '';
 
         // If no one is in battle
-        if (battle.length === undefined || battle.length === 0) {
+        if ($.isEmptyObject(battle)) {
             html = '<h3 class="text-muted">No one\'s here yet 😟</h3>' +
                 '<h4 class="text-muted">Send your <a data-toggle="modal" data-target="#modalShare">customized link</a> to your players. ' +
                 'Then, have them hit "Join Battle" when they\'re ready.</h4>';
