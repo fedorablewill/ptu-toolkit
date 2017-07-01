@@ -42,7 +42,7 @@
             color: white;
         }
 
-        #battle-actions {
+        #battle-message {
             text-shadow: #444 0px 0px 8px;
         }
 
@@ -54,7 +54,7 @@
 
         #battle-actions .battle-dialog {
             font-family: "Roboto Mono", "Roboto", "Helvetica", "Arial", sans-serif;
-            color: #FFF;
+            color: #333;
             margin-top: 15px;
             padding: 10px 10px 5px 10px;
             background-color: rgba(0, 0, 0, 0);
@@ -70,6 +70,13 @@
 
         #battle-actions h2, #battle-actions h3, #battle-actions h4, #battle-actions h5, #battle-actions h6 {
             margin-top: 5px;
+        }
+
+        #battle-help {
+            background: linear-gradient(60deg, #ef5350, #d32f2f);
+            font-weight: 400;
+            color: #FFF;
+            padding: 10px;
         }
 
         .battle-slider {
@@ -302,11 +309,11 @@
                     <h4>We're glad you're here!</h4>
                 </div>
                 <hr/>
-                <div id="battle-help" class="text-center">
+                <div id="battle-help card" class="text-center">
                     <h6>NEED HELP?</h6>
-                    <a class="text-danger" href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
+                    <a class="text-info" href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
                     <br/>
-                    <a class="text-danger" href="https://github.com/absorr/ptu-toolkit/issues" target="_blank">Bug/Issue Reporting</a>
+                    <a class="text-info" href="https://github.com/absorr/ptu-toolkit/issues" target="_blank">Bug/Issue Reporting</a>
                 </div>
             </div>
             <div class="col-sm-9">
