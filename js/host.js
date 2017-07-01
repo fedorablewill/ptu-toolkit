@@ -507,6 +507,22 @@ function endBattle() {
     }
 }
 
+function doMoveDialog(dealer_id, move_name, move_json) {
+    if (currentView !== 0)
+        doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + move_name + "!");
+
+    var html = '<img src="img/pokemon/' + gm_data["pokemon"][dealer_id]["dex"] + '.gif" />' +
+        '<div class="battle-dialog">' +
+        '<p>' + gm_data["pokemon"][dealer_id]["name"] + ' used <span style="color:' + typeColor(move_json["Type"]) + '">' + move_name + '</span></p>' +
+        '</div>';
+
+    $("#battle-message").html(html);
+}
+
+function addMoveDialogInfo(html) {
+    $(".battle-dialog").append('<p>' + '<strong>&gt;</strong> ' + html + '</p>');
+}
+
 /**
  * Handle a move request and dish out effects
  * @param moveName The name of the move used
@@ -516,9 +532,10 @@ function endBattle() {
  * @param dmg_bonus Value added to damage
  */
 function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
-    doToast(gm_data["pokemon"][dealer_id]["name"] + " used " + moveName + "!");
 
     $.getJSON("/api/v1/moves/"+moveName, function (move) {
+
+        doMoveDialog(dealer_id, moveName, move);
 
         var damageDone = 0;
         var canMove = true;
@@ -554,6 +571,10 @@ function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
 
             var acRoll = roll(1, 20, 1);
             var crit = 20, acCheck = acRoll + battle[dealer_id]["stage_acc"];
+
+            // Show roll
+
+            addMoveDialogInfo('<strong>ACC:</strong> Rolled ' + acRoll + ' on d20');
 
             // Subtract target evade
 
@@ -611,6 +632,10 @@ function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
                     var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
                     var damage = 0;
 
+                    // Show roll
+
+                    addMoveDialogInfo('<strong>DMG:</strong> Rolled ' + rolledDmg + ' on DB' + db);
+
                     // Declare if critical hit
                     if (acRoll >= crit)
                         doToast("Critical hit!");
@@ -631,6 +656,7 @@ function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
 
                     if (target_id == "other") {
                         doToast("OUTGOING DAMAGE = " + damage);
+                        addMoveDialogInfo('<strong>OUTGOING DAMAGE:</strong> ' + damage);
                         damageDone = damage;
                     }
                     else {
@@ -788,7 +814,9 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
 
         //Handling trigger by type
         if (trigger.type=="action-needed"){
-            doToast(trigger.text)
+            doToast(trigger.text);
+
+            addMoveDialogInfo('<strong>MANUAL ACTION:</strong> ' + trigger.text);
         }
         else if (trigger.type=="CS"){
             //Raising/lowering stats
@@ -800,11 +828,18 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
                 else if (battle[id]["stage_"+stat] < -6)
                     battle[id]["stage_"+stat] = -6;
 
+                // Notify client
                 sendMessage(battle[id]['client_id'], JSON.stringify({
                     "type": "data_changed",
                     "field": "stage-"+stat,
                     "value": battle[id]['stage_'+stat]
                 }));
+
+                // Log change
+                if (trigger.value > 0)
+                    addMoveDialogInfo(gm_data["pokemon"][id]['name'] + '\'s <strong>'+stat+'</strong> increased');
+                else
+                    addMoveDialogInfo(gm_data["pokemon"][id]['name'] + '\'s <strong>'+stat+'</strong> decreased');
             });
         }
         else if (trigger.type=="heal"){
@@ -827,15 +862,24 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
             //Setting Health bar
             var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
             $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
+
+            // Log change
+            addMoveDialogInfo(gm_data["pokemon"][id]['name'] + ' <strong>was healed</strong>');
         }
         else if (trigger.type=="vortex"){
             //TODO: Figure out vortex
+            // Log change
+            addMoveDialogInfo('<strong>Vortex</strong> has yet to be implemented');
         }
         else if (trigger.type=="push"){
             //TODO: Wait until map is implemented
+            // Log change
+            addMoveDialogInfo('<strong>Push</strong> has yet to be implemented');
         }
         else if (trigger.type=="switch"){
             //TODO: Not really a mechanism for this at present
+            // Log change
+            addMoveDialogInfo('<strong>Switch</strong> has yet to be implemented');
         }
         else if (trigger.type=="status"){
             $.each(trigger.stat, function (k, status) {
@@ -888,6 +932,9 @@ function handleTrigger(trigger, dealer_id, target_id, damage_dealt, moveName, ac
         }
         else if (trigger.type=="protect"){
             //TODO: Need ability to interrupt to implement
+
+            // Log change
+            addMoveDialogInfo('<strong>Protect/Interrupt</strong> has yet to be implemented');
         }
         else if (trigger.type=="execute"){
             var r = roll(1,100,1);
@@ -1752,7 +1799,7 @@ function onRenderPokemonManage() {
             // Add Pokemon
             gm_data['pokemon'][generatePmonId()] = data;
 
-            doToast(data['name'] + " was added.")
+            doToast(data['name'] + " was added.");
             renderPokemonList();
         });
     });

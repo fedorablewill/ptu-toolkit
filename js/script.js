@@ -238,3 +238,65 @@ function fetchPokemon(offset, size) {
         }
     });
 }
+
+function typeColor(type) {
+    var color = "#000";
+
+    switch (type.toLowerCase()) {
+        case "bug":
+            color = "rgb(158, 173, 30)";
+            break;
+        case "dark":
+            color = "rgb(99, 78, 64)";
+            break;
+        case "dragon":
+            color = "rgb(94, 33, 243)";
+            break;
+        case "electric":
+            color = "rgb(244, 200, 26)";
+            break;
+        case "fairy":
+            color = "rgb(223, 116, 223)";
+            break;
+        case "fighting":
+            color = "rgb(179, 44, 37)";
+            break;
+        case "fire":
+            color = "rgb(232, 118, 36)";
+            break;
+        case "flying":
+            color = "rgb(156, 136, 218,)";
+            break;
+        case "ghost":
+            color = "rgb(98, 77, 134)";
+            break;
+        case "grass":
+            color = "rgb(112, 191, 72)";
+            break;
+        case "ground":
+            color = "rgb(217, 178, 71)";
+            break;
+        case "ice":
+            color = "rgb(130, 208, 208)";
+            break;
+        case "normal":
+            color = "rgb(158, 158, 109)";
+            break;
+        case "poison":
+            color = "rgb(149, 59, 149)";
+            break;
+        case "psychic":
+            color = "rgb(247, 64, 119)";
+            break;
+        case "rock":
+            color = "rgb(169, 147, 51)";
+            break;
+        case "steel":
+            color = "rgb(166, 166, 196)";
+            break;
+        case "water":
+            color = "rgb(82, 127, 238)";
+            break;
+    }
+    return color;
+}

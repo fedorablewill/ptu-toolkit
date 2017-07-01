@@ -8,7 +8,7 @@
     <title>PTU Battle Viewer</title>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -42,17 +42,33 @@
             color: white;
         }
 
-        #battle-tutorial {
+        #battle-actions {
             text-shadow: #444 0px 0px 8px;
         }
 
-        #battle-tutorial h3 {
-            font-family: "Roboto Slab", "Roboto", "Helvetica", "Arial", sans-serif;
+        #battle-actions h3 {
+            font-family: "Roboto Mono", "Roboto", "Helvetica", "Arial", sans-serif;
             font-weight: 500;
             text-shadow: #444 1px 1px 6px;
         }
 
-        #battle-tutorial h2, #battle-tutorial h3, #battle-tutorial h4, #battle-tutorial h5, #battle-tutorial h6 {
+        #battle-actions .battle-dialog {
+            font-family: "Roboto Mono", "Roboto", "Helvetica", "Arial", sans-serif;
+            color: #FFF;
+            margin-top: 15px;
+            padding: 10px 10px 5px 10px;
+            background-color: rgba(0, 0, 0, 0);
+            background-image: linear-gradient(60deg, rgb(248, 248, 248), rgb(239, 239, 239));
+            border-radius: 4px;
+            border: #888 solid 3px;
+            text-shadow: none;
+        }
+
+        #battle-actions .battle-dialog p:not(:first-child){
+            text-align: left;
+        }
+
+        #battle-actions h2, #battle-actions h3, #battle-actions h4, #battle-actions h5, #battle-actions h6 {
             margin-top: 5px;
         }
 
@@ -280,15 +296,17 @@
     <div class="hidden" id="body-battle">
         <div class="row">
             <div class="col-sm-3" id="battle-actions">
-                <div id="battle-tutorial" class="text-center">
+                <div id="battle-message" class="text-center">
                     <img src="img/eevee_waving_by_kittycateevee-d9ex8gh.png" height="100" />
-                    <h3 class="text-primary">WELCOME</h3>
+                    <h3 class="text-danger">WELCOME</h3>
                     <h4>We're glad you're here!</h4>
-                    <hr/>
+                </div>
+                <hr/>
+                <div id="battle-help" class="text-center">
                     <h6>NEED HELP?</h6>
-                    <a href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
+                    <a class="text-danger" href="https://github.com/absorr/ptu-toolkit/wiki/Tutorial-&-FAQ" target="_blank">Tutorial &amp; FAQs</a>
                     <br/>
-                    <a href="https://github.com/absorr/ptu-toolkit/issues" target="_blank">Bug/Issue Reporting</a>
+                    <a class="text-danger" href="https://github.com/absorr/ptu-toolkit/issues" target="_blank">Bug/Issue Reporting</a>
                 </div>
             </div>
             <div class="col-sm-9">
