@@ -15,8 +15,8 @@
       <file leaf-file-name="host.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/host.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-424">
-              <caret line="311" column="63" lean-forward="true" selection-start-line="311" selection-start-column="63" selection-end-line="311" selection-end-column="63" />
+            <state relative-caret-position="1560">
+              <caret line="361" column="26" lean-forward="false" selection-start-line="340" selection-start-column="20" selection-end-line="361" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -25,17 +25,27 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1016">
-              <caret line="308" column="8" lean-forward="false" selection-start-line="308" selection-start-column="8" selection-end-line="310" selection-end-column="9" />
+            <state relative-caret-position="1280">
+              <caret line="286" column="9" lean-forward="false" selection-start-line="286" selection-start-column="9" selection-end-line="286" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="host.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="splash.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/splash.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="648">
+              <caret line="305" column="55" lean-forward="false" selection-start-line="305" selection-start-column="55" selection-end-line="305" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="host.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/host.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
+            <state relative-caret-position="40">
               <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
               <folding>
                 <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
@@ -49,8 +59,8 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="244" column="30" lean-forward="true" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
+            <state relative-caret-position="9760">
+              <caret line="244" column="30" lean-forward="false" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -59,7 +69,7 @@
       <file leaf-file-name="pokemon.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/pokemon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2349">
+            <state relative-caret-position="35320">
               <caret line="886" column="0" lean-forward="false" selection-start-line="886" selection-start-column="0" selection-end-line="886" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -93,6 +103,7 @@
         <option value="$PROJECT_DIR$/js/script.js" />
         <option value="$PROJECT_DIR$/host.php" />
         <option value="$PROJECT_DIR$/js/host.js" />
+        <option value="$PROJECT_DIR$/splash.php" />
       </list>
     </option>
   </component>
@@ -124,6 +135,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -152,8 +165,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -266,19 +277,20 @@
       <workItem from="1498662213116" duration="6813000" />
       <workItem from="1498672326826" duration="4158000" />
       <workItem from="1498846918137" duration="7008000" />
-      <workItem from="1498922730355" duration="9378000" />
+      <workItem from="1498922730355" duration="9717000" />
+      <workItem from="1499810894168" duration="3521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32129000" />
+    <option name="totallyTimeSpent" value="35989000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26925135" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27272728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -309,6 +321,58 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/host.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12440">
+          <caret line="311" column="63" lean-forward="false" selection-start-line="311" selection-start-column="63" selection-end-line="311" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/host.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8600">
+          <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
+          <folding>
+            <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
+            <marker date="1498945943116" expanded="true" signature="16869:16875" ph="..." />
+            <marker date="1498945943116" expanded="true" signature="17087:17091" ph="&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9760">
+          <caret line="244" column="30" lean-forward="true" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35440">
+          <caret line="886" column="0" lean-forward="false" selection-start-line="886" selection-start-column="0" selection-end-line="886" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1498923955186" expanded="true" signature="8283:8290" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="9231:9238" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="10082:10089" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="10925:10932" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="13082:13089" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="15842:15849" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11040">
+          <caret line="276" column="9" lean-forward="true" selection-start-line="276" selection-start-column="9" selection-end-line="276" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/host.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -342,7 +406,7 @@
         <state relative-caret-position="440">
           <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -404,7 +468,7 @@
         <state relative-caret-position="440">
           <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -619,7 +683,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/pokemon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2349">
+        <state relative-caret-position="35320">
           <caret line="886" column="0" lean-forward="false" selection-start-line="886" selection-start-column="0" selection-end-line="886" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -635,8 +699,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="244" column="30" lean-forward="true" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
+        <state relative-caret-position="9760">
+          <caret line="244" column="30" lean-forward="false" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -661,36 +725,44 @@
         <state relative-caret-position="960">
           <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1016">
-          <caret line="308" column="8" lean-forward="false" selection-start-line="308" selection-start-column="8" selection-end-line="310" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/host.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-424">
-          <caret line="311" column="63" lean-forward="true" selection-start-line="311" selection-start-column="63" selection-end-line="311" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/host.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
+        <state relative-caret-position="40">
           <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
           <folding>
             <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
             <marker date="1498945943116" expanded="true" signature="16869:16875" ph="..." />
             <marker date="1498945943116" expanded="true" signature="17087:17091" ph="&gt;" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1280">
+          <caret line="286" column="9" lean-forward="false" selection-start-line="286" selection-start-column="9" selection-end-line="286" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/host.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="361" column="26" lean-forward="false" selection-start-line="340" selection-start-column="20" selection-end-line="361" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splash.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="305" column="55" lean-forward="false" selection-start-line="305" selection-start-column="55" selection-end-line="305" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
