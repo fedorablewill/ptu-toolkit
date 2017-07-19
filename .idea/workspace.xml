@@ -15,8 +15,8 @@
       <file leaf-file-name="host.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/host.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1560">
-              <caret line="361" column="26" lean-forward="false" selection-start-line="340" selection-start-column="20" selection-end-line="361" selection-end-column="26" />
+            <state relative-caret-position="760">
+              <caret line="361" column="26" lean-forward="true" selection-start-line="361" selection-start-column="26" selection-end-line="361" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -35,8 +35,8 @@
       <file leaf-file-name="splash.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/splash.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="305" column="55" lean-forward="false" selection-start-line="305" selection-start-column="55" selection-end-line="305" selection-end-column="55" />
+            <state relative-caret-position="1028">
+              <caret line="358" column="55" lean-forward="true" selection-start-line="358" selection-start-column="55" selection-end-line="358" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -45,7 +45,7 @@
       <file leaf-file-name="host.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/host.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
+            <state relative-caret-position="8600">
               <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
               <folding>
                 <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
@@ -135,8 +135,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -163,8 +161,42 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptu-toolkit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptu-toolkit" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="v1" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptu-toolkit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptu-toolkit" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,19 +310,20 @@
       <workItem from="1498672326826" duration="4158000" />
       <workItem from="1498846918137" duration="7008000" />
       <workItem from="1498922730355" duration="9717000" />
-      <workItem from="1499810894168" duration="3521000" />
+      <workItem from="1499810894168" duration="4050000" />
+      <workItem from="1500508467877" duration="83000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35989000" />
+    <option name="totallyTimeSpent" value="36601000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="7" />
+    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27272728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27620322" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -321,6 +354,66 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/host.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14440">
+          <caret line="361" column="26" lean-forward="false" selection-start-line="340" selection-start-column="20" selection-end-line="361" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11440">
+          <caret line="286" column="9" lean-forward="false" selection-start-line="286" selection-start-column="9" selection-end-line="286" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/host.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8600">
+          <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
+          <folding>
+            <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
+            <marker date="1498945943116" expanded="true" signature="16869:16875" ph="..." />
+            <marker date="1498945943116" expanded="true" signature="17087:17091" ph="&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9760">
+          <caret line="244" column="30" lean-forward="false" selection-start-line="244" selection-start-column="30" selection-end-line="244" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35320">
+          <caret line="886" column="0" lean-forward="false" selection-start-line="886" selection-start-column="0" selection-end-line="886" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1498923955186" expanded="true" signature="8283:8290" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="9231:9238" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="10082:10089" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="10925:10932" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="13082:13089" ph="..." />
+            <marker date="1498923955186" expanded="true" signature="15842:15849" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splash.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13960">
+          <caret line="349" column="55" lean-forward="true" selection-start-line="349" selection-start-column="55" selection-end-line="349" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/host.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12440">
@@ -732,7 +825,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/host.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
+        <state relative-caret-position="8600">
           <caret line="215" column="34" lean-forward="false" selection-start-line="215" selection-start-column="34" selection-end-line="215" selection-end-column="34" />
           <folding>
             <marker date="1498945943116" expanded="true" signature="8506:8524" ph="..." />
@@ -752,16 +845,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/host.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="361" column="26" lean-forward="false" selection-start-line="340" selection-start-column="20" selection-end-line="361" selection-end-column="26" />
+        <state relative-caret-position="760">
+          <caret line="361" column="26" lean-forward="true" selection-start-line="361" selection-start-column="26" selection-end-line="361" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/splash.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="305" column="55" lean-forward="false" selection-start-line="305" selection-start-column="55" selection-end-line="305" selection-end-column="55" />
+        <state relative-caret-position="1028">
+          <caret line="358" column="55" lean-forward="true" selection-start-line="358" selection-start-column="55" selection-end-line="358" selection-end-column="55" />
           <folding />
         </state>
       </provider>

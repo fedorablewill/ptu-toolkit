@@ -314,6 +314,62 @@ class PtuAPI extends API
         return $generator->start();
     }
     
+    /**
+     * User API Calls
+     *
+     * api/v1/user/
+     * api/v1/user/login/
+     * api/v1/user/exists/username
+     */
+    
+    public function user() {
+    	eval(file_get_contents("../../../../sql/ptu/db.php"));
+    
+    	if ($this->checkBasicRequest() && $this->method == 'GET' && $this->checkUserAuth()) {
+    		$stmt = $db->prepare("SELECT * FROM users WHERE firebase_id=:fid");
+    		$stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER']));
+    		
+    		$r = $stmt->fetch();
+    		
+    		// If user found, JSON user data returned.
+    		return $r ? json_encode($r) : "false";
+    	}
+    	/* POST NEW USER api/v1/user/?... */
+    	else if ($this->checkBasicRequest() && $this->method == 'POST' && $this->checkUserAuth()) {
+    		$stmt = $db->prepare("INSERT INTO users (firebase_id, username) VALUES (:fid, :username)");
+    		$stmt->execute(array("fid" => $_POST['firebase_id'], "username" => $_POST['username']));
+    		
+    		return "true";
+    	}
+    	else if ($this->verb == "exists" && $this->method == 'GET') {
+    		$stmt = $db->prepare("SELECT COUNT(firebase_id) AS uexists FROM users WHERE username=?");
+    		$stmt->execute(array($this->args[0]));
+    		
+    		$r = $stmt->fetch();
+    		
+    		return $r['uexists'];
+    	}
+    	else if ($this->verb == "login" && $this->method == 'POST' && $this->checkUserAuth()) {
+    		$stmt = $db->prepare("SELECT username FROM users WHERE firebase_id=?");
+    		$stmt->execute(array($_SERVER['PHP_AUTH_USER']));
+    		
+    		$r = $stmt->fetch();
+    		
+    		if ($r && !is_null($r['username'])) {
+    			return $r['username'];
+    		}
+    		// User is not yet signed-up with a username
+    		else {
+    			http_response_code(204);
+    			return "";
+    		}
+    	}
+    	else {
+    		http_response_code(400);
+    		die;
+    	}
+    }
+    
     /*********************
      * Private Functions *
      ********************/
@@ -415,5 +471,20 @@ class PtuAPI extends API
             }
             return "Not Found";
         }
+    }
+    
+    /**
+     * Authenticate user session token with Google Firebase
+     * @return bool
+     */
+    private function checkUserAuth() {
+    	if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])){
+    		http_response_code(400);
+    		die;
+    	}
+    	
+    	// TODO authenticate user
+    	
+    	return true;
     }
 }

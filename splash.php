@@ -287,7 +287,7 @@
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
                         <div class="nav nav-tabs text-center" data-tabs="tabs">
-                            <h5>SIGN INTO TOOLKIT</h5>
+                            <h5 id="card-title">SIGN INTO TOOLKIT</h5>
                         </div>
                     </div>
                 </div>
@@ -300,17 +300,26 @@
                         </button>
                         <hr/>
                         <small class="text-muted">CONTINUE AS GM</small>
-                        <div id="firebaseui-auth-container">
+                        <div id="gm-auth">
+                        	<div id="firebaseui-auth-container">
 
+	                        </div>
+	                        <button class="btn btn-primary firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised
+	                            firebaseui-id-idp-button" id="btn-signin-anon">
+	                            <span class="firebaseui-idp-text firebaseui-idp-text-long">Continue Anonymously</span>
+	                            <span class="firebaseui-idp-text firebaseui-idp-text-short">Anonymous</span>
+	                        </button>
                         </div>
-                        <button class="btn btn-primary firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised
-                            firebaseui-id-idp-button" id="btn-signin-anon">
-                            <span class="firebaseui-idp-text firebaseui-idp-text-long">Continue Anonymously</span>
-                            <span class="firebaseui-idp-text firebaseui-idp-text-short">Anonymous</span>
-                        </button>
                     </div>
                     <div class="tab-pane" id="tab-player">
                         Hello, beautiful.
+                    </div>
+                    <div class="tab-pane" id="tab-signup">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="signup-uname">Enter a Username</label>
+                            <input class="form-control" type="text" id="signup-uname" />
+                        </div>
+                        <button class="btn btn-info" id="btn-signup">Signup</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +351,7 @@
 
     // FirebaseUI config.
     var uiConfig = {
-        signInSuccessUrl: 'http://ptu.will-step.com/splash.php',
+        signInSuccessUrl: 'http://ptu.will-step.com/splash.php#r',
         signInOptions: [
             // Leave the lines as is for the providers you want to offer your users.
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -362,8 +371,60 @@
     initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                // User is signed in.
-                window.location = 'host.php';
+                // User is signed in, get token.
+                
+                firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function(idToken) {
+                	// Send token to backend
+                	$.ajax({
+			    type: "POST",
+			    url: "api/v1/user/login",
+			    dataType: 'json',
+			    async: false,
+			    beforeSend: function (xhr) {
+			        xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
+			    },
+			    success: function (data, status, xhr){
+			    	// User not set up
+			    	if (!user.isAnonymous && (xhr.status == 204 || data == "" || data == '""')) {
+			    		$("#card-title").html('NEW USER');
+			    		$("#tab-signin").hide();
+			    		$("#tab-signup").show();
+			    		
+			    		$("#btn-signup").click(function() {
+			    			$.ajax({
+						    type: "POST",
+						    url: "api/v1/user",
+						    dataType: 'json',
+						    data: {"firebase_id": firebase.auth().currentUser.uid, "username": $("#signup-uname").val()},
+						    async: false,
+						    beforeSend: function (xhr) {
+						        xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
+						    },
+						    success: function (data, status, xhr){
+						    	window.location = "host.php";
+						    },
+						    error: function (xhr, status, error) {
+						    	window.alert(status + " " + error);
+						    }
+						});
+			    		});
+			    	}
+			    	else {
+			    		$("#gm-auth").html('<a href="host.php" class="btn btn-info" id="btn-signin-player">' +
+			                        '    Continue as GM' +
+			                        '</a>' +
+			                        '<button class="btn btn-danger" id="btn-signin-player" onclick="signout()">' +
+			                        '    Sign out' +
+			                        '</button>');
+			    	}
+			    },
+			    error: function (xhr, status, error) {
+			    	window.alert(status + " " + error);
+			    }
+			});
+		}).catch(function(error) {
+			window.alert(error);
+		});
             } else {
                 // User is signed out.
                 // TODO: something?
@@ -375,6 +436,12 @@
 
     window.addEventListener('load', function() {
         initApp()
+    
+	    $('#btn-signin-anon').click(function() {
+	    	firebase.auth().signInAnonymously().catch(function(error) {
+			window.alert(error.code + ": " + error.message);
+		});
+	    });
     });
 </script>
 
@@ -395,12 +462,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
 <script src="dist/snackbar.min.js"></script>
 <script src="js/material.min.js"></script>
-<script src="js/nouislider.min.js"></script>
 
 <script src="js/script.js"></script>
-<script src="js/JSONImport.js"></script>
-<script src="js/JSONExport.js"></script>
-<script src="js/species_to_dex.js"></script>
-<script src="js/host.js"></script>
 </body>
 </html>
