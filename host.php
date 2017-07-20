@@ -289,9 +289,9 @@
     <div id="view-holder">
         <div class="col-md-6 col-md-offset-3 content-select">
             <h2>Create or Import a GM File</h2>
-            <button class="btn btn-danger btn-raised" onclick="newGM();">Create Blank GM File</button>
+            <button class="btn btn-danger btn-raised" onclick="newCampaign();">Create Blank GM File</button>
             <br>
-            <button class="btn btn-danger btn-raised" onclick="selectGM();">Upload Existing GM File</button>
+            <button class="btn btn-danger btn-raised" onclick="uploadCampaign();">Upload Existing GM File</button>
         </div>
         <div class="col-md-6 col-md-offset-3 pokemon"></div>
     </div>

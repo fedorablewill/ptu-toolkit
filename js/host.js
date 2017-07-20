@@ -381,118 +381,11 @@ function changeGMView(view) {
     }
 }
 
-function newGM() {
-    //New blank gm_data object
-    gm_data = {characters:{},pokemon:{},settings:{}};
 
-    // Update display
-    onDataLoaded();
-}
 
-function selectGM() {
-    // Update display
-    var ulAnchorElem = document.getElementById('uploadAnchor');
-    ulAnchorElem.click();
-}
-
-$("#expmon-mon").change(function(){
-	var id = $('#expmon-mon').find(":selected").val();
-	if (gm_data["pokemon"][id]){
-  	$.getJSON("api/v1/"+pokedex+"/"+gm_data["pokemon"][id].dex, function (dex) {
-	$.getJSON("api/v1/moves/", function (moves) {
-	$.getJSON("api/v1/abilities/", function (abilities) {
-	$.getJSON("api/v1/experience/", function (experience) {
-	$.getJSON("api/v1/natures/"+gm_data["pokemon"][id].nature, function (nature) {
-  		$('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience,nature));
-	});
-	});
-	});
-	});
-	});
-	}
-});
-
-function fetchExistingPokemon(){
-  document.getElementById("expmon-mon").options.length = 0;
-  document.getElementById("expmon-mon").innerHTML += "<option value = ''></option>";
-  $.each(gm_data["pokemon"],function (k,v){
-  	document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
-  });
-}
-
-$("#uploadAnchor").change(function() {
-    {
-        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-            alert('The File APIs are not fully supported in this browser.');
-            return;
-        }
-
-        input = document.getElementById('uploadAnchor');
-        if (!input) {
-            alert("Um, couldn't find the fileinput element.");
-        }
-        else if (!input.files) {
-            alert("This browser doesn't seem to support the `files` property of file inputs.");
-        }
-        else if (!input.files[0]) {
-            alert("Please select a file before clicking 'Load'");
-        }
-        else {
-            file = input.files[0];
-            fr = new FileReader();
-            fr.onload = (function (theFile) {
-                return function (e) {
-                    //console.log('e readAsText = ', e);
-                    //console.log('e readAsText target = ', e.target);
-                    try {
-                        json = JSON.parse(e.target.result);
-                        gm_data = json;
-
-                        onDataLoaded();
-                    } catch (ex) {
-                        alert('ex when trying to parse json = ' + ex);
-                    }
-                };
-            })(file);
-            fr.readAsText(file);
-        }
-    }
-});
-
-/**
- * Called when the GM Data is created/uploaded
- */
-function onDataLoaded() {
-    $("#display-gmid").html(client_id);
-    $(".content-select").css("display", "none");
-    $(".footer-gm").removeClass("hidden");
-
-    $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
-    new Clipboard('.btn');
-
-    $("#zoom-slider").noUiSlider({
-        start: [10] ,
-        step: 1,
-        connect: false,
-        range: {
-            min: 1,
-            max: 20
-        }
-    }).on("change", function () {
-        renderBattler();
-    });
-
-    $("#view-holder").addClass("hidden");
-    changeGMView(0);
-}
-
-function saveGM() {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gm_data));
-    var dlAnchorElem = document.getElementById('downloadAnchor');
-    dlAnchorElem.setAttribute("href",     dataStr     );
-    dlAnchorElem.setAttribute("download", "GMData.json");
-    dlAnchorElem.click();
-}
+//
+// BATTLE FUNCTIONS
+//
 
 function startBattle() {
     battle = {};
@@ -1206,6 +1099,12 @@ function handleAffliction(affliction, monId) {
     return true;
 }
 
+
+
+//
+// POKEMON MANAGEMENT
+//
+
 /**
  * Initialize Add/Edit Pokemon
  */
@@ -1525,6 +1424,31 @@ function onClickDeletePokemon(id) {
     }
 }
 
+$("#expmon-mon").change(function(){
+    var id = $('#expmon-mon').find(":selected").val();
+    if (gm_data["pokemon"][id]){
+        $.getJSON("api/v1/"+pokedex+"/"+gm_data["pokemon"][id].dex, function (dex) {
+            $.getJSON("api/v1/moves/", function (moves) {
+                $.getJSON("api/v1/abilities/", function (abilities) {
+                    $.getJSON("api/v1/experience/", function (experience) {
+                        $.getJSON("api/v1/natures/"+gm_data["pokemon"][id].nature, function (nature) {
+                            $('#expmon-JSON').val(JSONExport(gm_data["pokemon"][id],dex,moves,abilities,experience,nature));
+                        });
+                    });
+                });
+            });
+        });
+    }
+});
+
+function fetchExistingPokemon(){
+    document.getElementById("expmon-mon").options.length = 0;
+    document.getElementById("expmon-mon").innerHTML += "<option value = ''></option>";
+    $.each(gm_data["pokemon"],function (k,v){
+        document.getElementById("expmon-mon").innerHTML += "<option value = '"+k+"'>" + v["name"] + "</option>";
+    });
+}
+
 
 $("#btn-impmon").click(function () {
 
@@ -1825,4 +1749,96 @@ function generatePmonId() {
         pmon_id += chars.charAt(Math.floor(Math.random() * chars.length));
 
     return pmon_id;
+}
+
+//
+// DATA MANAGEMENT
+//
+
+function newCampaign() {
+    //New blank gm_data object
+    gm_data = {characters:{},pokemon:{},settings:{}};
+
+    // Update display
+    onDataLoaded();
+}
+
+function uploadCampaign() {
+    // Update display
+    var ulAnchorElem = document.getElementById('uploadAnchor');
+    ulAnchorElem.click();
+}
+
+$("#uploadAnchor").change(function() {
+    {
+        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+            alert('The File APIs are not fully supported in this browser.');
+            return;
+        }
+
+        input = document.getElementById('uploadAnchor');
+        if (!input) {
+            alert("Um, couldn't find the fileinput element.");
+        }
+        else if (!input.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+        }
+        else if (!input.files[0]) {
+            alert("Please select a file before clicking 'Load'");
+        }
+        else {
+            file = input.files[0];
+            fr = new FileReader();
+            fr.onload = (function (theFile) {
+                return function (e) {
+                    //console.log('e readAsText = ', e);
+                    //console.log('e readAsText target = ', e.target);
+                    try {
+                        json = JSON.parse(e.target.result);
+                        gm_data = json;
+
+                        onDataLoaded();
+                    } catch (ex) {
+                        alert('ex when trying to parse json = ' + ex);
+                    }
+                };
+            })(file);
+            fr.readAsText(file);
+        }
+    }
+});
+
+/**
+ * Called when the GM Data is created/uploaded
+ */
+function onDataLoaded() {
+    $("#display-gmid").html(client_id);
+    $(".content-select").css("display", "none");
+    $(".footer-gm").removeClass("hidden");
+
+    $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
+    new Clipboard('.btn');
+
+    $("#zoom-slider").noUiSlider({
+        start: [10] ,
+        step: 1,
+        connect: false,
+        range: {
+            min: 1,
+            max: 20
+        }
+    }).on("change", function () {
+        renderBattler();
+    });
+
+    $("#view-holder").addClass("hidden");
+    changeGMView(0);
+}
+
+function saveGM() {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(gm_data));
+    var dlAnchorElem = document.getElementById('downloadAnchor');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", "GMData.json");
+    dlAnchorElem.click();
 }
