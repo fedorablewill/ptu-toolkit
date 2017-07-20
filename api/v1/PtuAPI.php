@@ -326,7 +326,7 @@ class PtuAPI extends API
     	eval(file_get_contents("../../../../sql/ptu/db.php"));
     
     	if ($this->checkBasicRequest() && $this->method == 'GET' && $this->checkUserAuth()) {
-    		$stmt = $db->prepare("SELECT * FROM users WHERE firebase_id=:fid");
+            $stmt = $db->prepare("SELECT * FROM users WHERE firebase_id=:fid");
     		$stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER']));
     		
     		$r = $stmt->fetch();
@@ -368,6 +368,62 @@ class PtuAPI extends API
     		http_response_code(400);
     		die;
     	}
+    }
+
+    /**
+     * Campaign/Save Data
+     *
+     * api/v1/campaign
+     * api/v1/campaign/?id=7
+     */
+    public function campaign() {
+        eval(file_get_contents("../../../../sql/ptu/db.php"));
+
+        if ($this->checkBasicRequest() && $this->method == 'GET' && $this->checkUserAuth()) {
+            // GET LIST OF CAMPAIGNS api/vi/campaign
+            if (!array_key_exists('id', $_GET)) {
+                $stmt = $db->prepare("SELECT campaign_id, campaign_name, campaign_data FROM campaigns ".
+                                        "WHERE user_firebase_id=:fid");
+
+                $stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER']));
+
+                $campaigns = $stmt->fetchAll();
+
+                return $campaigns;
+            }
+            // GET CAMPAIGN BY ID api/v1/campaign/?=id
+            else {
+                $stmt = $db->prepare("SELECT campaign_id, campaign_name, campaign_data FROM campaigns ".
+                    "WHERE campaign_id=:id AND user_firebase_id=:fid");
+
+                $stmt->execute(array("id" => $_GET['id'], "fid" => $_SERVER['PHP_AUTH_USER']));
+
+                $campaign = $stmt->fetch();
+
+                return $campaign;
+            }
+        }
+        // CREAT NEW CAMPAIGN
+        else if ($this->checkBasicRequest() && $this->method == 'POST' && $this->checkUserAuth()) {
+            $stmt = $db->prepare("INSERT INTO campaigns (user_firebase_id, campaign_name, campaign_data) ".
+                "VALUES (:fid, :name, :data)");
+
+            $stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER'], "name" => $_POST['name'], "data" => $_POST['data']));
+
+            return true;
+        }
+        // UPDATE CAMPAIGN
+        else if ($this->checkBasicRequest() && $this->method == 'PUT' && $this->checkUserAuth()) {
+            $stmt = $db->prepare("UPDATE campaigns SET campaign_data=?");
+
+            $stmt->execute(array($_POST['data']));
+
+            return true;
+        }
+        else {
+            http_response_code(400);
+            die;
+        }
     }
     
     /*********************

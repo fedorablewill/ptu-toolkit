@@ -376,55 +376,55 @@
                 firebase.auth().currentUser.getToken(/* forceRefresh */ true).then(function(idToken) {
                 	// Send token to backend
                 	$.ajax({
-			    type: "POST",
-			    url: "api/v1/user/login",
-			    dataType: 'json',
-			    async: false,
-			    beforeSend: function (xhr) {
-			        xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
-			    },
-			    success: function (data, status, xhr){
-			    	// User not set up
-			    	if (!user.isAnonymous && (xhr.status == 204 || data == "" || data == '""')) {
-			    		$("#card-title").html('NEW USER');
-			    		$("#tab-signin").hide();
-			    		$("#tab-signup").show();
-			    		
-			    		$("#btn-signup").click(function() {
-			    			$.ajax({
-						    type: "POST",
-						    url: "api/v1/user",
-						    dataType: 'json',
-						    data: {"firebase_id": firebase.auth().currentUser.uid, "username": $("#signup-uname").val()},
-						    async: false,
-						    beforeSend: function (xhr) {
-						        xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
-						    },
-						    success: function (data, status, xhr){
-						    	window.location = "host.php";
-						    },
-						    error: function (xhr, status, error) {
-						    	window.alert(status + " " + error);
-						    }
-						});
-			    		});
-			    	}
-			    	else {
-			    		$("#gm-auth").html('<a href="host.php" class="btn btn-info" id="btn-signin-player">' +
-			                        '    Continue as GM' +
-			                        '</a>' +
-			                        '<button class="btn btn-danger" id="btn-signin-player" onclick="signout()">' +
-			                        '    Sign out' +
-			                        '</button>');
-			    	}
-			    },
-			    error: function (xhr, status, error) {
-			    	window.alert(status + " " + error);
-			    }
-			});
-		}).catch(function(error) {
-			window.alert(error);
-		});
+                        type: "POST",
+                        url: "api/v1/user/login",
+                        dataType: 'json',
+                        async: false,
+                        beforeSend: function (xhr) {
+			                xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
+			            },
+			            success: function (data, status, xhr){
+                            // User not set up
+                            if (!user.isAnonymous && (xhr.status == 204 || data == "" || data == '""')) {
+                                $("#card-title").html('NEW USER');
+                                $("#tab-signin").hide();
+                                $("#tab-signup").show();
+
+                                $("#btn-signup").click(function() {
+                                    $.ajax({
+                                    type: "POST",
+                                    url: "api/v1/user",
+                                    dataType: 'json',
+                                    data: {"firebase_id": firebase.auth().currentUser.uid, "username": $("#signup-uname").val()},
+                                    async: false,
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
+                                    },
+                                    success: function (data, status, xhr){
+                                        window.location = "host.php";
+                                    },
+                                    error: function (xhr, status, error) {
+                                        window.alert(status + " " + error);
+                                    }
+                                });
+                                });
+                            }
+                            else {
+                                $("#gm-auth").html('<a href="host.php" class="btn btn-info" id="btn-signin-player">' +
+                                            '    Continue as GM' +
+                                            '</a>' +
+                                            '<button class="btn btn-danger" id="btn-signin-player" onclick="signout()">' +
+                                            '    Sign out' +
+                                            '</button>');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            window.alert(status + " " + error);
+                        }
+                    });
+                }).catch(function(error) {
+                    window.alert(error);
+                });
             } else {
                 // User is signed out.
                 // TODO: something?
@@ -435,12 +435,12 @@
     };
 
     window.addEventListener('load', function() {
-        initApp()
+        initApp();
     
 	    $('#btn-signin-anon').click(function() {
 	    	firebase.auth().signInAnonymously().catch(function(error) {
-			window.alert(error.code + ": " + error.message);
-		});
+                window.alert(error.code + ": " + error.message);
+            });
 	    });
     });
 </script>
