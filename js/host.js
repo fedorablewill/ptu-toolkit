@@ -7,6 +7,7 @@ var gm_data = {};
 var battle = {};
 var currentView = 0;
 var pokedex = "pokemon";
+var campaignId;
 
 /**
  * Enable "Are you sure" dialog before close
@@ -200,6 +201,57 @@ peer.on('connection', function (c) {
         "type": "pokemon_list",
         "pokemon": gm_data["pokemon"]
     }));
+});
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBGYQmctNWkQWpII2cfqs9yBJOEwgKvKAM",
+    authDomain: "ptu-toolkit.firebaseapp.com",
+    databaseURL: "https://ptu-toolkit.firebaseio.com",
+    projectId: "ptu-toolkit",
+    storageBucket: "ptu-toolkit.appspot.com",
+    messagingSenderId: "412564537560"
+};
+firebase.initializeApp(config);
+
+// Store token
+var f_token;
+
+// Firebase Logic
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is signed in, get token.
+
+        firebase.auth().currentUser.getToken(true).then(function(idToken) {
+            f_token = idToken;
+            // Send token to backend
+            $.ajax({
+                type: "GET",
+                url: "api/v1/campaign",
+                dataType: 'json',
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.uid+ ":" + idToken));
+                },
+                success: function (data, status, xhr){
+                    // Campaigns found
+                    if (data.length >= 1) {
+
+                    }
+                },
+                error: function (xhr, status, error) {
+                    window.alert(status + " " + error);
+                }
+            });
+        }).catch(function(error) {
+            window.alert(error);
+        });
+    } else {
+        // User is signed out.
+        // TODO: something?
+    }
+}, function(error) {
+    console.log(error);
 });
 
 /**
@@ -1761,12 +1813,55 @@ function newCampaign() {
 
     // Update display
     onDataLoaded();
+
+    // Create new entry in the database
+    if (firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
+        $.ajax({
+            type: "POST",
+            url: "api/v1/campaign/",
+            dataType: 'json',
+            data: {"name": "Campaign"},
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+            },
+            success: function (data, status, xhr){
+                if (data) {
+                    campaignId = data;
+                }
+            },
+            error: function (xhr, status, error) {
+                window.alert(status + " " + error);
+            }
+        });
 }
 
 function uploadCampaign() {
     // Update display
     var ulAnchorElem = document.getElementById('uploadAnchor');
     ulAnchorElem.click();
+}
+
+function selectCampaign(id) {
+    $.ajax({
+        type: "GET",
+        url: "api/v1/campaign/?id=" + id,
+        dataType: 'json',
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+        },
+        success: function (data, status, xhr){
+            if (data) {
+                gm_data = JSON.parse(data['campaign_data']);
+                campaignId = id;
+                onDataLoaded();
+            }
+        },
+        error: function (xhr, status, error) {
+            window.alert(status + " " + error);
+        }
+    });
 }
 
 $("#uploadAnchor").change(function() {
@@ -1798,6 +1893,28 @@ $("#uploadAnchor").change(function() {
                         gm_data = json;
 
                         onDataLoaded();
+
+                        // Create new entry in the database
+                        if (firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
+                            $.ajax({
+                                type: "POST",
+                                url: "api/v1/campaign/",
+                                dataType: 'json',
+                                data: {"name": "Campaign", "data": JSON.stringify(gm_data)},
+                                async: false,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader ("Authorization",
+                                        "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+                                },
+                                success: function (data, status, xhr){
+                                    if (data) {
+                                        campaignId = data;
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    window.alert(status + " " + error);
+                                }
+                            });
                     } catch (ex) {
                         alert('ex when trying to parse json = ' + ex);
                     }

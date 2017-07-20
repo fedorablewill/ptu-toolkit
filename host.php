@@ -989,6 +989,11 @@
     </div>
 </div>
 
+<!-- Google Firebase Init -->
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+
 <!-- JavaScript Imports -->
 <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

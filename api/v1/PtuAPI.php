@@ -403,14 +403,15 @@ class PtuAPI extends API
                 return $campaign;
             }
         }
-        // CREAT NEW CAMPAIGN
+        // CREATE NEW CAMPAIGN
         else if ($this->checkBasicRequest() && $this->method == 'POST' && $this->checkUserAuth()) {
             $stmt = $db->prepare("INSERT INTO campaigns (user_firebase_id, campaign_name, campaign_data) ".
                 "VALUES (:fid, :name, :data)");
 
-            $stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER'], "name" => $_POST['name'], "data" => $_POST['data']));
+            $stmt->execute(array("fid" => $_SERVER['PHP_AUTH_USER'], "name" => $_POST['name'],
+                "data" => isset($_POST['data']) ? $_POST['data'] : NULL));
 
-            return true;
+            return $db->lastInsertId();
         }
         // UPDATE CAMPAIGN
         else if ($this->checkBasicRequest() && $this->method == 'PUT' && $this->checkUserAuth()) {
