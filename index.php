@@ -206,6 +206,13 @@
             margin-bottom: 16px;
         }
 
+        .modal-move .move-desc {
+            text-align: center;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .dexdata-move-colsep {
             background-color: black;
             width: 5px;
@@ -385,90 +392,7 @@
             <h2 class="text-center text-muted">Moves</h2>
             <hr class="sm"/>
             <div class="moves">
-                <a class="btn btn-raised btn-move btn-move-1">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-2" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-3" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-4" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-5" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
-                <a class="btn btn-raised btn-move btn-move-6" style="display: none;">
-                    <div>
-                        <h4 class="move-name"></h4>
-                        <span class="pull-right">
-                                <span class="label label-warning label-type"></span>
-                            </span>
-                    </div>
-                    <div class="btn-move-footer">
-                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">
-                                <i class="material-icons">info</i>
-                            </span>
-                        <span class="move-freq"></span>
-                    </div>
-                </a>
+
             </div>
             <h2 class="text-center text-muted">Other Actions</h2>
             <hr class="sm"/>
@@ -764,8 +688,64 @@
     <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-move">
-                <h4 class="move-name"></h4>
-                <p class="move-desc"></p>
+                <h4 class="move-name" style="color: rgb(217, 178, 71);">Sand Attack</h4>
+                <p class="move-desc">Status Move. The target is Blinded until the end of their next turn.</p>
+                <div class="move-stats">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-type">Move Type</label>
+                                <select class="form-control" id="move-type" data-populate="type" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-class">Move Class</label>
+                                <select class="form-control" id="move-class" required>
+                                    <option></option>
+                                    <option>Physical</option><option>Special</option><option>Status</option><option>Static</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-db">Damage Base</label>
+                                <input class="form-control" id="move-db" min="1" max="28" value="7" required="" type="number">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-ac">Accuracy Check</label>
+                                <input class="form-control" id="move-ac" min="1" max="20" value="2" required="" type="number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-range">Range</label>
+                                <input class="form-control" id="move-range" value="Cone 2" disabled="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="move-crit">Crits On</label>
+                                <input class="form-control" id="move-crit" min="1" max="20" value="20" required="" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="move-extras hidden">
+                    <div class="togglebutton">
+                        <label>
+                            <input id="genmon-is-wild" checked="" type="checkbox"><span class="toggle"></span> Add Modifiers
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-content hidden" id="modalTarget-select">

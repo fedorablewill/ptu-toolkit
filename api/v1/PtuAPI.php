@@ -415,9 +415,9 @@ class PtuAPI extends API
         }
         // UPDATE CAMPAIGN
         else if ($this->checkBasicRequest() && $this->method == 'PUT' && $this->checkUserAuth()) {
-            $stmt = $db->prepare("UPDATE campaigns SET campaign_data=?");
+            $stmt = $db->prepare("UPDATE campaigns SET campaign_data=:data WHERE campaign_id=:id");
 
-            $stmt->execute(array($_POST['data']));
+            $stmt->execute(array("data" => $_POST['data'], "id" => $_POST['id']));
 
             return true;
         }

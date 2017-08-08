@@ -360,7 +360,8 @@ function generateGrid(parent, size) {
                     'background': 'url(img/pokemon/' + gm_data["pokemon"][id]["dex"] + '.gif) no-repeat center',
                     'background-size': 'contain',
                     'left': data['x'] * size,
-                    'top': data['y'] * size
+                    'top': data['y'] * size,
+                    'margin-bottom': size
                 }).addClass('grid-piece')
                     .attr("data-id", id)
                     .attr("data-x", data['x'])
@@ -479,169 +480,166 @@ function addMoveDialogInfo(html) {
 
 /**
  * Handle a move request and dish out effects
- * @param moveName The name of the move used
+ * @param move Move JSON
  * @param target_id The Pokemon id of the target
  * @param dealer_id The Pokemon id of the user
  * @param acc_bonus Value added to accuracy roll
  * @param dmg_bonus Value added to damage
  */
-function performMove(moveName, target_id, dealer_id, acc_bonus, dmg_bonus) {
+function performMove(move, target_id, dealer_id, acc_bonus, dmg_bonus) {
 
-    $.getJSON("/api/v1/moves/"+moveName, function (move) {
+    doMoveDialog(dealer_id, move["Title"], move);
 
-        doMoveDialog(dealer_id, moveName, move);
+    var damageDone = 0;
+    var canMove = true;
 
-        var damageDone = 0;
-        var canMove = true;
+    // Paralysis check
+    if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
+        $.inArray("Paralysis", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
 
-        // Paralysis check
-        if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
-            $.inArray("Paralysis", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+        // Save check roll
+        var check = roll(1, 20, 1);
 
-            // Save check roll
-            var check = roll(1, 20, 1);
+        if (check < 5) {
+            canMove = false;
+            doToast(gm_data["pokemon"][dealer_id]['name'] + " is paralyzed! They can't move!");
+        }
+    }
 
-            if (check < 5) {
-                canMove = false;
-                doToast(gm_data["pokemon"][dealer_id]['name'] + " is paralyzed! They can't move!");
+    // Confusion check
+    if (canMove && "Confused" in battle[dealer_id]['afflictions'])
+        canMove = handleAffliction("Confused", dealer_id);
+
+    // Check if Frozen (but don't Let It Go)
+    if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
+        $.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+
+        doToast(gm_data["pokemon"][dealer_id]["name"] + " is frozen solid!");
+    }
+    // Check if Fainted
+    else if ("Fainted" in battle[dealer_id]['afflictions']) {
+        doToast("Fainted Pokemon cannot use actions, abilities, or features");
+    }
+    else if (canMove) {
+
+        var acRoll = roll(1, 20, 1);
+        var crit = 20, acCheck = acRoll + battle[dealer_id]["stage_acc"];
+
+        // Show roll
+
+        addMoveDialogInfo('<strong>ACC:</strong> Rolled ' + acRoll + ' on d20');
+
+        // Subtract target evade
+
+        if (target_id != "other") {
+            // Find speed evade
+            var speed_evade = Math.floor(gm_data["pokemon"][dealer_id]["speed"] / 5);
+
+            // Apply evade bonus
+            acCheck -= battle[dealer_id]["stage_eva"];
+
+            if (move["Class"] == "Physical") {
+                var phy_evade = Math.floor(gm_data["pokemon"][dealer_id]["def"] / 5);
+
+                acCheck -= speed_evade > phy_evade ? speed_evade : phy_evade;
+            }
+            else if (move["Class"] == "Special") {
+                var spc_evade = Math.floor(gm_data["pokemon"][dealer_id]["spdef"] / 5);
+
+                acCheck -= speed_evade > spc_evade ? speed_evade : spc_evade;
+            }
+            else
+                acCheck -= speed_evade;
+        }
+
+        // Move missed
+        if (move.hasOwnProperty('AC') && acCheck < parseInt(move["AC"])) {
+            doToast("It missed!");
+
+            // Check for triggers for if missed
+            if (move.hasOwnProperty("Triggers")) {
+                $.each(move["Triggers"], function (k, trigger) {
+                    if (trigger.hasOwnProperty("prereq") && trigger.prereq == "miss")
+                        $.each(trigger["req"]["miss"], function (t) {
+                            handleTrigger(t, dealer_id, target_id, damageDone, move["Title"], acRoll);
+                        });
+                });
             }
         }
+        // Move hit
+        else {
 
-        // Confusion check
-        if (canMove && "Confused" in battle[dealer_id]['afflictions'])
-            canMove = handleAffliction("Confused", dealer_id);
+            if (move["Class"] == "Physical" || move["Class"] == "Special") {
+                var db = parseInt(move["DB"]);
 
-        // Check if Frozen (but don't Let It Go)
-        if (gm_data["pokemon"][dealer_id]['afflictions'] != null &&
-            $.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0) {
+                // STAB: if same type, increase damage base
 
-            doToast(gm_data["pokemon"][dealer_id]["name"] + " is frozen solid!");
-        }
-        // Check if Fainted
-        else if ("Fainted" in battle[dealer_id]['afflictions']) {
-            doToast("Fainted Pokemon cannot use actions, abilities, or features");
-        }
-        else if (canMove) {
+                var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
+                if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
+                    db += 2;
 
-            var acRoll = roll(1, 20, 1);
-            var crit = 20, acCheck = acRoll + battle[dealer_id]["stage_acc"];
+                if (db > 28) db = 28;
 
-            // Show roll
+                // Roll for damage
 
-            addMoveDialogInfo('<strong>ACC:</strong> Rolled ' + acRoll + ' on d20');
+                var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
+                var damage = 0;
 
-            // Subtract target evade
+                // Show roll
 
-            if (target_id != "other") {
-                // Find speed evade
-                var speed_evade = Math.floor(gm_data["pokemon"][dealer_id]["speed"] / 5);
+                addMoveDialogInfo('<strong>DMG:</strong> Rolled ' + rolledDmg + ' on DB' + db);
 
-                // Apply evade bonus
-                acCheck -= battle[dealer_id]["stage_eva"];
+                // Declare if critical hit
+                if (acRoll >= crit)
+                    doToast("Critical hit!");
 
+                // Add stat bonus to damage
                 if (move["Class"] == "Physical") {
-                    var phy_evade = Math.floor(gm_data["pokemon"][dealer_id]["def"] / 5);
-
-                    acCheck -= speed_evade > phy_evade ? speed_evade : phy_evade;
+                    damage = rolledDmg +
+                        gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
                 }
                 else if (move["Class"] == "Special") {
-                    var spc_evade = Math.floor(gm_data["pokemon"][dealer_id]["spdef"] / 5);
-
-                    acCheck -= speed_evade > spc_evade ? speed_evade : spc_evade;
+                    damage = rolledDmg +
+                        gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
                 }
-                else
-                    acCheck -= speed_evade;
-            }
 
-            // Move missed
-            if (move.hasOwnProperty('AC') && acCheck < parseInt(move["AC"])) {
-                doToast("It missed!");
+                // Distribute damage
 
-                // Check for triggers for if missed
-                if (move.hasOwnProperty("Triggers")) {
-                    $.each(move["Triggers"], function (k, trigger) {
-                        if (trigger.hasOwnProperty("prereq") && trigger.prereq == "miss")
-                            $.each(trigger["req"]["miss"], function (t) {
-                                handleTrigger(t, dealer_id, target_id, damageDone, moveName, acRoll);
-                            });
-                    });
+                damage += parseInt(dmg_bonus);
+
+                if (target_id == "other") {
+                    doToast("OUTGOING DAMAGE = " + damage);
+                    addMoveDialogInfo('<strong>OUTGOING DAMAGE:</strong> ' + damage);
+                    damageDone = damage;
+                }
+                else {
+                    damageDone = damagePokemon(target_id, move["Type"], move["Class"] == "Special", damage);
                 }
             }
-            // Move hit
-            else {
 
-                if (move["Class"] == "Physical" || move["Class"] == "Special") {
-                    var db = parseInt(move["DB"]);
+            /*
+            Triggers
+             */
 
-                    // STAB: if same type, increase damage base
-
-                    var types = gm_data["pokemon"][dealer_id]["type"].split(" / ");
-                    if (types[0] == move["Type"] || (types.length > 1 && types[1] == move["type"]))
-                        db += 2;
-
-                    if (db > 28) db = 28;
-
-                    // Roll for damage
-
-                    var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
-                    var damage = 0;
-
-                    // Show roll
-
-                    addMoveDialogInfo('<strong>DMG:</strong> Rolled ' + rolledDmg + ' on DB' + db);
-
-                    // Declare if critical hit
-                    if (acRoll >= crit)
-                        doToast("Critical hit!");
-
-                    // Add stat bonus to damage
-                    if (move["Class"] == "Physical") {
-                        damage = rolledDmg +
-                            gm_data["pokemon"][dealer_id]["atk"] * getStageMultiplier(battle[dealer_id]["stage_atk"]);
-                    }
-                    else if (move["Class"] == "Special") {
-                        damage = rolledDmg +
-                            gm_data["pokemon"][dealer_id]["spatk"] * getStageMultiplier(battle[dealer_id]["stage_spatk"]);
-                    }
-
-                    // Distribute damage
-
-                    damage += parseInt(dmg_bonus);
-
-                    if (target_id == "other") {
-                        doToast("OUTGOING DAMAGE = " + damage);
-                        addMoveDialogInfo('<strong>OUTGOING DAMAGE:</strong> ' + damage);
-                        damageDone = damage;
-                    }
-                    else {
-                        damageDone = damagePokemon(target_id, move["Type"], move["Class"] == "Special", damage);
-                    }
-                }
-
-                /*
-                Triggers
-                 */
-
-                if (move.hasOwnProperty("Triggers")) {
-                    $.each(move["Triggers"], function (k, trigger) {
-                        handleTrigger(trigger, dealer_id, target_id, damageDone, moveName, acRoll);
-                    });
-                }
+            if (move.hasOwnProperty("Triggers")) {
+                $.each(move["Triggers"], function (k, trigger) {
+                    handleTrigger(trigger, dealer_id, target_id, damageDone, move["Title"], acRoll);
+                });
             }
         }
+    }
 
-        /*
-         Afflictions (move end)
-         */
+    /*
+     Afflictions (move end)
+     */
 
-        // Persistent afflictions triggered by move end
-        if (gm_data["pokemon"][dealer_id]['afflictions'] != null) {
-            if ($.inArray("Burned", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
-                handleAffliction("Burned", dealer_id);
-            if ($.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
-                handleAffliction("Frozen", dealer_id);
-        }
-    });
+    // Persistent afflictions triggered by move end
+    if (gm_data["pokemon"][dealer_id]['afflictions'] != null) {
+        if ($.inArray("Burned", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
+            handleAffliction("Burned", dealer_id);
+        if ($.inArray("Frozen", gm_data["pokemon"][dealer_id]['afflictions']) >= 0)
+            handleAffliction("Frozen", dealer_id);
+    }
 }
 
 var typeEffects = {};
@@ -1539,6 +1537,8 @@ $("#btn-impmon").click(function () {
             doToast(gm_data["pokemon"][pmon_id]["name"] + " was added");
 
             renderPokemonList();
+
+            saveCampaignToAPI();
         }
 });
 
@@ -1613,6 +1613,8 @@ function onRenderPokemonManage() {
 
             renderPokemonList();
             $('#modalAddPokemon').modal('hide');
+
+            saveCampaignToAPI();
         }
     });
 
@@ -1786,6 +1788,8 @@ function onRenderPokemonManage() {
 
             doToast(data['name'] + " was added.");
             renderPokemonList();
+
+            saveCampaignToAPI();
         });
     });
 }
@@ -1958,4 +1962,24 @@ function saveGM() {
     dlAnchorElem.setAttribute("href",     dataStr     );
     dlAnchorElem.setAttribute("download", "GMData.json");
     dlAnchorElem.click();
+}
+
+function saveCampaignToAPI() {
+    if (campaignId && firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
+        $.ajax({
+            type: "PUT",
+            url: "api/v1/campaign/",
+            dataType: 'json',
+            data: {"id": campaignId, "data": JSON.stringify(gm_data)},
+            async: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+            },
+            success: function (data, status, xhr){
+                console.log("Saved campaign data.");
+            },
+            error: function (xhr, status, error) {
+                window.alert(status + " " + error);
+            }
+        });
 }

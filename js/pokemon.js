@@ -16,18 +16,6 @@ var currentMove = null;
  */
 $(function () {
 
-    // ON MOVE CLICKED
-    $(".btn-move").click(function () {
-        currentMove = $(this).find(".move-name").html();
-
-        $(".modal-move .move-desc").html($(this).find(".move-desc").attr("data-content"));
-        $(".modal-move .move-name").html(currentMove).css("color", $(this).find(".move-name").css("color"));
-
-        updateTargetList();
-
-        $('#modalTarget').modal('show');
-    });
-
     $("#btn-do-dmg").click(function () {
         sendMessage(host_id, JSON.stringify({
             "type": "battle_damage",
@@ -313,9 +301,22 @@ function displayInit() {
 
     $.each(moves_data, function (i, move) {
 
-        var movesEntry = display.find(".btn-move-" + (i + 1));
+        var moveBtn = $('<a class="btn btn-raised btn-move">\n' +
+            '                    <div>\n' +
+            '                        <h4 class="move-name"></h4>\n' +
+            '                        <span class="pull-right">\n' +
+            '                                <span class="label label-warning label-type"></span>\n' +
+            '                            </span>\n' +
+            '                    </div>\n' +
+            '                    <div class="btn-move-footer">\n' +
+            '                            <span class="pull-right move-desc" data-toggle="tooltip" data-placement="left">\n' +
+            '                                <i class="material-icons">info</i>\n' +
+            '                            </span>\n' +
+            '                        <span class="move-freq"></span>\n' +
+            '                    </div>\n' +
+            '                </a>');
 
-        movesEntry.css("display", "block");
+        moveBtn.css("display", "block").attr("data-index", i);
 
         var title = move["Title"];
         var freq = move["Freq"];
@@ -343,10 +344,12 @@ function displayInit() {
 
         // Put data on card
 
-        movesEntry.find(".move-name").html(title).css("color", color);
-        movesEntry.find(".label-type").html(type).css("background-color", color);
-        movesEntry.find(".move-freq").html(frqIco);
-        movesEntry.find(".move-desc").attr("data-content", dmgType + " Move. " + desc);
+        moveBtn.find(".move-name").html(title).css("color", color);
+        moveBtn.find(".label-type").html(type).css("background-color", color);
+        moveBtn.find(".move-freq").html(frqIco);
+        moveBtn.find(".move-desc").attr("data-content", dmgType + " Move. " + desc);
+
+        $(".moves").append(moveBtn);
     });
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -355,6 +358,41 @@ function displayInit() {
     display.find(".pokemon-enemy").css("display", "block");
 
     updateStatus();
+
+    $(".btn-move").click(function () {
+        var move = moves_data[parseInt($(this).attr("data-index"))];
+        currentMove = move;
+
+        // Populate fields
+        $(".modal-move .move-desc").html(move["Effect"]);
+        $(".modal-move .move-name").html(move["Title"]).css("color", $(this).find(".move-name").css("color"));
+        $(".modal-move #move-type").val(move["Type"]).parent().removeClass("is-empty");
+        $(".modal-move #move-class").val(move["Class"]).parent().removeClass("is-empty");
+
+        if (move["DB"])
+            $(".modal-move #move-db").removeAttr("disabled").val(move["DB"]);
+        else
+            $(".modal-move #move-db").attr("disabled", "").val("");
+
+        if (move["AC"])
+            $(".modal-move #move-ac").removeAttr("disabled").val(move["AC"]);
+        else
+            $(".modal-move #move-ac").attr("disabled", "").val("");
+
+        if (move["Range"])
+            $(".modal-move #move-range").val(move["Range"]);
+        else
+            $(".modal-move #move-range").val("");
+
+        if (move["Crits On"])
+            $(".modal-move #move-crit").removeAttr("disabled").val(move["Crits On"]);
+        else
+            $(".modal-move #move-crit").attr("disabled", "").val("");
+
+        updateTargetList();
+
+        $('#modalTarget').modal('show');
+    });
 }
 
 function onTargetGridLoaded() {
@@ -412,6 +450,15 @@ function updateTargetList() {
     $("#select-target-body").html(html);
 
     $("#select-target-body .btn").click(function () {
+
+        // Populate move with modified data
+        if (currentMove["Type"])     currentMove["Type"]  = $("#move-type").val();
+        if (currentMove["Class"])    currentMove["Class"] = $("#move-class").val();
+
+        if (currentMove["DB"])       currentMove["DB"] = parseInt($("#move-db").val());
+        if (currentMove["AC"])       currentMove["AC"] = parseInt($("#move-ac").val());
+
+        if (currentMove["Crits On"]) currentMove["Crits On"] = parseInt($("#move-crit").val());
 
         sendMessage(host_id, JSON.stringify({
             "type": "battle_move",
