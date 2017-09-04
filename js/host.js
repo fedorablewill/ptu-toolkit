@@ -130,7 +130,7 @@ function readMessage(connection, data) {
             var max_hp = gm_data["pokemon"][json.pokemon]['level'] + gm_data["pokemon"][json.pokemon]['hp'] * 3 + 10;
             var w = Math.floor((gm_data["pokemon"][json.pokemon]['health'] / max_hp) * 100);
 
-            $("[data-name='"+json.pokemon+"']").find(".progress-bar").css("width", w + "%");
+            renderBattler();
 
             sendMessage(battle[json.pokemon]["client_id"], JSON.stringify({
                 "type": "health",
@@ -142,7 +142,10 @@ function readMessage(connection, data) {
      Update Combat Stage Received
      */
     else if (json.type == "pokemon_setcs") {
-        battle[json.pokemon][json.field] = json.value;
+        battle[json.pokemon][json.field] = parseInt(json.value);
+
+        if (json.field === "stage_speed")
+            renderBattler();
     }
     /*
      Add an affliction
@@ -265,7 +268,7 @@ function renderBattler() {
         // Create grid
         generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
 
-        var html = '';
+        var elems = [], html = '';
 
         // If no one is in battle
         if ($.isEmptyObject(battle)) {
@@ -298,13 +301,28 @@ function renderBattler() {
                         afflictions += ' <span class="label label-danger">' + a + '</span>';
                     });
 
+                // Generate HTML Elements in order of initiative
+
+                var i = 0, speed = gm_data["pokemon"][id]['speed'] * getStageMultiplier(battle[id]["stage_speed"]);
+
+                while (i < elems.length) {
+                    if (speed > elems[i]["speed"])
+                        break;
+                    i++;
+                }
+
                 // Generate HTML
-                html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
-                    '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
-                    '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                    '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
-                    '</div>' +
-                    '</div>';
+                elems.splice(i, 0, {'html': '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
+                        '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
+                        '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
+                        '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
+                        '</div>' +
+                        '</div>',
+                    'speed': speed});
+            });
+
+            $.each(elems, function (k, e) {
+                html += e['html'];
             });
 
             html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
