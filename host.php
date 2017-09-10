@@ -378,7 +378,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tab-add" data-toggle="tab" onclick="onClickAddPokemon()">
+                                <a href="#tab-add" data-toggle="tab">
                                     <i class="material-icons">add</i>
                                     Create
                                 </a>
@@ -414,7 +414,13 @@
                         <div class="list-pokemon"></div>
                     </div>
                     <div class="tab-pane" id="tab-add">
-                        <p>To be moved here</p>
+                        <small class="text-muted"><i>MORE CHARACTER/POKEMON SHEET FEATURES ARE COMING</i></small>
+                        <h4>POKEMON</h4>
+                        <button class="btn btn-danger" onclick="onClickAddPokemon('SIMPLE','POKEMON')">Simple Sheet</button>
+                        <button class="btn" disabled>Full Sheet</button>
+                        <h4>TRAINER</h4>
+                        <button class="btn btn-danger" onclick="onClickAddPokemon('SIMPLE','OTHER')">Simple Sheet</button>
+                        <button class="btn" disabled>Full Sheet</button>
                     </div>
                     <div class="tab-pane" id="tab-generate">
                         <div class="col-md-8 col-md-offset-2 form-genmon">
@@ -825,7 +831,7 @@
 </div>
 
 <!-- Modal dialog for adding/editing Pokémon -->
-<div class="modal fade" id="modalAddPokemon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalSimpleSheet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -841,16 +847,17 @@
                 <h4>Basic Info</h4>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-name">Pokémon Name</label>
+                    <label class="control-label" for="addmon-name">Name</label>
                     <input class="form-control" type="text" id="addmon-name" data-field="name" required />
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="addmon-dex" data-field="dex" required data-populate="dex" />
+                    <input class="form-control" type="text" id="addmon-dex" data-field="dex" data-show="POKEMON"
+                           data-required="POKEMON" data-populate="dex" />
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-type1">Type 1</label>
-                    <select class="form-control" id="addmon-type1" required data-populate="type"><option></option></select>
+                    <select class="form-control" id="addmon-type1" data-required="POKEMON" data-populate="type"><option></option></select>
                 </div>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-type2">Type 2</label>
@@ -952,7 +959,7 @@
                 </div>
                 <label for="addmon-moves">Abilities</label>
                 <div id="addmon-abilities">
-                    <select class="form-control" title="Ability 1" required data-populate="ability"><option></option></select>
+                    <select class="form-control" title="Ability 1" data-required="POKEMON" data-populate="ability"><option></option></select>
                     <select class="form-control" title="Ability 2" data-populate="ability"><option></option></select>
                     <select class="form-control" title="Ability 3" data-populate="ability"><option></option></select>
                 </div>

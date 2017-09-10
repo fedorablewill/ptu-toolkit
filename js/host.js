@@ -1410,45 +1410,73 @@ function updatePokemonEditor() {
         });
 }
 
-function onClickAddPokemon() {
+function prepareSheet(sheet_type, entity_type) {
+    var modal = $("#modalSimpleSheet");
 
-    $("#addmon-id").val("").parent().addClass("is-empty");
-    $("#addmon-name").val("").parent().addClass("is-empty");
-    $("#addmon-dex").val("").parent().addClass("is-empty");
-    $("#addmon-level").val("").parent().addClass("is-empty");
-    $("#addmon-exp").val(0).parent().removeClass("is-empty");
-    $("#addmon-type1").val("").parent().addClass("is-empty");
-    $("#addmon-type2").val("").parent().addClass("is-empty");
-    $("#addmon-nature").val("").parent().addClass("is-empty");
-    $("#addmon-gender").val("Genderless").parent().removeClass("is-empty");
-    $("#addmon-discover").val("").parent().addClass("is-empty");
-    $("#addmon-item").val("").parent().addClass("is-empty");
-    $("#addmon-health").val("").parent().addClass("is-empty");
-    $("#addmon-injure").val("0").parent().removeClass("is-empty");
-    $("#addmon-hp").val("").parent().addClass("is-empty");
-    $("#addmon-atk").val("").parent().addClass("is-empty");
-    $("#addmon-def").val("").parent().addClass("is-empty");
-    $("#addmon-spdef").val("").parent().addClass("is-empty");
-    $("#addmon-spatk").val("").parent().addClass("is-empty");
-    $("#addmon-speed").val("").parent().addClass("is-empty");
-    $("[title='Move 1']").val("");
-    $("[title='Move 2']").val("");
-    $("[title='Move 3']").val("");
-    $("[title='Move 4']").val("");
-    $("[title='Move 5']").val("");
-    $("[title='Move 6']").val("");
-    $("[title='Move 7']").val("");
-    $("[title='Move 8']").val("");
-    $("[title='Move 9']").val("");
-    $("[title='Ability 1']").val("");
-    $("[title='Ability 2']").val("");
-    $("[title='Ability 3']").val("");
+    modal.find("[data-show]").each(function() {
+        if ($(this).attr("data-show") === entity_type)
+            $(this).parent().show();
+        else
+            $(this).parent().hide();
+    });
 
-    $('#modalAddPokemon').modal('show');
+    modal.find("[data-required]").each(function() {
+        if ($(this).attr("data-required") === entity_type)
+            $(this).attr("required", "");
+        else
+            $(this).removeAttr("required");
+    });
+}
+
+function onClickAddPokemon(sheet_type, entity_type) {
+
+    prepareSheet(sheet_type, entity_type);
+
+    // Reset Simple Sheet
+    if (sheet_type === "SIMPLE") {
+
+        $("#addmon-id").val("").parent().addClass("is-empty");
+        $("#addmon-name").val("").parent().addClass("is-empty");
+        $("#addmon-dex").val("").parent().addClass("is-empty");
+        $("#addmon-level").val("").parent().addClass("is-empty");
+        $("#addmon-exp").val(0).parent().removeClass("is-empty");
+        $("#addmon-type1").val("").parent().addClass("is-empty");
+        $("#addmon-type2").val("").parent().addClass("is-empty");
+        $("#addmon-nature").val("").parent().addClass("is-empty");
+        $("#addmon-gender").val("Genderless").parent().removeClass("is-empty");
+        $("#addmon-discover").val("").parent().addClass("is-empty");
+        $("#addmon-item").val("").parent().addClass("is-empty");
+        $("#addmon-health").val("").parent().addClass("is-empty");
+        $("#addmon-injure").val("0").parent().removeClass("is-empty");
+        $("#addmon-hp").val("").parent().addClass("is-empty");
+        $("#addmon-atk").val("").parent().addClass("is-empty");
+        $("#addmon-def").val("").parent().addClass("is-empty");
+        $("#addmon-spdef").val("").parent().addClass("is-empty");
+        $("#addmon-spatk").val("").parent().addClass("is-empty");
+        $("#addmon-speed").val("").parent().addClass("is-empty");
+        $("[title='Move 1']").val("");
+        $("[title='Move 2']").val("");
+        $("[title='Move 3']").val("");
+        $("[title='Move 4']").val("");
+        $("[title='Move 5']").val("");
+        $("[title='Move 6']").val("");
+        $("[title='Move 7']").val("");
+        $("[title='Move 8']").val("");
+        $("[title='Move 9']").val("");
+        $("[title='Ability 1']").val("");
+        $("[title='Ability 2']").val("");
+        $("[title='Ability 3']").val("");
+    }
+
+    $('#modalSimpleSheet').modal('show');
 }
 
 function onClickEditPokemon(id) {
+    var sheet = gm_data['pokemon'][id].hasOwnProperty("Sheet") ? gm_data['pokemon'][id]['Sheet'] : "SIMPLE";
+    var entity = gm_data['pokemon'][id]['dex'] === "" ? "TRAINER" : "POKEMON";
     var types = gm_data['pokemon'][id]['type'].split(" / ");
+
+    prepareSheet(sheet, entity);
 
     $("#addmon-id").val(id);
     $("#addmon-name").val(gm_data['pokemon'][id]['name']).parent().removeClass("is-empty");
@@ -1458,6 +1486,8 @@ function onClickEditPokemon(id) {
     $("#addmon-type1").val(types[0]).parent().removeClass("is-empty");
     if (types[1] != null)
         $("#addmon-type2").val(types[1]).parent().removeClass("is-empty");
+    else
+        $("#addmon-type2").val("").parent().addClass("is-empty");
     $("#addmon-nature").val(gm_data['pokemon'][id]['nature']).parent().removeClass("is-empty");
     $("#addmon-gender").val(gm_data['pokemon'][id]['gender']).parent().removeClass("is-empty");
     $("#addmon-discover").val(gm_data['pokemon'][id]['discovery']).parent().removeClass("is-empty");
@@ -1485,7 +1515,7 @@ function onClickEditPokemon(id) {
 
     updatePokemonEditor();
 
-    $('#modalAddPokemon').modal('show');
+    $('#modalSimpleSheet').modal('show');
 }
 
 function onClickDeletePokemon(id) {
