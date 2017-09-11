@@ -821,16 +821,16 @@ function onClickMenu() {
         elem.css("display", "none").addClass("hidden-xs").addClass("hidden-sm");
 }
 
-$(".btn-sidebar").click(function () {
+$(".btn-sidebar, .navbar-fixed-bottom .btn").click(function () { //TODO: redo sidebar
     var tab = $(this).attr("data-target");
 
     // Change out tab content
     $(".tab").css("display", "none");
     $("#tab" + tab).css("display", "block");
 
-    // Change out button classes
-    $("[data-toggle='tab']:not(.btn-simple)").addClass("btn-simple", 1000);
-    $(this).removeClass("btn-simple", 1000);
+    // Change navbar
+    $(this).parent().parent().find(".active").removeClass("active");
+    $(this).parent().addClass("active");
 
     if (tab == 2)
         updateInfoPage();

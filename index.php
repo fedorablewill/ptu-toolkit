@@ -23,12 +23,30 @@
             100% {height: 50px;}
         }
 
-        body {
-            background: url('img/pixel-art-pokemon-wallpaper-2.jpg') no-repeat fixed center bottom;
-
+        body::before {
+            content: "";
+            display: block;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: url('img/pixel-art-pokemon-wallpaper-2.jpg') no-repeat center bottom;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
             background-size: cover !important;
+        }
+
+        body {
             color: white;
             padding-top: 90px;
+            padding-bottom: 90px;
+        }
+
+        .navbar {
+            border: 0 !important;
         }
 
         .nav-pokemon {
@@ -47,6 +65,40 @@
         .nav-status {
             position: absolute;
             top: 75px;
+        }
+
+        .navbar-fixed-bottom .nav-bottom-item {
+            padding: 0;
+        }
+
+        .navbar-fixed-bottom .nav-bottom-item .btn {
+            width: 100%;
+            padding: 13px 0;
+            color: #EFEFEF;
+        }
+
+        .navbar-fixed-bottom .nav-bottom-item.active .btn {
+            color: #faaca6;
+        }
+
+        .navbar-fixed-bottom .nav-bottom-item .material-icons {
+            font-size: 24px;
+            width: 24px;
+            margin-right: 8px;
+        }
+
+        .navbar-fixed-bottom .nav-bottom-item.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -8px;
+            height: 4px;
+            background: #faaca6;
+        }
+
+        .nav-bottom-item:not(.active) .nav-bottom-label {
+            display: none;
         }
 
         .sidebar-nav {
@@ -208,7 +260,7 @@
 
         .modal-move .move-desc {
             text-align: center;
-            width: 400px;
+            width: 90%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -328,20 +380,25 @@
     </div>
 </nav>
 
-<!--    <div class="container">-->
-<!--<!--        <ul class="nav nav-tabs">-->-->
-<!--<!--            <li class="active"><a href="javascript:void(0)">Moves</a></li>-->-->
-<!--<!--            <li><a href="javascript:void(0)">Info</a></li>-->-->
-<!--<!--            <li class="disabled"><a href="javascript:void(0)">Pokédex</a></li>-->-->
-<!--<!--            <li><a href="javascript:void(0)">Advanced</a></li>-->-->
-<!--<!--        </ul>-->-->
-<!---->
-<!--        <p class="lead nav-status text-success">-->
-<!--            <span class="fa fa-circle"></span> Connected to Battle-->
-<!--        </p>-->
-<!--    </div>-->
-
-<!-- Initial View (Join & Select) -->
+<nav class="navbar navbar-danger navbar-fixed-bottom">
+    <div class="container">
+        <div class="col-xs-4 nav-bottom-item active">
+            <button class="btn btn-simple" data-toggle="tab" data-target="1">
+                <i class="material-icons">directions_walking</i><span class="nav-bottom-label">Actions</span>
+            </button>
+        </div>
+        <div class="col-xs-4 nav-bottom-item">
+            <button class="btn btn-simple" data-toggle="tab" data-target="3">
+                <i class="material-icons">build</i><span class="nav-bottom-label">Manage</span>
+            </button>
+        </div>
+        <div class="col-xs-4 nav-bottom-item">
+            <button class="btn btn-simple" data-toggle="tab" data-target="2">
+                <i class="material-icons">assessment</i><span class="nav-bottom-label">Info</span>
+            </button>
+        </div>
+    </div>
+</nav>
 <div class="container content-init">
     <div class="well col-sm-4 col-sm-offset-4" id="init-connect">
         <h1>Enter GM ID</h1>
