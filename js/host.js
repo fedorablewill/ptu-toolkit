@@ -684,14 +684,11 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
     var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
     var effect1 = typeEffects[moveType.toLowerCase()][target_types[0].toLowerCase()];
-    var effect2 = 1;
-
-    if (target_types.length > 1)
-        effect2 = typeEffects[moveType.toLowerCase()][target_types[1].toLowerCase()];
+    var effect2 = target_types.length > 1 ? typeEffects[moveType.toLowerCase()][target_types[1].toLowerCase()] : 1;
 
     damage = damage * effect1 * effect2;
 
-    if (effect1 * effect2 == 0)
+    if (effect1 !== undefined && effect1 * effect2 === 0)
         doToast("No effect!");
     else if (effect1 * effect2 >= 2)
         doToast("It's super effective!");
@@ -1298,7 +1295,7 @@ function onAddmonDexChange() {
 function updatePokemonEditor() {
     var dex = $("#addmon-dex").val();
 
-    if (dex != "")
+    if (dex !== "" && dex !== "TRAINER")
         $.getJSON("api/v1/"+pokedex+"/" + dex, function (entry) {
             // Fields to edit/view
             var field_level = $("#addmon-level");
@@ -1426,6 +1423,17 @@ function prepareSheet(sheet_type, entity_type) {
         else
             $(this).removeAttr("required");
     });
+
+    if (entity_type === "TRAINER") {
+        $("#addmon-dex").val("TRAINER");
+
+        $("addmon-hp").attr("data-base", "10");
+        $("addmon-atk").attr("data-base", "5");
+        $("addmon-def").attr("data-base", "5");
+        $("addmon-spatk").attr("data-base", "5");
+        $("addmon-spdef").attr("data-base", "5");
+        $("addmon-speed").attr("data-base", "5");
+    }
 }
 
 function onClickAddPokemon(sheet_type, entity_type) {
@@ -1513,6 +1521,7 @@ function onClickEditPokemon(id) {
     $("[title='Ability 2']").val(gm_data['pokemon'][id]['abilities'][1]);
     $("[title='Ability 3']").val(gm_data['pokemon'][id]['abilities'][2]);
 
+    onAddmonDexChange();
     updatePokemonEditor();
 
     $('#modalSimpleSheet').modal('show');

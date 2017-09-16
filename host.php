@@ -890,7 +890,7 @@
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-discover">Discovered at</label>
-                    <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
+                    <input class="form-control" type="text" id="addmon-discover" data-field="discovery" data-show="POKEMON" />
                     <p class="help-block">Where was the Pokémon found</p>
                 </div>
                 <div class="form-group label-floating">
