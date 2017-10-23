@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="Propel\PtuToolkit" defaultPhpNamingMethod="underscore">
+  <table name="battle_entries" idMethod="native" phpName="BattleEntries" namespace="Propel\PtuToolkit">
+    <column name="battle_entry_id" phpName="BattleEntryId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="battle_id" phpName="BattleId" type="INTEGER" required="true"/>
+    <column name="character_id" phpName="CharacterId" type="INTEGER" required="true"/>
+    <unique name="battle_entries_battle_entry_id_uindex">
+      <unique-column name="battle_entry_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="battles" idMethod="native" phpName="Battles" namespace="Propel\PtuToolkit">
+    <column name="battle_id" phpName="BattleId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="campaign_id" phpName="CampaignId" type="INTEGER" required="true"/>
+    <column name="is_active" phpName="IsActive" type="BOOLEAN" size="1"/>
+    <index name="battles_campaigns_campaign_id_fk">
+      <index-column name="campaign_id"/>
+    </index>
+    <unique name="battles_id_uindex">
+      <unique-column name="battle_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="campaigns" idMethod="native" phpName="Campaigns" namespace="Propel\PtuToolkit">
+    <column name="campaign_id" phpName="CampaignId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_firebase_id" phpName="UserFirebaseId" type="VARCHAR" size="32" primaryKey="true" required="true"/>
+    <column name="campaign_name" phpName="CampaignName" type="VARCHAR" size="25" required="true"/>
+    <column name="campaign_data" phpName="CampaignData" type="LONGVARBINARY"/>
+    <foreign-key foreignTable="users" name="Users_Campaigns_FK1">
+      <reference local="user_firebase_id" foreign="firebase_id"/>
+    </foreign-key>
+    <unique name="Campaign_id">
+      <unique-column name="campaign_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="character_abilities" idMethod="native" phpName="CharacterAbilities" namespace="Propel\PtuToolkit">
+    <column name="character_ability_id" phpName="CharacterAbilityId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="character_id" phpName="CharacterId" type="INTEGER" required="true"/>
+    <column name="ability_id" phpName="AbilityId" type="INTEGER"/>
+    <column name="ability_name" phpName="AbilityName" type="VARCHAR" size="64"/>
+    <unique name="character_abilities_character_ability_id_uindex">
+      <unique-column name="character_ability_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="character_buffs" idMethod="native" phpName="CharacterBuffs" namespace="Propel\PtuToolkit">
+    <column name="character_buff_id" phpName="CharacterBuffId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="character_id" phpName="CharacterId" type="INTEGER" required="true"/>
+    <column name="battle_id" phpName="BattleId" type="INTEGER"/>
+    <column name="value" phpName="Value" type="INTEGER" required="true" defaultValue="0"/>
+    <column name="type" phpName="Type" type="CHAR" sqlType="enum('CS','ADD')" defaultValue="ADD"/>
+    <column name="prereq" phpName="Prereq" type="VARCHAR" size="128"/>
+    <column name="target_stat" phpName="TargetStat" type="VARCHAR" size="8" required="true"/>
+    <index name="character_buffs_characters_character_id_fk">
+      <index-column name="character_id"/>
+    </index>
+    <unique name="character_buffs_id_uindex">
+      <unique-column name="character_buff_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="character_moves" idMethod="native" phpName="CharacterMoves" namespace="Propel\PtuToolkit">
+    <column name="character_move_id" phpName="CharacterMoveId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="character_id" phpName="CharacterId" type="INTEGER" required="true"/>
+    <column name="move_id" phpName="MoveId" type="INTEGER"/>
+    <column name="move_name" phpName="MoveName" type="VARCHAR" size="64"/>
+    <unique name="character_moves_character_move_id_uindex">
+      <unique-column name="character_move_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="characters" idMethod="native" phpName="Characters" namespace="Propel\PtuToolkit">
+    <column name="character_id" phpName="CharacterId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="campaign_id" phpName="CampaignId" type="INTEGER" required="true"/>
+    <column name="type" phpName="Type" type="CHAR" sqlType="enum('TRAINER','POKEMON')" required="true"/>
+    <column name="pokedex_id" phpName="PokedexId" type="VARCHAR" size="8"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="80" required="true"/>
+    <column name="owner" phpName="Owner" type="INTEGER"/>
+    <column name="age" phpName="Age" type="VARCHAR" size="12"/>
+    <column name="weight" phpName="Weight" type="VARCHAR" size="12"/>
+    <column name="height" phpName="Height" type="VARCHAR" size="12"/>
+    <column name="sex" phpName="Sex" type="VARCHAR" size="12"/>
+    <column name="base_type1" phpName="BaseType1" type="VARCHAR" size="16"/>
+    <column name="base_type2" phpName="BaseType2" type="VARCHAR" size="16"/>
+    <column name="level" phpName="Level" type="INTEGER"/>
+    <column name="exp" phpName="Exp" type="INTEGER"/>
+    <column name="base_hp" phpName="BaseHp" type="INTEGER" required="true"/>
+    <column name="base_atk" phpName="BaseAtk" type="INTEGER" required="true"/>
+    <column name="base_def" phpName="BaseDef" type="INTEGER" required="true"/>
+    <column name="base_satk" phpName="BaseSatk" type="INTEGER" required="true"/>
+    <column name="base_sdef" phpName="BaseSdef" type="INTEGER" required="true"/>
+    <column name="base_spd" phpName="BaseSpd" type="INTEGER" required="true"/>
+    <column name="add_hp" phpName="AddHp" type="INTEGER" defaultValue="0"/>
+    <column name="add_atk" phpName="AddAtk" type="INTEGER" defaultValue="0"/>
+    <column name="add_def" phpName="AddDef" type="INTEGER" defaultValue="0"/>
+    <column name="add_satk" phpName="AddSatk" type="INTEGER" defaultValue="0"/>
+    <column name="add_sdef" phpName="AddSdef" type="INTEGER" defaultValue="0"/>
+    <column name="add_spd" phpName="AddSpd" type="INTEGER" defaultValue="0"/>
+    <column name="health" phpName="Health" type="INTEGER"/>
+    <column name="injuries" phpName="Injuries" type="INTEGER" defaultValue="0"/>
+    <column name="money" phpName="Money" type="INTEGER" defaultValue="0"/>
+    <column name="skill_acrobatics" phpName="SkillAcrobatics" type="INTEGER" defaultValue="2"/>
+    <column name="skill_athletics" phpName="SkillAthletics" type="INTEGER" defaultValue="2"/>
+    <column name="skill_charm" phpName="SkillCharm" type="INTEGER" defaultValue="2"/>
+    <column name="skill_combat" phpName="SkillCombat" type="INTEGER" defaultValue="2"/>
+    <column name="skill_command" phpName="SkillCommand" type="INTEGER" defaultValue="2"/>
+    <column name="skill_general_ed" phpName="SkillGeneralEd" type="INTEGER" defaultValue="2"/>
+    <column name="skill_medicine_ed" phpName="SkillMedicineEd" type="INTEGER" defaultValue="2"/>
+    <column name="skill_occult_ed" phpName="SkillOccultEd" type="INTEGER" defaultValue="2"/>
+    <column name="skill_pokemon_ed" phpName="SkillPokemonEd" type="INTEGER" defaultValue="2"/>
+    <column name="skill_technology_ed" phpName="SkillTechnologyEd" type="INTEGER" defaultValue="2"/>
+    <column name="skill_focus" phpName="SkillFocus" type="INTEGER" defaultValue="2"/>
+    <column name="skill_guile" phpName="SkillGuile" type="INTEGER" defaultValue="2"/>
+    <column name="skill_intimidate" phpName="SkillIntimidate" type="INTEGER" defaultValue="2"/>
+    <column name="skill_intuition" phpName="SkillIntuition" type="INTEGER" defaultValue="2"/>
+    <column name="skill_perception" phpName="SkillPerception" type="INTEGER" defaultValue="2"/>
+    <column name="skill_stealth" phpName="SkillStealth" type="INTEGER" defaultValue="2"/>
+    <column name="skill_survival" phpName="SkillSurvival" type="INTEGER" defaultValue="2"/>
+    <column name="ap_spent" phpName="ApSpent" type="INTEGER" defaultValue="0"/>
+    <column name="ap_bound" phpName="ApBound" type="INTEGER" defaultValue="0"/>
+    <column name="ap_drained" phpName="ApDrained" type="INTEGER" defaultValue="0"/>
+    <column name="background_name" phpName="BackgroundName" type="VARCHAR" size="80"/>
+    <column name="background_adept" phpName="BackgroundAdept" type="VARCHAR" size="80"/>
+    <column name="background_novice" phpName="BackgroundNovice" type="VARCHAR" size="80"/>
+    <column name="background_pthc1" phpName="BackgroundPthc1" type="VARCHAR" size="80"/>
+    <column name="background_pthc2" phpName="BackgroundPthc2" type="VARCHAR" size="80"/>
+    <column name="background_pthc3" phpName="BackgroundPthc3" type="VARCHAR" size="80"/>
+    <column name="notes" phpName="Notes" type="LONGVARCHAR"/>
+    <column name="nature" phpName="Nature" type="VARCHAR" size="16"/>
+    <index name="characters_characters_character_id_fk">
+      <index-column name="owner"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="sessions" idMethod="native" phpName="Sessions" namespace="Propel\PtuToolkit">
+    <column name="session_id" phpName="SessionId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_firebase_id" phpName="UserFirebaseId" type="VARCHAR" size="16" required="true"/>
+    <column name="firebase_token" phpName="FirebaseToken" type="LONGVARCHAR" required="true"/>
+    <column name="ip_address" phpName="IpAddress" type="VARCHAR" size="16" required="true"/>
+    <column name="agent" phpName="Agent" type="VARCHAR" size="64" required="true"/>
+    <column name="timestamp" phpName="Timestamp" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <foreign-key foreignTable="users" name="Users_Sessions_FK1">
+      <reference local="user_firebase_id" foreign="firebase_id"/>
+    </foreign-key>
+    <index name="Users_Sessions_FK1">
+      <index-column name="user_firebase_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users" namespace="Propel\PtuToolkit">
+    <column name="firebase_id" phpName="FirebaseId" type="VARCHAR" size="32" primaryKey="true" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="20" required="true"/>
+    <column name="peer_id" phpName="PeerId" type="VARCHAR" size="32" required="true"/>
+    <column name="settings" phpName="Settings" type="LONGVARBINARY"/>
+    <unique name="Users_AK1">
+      <unique-column name="username"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

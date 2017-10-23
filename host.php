@@ -875,7 +875,8 @@
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-nature">Nature</label>
-                    <select class="form-control" id="addmon-nature" data-field="nature" required data-populate="nature">
+                    <select class="form-control" id="addmon-nature" data-field="nature" data-populate="nature"
+                            data-show="POKEMON" data-required="POKEMON">
                         <option></option>
                     </select>
                 </div>
