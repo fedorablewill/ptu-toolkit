@@ -18,8 +18,6 @@ $characters = CharactersQuery::create()
     ->filterByOwner(null)
     ->find();
 
-$characters = CharactersQuery::create()->find();
-
 foreach ($characters as $character): ?>
 
     <h1><?php echo $character->getName();?></h1>

@@ -1,0 +1,17 @@
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "default": {
+                    "adapter": "mysql",
+                    "dsn": "mysql:host=absorr.com;port=3306;dbname=absorrco_ptu_toolkit",
+                    "user": "absorrco_ptu",
+                    "password": "Pmon#sql@toolkit",
+                    "settings": {
+                        "charset": "utf8"
+                    }
+                }
+            }
+        }
+    }
+}

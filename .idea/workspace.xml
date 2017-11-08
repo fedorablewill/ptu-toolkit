@@ -2,841 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15862326-d7eb-4f47-8185-a295394b3116" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/composer.phar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/lob/propel.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/lob/tin_drum.gif" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/ptu-entities.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/ptu-io.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/UPDATE.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/autoload.php.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/bin/propel" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/bin/propel.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/bin/propel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/circle.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/features/bootstrap/FeatureContext.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/features/table.feature" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/phpunit.xml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/pom.xml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/resources/dtd/database.dtd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/resources/xsd/custom_datatypes.xsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/resources/xsd/database.xsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/resources/xsl/database.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/resources/xsl/dbd2propel.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/ConfigurationManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/IniParseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/InputOutputException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/InvalidConfigurationException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/JsonParseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Exception/XmlParseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/FileLocator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/DelegatingLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/FileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/IniFileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/JsonFileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/LoaderResolver.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/PhpFileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/XmlFileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/Loader/YamlFileLoader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/PropelConfiguration.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Config/XmlToArrayConverter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Exception/SetColumnConverterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Pluralizer/PluralizerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Pluralizer/SimpleEnglishPluralizer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Pluralizer/StandardEnglishPluralizer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Common/Util/SetColumnConverter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Application.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/AggregateColumnBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/AggregateColumnRelationBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/templates/objectCompute.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/templates/objectUpdate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/templates/objectUpdateRelated.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/templates/queryFindRelated.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AggregateColumn/templates/queryUpdateRelated.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/ArchivableBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/ArchivableBehaviorObjectBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/ArchivableBehaviorQueryBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectDeleteWithoutArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectGetArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectPopulateFromArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectPreDelete.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectRestoreFromArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/objectSaveWithoutArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/queryArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/queryDeleteWithoutArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/querySetArchiveOnDelete.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/querySetArchiveOnUpdate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Archivable/templates/queryUpdateWithoutArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/AutoAddPk/AutoAddPkBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceParentBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Delegate/DelegateBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Delegate/templates/queryMethodsTemplate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/I18nBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/I18nBehaviorObjectBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/I18nBehaviorQueryBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectAttributes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectClearReferences.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectGetCurrentTranslation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectGetLocale.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectGetLocaleAlias.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectGetTranslation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectPostDelete.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectRemoveTranslation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectSetLocale.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectSetLocaleAlias.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectSetTranslation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectTranslatedColumnGetter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/objectTranslatedColumnSetter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/queryJoinI18n.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/queryJoinWithI18n.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/queryUseI18nQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/I18n/templates/staticAttributes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/NestedSetBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/NestedSetBehaviorObjectBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/NestedSetBehaviorQueryBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/templates/objectGetIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/templates/objectInsertAsLastChildOf.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/NestedSet/templates/objectSetLeft.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/QueryCache/QueryCacheBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sluggable/SluggableBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sortable/SortableBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sortable/SortableBehaviorObjectBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sortable/SortableBehaviorQueryBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sortable/SortableBehaviorTableMapBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Sortable/templates/tableMapSortable.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Timestampable/TimestampableBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Validate/ValidateBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Validate/templates/objectAttributes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Validate/templates/objectGetValidationFailures.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Validate/templates/objectLoadValidatorMetadata.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Validate/templates/objectValidate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Versionable/VersionableBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Versionable/VersionableBehaviorObjectBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Behavior/Versionable/VersionableBehaviorQueryBuilderModifier.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/DataModelBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/AbstractOMBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/AbstractObjectBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/ClassTools.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/ExtensionObjectBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/ExtensionQueryBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/ExtensionQueryInheritanceBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/InterfaceBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/MultiExtendObjectBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/ObjectBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/QueryBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/QueryInheritanceBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/TableMapBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/baseObjectAttributes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/baseObjectMethodHook.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/baseObjectMethodMagicCall.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/baseObjectMethods.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/tableMapClearRelatedInstancePool.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/tableMapConstants.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/tableMapFields.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Om/templates/tableMapInstancePool.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Sql/Pgsql/PgsqlDataSQLBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Util/DataRow.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Util/PropelTemplate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Builder/Util/SchemaReader.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/AbstractCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/ConfigConvertCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/DatabaseReverseCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/GraphvizGenerateCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/Helper/ConsoleHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/Helper/ConsoleHelper3.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/Helper/ConsoleHelperInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/InitCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationCreateCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationDiffCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationDownCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationMigrateCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationStatusCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/MigrationUpCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/ModelBuildCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/SqlBuildCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/SqlInsertCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/TestPrepareCommand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.ini.dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.ini.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.json.dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.json.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.php.dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.php.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.xml.dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.xml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.yml.dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/propel.yml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Command/templates/schema.xml.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Config/ArrayToPhpConverter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Config/GeneratorConfig.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Config/GeneratorConfigInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Config/QuickGeneratorConfig.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/BehaviorNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/BuildException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/ClassNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/ConstraintNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/DiffException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/EngineException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/LogicException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Exception/SchemaException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/AbstractManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/GraphvizManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/MigrationManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/ModelManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/ReverseManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Manager/SqlManager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Behavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/BehaviorableTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Column.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/ColumnDefaultValue.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/ConstraintNameGenerator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/CrossForeignKeys.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Database.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/ColumnComparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/ColumnDiff.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/DatabaseComparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/DatabaseDiff.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/ForeignKeyComparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/IndexComparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/TableComparator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Diff/TableDiff.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Domain.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/ForeignKey.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/IdMethod.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/IdMethodParameter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Inheritance.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/MappingModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/MappingModelInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/NameFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/NameGeneratorInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/PhpNameGenerator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/PropelTypes.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Schema.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/ScopedMappingModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/Unique.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/VendorInfo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/DefaultPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/MssqlPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/MysqlPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/OraclePlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/PgsqlPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/PlatformInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/SqlitePlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Platform/SqlsrvPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/AbstractSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/MssqlSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/MysqlSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/OracleSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/PgsqlSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/SchemaParserInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/SqliteSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Reverse/SqlsrvSchemaParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Schema/Dumper/DumperInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Schema/Dumper/XmlDumper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Util/BehaviorLocator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Util/PhpParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Util/QuickBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Util/SchemaValidator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Util/SqlParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/BattleEntries.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/BattleEntriesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Battles.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/BattlesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Campaigns.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CampaignsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterAbilities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterAbilitiesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterBuffs.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterBuffsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMoves.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMovesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharactersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Sessions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/SessionsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Users.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/UsersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/BattleEntries.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/BattleEntriesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Battles.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/BattlesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Campaigns.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CampaignsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterAbilities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterAbilitiesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterBuffs.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterBuffsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterMoves.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharacterMovesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/CharactersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/BattleEntriesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/BattlesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CampaignsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharacterAbilitiesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharacterBuffsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharacterMovesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharactersTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/SessionsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/UsersTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Sessions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/SessionsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Users.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/UsersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/BaseModelCriteria.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criteria.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/AbstractCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/AbstractModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/BasicCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/BasicModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/BinaryCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/BinaryModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/CustomCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/Exception/InvalidClauseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/Exception/InvalidValueException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/InCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/InModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/LikeCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/LikeModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/RawCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/RawModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criterion/SeveralModelCriterion.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Exception/UnknownColumnException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Exception/UnknownModelException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Exception/UnknownRelationException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/InstancePoolTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Join.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/ModelCriteria.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/ModelJoin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/ModelWith.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/PropelQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveRecord/ActiveRecordInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveRecord/NestedSetRecursiveIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/AdapterFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/AdapterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Exception/AdapterException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Exception/ColumnNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Exception/MalformedClauseException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Exception/UnsupportedEncodingException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/MSSQL/MssqlDebugPDO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/MSSQL/MssqlPropelPDO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/MssqlAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/MysqlAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/OracleAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/PdoAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/PgsqlAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/SqliteAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/Pdo/SqlsrvAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Adapter/SqlAdapterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/ArrayCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/Collection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/CollectionIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/Exception/ModelNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/Exception/ReadOnlyModelException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/Exception/UnsupportedRelationException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/ObjectCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/ObjectCombinationCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/OnDemandCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Collection/OnDemandIterator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionFactory.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionManagerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionManagerMasterSlave.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionManagerSingle.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ConnectionWrapper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/DebugPDO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/Exception/ConnectionException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/Exception/RollbackException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/PdoConnection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ProfilerConnectionWrapper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/ProfilerStatementWrapper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/PropelPDO.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/StatementWrapper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Connection/TransactionTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/DataFetcher/AbstractDataFetcher.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/DataFetcher/ArrayDataFetcher.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/DataFetcher/DataFetcherInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/DataFetcher/PDODataFetcher.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/BadMethodCallException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/ClassNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/EntityNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/ExceptionInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/FileNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/InvalidArgumentException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/LogicException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/PropelException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/RuntimeException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/UnexpectedValueException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/AbstractFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/ArrayFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/ObjectFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/OnDemandFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/SimpleArrayFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Formatter/StatementFormatter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/ColumnMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/DatabaseMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/Exception/ColumnNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/Exception/ForeignKeyNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/Exception/RelationNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/Exception/TableNotFoundException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/RelationMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/TableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Map/TableMapTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Parser/AbstractParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Parser/CsvParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Parser/JsonParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Parser/XmlParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Parser/YamlParser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Propel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/ServiceContainerInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/StandardServiceContainer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Util/Profiler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Util/PropelConditionalProxy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Util/PropelDateTime.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Util/PropelModelPager.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Validator/Constraints/Unique.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Validator/Constraints/UniqueValidator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntries.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntriesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Battles.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattlesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CampaignsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilitiesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffs.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMovesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharactersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Sessions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/SessionsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Users.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/UsersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntries.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntriesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattlesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Campaigns.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CampaignsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilities.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilitiesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffs.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMovesQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharactersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattleEntriesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattlesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CampaignsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterAbilitiesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterBuffsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterMovesTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharactersTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/SessionsTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/UsersTableMap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Sessions.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/SessionsQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Users.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/UsersQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/behavior-development/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/behavior-development/src/CollectionBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/behavior-installer/composer.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/behavior-installer/src/gossi/propel/behavior/l10n/L10nBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/book.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/book_club_list.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/external/author.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/log.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/media.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/publisher.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore-packaged/review.schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-add-class-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-aggregate-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-auto-add-pk-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-concrete-inheritance-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-query_cache-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-sluggable-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-sortable-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-timestampable-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-validate-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/behavior-validate-triggers-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/bookstore/types-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/lob/tin_drum.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/xsl/coverage-frames.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/xsl/log.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/xsl/phpunit-noframes.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/etc/xsl/str.replace.function.xsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/migration-command/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/migration-command/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/migration/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/namespaced/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/namespaced/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/quoting/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/quoting/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/recursive/level1/level2/other-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/recursive/level1/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/recursive/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/reverse/mysql/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/reverse/pgsql/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/schemas/propel.yaml.dist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Fixtures/schemas/schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Bookstore/AuthorCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/BookstoreLoggingTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/BookstoreTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/CharacterEncodingTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/ConfigTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/ConfigurationManagerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/DataProviderTrait.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/FileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/IniFileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/JsonFileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/PhpFileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/XmlFileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/Loader/YamlFileLoaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Config/XmlToArrayConverterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Pluralizer/EnglishPluralizerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Common/Util/SetColumnConverterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/FieldnameRelatedTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/AddClass/AddClassBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/AggregateColumn/AggregateColumnBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/AggregateColumn/AggregateColumnBehaviorWithSchemaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/AggregateColumn/AggregateColumnsBehaviorTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/ArchivableBehaviorObjectBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/ArchivableBehaviorQueryBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/ArchivableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/FooArchive.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/FooArchiveCollection.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Archivable/FooArchiveQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/AutoAddPk/AutoAddPkBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/BehaviorLocatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceBehaviorWithBehaviorExclusionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceBehaviorWithSchemaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/ConcreteInheritance/ConcreteInheritanceParentBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Delegate/DelegateBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/I18n/I18nBehaviorObjectBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/I18n/I18nBehaviorQueryBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/I18n/I18nBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/Fixtures/PublicTable10.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/Fixtures/PublicTable9.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/NestedSetBehaviorObjectBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/NestedSetBehaviorObjectBuilderModifierWithScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/NestedSetBehaviorQueryBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/NestedSetBehaviorQueryBuilderModifierWithScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/NestedSetBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/NestedSet/TestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/ObjectBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/QueryBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/QueryCache/QueryCacheTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sluggable/SluggableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sluggable/SluggableBehaviorTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorObjectBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorObjectBuilderModifierWithScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorQueryBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorQueryBuilderModifierWithScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorQueryUtilsBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorQueryUtilsBuilderModifierWithScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorWithEnumScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/SortableBehaviorWithSetScopeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Sortable/TestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/TableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Timestampable/TimestampableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Validate/I18nConcreteInheritanceHandleValidateBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Validate/UniqueConstraintTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Validate/ValidateBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Versionable/TestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Versionable/VersionableBehaviorObjectBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Versionable/VersionableBehaviorQueryBuilderModifierTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Behavior/Versionable/VersionableBehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/NamespaceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/AbstractOMBuilderNamespaceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/AbstractOMBuilderRelatedByTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/AbstractOMBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/Fixtures/ComplexColumnTypeEntityWithConstructor.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectArrayColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectBooleanColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectEnumColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectJsonColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectLazyLoadTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectLobTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectM2MRelationSimpleTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectM2MRelationThreePKs2Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectM2MRelationThreePKsTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectMoreRelationTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectObjectColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectRelTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectSetColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectTemporalColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectWithDateImmutableClassTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectWithFixturesTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedObjectWithInterfaceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedPKLessQueryBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedPKLessTableMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQueryArrayColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQueryDoDeleteTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQueryDoSelectTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQueryEnumColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQueryObjectColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedQuerySetColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedTableMapEnumColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedTableMapLazyLoadTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedTableMapSetColumnTypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/GeneratedTableMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/ObjectBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/PoisonedCacheBugTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/QueryBuilderInheritanceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/QueryBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/QueryBuilderTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Om/TableMapBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/PropelTemplateTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/SchemaReaderJoinSchemaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/SchemaReaderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/barSchema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/fooSchema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/innerSchema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/outerSchema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/template.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Builder/Util/testSchema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Command/AbstractCommandTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Command/DatabaseReverseTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Command/GraphvizGenerateTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Command/MigrationTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Config/ArrayToPhpConverterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Config/GeneratorConfigTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Config/QuickGeneratorConfigTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Manager/MigrationManagerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/BaseTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/ForeignKeyTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/IndexTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/MigrationTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/PrimaryKeyAITest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Migration/PrimaryKeyTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/BehaviorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/ColumnDefaultValueTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/ColumnTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/ConstantNameTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/DatabaseTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/ColumnComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/DatabaseTableComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/ForeignKeyComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/IndexComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/PropelTableColumnComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/PropelTableForeignKeyComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/PropelTableIndexComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/PropelTablePkColumnComparatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/Diff/TableDiffTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/DomainTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/ForeignKeyTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/IndexTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/InheritanceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/MappingModelTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/ModelTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/NameFactoryTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/PhpNameGeneratorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/SchemaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/TableTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/UniqueTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Model/VendorInfoTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/DefaultPlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MssqlPlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MysqlPlatformMigrationMyISAMTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MysqlPlatformMigrationTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MysqlPlatformMigrationTestProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MysqlPlatformMyISAMTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/MysqlPlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/OraclePlatformMigrationTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/OraclePlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/PgsqlPlatformMigrationTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/PgsqlPlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/PlatformMigrationTestProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/PlatformTestBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/PlatformTestProvider.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Platform/SqlitePlatformTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Reverse/MssqlSchemaParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Reverse/MysqlSchemaParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Reverse/PgsqlSchemaParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Schema/Dumper/XmlDumperTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Util/PhpParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Util/QuickBuilderTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Util/SchemaValidatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Generator/Util/SqlParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/BaseTestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/AddClassBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/AddClassBehaviorBuilder.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/DonothingBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/TestAuthor.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/TestAuthorDeleteFalse.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/TestAuthorSaveFalse.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/Behavior/Testallhooksbehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/BookstoreDataPopulator.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/BookstoreEmptyTestBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Bookstore/BookstoreTestBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/MultipleBehavior.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/Namespaces/NamespacesTestBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/NoSchemaPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/PlatformDatabaseBuildTimeBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Helpers/SchemaPlatform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue1033Book.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue1033Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue1133Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue617Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue646Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue656Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue675Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue730Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue733Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue768Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue829Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue915Book.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue915Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Issues/Issue989Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Resources/blog-database.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Resources/blog-database.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Resources/blog-schema.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Resources/blog-schema.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/CriteriaCombineTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/CriteriaFluidConditionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/CriteriaFluidOperatorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/CriteriaMergeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/BasicCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/BasicModelCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/CustomCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/InCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/InModelCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/LikeCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/LikeModelCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/RawCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/RawModelCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/Criterion/SeveralModelCriterionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/JoinTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaForUseQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaGroupByArrayTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaHooksTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaSelectTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaWithNamespaceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelCriteriaWithSchemaTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelJoinTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/ModelWithTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/PropelQueryTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/PropelQueryTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/QuotingTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/SubQueryTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/SubQueryTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveQuery/TestableModelCriteria.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveRecordConvertTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveRecordSerializeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveRecordTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ActiveRecordTestClasses.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Adapter/AbstractAdapterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Adapter/Pdo/MssqlAdapterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Adapter/Pdo/MysqlAdapterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Adapter/Pdo/OracleAdapterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Adapter/Pdo/PgsqlAdapter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/ArrayCollectionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/CollectionConvertTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/CollectionIteratorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/CollectionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/ObjectCollectionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/ObjectCollectionWithFixturesTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/OnDemandCollectionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Collection/OnDemandIteratorTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Connection/ConnectionFactoryTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Connection/ConnectionManagerMasterSlaveTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Connection/ConnectionManagerSingleTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Connection/PropelPDOTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Connection/TransactionTraitTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Exception/PropelExceptionTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/ArrayFormatterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/ArrayFormatterWithTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/DataFetcherTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/ObjectFormatterInheritanceTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/ObjectFormatterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/ObjectFormatterWithTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/OnDemandFormatterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/OnDemandFormatterWithTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/SimpleArrayFormatterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Formatter/StatementFormatterTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/ColumnMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/DatabaseMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/GeneratedRelationMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/GeneratedRelationMapWithSchemasTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/RelatedMapSymmetricalTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/RelatedMapSymmetricalWithSchemasTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/RelationMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Map/TableMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/AbstractParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/CsvParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/JsonParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/XmlParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/YamlParserTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Parser/fixtures/test_data.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/PropelTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/ServiceContainer/StandardServiceContainerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/TypeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/TypeTests/DummyObjectClass.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/TypeTests/TypeObjectInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/ProfilerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/PropelConditionalProxyTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/PropelDateTimeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/PropelModelPagerTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/TableMapExceptionsTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Runtime/Util/TableMapTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/TestCase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/TestCaseFixtures.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/TestCaseFixturesDatabase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/Propel/Tests/Ticket520Test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/agnostic.phpunit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/base.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/circleci.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/clear-fixtures.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/phpunit.agnostic.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/phpunit.mysql.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/phpunit.pgsql.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/phpunit.sqlite.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.mysql.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.mysql.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.pgsql.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.pgsql.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.sqlite.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bin/setup.sqlite.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/bootstrap.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/mysql.phpunit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/pgsql.phpunit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/tests/sqlite.phpunit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/char-list.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/PTU Toolkit.iml" afterPath="$PROJECT_DIR$/.idea/PTU Toolkit.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntryQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntry.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/char-edit.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/test-convert-pokedex.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntries.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntriesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Battles.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattlesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CampaignsQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilities.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilitiesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffs.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffsQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMovesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharactersQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/SessionsQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Users.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/UsersQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattlesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Campaigns.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilities.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilitiesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffs.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffsQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMovesQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharactersQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattleEntriesTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CampaignsTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterAbilitiesTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterBuffsTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterMovesTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharactersTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/SessionsTableMap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Sessions.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/SessionsQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Users.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/UsersQuery.php" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Sessions.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntries.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedex.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntriesQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntryQuery.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CampaignsQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexQuery.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattlesTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/UsersTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexTableMap.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/host.php" afterPath="$PROJECT_DIR$/host.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/v1/PtuAPI.php" afterPath="$PROJECT_DIR$/api/v1/PtuAPI.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/host.js" afterPath="$PROJECT_DIR$/js/host.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-battle.js" afterPath="$PROJECT_DIR$/js/ptu-battle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/schema.xml" afterPath="$PROJECT_DIR$/lib/propel2/schema.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/char-list.php" afterPath="$PROJECT_DIR$/pages/char-list.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/test-convert-gmdata.php" afterPath="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -867,106 +93,90 @@
         <item name="absorrco_ptu_toolkit@absorr.com" type="e3449647:DbNodeDescriptor" />
         <item name="absorrco_ptu_toolkit" type="e3449647:DbNodeDescriptor" />
       </path>
-      <path>
-        <item name="" type="eadb38e5:DatabaseStructure$Root" />
-        <item name="absorrco_ptu_toolkit@absorr.com" type="e3449647:DbNodeDescriptor" />
-        <item name="absorrco_ptu_toolkit" type="e3449647:DbNodeDescriptor" />
-        <item name="character_moves" type="e3449647:DbNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="characters" pinned="false" current-in-tab="true">
-        <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.characters">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="char-list.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/char-list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
-              <folding>
-                <element signature="e#139#177#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test-convert-gmdata.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/test-convert-gmdata.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            <state relative-caret-position="440">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PtuApp.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ptu-battle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="302" selection-end-column="48" />
+              <folding>
+                <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="host.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/host.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="914">
+              <caret line="974" column="6" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PtuAPI.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="804">
+              <caret line="383" column="9" lean-forward="true" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+              <folding>
+                <marker date="1510177325358" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
+                <marker date="1510177325358" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
+                <marker date="1510177325358" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
+                <marker date="1510177325358" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
+                <marker date="1510177325358" expanded="true" signature="13108:13243" ph="SELECT campa... campaigns" />
+                <marker date="1510177325358" expanded="true" signature="13534:13669" ph="SELECT campa... campaigns" />
+                <marker date="1510177325358" expanded="true" signature="14039:14157" ph="INSERT INTO campaigns... " />
+                <marker date="1510177325358" expanded="true" signature="14543:14605" ph="UPDATE campa... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PtuApp.php" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="932">
-              <caret line="82" column="31" lean-forward="false" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Characters.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="1426" column="20" lean-forward="false" selection-start-line="1426" selection-start-column="20" selection-end-line="1426" selection-end-column="20" />
-              <folding>
-                <marker date="1508728678227" expanded="true" signature="97719:97758" ph="INSERT INTO characters... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StandardServiceContainer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/StandardServiceContainer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="380" column="30" lean-forward="true" selection-start-line="380" selection-start-column="30" selection-end-line="380" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="propel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/propel2/bin/propel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Propel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Propel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1320">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1364">
+              <caret line="103" column="62" lean-forward="false" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="error_log" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;017f3b75-929f-47ee-8d6a-4957c8068756&gt;/ptu/pages/error_log">
+        <entry file="remoteDeploymentFS://&lt;017f3b75-929f-47ee-8d6a-4957c8068756&gt;/ptu/api/v1/error_log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="1" column="108" lean-forward="false" selection-start-line="1" selection-start-column="108" selection-end-line="1" selection-end-column="108" />
+            <state relative-caret-position="-287295">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataPokedexEntry.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2360">
+              <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+              <folding>
+                <marker date="1509583591123" expanded="true" signature="22704:22751" ph="INSERT INTO data_pokedex_entry... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1009,11 +219,15 @@
       <find>PropelException</find>
       <find>default</find>
       <find>-&gt;BaseStats-&gt;</find>
+      <find>LOB</find>
+      <find>LONGVARBINARY</find>
+      <find>gm_data[&quot;entities&quot;][target_id]</find>
     </findStrings>
     <replaceStrings>
       <replace>gm_data[&quot;entities&quot;]</replace>
       <replace>&quot;</replace>
       <replace>[&quot;BaseStats&quot;][&quot;</replace>
+      <replace>target</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2</dir>
@@ -1029,14 +243,11 @@
         <option value="$PROJECT_DIR$/js/script.js" />
         <option value="$PROJECT_DIR$/splash.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/js/ptu-battle.js" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
         <option value="$PROJECT_DIR$/sheet.php" />
         <option value="$PROJECT_DIR$/js/pokemon.js" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/host.php" />
         <option value="$PROJECT_DIR$/js/host.js" />
-        <option value="$PROJECT_DIR$/api/v1/PtuAPI.php" />
         <option value="$PROJECT_DIR$/api/v1/PtuCharacter.php" />
         <option value="$PROJECT_DIR$/js/ptu-entities.js" />
         <option value="$PROJECT_DIR$/js/ptu-io.js" />
@@ -1048,8 +259,16 @@
         <option value="$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_namespaces.php" />
         <option value="C:/xampp/php/php.ini" />
         <option value="$PROJECT_DIR$/lib/propel2/composer.json" />
-        <option value="$PROJECT_DIR$/pages/char-list.php" />
+        <option value="$PROJECT_DIR$/pages/test-convert-pokedex.php" />
+        <option value="$PROJECT_DIR$/lib/propel2/schema.xml" />
         <option value="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
+        <option value="$PROJECT_DIR$/pages/char-list.php" />
+        <option value="$PROJECT_DIR$/pages/char-edit.php" />
+        <option value="$PROJECT_DIR$/js/ptu-battle.js" />
+        <option value="$PROJECT_DIR$/api/v1/PtuAPI.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
       </list>
     </option>
@@ -1139,6 +358,64 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="v1" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Propel" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="pages" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scratches">
         <subPane>
           <expand>
@@ -1168,75 +445,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="v1" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="bin" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Propel" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Propel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="PtuToolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pages" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
     </panes>
   </component>
@@ -1245,7 +453,7 @@
     <property name="last_opened_file_path" value="C:/xampp/php/php_xdebug.dll" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JSON" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JSON&#10;JavaScript" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
@@ -1256,8 +464,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel\PtuToolkit" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel" />
+      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel\PtuToolkit" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\PtuToolkit" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\PtuToolkit\Base" />
@@ -1447,10 +655,6 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="PHP Built-in Web Server.Unnamed" />
-      <item index="1" class="java.lang.String" itemvalue="PHP Web Application.Localhost" />
-    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -1490,12 +694,23 @@
       <workItem from="1506027897365" duration="1223000" />
       <workItem from="1506282490037" duration="6051000" />
       <workItem from="1508613182615" duration="60000" />
-      <workItem from="1508693119798" duration="33752000" />
+      <workItem from="1508693119798" duration="34591000" />
+      <workItem from="1508792210413" duration="2446000" />
+      <workItem from="1508794689824" duration="982000" />
+      <workItem from="1509579433568" duration="12471000" />
     </task>
+    <task id="LOCAL-00001" summary="Integrated ORM">
+      <created>1508732505788</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1508732505788</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131853000" />
+    <option name="totallyTimeSpent" value="148591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
@@ -1508,9 +723,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31737968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32566845" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2529412" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955482" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1519,7 +735,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-61" y="803" width="3740" height="990" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1543,142 +758,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/ptu_pokedex_1_05.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="660" column="27" lean-forward="false" selection-start-line="660" selection-start-column="16" selection-end-line="660" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33240">
-          <caret line="834" column="17" lean-forward="false" selection-start-line="834" selection-start-column="17" selection-end-line="834" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <marker date="1505093208740" expanded="true" signature="7883:7890" ph="..." />
-            <marker date="1505093208740" expanded="true" signature="8831:8838" ph="..." />
-            <marker date="1505093208740" expanded="true" signature="9682:9689" ph="..." />
-            <marker date="1505093208740" expanded="true" signature="10525:10532" ph="..." />
-            <marker date="1505093208740" expanded="true" signature="12682:12689" ph="..." />
-            <marker date="1505093208740" expanded="true" signature="15442:15449" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/host.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="878" column="28" lean-forward="false" selection-start-line="878" selection-start-column="28" selection-end-line="878" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/sheet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="93" lean-forward="false" selection-start-line="9" selection-start-column="93" selection-end-line="9" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="14" column="12" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.battles">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.character_buffs">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/features/bootstrap/FeatureContext.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/project/file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/project/ptutoolkit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="105" column="11" lean-forward="true" selection-start-line="105" selection-start-column="11" selection-end-line="105" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/Base/UsersQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3577">
-          <caret line="86" column="15" lean-forward="false" selection-start-line="86" selection-start-column="15" selection-end-line="86" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/UsersQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/BattlesQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/Base/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3886">
-          <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/PtuCharacter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding>
-            <marker date="1508694335530" expanded="true" signature="832:1489" ph="SELECT chara... characters" />
-            <marker date="1508694335530" expanded="true" signature="1707:2342" ph="SELECT chara... characters" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.campaigns">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1686,66 +765,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php" />
     <entry file="file://$PROJECT_DIR$/js/host.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-316">
           <caret line="1875" column="14" lean-forward="false" selection-start-line="1875" selection-start-column="14" selection-end-line="1875" selection-end-column="14" />
-          <folding>
-            <marker date="1506285775277" expanded="true" signature="9907:9925" ph="..." />
-            <marker date="1506285775277" expanded="true" signature="15278:15284" ph="..." />
-            <marker date="1506285775277" expanded="true" signature="15496:15500" ph="&gt;" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="201" column="29" lean-forward="false" selection-start-line="201" selection-start-column="29" selection-end-line="201" selection-end-column="29" />
-          <folding>
-            <marker date="1500517929542" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
-            <marker date="1500517929542" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
-            <marker date="1500517929542" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
-            <marker date="1500517929542" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
-            <marker date="1500517929542" expanded="true" signature="12456:12591" ph="SELECT campa... campaigns" />
-            <marker date="1500517929542" expanded="true" signature="12882:13017" ph="SELECT campa... campaigns" />
-            <marker date="1500517929542" expanded="true" signature="13387:13505" ph="INSERT INTO campaigns... " />
-            <marker date="1500517929542" expanded="true" signature="13891:13953" ph="UPDATE campa... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3200">
-          <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-          <folding>
-            <marker date="1508714402857" expanded="true" signature="23420:23464" ph="INSERT INTO character_moves... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php" />
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php" />
     <entry file="file://$PROJECT_DIR$/error_log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1753,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1761,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1769,49 +800,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php" />
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php" />
     <entry file="file://$PROJECT_DIR$/pages/error_log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70400">
-          <caret line="1790" column="20" lean-forward="false" selection-start-line="1790" selection-start-column="20" selection-end-line="1790" selection-end-column="20" />
-          <folding>
-            <marker date="1508717354784" expanded="true" signature="97136:97175" ph="INSERT INTO characters... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php" />
     <entry file="file://$PROJECT_DIR$/lib/propel2/autoload.php.dist">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="18" column="38" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1819,7 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1827,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="517" column="43" lean-forward="false" selection-start-line="517" selection-start-column="43" selection-end-line="517" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1835,7 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
           <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1843,9 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12780">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#7#267#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1853,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1861,7 +859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18880">
           <caret line="472" column="82" lean-forward="false" selection-start-line="472" selection-start-column="82" selection-end-line="472" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1869,26 +866,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="288" column="12" lean-forward="false" selection-start-line="288" selection-start-column="12" selection-end-line="288" selection-end-column="107" />
-          <folding>
-            <element signature="e#35#50#0#PHP" expanded="true" />
-            <marker date="1508714402548" expanded="true" signature="26823:26861" ph="INSERT INTO campaigns... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php" />
     <entry file="file://$PROJECT_DIR$/lib/propel2/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1896,7 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1912,15 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/StandardServiceContainer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="380" column="30" lean-forward="true" selection-start-line="380" selection-start-column="30" selection-end-line="380" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1928,43 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
-          <folding>
-            <element signature="e#139#177#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/test-convert-gmdata.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="1426" column="20" lean-forward="false" selection-start-line="1426" selection-start-column="20" selection-end-line="1426" selection-end-column="20" />
-          <folding>
-            <marker date="1508728678227" expanded="true" signature="97719:97758" ph="INSERT INTO characters... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="932">
-          <caret line="82" column="31" lean-forward="false" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1975,10 +913,202 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/StandardServiceContainer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="380" column="30" lean-forward="true" selection-start-line="380" selection-start-column="30" selection-end-line="380" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="1426" column="20" lean-forward="false" selection-start-line="1426" selection-start-column="20" selection-end-line="1426" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/schema.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5960">
+          <caret line="149" column="2" lean-forward="false" selection-start-line="149" selection-start-column="2" selection-end-line="149" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/BattleEntries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntryQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1657">
+          <caret line="65" column="3" lean-forward="false" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
+          <folding>
+            <marker date="1508795167699" expanded="true" signature="9353:9435" ph="SELECT poked... data_pokedex_entry" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="2" column="60" lean-forward="false" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+          <folding>
+            <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Generator/Model/PropelTypes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="39" column="19" lean-forward="false" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex_entry">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="pokedex_no='479:W'" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="140" column="53" lean-forward="false" selection-start-line="140" selection-start-column="53" selection-end-line="140" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-gmdata.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="14" column="62" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/char-edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="123" column="83" lean-forward="true" selection-start-line="123" selection-start-column="83" selection-end-line="123" selection-end-column="83" />
+          <folding>
+            <element signature="e#139#177#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/host.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="914">
+          <caret line="974" column="6" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.characters">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="302" selection-end-column="48" />
+          <folding>
+            <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/api.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="383" column="9" lean-forward="true" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+          <folding>
+            <marker date="1510177325358" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
+            <marker date="1510177325358" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
+            <marker date="1510177325358" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
+            <marker date="1510177325358" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
+            <marker date="1510177325358" expanded="true" signature="13108:13243" ph="SELECT campa... campaigns" />
+            <marker date="1510177325358" expanded="true" signature="13534:13669" ph="SELECT campa... campaigns" />
+            <marker date="1510177325358" expanded="true" signature="14039:14157" ph="INSERT INTO campaigns... " />
+            <marker date="1510177325358" expanded="true" signature="14543:14605" ph="UPDATE campa... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2360">
+          <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+          <folding>
+            <marker date="1509583591123" expanded="true" signature="22704:22751" ph="INSERT INTO data_pokedex_entry... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="103" column="62" lean-forward="false" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

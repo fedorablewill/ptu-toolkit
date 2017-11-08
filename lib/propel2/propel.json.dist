@@ -1,0 +1,8 @@
+{
+    "propel": {
+        "paths": {
+            "schemaDir": "C:\\Users\\absor\\PhpstormProjects\\ptu-toolkit\\lib\\propel2",
+            "phpDir": "\/Model\/"
+        }
+    }
+}

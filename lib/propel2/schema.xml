@@ -147,6 +147,27 @@
       <parameter name="Engine" value="MyISAM"/>
     </vendor>
   </table>
+  <table name="data_pokedex" idMethod="native" phpName="DataPokedex">
+    <column name="pokedex_id" phpName="PokedexId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="100" required="true"/>
+    <unique name="data_pokedex_pokedex_id_uindex">
+      <unique-column name="pokedex_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="data_pokedex_entry" idMethod="native" phpName="DataPokedexEntry">
+    <column name="pokedex_no" phpName="PokedexNo" type="VARCHAR" size="8" primaryKey="true" required="true"/>
+    <column name="pokedex_id" phpName="PokedexId" type="INTEGER"/>
+    <column name="data" phpName="Data" type="LONGVARBINARY" required="true"/>
+    <unique name="data_pokedex_entry_pokedex_no_uindex">
+      <unique-column name="pokedex_no"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
   <table name="sessions" idMethod="native" phpName="Sessions" namespace="Propel\PtuToolkit">
     <column name="session_id" phpName="SessionId" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="user_firebase_id" phpName="UserFirebaseId" type="VARCHAR" size="16" required="true"/>

@@ -683,10 +683,13 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
 
     var target_types = gm_data["pokemon"][target_id]["type"].split(" / ");
 
-    var effect1 = typeEffects[moveType.toLowerCase()][target_types[0].toLowerCase()];
-    var effect2 = target_types.length > 1 ? typeEffects[moveType.toLowerCase()][target_types[1].toLowerCase()] : 1;
+    var effect1 = typeEffects[moveType.toLowerCase()][target_types[0].toLowerCase()] || 1;
+    var effect2 = target_types.length > 1 ? typeEffects[moveType.toLowerCase()][target_types[1].toLowerCase()] || 1 : 1;
 
-    damage = damage * effect1 * effect2;
+    if (effect1 !== undefined)
+        damage = damage * effect1;
+    if (effect2 !== undefined)
+        damage = damage * effect2;
 
     if (effect1 !== undefined && effect1 * effect2 === 0)
         doToast("No effect!");
@@ -1488,7 +1491,7 @@ function onClickEditPokemon(id) {
 
     $("#addmon-id").val(id);
     $("#addmon-name").val(gm_data['pokemon'][id]['name']).parent().removeClass("is-empty");
-    $("#addmon-dex").val(gm_data['pokemon'][id]['dex']).parent().removeClass("is-empty");
+    $("#addmon-dex").val(gm_data['pokemon'][id]['dex']).parent().removeClass("is-empty").change();
     $("#addmon-level").val(gm_data['pokemon'][id]['level']).parent().removeClass("is-empty");
     $("#addmon-exp").val(gm_data['pokemon'][id]['EXP']).parent().removeClass("is-empty");
     $("#addmon-type1").val(types[0]).parent().removeClass("is-empty");
@@ -1521,7 +1524,6 @@ function onClickEditPokemon(id) {
     $("[title='Ability 2']").val(gm_data['pokemon'][id]['abilities'][1]);
     $("[title='Ability 3']").val(gm_data['pokemon'][id]['abilities'][2]);
 
-    onAddmonDexChange();
     updatePokemonEditor();
 
     $('#modalSimpleSheet').modal('show');
@@ -2025,21 +2027,21 @@ function saveGM() {
 }
 
 function saveCampaignToAPI() {
-    if (campaignId && firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
-        $.ajax({
-            type: "PUT",
-            url: "api/v1/campaign/",
-            dataType: 'json',
-            data: {"id": campaignId, "data": JSON.stringify(gm_data)},
-            async: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
-            },
-            success: function (data, status, xhr){
-                console.log("Saved campaign data.");
-            },
-            error: function (xhr, status, error) {
-                window.alert(status + " " + error);
-            }
-        });
+    // if (campaignId && firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
+    //     $.ajax({
+    //         type: "PUT",
+    //         url: "api/v1/campaign/",
+    //         dataType: 'json',
+    //         data: {"id": campaignId, "data": JSON.stringify(gm_data)},
+    //         async: false,
+    //         beforeSend: function (xhr) {
+    //             xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+    //         },
+    //         success: function (data, status, xhr){
+    //             console.log("Saved campaign data.");
+    //         },
+    //         error: function (xhr, status, error) {
+    //             window.alert(status + " " + error);
+    //         }
+    //     });
 }

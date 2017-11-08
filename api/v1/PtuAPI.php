@@ -370,6 +370,24 @@ class PtuAPI extends API
     	}
     }
 
+    public function data() {
+
+        require_once __DIR__.'/../../lib/propel2/src/Propel/PtuToolkit/PtuApp.php';
+
+        $app = new \Propel\PtuToolkit\PtuApp();
+
+        if ($this->verb === "character") {
+            if ($this->args[0] === "list" && $this->method == "GET")
+                return $app->getCampaignById($_GET['campaign_id'])->getCharacterss()->toArray();
+            else if (!is_null($this->args[0]) && $this->method == "GET")
+                return $app->getCharacterById($this->args[0])->toArray();
+        }
+
+        // Nothing has been returned, assume it's the users's fault
+        http_response_code(400);
+        die;
+    }
+
     /**
      * Campaign/Save Data
      *
