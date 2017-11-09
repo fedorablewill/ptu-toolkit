@@ -6,7 +6,7 @@
  * JSON data of loaded Pokemon
  * @type JSON
  */
-var pokemon_data = {}, moves_data = [], battle_data = {}, afflictions = [], dex_data = {};
+var character_data = {}, moves_data = [], battle_data = {}, afflictions = [], dex_data = {};
 
 var currentMove = null;
 
@@ -27,18 +27,18 @@ $(function () {
     });
 
     $("#btn-do-heal").click(function () {
-        var max_hp = pokemon_data['level'] + pokemon_data['hp'] * 3 + 10;
+        var max_hp = character_data['level'] + character_data['hp'] * 3 + 10;
 
-        pokemon_data["health"] += $("#do-heal").val();
+        character_data["health"] += $("#do-heal").val();
 
-        if (pokemon_data["health"] > max_hp)
-            pokemon_data["health"] = max_hp;
+        if (character_data["health"] > max_hp)
+            character_data["health"] = max_hp;
 
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_update",
             "pokemon": $("#pokemonId").val(),
             "field": "health",
-            "value": pokemon_data["health"]
+            "value": character_data["health"]
         }));
     });
 
@@ -54,7 +54,7 @@ $(function () {
             $("#move-acc-bonus").val($(this).val());
 
         if ($(this).attr("id") == "stage-speed") {
-            var s = pokemon_data["speed"] * getStageMultiplier(parseInt($(this).val()));
+            var s = character_data["speed"] * getStageMultiplier(parseInt($(this).val()));
             $("#speed").html(s);
         }
     });
@@ -111,14 +111,14 @@ $(function () {
 function displayInit() {
     var display = $("#tab1");
 
-    $(".name").html(pokemon_data["name"]);
-    $(".level").html('Level ' + pokemon_data['level']);
-    $(".pokemon-image").attr("src", "img/pokemon/"+pokemon_data["dex"]+".gif");
+    $(".name").html(character_data["name"]);
+    $(".level").html('Level ' + character_data['level']);
+    $(".pokemon-image").attr("src", "img/pokemon/"+character_data["dex"]+".gif");
 
-    //$("#dex-species").html('#' + pokemon_data["dex"] + ' - Species');
+    //$("#dex-species").html('#' + character_data["dex"] + ' - Species');
 
     //Pokedex Data is set here
-    $.getJSON("api/v1/pokemon/" + pokemon_data['dex'], function (dex) {
+    $.getJSON("api/v1/pokemon/" + character_data['dex'], function (dex) {
 
         dex_data = dex;
 
@@ -126,7 +126,7 @@ function displayInit() {
         // Basic Pokemon information
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        $("#DexData_Basic_ID").html(pokemon_data["dex"]);
+        $("#DexData_Basic_ID").html(character_data["dex"]);
         $("#DexData_Basic_SpeciesName").html(dex.Species);
 
         //Sets the Pokemons Type on the Dex Screen.
@@ -297,7 +297,7 @@ function displayInit() {
     });
 
     //Speed Stat is set here
-    $("#speed").html(pokemon_data["speed"]);
+    $("#speed").html(character_data["speed"]);
 
     $.each(moves_data, function (i, move) {
 
@@ -434,10 +434,10 @@ function updateInfoPage() {
 }
 
 function updateStatus() {
-    var max_hp = pokemon_data['level'] + pokemon_data['hp'] * 3 + 10;
+    var max_hp = character_data['level'] + character_data['hp'] * 3 + 10;
 
-    $(".bar-hp").css("width", Math.floor((parseInt(pokemon_data['health']) / max_hp) * 100) + "%");
-    $(".bar-exp").css("width", Math.floor((parseInt(pokemon_data['EXP']) / EXP_CHART[parseInt(pokemon_data['level'])]) * 100) + "%");
+    $(".bar-hp").css("width", Math.floor((parseInt(character_data['health']) / max_hp) * 100) + "%");
+    $(".bar-exp").css("width", Math.floor((parseInt(character_data['EXP']) / EXP_CHART[parseInt(character_data['level'])]) * 100) + "%");
 }
 
 function updateTargetList() {
@@ -556,7 +556,7 @@ function onClickConnect() {
              Pokemon received
              */
             if (json.type == "pokemon") {
-                pokemon_data = json.pokemon;
+                character_data = json.pokemon;
                 fetchMoves();
             }
             /*
@@ -602,7 +602,7 @@ function onClickConnect() {
              Health changed
              */
             else if (json.type == "health") {
-                pokemon_data["health"] = json.value;
+                character_data["health"] = json.value;
                 updateStatus();
             }
             /*
@@ -684,7 +684,7 @@ function addPokemonToBattle() {
 }
 
 function fetchMoves() {
-    $.getJSON("/api/v1/moves/?names=" + encodeURIComponent(JSON.stringify(pokemon_data["moves"])), function (json) {
+    $.getJSON("/api/v1/moves/?names=" + encodeURIComponent(JSON.stringify(character_data["moves"])), function (json) {
         var i = 0;
         $.each(json, function (name, move) {
             if (name != "") {

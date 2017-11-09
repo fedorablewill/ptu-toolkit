@@ -401,12 +401,12 @@
 </nav>
 <div class="container content-init">
     <div class="well col-sm-4 col-sm-offset-4" id="init-connect">
-        <h1>Enter GM ID</h1>
+        <h2>Enter GM ID</h2>
         <input type="text" class="form-control" id="gm-id" placeholder="GM ID"/>
         <button class="btn btn-danger btn-raised" onclick="onClickConnect();">Connect</button>
     </div>
     <div class="well col-sm-4 col-sm-offset-4" id="init-select" style="display: none;">
-        <h1>Select Pokémon</h1>
+        <h2>Select Character</h2>
         <select id="pokemonId"></select>
         <button class="btn btn-danger btn-raised" onclick="onClickLoadFromSelected();">Select</button>
     </div>

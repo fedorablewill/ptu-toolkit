@@ -20,13 +20,20 @@ $characters = CharactersQuery::create()
 
 foreach ($characters as $character): ?>
 
-    <h1><?php echo $character->getName();?></h1>
-    <?php
-    $ownedChars = CharactersQuery::create()
-        ->findByOwner($character->getCharacterId());
+    <div class="char-list char-list-select">
+        <div class="char-item char-owner" data-id="<?php echo $character->getCharacterId();?>">
+            <span class="char-name"><strong><?php echo $character->getName();?></strong></span>
+            <?php
+            $ownedChars = CharactersQuery::create()
+                ->findByOwner($character->getCharacterId());
 
-    foreach ($ownedChars as $ownedChar): ?>
-        <h3><?php echo $ownedChar->getName();?></h3>
-    <?php endforeach; ?>
+            foreach ($ownedChars as $ownedChar): ?>
+                <div class="char-item char-owned" data-id="<?php echo $ownedChar->getCharacterId();?>">
+
+                    <span class="char-name"><?php echo $ownedChar->getName();?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
 <?php endforeach; ?>

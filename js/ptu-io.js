@@ -16,6 +16,18 @@ function saveGM() {
     }
 }
 
-function getCharacterById(characterId) {
-    return $.getJSON("api/v1/data/3/character/" + characterId)
+function fetchCharacterById(characterId, callback) {
+    $.getJSON("api/v1/data/character/" + characterId, callback)
+}
+
+function fetchCharactersByCampaignId(campaignId, callback) {
+    $.getJSON("api/v1/data/character/list/?campaign_id=" + campaignId, callback)
+}
+
+function fetchCharacterMoves(characterId, callback) {
+    $.getJSON("/api/v1/data/character/moves/?character_id=" + characterId, callback)
+}
+
+function fetchPage(pageName, callback) {
+    $.get("/pages/" + pageName + ".php", callback)
 }
