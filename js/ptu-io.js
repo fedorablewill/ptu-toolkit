@@ -15,3 +15,7 @@ function saveGM() {
 
     }
 }
+
+function getCharacterById(characterId) {
+    return $.getJSON("api/v1/data/3/character/" + characterId)
+}

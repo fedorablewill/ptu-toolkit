@@ -78,7 +78,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     /**
      * The value for the data field.
      *
-     * @var        resource
+     * @var        string
      */
     protected $data;
 
@@ -343,7 +343,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     /**
      * Get the [data] column value.
      *
-     * @return resource
+     * @return string
      */
     public function getData()
     {

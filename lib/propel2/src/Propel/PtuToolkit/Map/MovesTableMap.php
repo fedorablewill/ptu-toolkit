@@ -2,8 +2,8 @@
 
 namespace Propel\PtuToolkit\Map;
 
-use Propel\PtuToolkit\DataPokedex;
-use Propel\PtuToolkit\DataPokedexQuery;
+use Propel\PtuToolkit\Moves;
+use Propel\PtuToolkit\MovesQuery;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\InstancePoolTrait;
@@ -16,7 +16,7 @@ use Propel\Runtime\Map\TableMapTrait;
 
 
 /**
- * This class defines the structure of the 'data_pokedex' table.
+ * This class defines the structure of the 'moves' table.
  *
  *
  *
@@ -26,7 +26,7 @@ use Propel\Runtime\Map\TableMapTrait;
  * (i.e. if it's a text column type).
  *
  */
-class DataPokedexTableMap extends TableMap
+class MovesTableMap extends TableMap
 {
     use InstancePoolTrait;
     use TableMapTrait;
@@ -34,7 +34,7 @@ class DataPokedexTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'Propel.PtuToolkit.Map.DataPokedexTableMap';
+    const CLASS_NAME = 'Propel.PtuToolkit.Map.MovesTableMap';
 
     /**
      * The default database name for this class
@@ -44,22 +44,22 @@ class DataPokedexTableMap extends TableMap
     /**
      * The table name for this class
      */
-    const TABLE_NAME = 'data_pokedex';
+    const TABLE_NAME = 'moves';
 
     /**
      * The related Propel class for this table
      */
-    const OM_CLASS = '\\Propel\\PtuToolkit\\DataPokedex';
+    const OM_CLASS = '\\Propel\\PtuToolkit\\Moves';
 
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'Propel.PtuToolkit.DataPokedex';
+    const CLASS_DEFAULT = 'Propel.PtuToolkit.Moves';
 
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 2;
+    const NUM_COLUMNS = 12;
 
     /**
      * The number of lazy-loaded columns
@@ -69,17 +69,67 @@ class DataPokedexTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 2;
+    const NUM_HYDRATE_COLUMNS = 12;
+
+    /**
+     * the column name for the move_id field
+     */
+    const COL_MOVE_ID = 'moves.move_id';
 
     /**
      * the column name for the pokedex_id field
      */
-    const COL_POKEDEX_ID = 'data_pokedex.pokedex_id';
+    const COL_POKEDEX_ID = 'moves.pokedex_id';
 
     /**
      * the column name for the name field
      */
-    const COL_NAME = 'data_pokedex.name';
+    const COL_NAME = 'moves.name';
+
+    /**
+     * the column name for the effect field
+     */
+    const COL_EFFECT = 'moves.effect';
+
+    /**
+     * the column name for the freq field
+     */
+    const COL_FREQ = 'moves.freq';
+
+    /**
+     * the column name for the class field
+     */
+    const COL_CLASS = 'moves.class';
+
+    /**
+     * the column name for the range field
+     */
+    const COL_RANGE = 'moves.range';
+
+    /**
+     * the column name for the contest_type field
+     */
+    const COL_CONTEST_TYPE = 'moves.contest_type';
+
+    /**
+     * the column name for the contest_effect field
+     */
+    const COL_CONTEST_EFFECT = 'moves.contest_effect';
+
+    /**
+     * the column name for the crits_on field
+     */
+    const COL_CRITS_ON = 'moves.crits_on';
+
+    /**
+     * the column name for the type field
+     */
+    const COL_TYPE = 'moves.type';
+
+    /**
+     * the column name for the triggers field
+     */
+    const COL_TRIGGERS = 'moves.triggers';
 
     /**
      * The default string format for model objects of the related table
@@ -93,11 +143,11 @@ class DataPokedexTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('PokedexId', 'Name', ),
-        self::TYPE_CAMELNAME     => array('pokedexId', 'name', ),
-        self::TYPE_COLNAME       => array(DataPokedexTableMap::COL_POKEDEX_ID, DataPokedexTableMap::COL_NAME, ),
-        self::TYPE_FIELDNAME     => array('pokedex_id', 'name', ),
-        self::TYPE_NUM           => array(0, 1, )
+        self::TYPE_PHPNAME       => array('MoveId', 'PokedexId', 'Name', 'Effect', 'Freq', 'Class', 'Range', 'ContestType', 'ContestEffect', 'CritsOn', 'Type', 'Triggers', ),
+        self::TYPE_CAMELNAME     => array('moveId', 'pokedexId', 'name', 'effect', 'freq', 'class', 'range', 'contestType', 'contestEffect', 'critsOn', 'type', 'triggers', ),
+        self::TYPE_COLNAME       => array(MovesTableMap::COL_MOVE_ID, MovesTableMap::COL_POKEDEX_ID, MovesTableMap::COL_NAME, MovesTableMap::COL_EFFECT, MovesTableMap::COL_FREQ, MovesTableMap::COL_CLASS, MovesTableMap::COL_RANGE, MovesTableMap::COL_CONTEST_TYPE, MovesTableMap::COL_CONTEST_EFFECT, MovesTableMap::COL_CRITS_ON, MovesTableMap::COL_TYPE, MovesTableMap::COL_TRIGGERS, ),
+        self::TYPE_FIELDNAME     => array('move_id', 'pokedex_id', 'name', 'effect', 'freq', 'class', 'range', 'contest_type', 'contest_effect', 'crits_on', 'type', 'triggers', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
     );
 
     /**
@@ -107,11 +157,11 @@ class DataPokedexTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('PokedexId' => 0, 'Name' => 1, ),
-        self::TYPE_CAMELNAME     => array('pokedexId' => 0, 'name' => 1, ),
-        self::TYPE_COLNAME       => array(DataPokedexTableMap::COL_POKEDEX_ID => 0, DataPokedexTableMap::COL_NAME => 1, ),
-        self::TYPE_FIELDNAME     => array('pokedex_id' => 0, 'name' => 1, ),
-        self::TYPE_NUM           => array(0, 1, )
+        self::TYPE_PHPNAME       => array('MoveId' => 0, 'PokedexId' => 1, 'Name' => 2, 'Effect' => 3, 'Freq' => 4, 'Class' => 5, 'Range' => 6, 'ContestType' => 7, 'ContestEffect' => 8, 'CritsOn' => 9, 'Type' => 10, 'Triggers' => 11, ),
+        self::TYPE_CAMELNAME     => array('moveId' => 0, 'pokedexId' => 1, 'name' => 2, 'effect' => 3, 'freq' => 4, 'class' => 5, 'range' => 6, 'contestType' => 7, 'contestEffect' => 8, 'critsOn' => 9, 'type' => 10, 'triggers' => 11, ),
+        self::TYPE_COLNAME       => array(MovesTableMap::COL_MOVE_ID => 0, MovesTableMap::COL_POKEDEX_ID => 1, MovesTableMap::COL_NAME => 2, MovesTableMap::COL_EFFECT => 3, MovesTableMap::COL_FREQ => 4, MovesTableMap::COL_CLASS => 5, MovesTableMap::COL_RANGE => 6, MovesTableMap::COL_CONTEST_TYPE => 7, MovesTableMap::COL_CONTEST_EFFECT => 8, MovesTableMap::COL_CRITS_ON => 9, MovesTableMap::COL_TYPE => 10, MovesTableMap::COL_TRIGGERS => 11, ),
+        self::TYPE_FIELDNAME     => array('move_id' => 0, 'pokedex_id' => 1, 'name' => 2, 'effect' => 3, 'freq' => 4, 'class' => 5, 'range' => 6, 'contest_type' => 7, 'contest_effect' => 8, 'crits_on' => 9, 'type' => 10, 'triggers' => 11, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
     );
 
     /**
@@ -124,15 +174,25 @@ class DataPokedexTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('data_pokedex');
-        $this->setPhpName('DataPokedex');
+        $this->setName('moves');
+        $this->setPhpName('Moves');
         $this->setIdentifierQuoting(false);
-        $this->setClassName('\\Propel\\PtuToolkit\\DataPokedex');
+        $this->setClassName('\\Propel\\PtuToolkit\\Moves');
         $this->setPackage('Propel.PtuToolkit');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('pokedex_id', 'PokedexId', 'INTEGER', true, null, null);
+        $this->addPrimaryKey('move_id', 'MoveId', 'INTEGER', true, null, null);
+        $this->addForeignKey('pokedex_id', 'PokedexId', 'INTEGER', 'data_pokedex', 'pokedex_id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', true, 100, null);
+        $this->addColumn('effect', 'Effect', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('freq', 'Freq', 'VARCHAR', false, 52, null);
+        $this->addColumn('class', 'Class', 'VARCHAR', false, 16, null);
+        $this->addColumn('range', 'Range', 'VARCHAR', false, 100, null);
+        $this->addColumn('contest_type', 'ContestType', 'VARCHAR', false, 16, null);
+        $this->addColumn('contest_effect', 'ContestEffect', 'VARCHAR', false, 32, null);
+        $this->addColumn('crits_on', 'CritsOn', 'INTEGER', false, null, null);
+        $this->addColumn('type', 'Type', 'VARCHAR', true, 16, null);
+        $this->addColumn('triggers', 'Triggers', 'LONGVARCHAR', false, null, null);
     } // initialize()
 
     /**
@@ -140,20 +200,20 @@ class DataPokedexTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('DataPokedexEntry', '\\Propel\\PtuToolkit\\DataPokedexEntry', RelationMap::ONE_TO_MANY, array (
+        $this->addRelation('DataPokedex', '\\Propel\\PtuToolkit\\DataPokedex', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':pokedex_id',
     1 => ':pokedex_id',
   ),
-), null, null, 'DataPokedexEntries', false);
-        $this->addRelation('Moves', '\\Propel\\PtuToolkit\\Moves', RelationMap::ONE_TO_MANY, array (
+), null, null, null, false);
+        $this->addRelation('CharacterMoves', '\\Propel\\PtuToolkit\\CharacterMoves', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
-    0 => ':pokedex_id',
-    1 => ':pokedex_id',
+    0 => ':move_id',
+    1 => ':move_id',
   ),
-), null, null, 'Movess', false);
+), null, null, 'CharacterMovess', false);
     } // buildRelations()
 
     /**
@@ -172,11 +232,11 @@ class DataPokedexTableMap extends TableMap
     public static function getPrimaryKeyHashFromRow($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
     {
         // If the PK cannot be derived from the row, return NULL.
-        if ($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)] === null) {
+        if ($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)] === null) {
             return null;
         }
 
-        return null === $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)] || is_scalar($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)]) || is_callable([$row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)], '__toString']) ? (string) $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)] : $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)];
+        return null === $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)] || is_scalar($row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)]) || is_callable([$row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)], '__toString']) ? (string) $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)] : $row[TableMap::TYPE_NUM == $indexType ? 0 + $offset : static::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)];
     }
 
     /**
@@ -196,7 +256,7 @@ class DataPokedexTableMap extends TableMap
         return (int) $row[
             $indexType == TableMap::TYPE_NUM
                 ? 0 + $offset
-                : self::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)
+                : self::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)
         ];
     }
 
@@ -213,7 +273,7 @@ class DataPokedexTableMap extends TableMap
      */
     public static function getOMClass($withPrefix = true)
     {
-        return $withPrefix ? DataPokedexTableMap::CLASS_DEFAULT : DataPokedexTableMap::OM_CLASS;
+        return $withPrefix ? MovesTableMap::CLASS_DEFAULT : MovesTableMap::OM_CLASS;
     }
 
     /**
@@ -227,22 +287,22 @@ class DataPokedexTableMap extends TableMap
      *
      * @throws PropelException Any exceptions caught during processing will be
      *                         rethrown wrapped into a PropelException.
-     * @return array           (DataPokedex object, last column rank)
+     * @return array           (Moves object, last column rank)
      */
     public static function populateObject($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
     {
-        $key = DataPokedexTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
-        if (null !== ($obj = DataPokedexTableMap::getInstanceFromPool($key))) {
+        $key = MovesTableMap::getPrimaryKeyHashFromRow($row, $offset, $indexType);
+        if (null !== ($obj = MovesTableMap::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $offset, true); // rehydrate
-            $col = $offset + DataPokedexTableMap::NUM_HYDRATE_COLUMNS;
+            $col = $offset + MovesTableMap::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = DataPokedexTableMap::OM_CLASS;
-            /** @var DataPokedex $obj */
+            $cls = MovesTableMap::OM_CLASS;
+            /** @var Moves $obj */
             $obj = new $cls();
             $col = $obj->hydrate($row, $offset, false, $indexType);
-            DataPokedexTableMap::addInstanceToPool($obj, $key);
+            MovesTableMap::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -265,18 +325,18 @@ class DataPokedexTableMap extends TableMap
         $cls = static::getOMClass(false);
         // populate the object(s)
         while ($row = $dataFetcher->fetch()) {
-            $key = DataPokedexTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
-            if (null !== ($obj = DataPokedexTableMap::getInstanceFromPool($key))) {
+            $key = MovesTableMap::getPrimaryKeyHashFromRow($row, 0, $dataFetcher->getIndexType());
+            if (null !== ($obj = MovesTableMap::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
                 $results[] = $obj;
             } else {
-                /** @var DataPokedex $obj */
+                /** @var Moves $obj */
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                DataPokedexTableMap::addInstanceToPool($obj, $key);
+                MovesTableMap::addInstanceToPool($obj, $key);
             } // if key exists
         }
 
@@ -297,11 +357,31 @@ class DataPokedexTableMap extends TableMap
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(DataPokedexTableMap::COL_POKEDEX_ID);
-            $criteria->addSelectColumn(DataPokedexTableMap::COL_NAME);
+            $criteria->addSelectColumn(MovesTableMap::COL_MOVE_ID);
+            $criteria->addSelectColumn(MovesTableMap::COL_POKEDEX_ID);
+            $criteria->addSelectColumn(MovesTableMap::COL_NAME);
+            $criteria->addSelectColumn(MovesTableMap::COL_EFFECT);
+            $criteria->addSelectColumn(MovesTableMap::COL_FREQ);
+            $criteria->addSelectColumn(MovesTableMap::COL_CLASS);
+            $criteria->addSelectColumn(MovesTableMap::COL_RANGE);
+            $criteria->addSelectColumn(MovesTableMap::COL_CONTEST_TYPE);
+            $criteria->addSelectColumn(MovesTableMap::COL_CONTEST_EFFECT);
+            $criteria->addSelectColumn(MovesTableMap::COL_CRITS_ON);
+            $criteria->addSelectColumn(MovesTableMap::COL_TYPE);
+            $criteria->addSelectColumn(MovesTableMap::COL_TRIGGERS);
         } else {
+            $criteria->addSelectColumn($alias . '.move_id');
             $criteria->addSelectColumn($alias . '.pokedex_id');
             $criteria->addSelectColumn($alias . '.name');
+            $criteria->addSelectColumn($alias . '.effect');
+            $criteria->addSelectColumn($alias . '.freq');
+            $criteria->addSelectColumn($alias . '.class');
+            $criteria->addSelectColumn($alias . '.range');
+            $criteria->addSelectColumn($alias . '.contest_type');
+            $criteria->addSelectColumn($alias . '.contest_effect');
+            $criteria->addSelectColumn($alias . '.crits_on');
+            $criteria->addSelectColumn($alias . '.type');
+            $criteria->addSelectColumn($alias . '.triggers');
         }
     }
 
@@ -314,7 +394,7 @@ class DataPokedexTableMap extends TableMap
      */
     public static function getTableMap()
     {
-        return Propel::getServiceContainer()->getDatabaseMap(DataPokedexTableMap::DATABASE_NAME)->getTable(DataPokedexTableMap::TABLE_NAME);
+        return Propel::getServiceContainer()->getDatabaseMap(MovesTableMap::DATABASE_NAME)->getTable(MovesTableMap::TABLE_NAME);
     }
 
     /**
@@ -322,16 +402,16 @@ class DataPokedexTableMap extends TableMap
      */
     public static function buildTableMap()
     {
-        $dbMap = Propel::getServiceContainer()->getDatabaseMap(DataPokedexTableMap::DATABASE_NAME);
-        if (!$dbMap->hasTable(DataPokedexTableMap::TABLE_NAME)) {
-            $dbMap->addTableObject(new DataPokedexTableMap());
+        $dbMap = Propel::getServiceContainer()->getDatabaseMap(MovesTableMap::DATABASE_NAME);
+        if (!$dbMap->hasTable(MovesTableMap::TABLE_NAME)) {
+            $dbMap->addTableObject(new MovesTableMap());
         }
     }
 
     /**
-     * Performs a DELETE on the database, given a DataPokedex or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a Moves or Criteria object OR a primary key value.
      *
-     * @param mixed               $values Criteria or DataPokedex object or primary key or array of primary keys
+     * @param mixed               $values Criteria or Moves object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param  ConnectionInterface $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -342,27 +422,27 @@ class DataPokedexTableMap extends TableMap
      public static function doDelete($values, ConnectionInterface $con = null)
      {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(DataPokedexTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(MovesTableMap::DATABASE_NAME);
         }
 
         if ($values instanceof Criteria) {
             // rename for clarity
             $criteria = $values;
-        } elseif ($values instanceof \Propel\PtuToolkit\DataPokedex) { // it's a model object
+        } elseif ($values instanceof \Propel\PtuToolkit\Moves) { // it's a model object
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(DataPokedexTableMap::DATABASE_NAME);
-            $criteria->add(DataPokedexTableMap::COL_POKEDEX_ID, (array) $values, Criteria::IN);
+            $criteria = new Criteria(MovesTableMap::DATABASE_NAME);
+            $criteria->add(MovesTableMap::COL_MOVE_ID, (array) $values, Criteria::IN);
         }
 
-        $query = DataPokedexQuery::create()->mergeWith($criteria);
+        $query = MovesQuery::create()->mergeWith($criteria);
 
         if ($values instanceof Criteria) {
-            DataPokedexTableMap::clearInstancePool();
+            MovesTableMap::clearInstancePool();
         } elseif (!is_object($values)) { // it's a primary key, or an array of pks
             foreach ((array) $values as $singleval) {
-                DataPokedexTableMap::removeInstanceFromPool($singleval);
+                MovesTableMap::removeInstanceFromPool($singleval);
             }
         }
 
@@ -370,20 +450,20 @@ class DataPokedexTableMap extends TableMap
     }
 
     /**
-     * Deletes all rows from the data_pokedex table.
+     * Deletes all rows from the moves table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
      */
     public static function doDeleteAll(ConnectionInterface $con = null)
     {
-        return DataPokedexQuery::create()->doDeleteAll($con);
+        return MovesQuery::create()->doDeleteAll($con);
     }
 
     /**
-     * Performs an INSERT on the database, given a DataPokedex or Criteria object.
+     * Performs an INSERT on the database, given a Moves or Criteria object.
      *
-     * @param mixed               $criteria Criteria or DataPokedex object containing data that is used to create the INSERT statement.
+     * @param mixed               $criteria Criteria or Moves object containing data that is used to create the INSERT statement.
      * @param ConnectionInterface $con the ConnectionInterface connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -392,22 +472,22 @@ class DataPokedexTableMap extends TableMap
     public static function doInsert($criteria, ConnectionInterface $con = null)
     {
         if (null === $con) {
-            $con = Propel::getServiceContainer()->getWriteConnection(DataPokedexTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(MovesTableMap::DATABASE_NAME);
         }
 
         if ($criteria instanceof Criteria) {
             $criteria = clone $criteria; // rename for clarity
         } else {
-            $criteria = $criteria->buildCriteria(); // build Criteria from DataPokedex object
+            $criteria = $criteria->buildCriteria(); // build Criteria from Moves object
         }
 
-        if ($criteria->containsKey(DataPokedexTableMap::COL_POKEDEX_ID) && $criteria->keyContainsValue(DataPokedexTableMap::COL_POKEDEX_ID) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.DataPokedexTableMap::COL_POKEDEX_ID.')');
+        if ($criteria->containsKey(MovesTableMap::COL_MOVE_ID) && $criteria->keyContainsValue(MovesTableMap::COL_MOVE_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.MovesTableMap::COL_MOVE_ID.')');
         }
 
 
         // Set the correct dbName
-        $query = DataPokedexQuery::create()->mergeWith($criteria);
+        $query = MovesQuery::create()->mergeWith($criteria);
 
         // use transaction because $criteria could contain info
         // for more than one table (I guess, conceivably)
@@ -416,7 +496,7 @@ class DataPokedexTableMap extends TableMap
         });
     }
 
-} // DataPokedexTableMap
+} // MovesTableMap
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-DataPokedexTableMap::buildTableMap();
+MovesTableMap::buildTableMap();

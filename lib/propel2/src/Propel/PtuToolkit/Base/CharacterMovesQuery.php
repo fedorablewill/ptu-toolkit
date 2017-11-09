@@ -48,7 +48,17 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacterMovesQuery rightJoinWithCharacters() Adds a RIGHT JOIN clause and with to the query using the Characters relation
  * @method     ChildCharacterMovesQuery innerJoinWithCharacters() Adds a INNER JOIN clause and with to the query using the Characters relation
  *
- * @method     \Propel\PtuToolkit\CharactersQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     ChildCharacterMovesQuery leftJoinMoves($relationAlias = null) Adds a LEFT JOIN clause to the query using the Moves relation
+ * @method     ChildCharacterMovesQuery rightJoinMoves($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Moves relation
+ * @method     ChildCharacterMovesQuery innerJoinMoves($relationAlias = null) Adds a INNER JOIN clause to the query using the Moves relation
+ *
+ * @method     ChildCharacterMovesQuery joinWithMoves($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the Moves relation
+ *
+ * @method     ChildCharacterMovesQuery leftJoinWithMoves() Adds a LEFT JOIN clause and with to the query using the Moves relation
+ * @method     ChildCharacterMovesQuery rightJoinWithMoves() Adds a RIGHT JOIN clause and with to the query using the Moves relation
+ * @method     ChildCharacterMovesQuery innerJoinWithMoves() Adds a INNER JOIN clause and with to the query using the Moves relation
+ *
+ * @method     \Propel\PtuToolkit\CharactersQuery|\Propel\PtuToolkit\MovesQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildCharacterMoves findOne(ConnectionInterface $con = null) Return the first ChildCharacterMoves matching the query
  * @method     ChildCharacterMoves findOneOrCreate(ConnectionInterface $con = null) Return the first ChildCharacterMoves matching the query, or a new ChildCharacterMoves object populated from the query conditions when no match is found
@@ -353,6 +363,8 @@ abstract class CharacterMovesQuery extends ModelCriteria
      * $query->filterByMoveId(array('min' => 12)); // WHERE move_id > 12
      * </code>
      *
+     * @see       filterByMoves()
+     *
      * @param     mixed $moveId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
@@ -484,6 +496,83 @@ abstract class CharacterMovesQuery extends ModelCriteria
         return $this
             ->joinCharacters($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Characters', '\Propel\PtuToolkit\CharactersQuery');
+    }
+
+    /**
+     * Filter the query by a related \Propel\PtuToolkit\Moves object
+     *
+     * @param \Propel\PtuToolkit\Moves|ObjectCollection $moves The related object(s) to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @throws \Propel\Runtime\Exception\PropelException
+     *
+     * @return ChildCharacterMovesQuery The current query, for fluid interface
+     */
+    public function filterByMoves($moves, $comparison = null)
+    {
+        if ($moves instanceof \Propel\PtuToolkit\Moves) {
+            return $this
+                ->addUsingAlias(CharacterMovesTableMap::COL_MOVE_ID, $moves->getMoveId(), $comparison);
+        } elseif ($moves instanceof ObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(CharacterMovesTableMap::COL_MOVE_ID, $moves->toKeyValue('PrimaryKey', 'MoveId'), $comparison);
+        } else {
+            throw new PropelException('filterByMoves() only accepts arguments of type \Propel\PtuToolkit\Moves or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Moves relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildCharacterMovesQuery The current query, for fluid interface
+     */
+    public function joinMoves($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Moves');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Moves');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Moves relation Moves object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \Propel\PtuToolkit\MovesQuery A secondary query class using the current class as primary query
+     */
+    public function useMovesQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinMoves($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Moves', '\Propel\PtuToolkit\MovesQuery');
     }
 
     /**

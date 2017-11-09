@@ -143,7 +143,7 @@ class CharacterMovesTableMap extends TableMap
         // columns
         $this->addPrimaryKey('character_move_id', 'CharacterMoveId', 'INTEGER', true, null, null);
         $this->addForeignKey('character_id', 'CharacterId', 'INTEGER', 'characters', 'character_id', true, null, null);
-        $this->addColumn('move_id', 'MoveId', 'INTEGER', false, null, null);
+        $this->addForeignKey('move_id', 'MoveId', 'INTEGER', 'moves', 'move_id', false, null, null);
         $this->addColumn('move_name', 'MoveName', 'VARCHAR', false, 64, null);
     } // initialize()
 
@@ -157,6 +157,13 @@ class CharacterMovesTableMap extends TableMap
   array (
     0 => ':character_id',
     1 => ':character_id',
+  ),
+), null, null, null, false);
+        $this->addRelation('Moves', '\\Propel\\PtuToolkit\\Moves', RelationMap::MANY_TO_ONE, array (
+  0 =>
+  array (
+    0 => ':move_id',
+    1 => ':move_id',
   ),
 ), null, null, null, false);
     } // buildRelations()

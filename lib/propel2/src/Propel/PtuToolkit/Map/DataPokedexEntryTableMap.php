@@ -138,7 +138,7 @@ class DataPokedexEntryTableMap extends TableMap
         // columns
         $this->addPrimaryKey('pokedex_no', 'PokedexNo', 'VARCHAR', true, 8, null);
         $this->addForeignKey('pokedex_id', 'PokedexId', 'INTEGER', 'data_pokedex', 'pokedex_id', false, null, null);
-        $this->addColumn('data', 'Data', 'LONGVARCHAR', true, null, null);
+        $this->addColumn('data', 'Data', 'LONGVARBINARY', true, null, null);
     } // initialize()
 
     /**

@@ -103,4 +103,26 @@ class PtuApp
     public function getCharacterById($characterId) {
         return CharactersQuery::create()->findOneByCharacterId($characterId);
     }
+
+    public function getCharacterMoves($characterId) {
+        $charMoves = $this->getCharacterById($characterId)->getCharacterMovessJoinMoves();
+        $moves = array();
+
+        foreach ($charMoves as $charMove) {
+            $move = $charMove->getMoves();
+
+            $moves[$move->getName()] = array(
+                "Type" => $move->getType(),
+                "Freq" => $move->getFreq(),
+                "Class" => $move->getClass(),
+                "Range" => $move->getRange(),
+                "Effect" => $move->getEffect(),
+                "Contest Type" => $move->getContestType(),
+                "Contest Effect" => $move->getContestEffect(),
+                "Triggers" => json_decode($move->getTriggers(), true)
+            );
+        }
+
+        return $moves;
+    }
 }

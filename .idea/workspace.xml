@@ -2,67 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15862326-d7eb-4f47-8185-a295394b3116" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/ptu-entities.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/ptu-io.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntryQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntry.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/char-edit.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/test-convert-pokedex.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntries.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattleEntriesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Battles.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/BattlesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CampaignsQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilities.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterAbilitiesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffs.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterBuffsQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMovesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharactersQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/SessionsQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Users.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/UsersQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattlesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Campaigns.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilities.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterAbilitiesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffs.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterBuffsQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMovesQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharactersQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattleEntriesTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CampaignsTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterAbilitiesTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterBuffsTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharacterMovesTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/CharactersTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/SessionsTableMap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Sessions.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/SessionsQuery.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Users.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/UsersQuery.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Sessions.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntries.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedex.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/BattleEntriesQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntryQuery.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CampaignsQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexQuery.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/BattlesTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Map/UsersTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexTableMap.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/ptu-player.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Moves.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/MovesQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/MovesTableMap.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Moves.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/MovesQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/test-convert-moves.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/v1/PtuAPI.php" afterPath="$PROJECT_DIR$/api/v1/PtuAPI.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/host.js" afterPath="$PROJECT_DIR$/js/host.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-battle.js" afterPath="$PROJECT_DIR$/js/ptu-battle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/schema.xml" afterPath="$PROJECT_DIR$/lib/propel2/schema.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-io.js" afterPath="$PROJECT_DIR$/js/ptu-io.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMoves.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMoves.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMovesQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharacterMovesQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharacterMovesTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharacterMovesTableMap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexTableMap.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/char-list.php" afterPath="$PROJECT_DIR$/pages/char-list.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/test-convert-gmdata.php" afterPath="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -93,39 +52,47 @@
         <item name="absorrco_ptu_toolkit@absorr.com" type="e3449647:DbNodeDescriptor" />
         <item name="absorrco_ptu_toolkit" type="e3449647:DbNodeDescriptor" />
       </path>
+      <path>
+        <item name="" type="eadb38e5:DatabaseStructure$Root" />
+        <item name="absorrco_ptu_toolkit@absorr.com" type="e3449647:DbNodeDescriptor" />
+        <item name="absorrco_ptu_toolkit" type="e3449647:DbNodeDescriptor" />
+        <item name="moves" type="e3449647:DbNodeDescriptor" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="char-list.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/char-list.php">
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ptu-battle.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
+      <file leaf-file-name="test-convert-pokedex.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="302" selection-end-column="48" />
+            <state relative-caret-position="440">
+              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
               <folding>
-                <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
+                <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="host.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/host.php">
+      <file leaf-file-name="test-convert-moves.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/test-convert-moves.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="914">
-              <caret line="974" column="6" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="0">
+              <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+              <folding>
+                <marker date="1510183532866" expanded="true" signature="207:446" ph="INSERT INTO moves... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,18 +100,28 @@
       <file leaf-file-name="PtuAPI.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="383" column="9" lean-forward="true" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+            <state relative-caret-position="601">
+              <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
               <folding>
-                <marker date="1510177325358" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
-                <marker date="1510177325358" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
-                <marker date="1510177325358" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
-                <marker date="1510177325358" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
-                <marker date="1510177325358" expanded="true" signature="13108:13243" ph="SELECT campa... campaigns" />
-                <marker date="1510177325358" expanded="true" signature="13534:13669" ph="SELECT campa... campaigns" />
-                <marker date="1510177325358" expanded="true" signature="14039:14157" ph="INSERT INTO campaigns... " />
-                <marker date="1510177325358" expanded="true" signature="14543:14605" ph="UPDATE campa... " />
+                <marker date="1510192576510" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
+                <marker date="1510192576510" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
+                <marker date="1510192576510" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
+                <marker date="1510192576510" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
+                <marker date="1510192576510" expanded="true" signature="13249:13384" ph="SELECT campa... campaigns" />
+                <marker date="1510192576510" expanded="true" signature="13675:13810" ph="SELECT campa... campaigns" />
+                <marker date="1510192576510" expanded="true" signature="14180:14298" ph="INSERT INTO campaigns... " />
+                <marker date="1510192576510" expanded="true" signature="14684:14746" ph="UPDATE campa... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Characters.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,31 +129,9 @@
       <file leaf-file-name="PtuApp.php" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1364">
-              <caret line="103" column="62" lean-forward="false" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="62" />
+            <state relative-caret-position="606">
+              <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="error_log" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;017f3b75-929f-47ee-8d6a-4957c8068756&gt;/ptu/api/v1/error_log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-287295">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataPokedexEntry.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2360">
-              <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-              <folding>
-                <marker date="1509583591123" expanded="true" signature="22704:22751" ph="INSERT INTO data_pokedex_entry... " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -192,11 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>#view-holder</find>
-      <find>selectGM</find>
-      <find>gm</find>
-      <find>gm_data[&quot;pokemon&quot;]</find>
-      <find>entities</find>
       <find>gm_data['pokemon']</find>
       <find>getEntityById</find>
       <find>damage_dealt</find>
@@ -222,12 +172,24 @@
       <find>LOB</find>
       <find>LONGVARBINARY</find>
       <find>gm_data[&quot;entities&quot;][target_id]</find>
+      <find>FieldName</find>
+      <find>effect</find>
+      <find>moves()</find>
+      <find>json_encode(</find>
+      <find>json_encode</find>
     </findStrings>
     <replaceStrings>
       <replace>gm_data[&quot;entities&quot;]</replace>
       <replace>&quot;</replace>
       <replace>[&quot;BaseStats&quot;][&quot;</replace>
       <replace>target</replace>
+      <replace>effect</replace>
+      <replace>freq</replace>
+      <replace>class</replace>
+      <replace>contest_effect</replace>
+      <replace>type</replace>
+      <replace>range</replace>
+      <replace>`range`</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2</dir>
@@ -244,13 +206,10 @@
         <option value="$PROJECT_DIR$/splash.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/sheet.php" />
-        <option value="$PROJECT_DIR$/js/pokemon.js" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/host.php" />
         <option value="$PROJECT_DIR$/js/host.js" />
         <option value="$PROJECT_DIR$/api/v1/PtuCharacter.php" />
         <option value="$PROJECT_DIR$/js/ptu-entities.js" />
-        <option value="$PROJECT_DIR$/js/ptu-io.js" />
         <option value="$PROJECT_DIR$/lib/propel2/project/ptutoolkit.xml" />
         <option value="$PROJECT_DIR$/lib/PtuToolkit/PtuToolkit/Users.php" />
         <option value="$PROJECT_DIR$/lib/PtuToolkit/PtuApp.php" />
@@ -262,12 +221,19 @@
         <option value="$PROJECT_DIR$/pages/test-convert-pokedex.php" />
         <option value="$PROJECT_DIR$/lib/propel2/schema.xml" />
         <option value="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
         <option value="$PROJECT_DIR$/pages/char-list.php" />
         <option value="$PROJECT_DIR$/pages/char-edit.php" />
         <option value="$PROJECT_DIR$/js/ptu-battle.js" />
+        <option value="$PROJECT_DIR$/host.php" />
+        <option value="$PROJECT_DIR$/js/ptu-io.js" />
+        <option value="$PROJECT_DIR$/js/pokemon.js" />
+        <option value="$PROJECT_DIR$/js/ptu-player.js" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
+        <option value="&lt;017f3b75-929f-47ee-8d6a-4957c8068756&gt;/ptu/pages/error_log" />
+        <option value="$PROJECT_DIR$/pages/test-convert-moves.php" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" />
         <option value="$PROJECT_DIR$/api/v1/PtuAPI.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
       </list>
@@ -368,44 +334,7 @@
             <path>
               <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
               <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="v1" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="propel2" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Propel" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
@@ -464,11 +393,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel" />
+      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel\PtuToolkit\Map" />
+      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel\PtuToolkit\Base" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel\PtuToolkit" />
+      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src\Propel" />
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2" />
-      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\PtuToolkit" />
-      <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\PtuToolkit\Base" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2\src" />
@@ -697,7 +626,7 @@
       <workItem from="1508693119798" duration="34591000" />
       <workItem from="1508792210413" duration="2446000" />
       <workItem from="1508794689824" duration="982000" />
-      <workItem from="1509579433568" duration="12471000" />
+      <workItem from="1509579433568" duration="20359000" />
     </task>
     <task id="LOCAL-00001" summary="Integrated ORM">
       <created>1508732505788</created>
@@ -710,7 +639,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148591000" />
+    <option name="totallyTimeSpent" value="156479000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
@@ -718,7 +647,7 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.50106955" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.49893048" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33277684" sideWeight="0.49893048" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -758,44 +687,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.campaigns">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Characters.php" />
-    <entry file="file://$PROJECT_DIR$/js/host.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="1875" column="14" lean-forward="false" selection-start-line="1875" selection-start-column="14" selection-end-line="1875" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/CharacterMoves.php" />
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/CharacterMoves.php" />
-    <entry file="file://$PROJECT_DIR$/error_log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-entities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-io.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_files.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -906,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.character_moves">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ServiceContainer/StandardServiceContainer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -942,13 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/DataPokedexEntry.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -961,19 +838,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1657">
           <caret line="65" column="3" lean-forward="false" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
-          <folding>
-            <marker date="1508795167699" expanded="true" signature="9353:9435" ph="SELECT poked... data_pokedex_entry" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="2" column="60" lean-forward="false" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
-          <folding>
-            <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -991,14 +856,6 @@
           <filtering enabled="true">
             <filter text="pokedex_no='479:W'" />
           </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1023,16 +880,8 @@
         <state relative-caret-position="616">
           <caret line="123" column="83" lean-forward="true" selection-start-line="123" selection-start-column="83" selection-end-line="123" selection-end-column="83" />
           <folding>
-            <element signature="e#139#177#0#PHP" expanded="true" />
+            <element signature="e#139#177#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/host.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="914">
-          <caret line="974" column="6" lean-forward="true" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,24 +889,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="302" selection-end-column="48" />
-          <folding>
-            <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1077,20 +908,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
+    <entry file="file://$PROJECT_DIR$/host.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="383" column="9" lean-forward="true" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+        <state relative-caret-position="-6264">
+          <caret line="833" column="0" lean-forward="false" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
           <folding>
-            <marker date="1510177325358" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
-            <marker date="1510177325358" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
-            <marker date="1510177325358" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
-            <marker date="1510177325358" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
-            <marker date="1510177325358" expanded="true" signature="13108:13243" ph="SELECT campa... campaigns" />
-            <marker date="1510177325358" expanded="true" signature="13534:13669" ph="SELECT campa... campaigns" />
-            <marker date="1510177325358" expanded="true" signature="14039:14157" ph="INSERT INTO campaigns... " />
-            <marker date="1510177325358" expanded="true" signature="14543:14605" ph="UPDATE campa... " />
+            <element signature="e#39132#39139#1#HTML" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,16 +930,152 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2360">
           <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="310" column="17" lean-forward="false" selection-start-line="310" selection-start-column="17" selection-end-line="310" selection-end-column="66" />
           <folding>
-            <marker date="1509583591123" expanded="true" signature="22704:22751" ph="INSERT INTO data_pokedex_entry... " />
+            <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="19" column="62" lean-forward="false" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="7" column="1" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="685" column="9" lean-forward="false" selection-start-line="685" selection-start-column="9" selection-end-line="685" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <marker date="1505093208740" expanded="true" signature="7883:7890" ph="..." />
+            <marker date="1505093208740" expanded="true" signature="8831:8838" ph="..." />
+            <marker date="1505093208740" expanded="true" signature="9682:9689" ph="..." />
+            <marker date="1505093208740" expanded="true" signature="10525:10532" ph="..." />
+            <marker date="1505093208740" expanded="true" signature="12682:12689" ph="..." />
+            <marker date="1505093208740" expanded="true" signature="15442:15449" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/json/json.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="123" column="9" lean-forward="false" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_5.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="863">
+          <caret line="1046" column="9" lean-forward="false" selection-start-line="1046" selection-start-column="9" selection-end-line="1046" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.character_moves">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="ISNULL(move_id)" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.moves">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" text="name='Thunder Wave'">
+            <filter text="name='Thunder Wave'" />
+            <filter text="name LIKE '%Thunder%Wave%'" />
+            <filter text="name LIKE '%Thunder Wave%'" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-moves.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding>
+            <marker date="1510183532866" expanded="true" signature="207:446" ph="INSERT INTO moves... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
+          <folding>
+            <marker date="1510192576510" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
+            <marker date="1510192576510" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
+            <marker date="1510192576510" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
+            <marker date="1510192576510" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
+            <marker date="1510192576510" expanded="true" signature="13249:13384" ph="SELECT campa... campaigns" />
+            <marker date="1510192576510" expanded="true" signature="13675:13810" ph="SELECT campa... campaigns" />
+            <marker date="1510192576510" expanded="true" signature="14180:14298" ph="INSERT INTO campaigns... " />
+            <marker date="1510192576510" expanded="true" signature="14684:14746" ph="UPDATE campa... " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1364">
-          <caret line="103" column="62" lean-forward="false" selection-start-line="103" selection-start-column="62" selection-end-line="103" selection-end-column="62" />
+        <state relative-caret-position="606">
+          <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
           <folding />
         </state>
       </provider>

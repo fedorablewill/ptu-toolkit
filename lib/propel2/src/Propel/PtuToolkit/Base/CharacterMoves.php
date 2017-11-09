@@ -7,6 +7,8 @@ use \PDO;
 use Propel\PtuToolkit\CharacterMovesQuery as ChildCharacterMovesQuery;
 use Propel\PtuToolkit\Characters as ChildCharacters;
 use Propel\PtuToolkit\CharactersQuery as ChildCharactersQuery;
+use Propel\PtuToolkit\Moves as ChildMoves;
+use Propel\PtuToolkit\MovesQuery as ChildMovesQuery;
 use Propel\PtuToolkit\Map\CharacterMovesTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -93,6 +95,11 @@ abstract class CharacterMoves implements ActiveRecordInterface
      * @var        ChildCharacters
      */
     protected $aCharacters;
+
+    /**
+     * @var        ChildMoves
+     */
+    protected $aMoves;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -428,6 +435,10 @@ abstract class CharacterMoves implements ActiveRecordInterface
             $this->modifiedColumns[CharacterMovesTableMap::COL_MOVE_ID] = true;
         }
 
+        if ($this->aMoves !== null && $this->aMoves->getMoveId() !== $v) {
+            $this->aMoves = null;
+        }
+
         return $this;
     } // setMoveId()
 
@@ -531,6 +542,9 @@ abstract class CharacterMoves implements ActiveRecordInterface
         if ($this->aCharacters !== null && $this->character_id !== $this->aCharacters->getCharacterId()) {
             $this->aCharacters = null;
         }
+        if ($this->aMoves !== null && $this->move_id !== $this->aMoves->getMoveId()) {
+            $this->aMoves = null;
+        }
     } // ensureConsistency
 
     /**
@@ -571,6 +585,7 @@ abstract class CharacterMoves implements ActiveRecordInterface
         if ($deep) {  // also de-associate any related objects?
 
             $this->aCharacters = null;
+            $this->aMoves = null;
         } // if (deep)
     }
 
@@ -684,6 +699,13 @@ abstract class CharacterMoves implements ActiveRecordInterface
                     $affectedRows += $this->aCharacters->save($con);
                 }
                 $this->setCharacters($this->aCharacters);
+            }
+
+            if ($this->aMoves !== null) {
+                if ($this->aMoves->isModified() || $this->aMoves->isNew()) {
+                    $affectedRows += $this->aMoves->save($con);
+                }
+                $this->setMoves($this->aMoves);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -887,6 +909,21 @@ abstract class CharacterMoves implements ActiveRecordInterface
                 }
 
                 $result[$key] = $this->aCharacters->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aMoves) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'moves';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'moves';
+                        break;
+                    default:
+                        $key = 'Moves';
+                }
+
+                $result[$key] = $this->aMoves->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1194,6 +1231,57 @@ abstract class CharacterMoves implements ActiveRecordInterface
     }
 
     /**
+     * Declares an association between this object and a ChildMoves object.
+     *
+     * @param  ChildMoves $v
+     * @return $this|\Propel\PtuToolkit\CharacterMoves The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setMoves(ChildMoves $v = null)
+    {
+        if ($v === null) {
+            $this->setMoveId(NULL);
+        } else {
+            $this->setMoveId($v->getMoveId());
+        }
+
+        $this->aMoves = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the ChildMoves object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCharacterMoves($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated ChildMoves object
+     *
+     * @param  ConnectionInterface $con Optional Connection object.
+     * @return ChildMoves The associated ChildMoves object.
+     * @throws PropelException
+     */
+    public function getMoves(ConnectionInterface $con = null)
+    {
+        if ($this->aMoves === null && ($this->move_id != 0)) {
+            $this->aMoves = ChildMovesQuery::create()->findPk($this->move_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aMoves->addCharacterMovess($this);
+             */
+        }
+
+        return $this->aMoves;
+    }
+
+    /**
      * Clears the current object, sets all attributes to their default values and removes
      * outgoing references as well as back-references (from other objects to this one. Results probably in a database
      * change of those foreign objects when you call `save` there).
@@ -1202,6 +1290,9 @@ abstract class CharacterMoves implements ActiveRecordInterface
     {
         if (null !== $this->aCharacters) {
             $this->aCharacters->removeCharacterMoves($this);
+        }
+        if (null !== $this->aMoves) {
+            $this->aMoves->removeCharacterMoves($this);
         }
         $this->character_move_id = null;
         $this->character_id = null;
@@ -1228,6 +1319,7 @@ abstract class CharacterMoves implements ActiveRecordInterface
         } // if ($deep)
 
         $this->aCharacters = null;
+        $this->aMoves = null;
     }
 
     /**
