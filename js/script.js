@@ -37,7 +37,44 @@ function receiveMessages(connection, callback) {
 }
 
 function sendMessage(to, message) {
-    peer.connections[to][0].send(message);
+
+    var c = peer.connections[to][0];
+
+    if (peer.disconnected)
+        peer.reconnect();
+
+    if (c !== null && !c.open) {
+        if (peer.connections[to].length > 1){
+            for (var i=0; i < peer.connections[to].length; i++) {
+                if (!peer.connections[to][i].open)
+                    peer.connections[to].splice(i, 1);
+                else
+                    c = peer.connections[to][i];
+            }
+        }
+
+        if (!c.open) {
+            doToast("Connection to peer lost. Attempting to communicate");
+
+            c = null;
+
+            var connect = peer.connect(to, {
+                label: 'chat',
+                serialization: 'none',
+                metadata: {message: 'connect to host'}
+            });
+            connect.on('open', function () {
+                doToast("Connection to peer found");
+                connect.send(message);
+            });
+            connect.on('error', function (err) {
+                alert(err);
+            });
+        }
+    }
+
+    if (c !== null)
+        c.send(message);
 }
 
 function sendMessageToAll(message) {

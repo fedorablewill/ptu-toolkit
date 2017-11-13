@@ -9,6 +9,13 @@
 var character_data = {}, moves_data = [], battle_data = {}, afflictions = [], dex_data = {};
 
 var currentMove = null;
+var character_id = null; //TODO: replace with character_data["ID"]
+
+/**
+ * Peer to Peer Connection
+ * @type DataConnection
+ */
+var connection = null;
 
 
 /**
@@ -19,7 +26,7 @@ $(function () {
     $("#btn-do-dmg").click(function () {
         sendMessage(host_id, JSON.stringify({
             "type": "battle_damage",
-            "target": $("#pokemonId").val(),
+            "target": character_id,
             "moveType": $("#dmg-type").val(),
             "isSpecial": $("#do-dmg-sp").is(':checked'),
             "damage": $("#do-dmg").val()
@@ -36,7 +43,7 @@ $(function () {
 
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_update",
-            "pokemon": $("#pokemonId").val(),
+            "pokemon": character_id,
             "field": "health",
             "value": character_data["health"]
         }));
@@ -45,7 +52,7 @@ $(function () {
     $("#stages").find("input").change(function () {
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_setcs",
-            "pokemon": $("#pokemonId").val(),
+            "pokemon": character_id,
             "field": $(this).attr("data-target"),
             "value": $(this).val()
         }));
@@ -95,7 +102,7 @@ $(function () {
         // Update remotely
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_afflict_add",
-            "pokemon": $("#pokemonId").val(),
+            "pokemon": character_id,
             "affliction": a,
             "value": null
         }));
@@ -462,7 +469,7 @@ function updateTargetList() {
 
         sendMessage(host_id, JSON.stringify({
             "type": "battle_move",
-            "dealer": $("#pokemonId").val(),
+            "dealer": character_id,
             "target": $(this).attr("data-target"),
             "move": currentMove,
             "bonus_dmg": $("#move-dmg-bonus").val(),
@@ -514,14 +521,14 @@ function updateAfflictions() {
     $("#afflictions .btn-trigger").click(function () {
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_afflict_trigger",
-            "pokemon": $("#pokemonId").val(),
+            "pokemon": character_id,
             "affliction": $(this).parent().attr("data-value")
         }));
     });
     $("#afflictions .btn-delete").click(function () {
         sendMessage(host_id, JSON.stringify({
             "type": "pokemon_afflict_delete",
-            "pokemon": $("#pokemonId").val(),
+            "pokemon": character_id,
             "affliction": $(this).parent().attr("data-value")
         }));
 
@@ -542,14 +549,21 @@ peer.on('connection', function (c) {
 function onClickConnect() {
     host_id = $("#gm-id").val();
 
-    var c = peer.connect(host_id, {
+    if (peer.connections[host_id] != null) {
+        for (var i = 0; i < peer.connections[host_id].length; i++) {
+            peer.connections[host_id][i].close();
+            peer.connections[host_id].splice(i, 1);
+        }
+    }
+
+    connection = peer.connect(host_id, {
         label: 'chat',
         serialization: 'none',
         metadata: {message: 'connect to host'}
     });
 
-    c.on('open', function () {
-        c.on('data', function (data) {
+    connection.on('open', function () {
+        connection.on('data', function (data) {
             var json = JSON.parse(data);
 
             /*
@@ -646,22 +660,31 @@ function onClickConnect() {
 
         });
 
-        c.send(JSON.stringify({
-            "type": "pokemon_list"
-        }));
+        // Connection established - make appropriate calls
+
+        if ($.isEmptyObject(character_data)) {
+            connection.send(JSON.stringify({
+                "type": "pokemon_list"
+            }));
+        } else {
+            connection.send(JSON.stringify({
+                "type": "reconnect",
+                "character": character_data["ID"]
+            }));
+        }
     });
-    c.on('error', function (err) {
+    connection.on('error', function (err) {
         alert(err);
     });
 }
 
 function onClickLoadFromSelected() {
-    var pmon_id = $("#pokemonId").val();
+    character_id = $("#pokemonId").val();
 
     sendMessage(host_id, JSON.stringify({
         "type": "pokemon_get",
         "from": client_id,
-        "pokemon_id": pmon_id
+        "pokemon_id": character_id
     }));
 }
 
@@ -670,7 +693,7 @@ function addPokemonToBattle() {
     var message = {
         "type": "battle_add",
         "from": client_id,
-        "pokemon": $("#pokemonId").val(),
+        "pokemon": character_id,
         "stage_atk": $("#stage-atk").val(),
         "stage_def": $("#stage-def").val(),
         "stage_spatk": $("#stage-spatk").val(),
