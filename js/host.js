@@ -703,6 +703,9 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
         damage = 1;
     }
 
+    // Round the damage
+    damage = Math.ceil(damage);
+
     // Calculating max_hp
     var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
 
