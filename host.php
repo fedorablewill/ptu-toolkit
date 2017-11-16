@@ -699,7 +699,12 @@
     </div>
 
     <div class="hidden" id="body-settings">
-        <h1>Nothin' to see yet..</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2>Settings</h2>
+                <button class="btn btn-danger" onclick="reconnect()">Reconnect to Peer.JS</button>
+            </div>
+        </div>
     </div>
 </div>
 

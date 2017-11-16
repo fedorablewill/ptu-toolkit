@@ -29,6 +29,10 @@ peer.on('connection', function (c) {
     }));
 });
 
+function reconnect() {
+    peer.reconnect();
+}
+
 function readMessage(connection, data) {
 
     var json = JSON.parse(data);
