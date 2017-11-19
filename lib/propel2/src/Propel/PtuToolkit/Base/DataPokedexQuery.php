@@ -356,7 +356,7 @@ abstract class DataPokedexQuery extends ModelCriteria
      *
      * @return $this|ChildDataPokedexQuery The current query, for fluid interface
      */
-    public function joinDataPokedexEntry($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinDataPokedexEntry($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('DataPokedexEntry');
@@ -391,7 +391,7 @@ abstract class DataPokedexQuery extends ModelCriteria
      *
      * @return \Propel\PtuToolkit\DataPokedexEntryQuery A secondary query class using the current class as primary query
      */
-    public function useDataPokedexEntryQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useDataPokedexEntryQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinDataPokedexEntry($relationAlias, $joinType)

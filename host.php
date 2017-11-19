@@ -262,6 +262,11 @@
             z-index: -200;
             display: none;
         }
+
+        .ui-autocomplete {
+            height: 150px;
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>

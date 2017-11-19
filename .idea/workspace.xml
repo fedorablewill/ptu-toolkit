@@ -2,11 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15862326-d7eb-4f47-8185-a295394b3116" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/PokedexMoves.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/PokedexMovesQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/PokedexMovesTableMap.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PokedexMoves.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PokedexMovesQuery.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/test-convert-pokedex-moves.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/host.php" afterPath="$PROJECT_DIR$/host.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/pokemon.js" afterPath="$PROJECT_DIR$/js/pokemon.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-battle.js" afterPath="$PROJECT_DIR$/js/ptu-battle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-io.js" afterPath="$PROJECT_DIR$/js/ptu-io.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ptu-player.js" afterPath="$PROJECT_DIR$/js/ptu-player.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/char-list.php" afterPath="$PROJECT_DIR$/pages/char-list.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/script.js" afterPath="$PROJECT_DIR$/js/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharactersQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/CharactersQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedex.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntryQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntryQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Moves.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Moves.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/MovesQuery.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/MovesQuery.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharactersTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/CharactersTableMap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/MovesTableMap.php" afterPath="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/MovesTableMap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/char-edit.php" afterPath="$PROJECT_DIR$/pages/char-edit.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,81 +61,112 @@
         <item name="" type="eadb38e5:DatabaseStructure$Root" />
         <item name="absorrco_ptu_toolkit@absorr.com" type="e3449647:DbNodeDescriptor" />
         <item name="absorrco_ptu_toolkit" type="e3449647:DbNodeDescriptor" />
-        <item name="moves" type="e3449647:DbNodeDescriptor" />
+        <item name="pokedex_moves" type="e3449647:DbNodeDescriptor" />
       </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+      <file leaf-file-name="char-edit.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/char-edit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="898">
+              <caret line="226" column="7" lean-forward="true" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Characters.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="606">
+              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding>
+                <element signature="e#37#45#0#PHP" expanded="true" />
+                <marker date="1511125688374" expanded="true" signature="562:1163" ph="SELECT moves... moves" />
+                <marker date="1511125688374" expanded="true" signature="852:951" ph="SELECT * FRO... pokedex_moves" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MovesQuery.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/MovesQuery.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="755">
+              <caret line="167" column="31" lean-forward="false" selection-start-line="167" selection-start-column="31" selection-end-line="167" selection-end-column="31" />
+              <folding>
+                <element signature="e#42#57#0#PHP" expanded="true" />
+                <marker date="1511029724747" expanded="true" signature="16344:16491" ph="SELECT move_... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Criteria.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criteria.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="723">
+              <caret line="2643" column="0" lean-forward="false" selection-start-line="2643" selection-start-column="0" selection-end-line="2643" selection-end-column="0" />
+              <folding>
+                <marker date="1508719830997" expanded="true" signature="71656:71765" ph="INSERT INTO ${$tableName}... " />
+                <marker date="1508719830997" expanded="true" signature="81301:81358" ph="SELECT COUNT... ${$selectSql}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="host.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/host.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="640">
+              <caret line="268" column="8" lean-forward="false" selection-start-line="268" selection-start-column="8" selection-end-line="268" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+            <state relative-caret-position="735">
+              <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="char-list.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/char-list.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-              <folding />
+      <file leaf-file-name="characters" pinned="false" current-in-tab="false">
+        <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.characters">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="407" column="87" lean-forward="true" selection-start-line="407" selection-start-column="87" selection-end-line="407" selection-end-column="87" />
-              <folding />
+      <file leaf-file-name="pokedex_moves" pinned="false" current-in-tab="false">
+        <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.pokedex_moves">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" text="pokedex_no IN ('179','374','304','029','092','667','557','674','418','387','029','032','158','281','280','280','280','236','532','236','479:W','479:W','007')">
+                <filter text="pokedex_no IN ('179','374','304','029','092','667','557','674','418','387','029','032','158','281','280','280','280','236','532','236','479:W','479:W','007')" />
+                <filter text="pokedex_no='178'" />
+                <filter text="pokedex_no='179'" />
+              </filtering>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test-convert-pokedex.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
+      <file leaf-file-name="test-convert-pokedex-moves.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex-moves.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            <state relative-caret-position="931">
+              <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
-                <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test-convert-moves.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/test-convert-moves.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-              <folding>
-                <marker date="1510183532866" expanded="true" signature="207:446" ph="INSERT INTO moves... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PtuAPI.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="601">
-              <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
-              <folding>
-                <marker date="1510192576510" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
-                <marker date="1510192576510" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
-                <marker date="1510192576510" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
-                <marker date="1510192576510" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
-                <marker date="1510192576510" expanded="true" signature="13249:13384" ph="SELECT campa... campaigns" />
-                <marker date="1510192576510" expanded="true" signature="13675:13810" ph="SELECT campa... campaigns" />
-                <marker date="1510192576510" expanded="true" signature="14180:14298" ph="INSERT INTO campaigns... " />
-                <marker date="1510192576510" expanded="true" signature="14684:14746" ph="UPDATE campa... " />
+                <element signature="e#139#183#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,45 +175,8 @@
       <file leaf-file-name="PtuApp.php" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
+            <state relative-caret-position="804">
               <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pokemon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/pokemon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-              <folding>
-                <marker date="1510199318772" expanded="true" signature="7911:7918" ph="..." />
-                <marker date="1510199318772" expanded="true" signature="8859:8866" ph="..." />
-                <marker date="1510199318772" expanded="true" signature="9710:9717" ph="..." />
-                <marker date="1510199318772" expanded="true" signature="10553:10560" ph="..." />
-                <marker date="1510199318772" expanded="true" signature="12710:12717" ph="..." />
-                <marker date="1510199318772" expanded="true" signature="15470:15477" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ptu-io.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/ptu-io.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1040">
-              <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ptu-player.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/ptu-player.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -179,16 +193,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>damage_dealt</find>
-      <find>moveName</find>
-      <find>accuracy</find>
-      <find>gm_data</find>
-      <find>removeAttr</find>
-      <find>Class</find>
-      <find>&quot;Class&quot;</find>
-      <find>data-target</find>
-      <find>-&gt;</find>
-      <find>data-base</find>
       <find>Grassland</find>
       <find>&quot;Grassland&quot;</find>
       <find>onAddmonDex</find>
@@ -209,6 +213,16 @@
       <find>json_encode</find>
       <find>pmon_id</find>
       <find>parent</find>
+      <find>battle</find>
+      <find>$(&quot;#pokemonId&quot;).val()</find>
+      <find>modal</find>
+      <find>peer</find>
+      <find>autocom</find>
+      <find>stmt</find>
+      <find>collPoke</find>
+      <find>execute</find>
+      <find>getPoke</find>
+      <find>&lt;/td&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>gm_data[&quot;entities&quot;]</replace>
@@ -223,6 +237,7 @@
       <replace>range</replace>
       <replace>`range`</replace>
       <replace>char_id</replace>
+      <replace>character_id</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\absor\PhpstormProjects\ptu-toolkit\lib\propel2</dir>
@@ -231,15 +246,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://restClient/response1.json" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/js/JSONExport.js" />
-        <option value="$PROJECT_DIR$/js/script.js" />
         <option value="$PROJECT_DIR$/splash.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/sheet.php" />
-        <option value="$PROJECT_DIR$/js/host.js" />
         <option value="$PROJECT_DIR$/api/v1/PtuCharacter.php" />
         <option value="$PROJECT_DIR$/js/ptu-entities.js" />
         <option value="$PROJECT_DIR$/lib/propel2/project/ptutoolkit.xml" />
@@ -255,20 +271,25 @@
         <option value="$PROJECT_DIR$/pages/test-convert-gmdata.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Map/DataPokedexEntryTableMap.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/DataPokedexEntry.php" />
-        <option value="$PROJECT_DIR$/pages/char-edit.php" />
-        <option value="$PROJECT_DIR$/js/ptu-battle.js" />
-        <option value="$PROJECT_DIR$/host.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
         <option value="&lt;017f3b75-929f-47ee-8d6a-4957c8068756&gt;/ptu/pages/error_log" />
         <option value="$PROJECT_DIR$/pages/test-convert-moves.php" />
-        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" />
         <option value="$PROJECT_DIR$/api/v1/PtuAPI.php" />
         <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php" />
+        <option value="$PROJECT_DIR$/pages/char-list.php" />
+        <option value="$PROJECT_DIR$/js/ptu-player.js" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/js/ptu-io.js" />
-        <option value="$PROJECT_DIR$/pages/char-list.php" />
         <option value="$PROJECT_DIR$/js/pokemon.js" />
-        <option value="$PROJECT_DIR$/js/ptu-player.js" />
+        <option value="$PROJECT_DIR$/js/ptu-battle.js" />
+        <option value="$PROJECT_DIR$/js/host.js" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/PokedexMoves.php" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/BaseModelCriteria.php" />
+        <option value="$PROJECT_DIR$/js/script.js" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql" />
+        <option value="$PROJECT_DIR$/pages/test-convert-pokedex-moves.php" />
+        <option value="$PROJECT_DIR$/host.php" />
+        <option value="$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php" />
+        <option value="$PROJECT_DIR$/pages/char-edit.php" />
       </list>
     </option>
   </component>
@@ -288,10 +309,14 @@
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpServers">
     <servers>
-      <server host="localhost" id="035becf2-3e1a-4b80-8624-40b7b88b77fd" name="Unnamed" />
+      <server host="localhost" id="035becf2-3e1a-4b80-8624-40b7b88b77fd" name="Unnamed" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="C:/Users/absor/PhpstormProjects/ptu-toolkit" />
+        </path_mappings>
+      </server>
     </servers>
   </component>
-  <component name="PhpWebServerValidation" deployment_server_id="017f3b75-929f-47ee-8d6a-4957c8068756" path_to_validation_script="C:\Users\absor\PhpstormProjects\ptu-toolkit" selected_validation_type="REMOTE" web_path_to_validation_script="http://127.0.0.1/" />
+  <component name="PhpWebServerValidation" deployment_server_id="017f3b75-929f-47ee-8d6a-4957c8068756" path_to_validation_script="C:\Users\absor\PhpstormProjects\ptu-toolkit" selected_validation_type="LOCAL" web_path_to_validation_script="http://localhost/" />
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP">
     <include_path>
       <path value="$PROJECT_DIR$/lib/propel2/vendor/monolog/monolog" />
@@ -357,6 +382,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -367,7 +394,7 @@
             <path>
               <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
               <item name="ptu-toolkit" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="ptu-toolkit" type="b2602c69:ProjectViewProjectNode" />
@@ -378,42 +405,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-            </path>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-              <item name="com.intellij.database" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-            </path>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-              <item name="com.intellij.database" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-              <item name="data" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-            </path>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-              <item name="com.intellij.database" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-              <item name="data" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-              <item name="extractors" type="61db50fb:ScratchProjectViewPane$MyPsiNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="C:/xampp/php/php_xdebug.dll" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="settings.php.debug.servers" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JSON&#10;JavaScript" />
     <property name="JavaScriptPreferStrict" value="false" />
@@ -442,6 +439,42 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://ptu.will-step.com" />
+          <option name="urlPath" value="/api/v1/pokemon/001" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Authorization" />
+                <option name="value" value="Basic emJaTE1Ed2xvRlRNVDNxN3dXZHJnYzVLQnZtMjoxMjM=" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="id" />
+                <option name="value" value="1" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="id" />
+                <option name="value" value="2" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="httpMethod" value="GET" />
           <option name="urlBase" value="http://ptu.will-step.com" />
@@ -550,6 +583,7 @@
     </option>
   </component>
   <component name="RunManager" selected="PHP Web Application.Localhost">
+    <configuration name="Built-in Server" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$" />
     <configuration name="Localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="Unnamed" />
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
@@ -617,6 +651,10 @@
       <recursive>false</recursive>
       <method />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="PHP Built-in Web Server.Built-in Server" />
+      <item index="1" class="java.lang.String" itemvalue="PHP Web Application.Localhost" />
+    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -659,7 +697,12 @@
       <workItem from="1508693119798" duration="34591000" />
       <workItem from="1508792210413" duration="2446000" />
       <workItem from="1508794689824" duration="982000" />
-      <workItem from="1509579433568" duration="24736000" />
+      <workItem from="1509579433568" duration="26711000" />
+      <workItem from="1510517592037" duration="9337000" />
+      <workItem from="1510608688956" duration="3595000" />
+      <workItem from="1510848646216" duration="4457000" />
+      <workItem from="1511021989818" duration="231000" />
+      <workItem from="1511022263495" duration="25476000" />
     </task>
     <task id="LOCAL-00001" summary="Integrated ORM">
       <created>1508732505788</created>
@@ -672,31 +715,40 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160856000" />
+    <option name="totallyTimeSpent" value="205927000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.50106955" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.49893048" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.50213903" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33277684" sideWeight="0.49786097" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-61" y="803" width="3740" height="990" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999444" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32566845" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943794" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2529412" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25614974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955482" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39955482" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="-61" y="803" width="3740" height="990" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -715,85 +767,26 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criteria.php</url>
+          <line>2643</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="javascript-exception">
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Battles.php" />
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/PtuApp.php" />
-    <entry file="file://$PROJECT_DIR$/pages/error_log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Characters.php" />
-    <entry file="file://$PROJECT_DIR$/lib/propel2/autoload.php.dist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="18" column="38" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_psr4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/xampp/php/php.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="517" column="43" lean-forward="false" selection-start-line="517" selection-start-column="43" selection-end-line="517" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_real.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/ClassLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12780">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_namespaces.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/vendor/composer/autoload_classmap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18880">
-          <caret line="472" column="82" lean-forward="false" selection-start-line="472" selection-start-column="82" selection-end-line="472" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/Exception/PropelException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/PtuToolkit/Base/Campaigns.php" />
-    <entry file="file://$PROJECT_DIR$/lib/propel2/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/propel.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -805,7 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1320">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -830,18 +822,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="1426" column="20" lean-forward="false" selection-start-line="1426" selection-start-column="20" selection-end-line="1426" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/propel2/schema.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5960">
           <caret line="149" column="2" lean-forward="false" selection-start-line="149" selection-start-column="2" selection-end-line="149" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -856,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1657">
           <caret line="65" column="3" lean-forward="false" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -872,16 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
           <caret line="39" column="19" lean-forward="false" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex_entry">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true">
-            <filter text="pokedex_no='479:W'" />
-          </filtering>
         </state>
       </provider>
     </entry>
@@ -889,7 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1000">
           <caret line="140" column="53" lean-forward="false" selection-start-line="140" selection-start-column="53" selection-end-line="140" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -897,24 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="14" column="62" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/char-edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="123" column="83" lean-forward="true" selection-start-line="123" selection-start-column="83" selection-end-line="123" selection-end-column="83" />
-          <folding>
-            <element signature="e#139#177#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.characters">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -922,7 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -930,17 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/host.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6264">
-          <caret line="833" column="0" lean-forward="false" selection-start-line="833" selection-start-column="0" selection-end-line="974" selection-end-column="6" />
-          <folding>
-            <element signature="e#39132#39139#1#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,17 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2360">
           <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="310" column="17" lean-forward="false" selection-start-line="310" selection-start-column="17" selection-end-line="310" selection-end-column="66" />
-          <folding>
-            <marker date="1509814865413" expanded="true" signature="33097:33115" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -973,7 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1463">
           <caret line="123" column="9" lean-forward="false" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,7 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="863">
           <caret line="1046" column="9" lean-forward="false" selection-start-line="1046" selection-start-column="9" selection-end-line="1046" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -994,10 +922,131 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15280">
+          <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-moves.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.peerjs.com_0.3_peer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="702" column="4" lean-forward="false" selection-start-line="702" selection-start-column="4" selection-end-line="702" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_ajax.googleapis.com_ajax_libs_jquery_1.11.1_jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="9312" column="0" lean-forward="false" selection-start-line="9312" selection-start-column="0" selection-end-line="9312" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="25" column="17" lean-forward="false" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="555" column="9" lean-forward="false" selection-start-line="555" selection-start-column="9" selection-end-line="555" selection-end-column="9" />
+          <folding>
+            <marker date="1510611596302" expanded="true" signature="8025:8032" ph="..." />
+            <marker date="1510611596302" expanded="true" signature="8973:8980" ph="..." />
+            <marker date="1510611596302" expanded="true" signature="9824:9831" ph="..." />
+            <marker date="1510611596302" expanded="true" signature="10667:10674" ph="..." />
+            <marker date="1510611596302" expanded="true" signature="12824:12831" ph="..." />
+            <marker date="1510611596302" expanded="true" signature="15584:15591" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/host.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <marker date="1510865597544" expanded="true" signature="9955:9973" ph="..." />
+            <marker date="1510865597544" expanded="true" signature="15326:15332" ph="..." />
+            <marker date="1510865597544" expanded="true" signature="15544:15548" ph="&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ptu-battle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1760">
+          <caret line="310" column="67" lean-forward="false" selection-start-line="310" selection-start-column="67" selection-end-line="310" selection-end-column="67" />
+          <folding>
+            <marker date="1510863909599" expanded="true" signature="33063:33081" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2204">
+          <caret line="891" column="0" lean-forward="false" selection-start-line="891" selection-start-column="0" selection-end-line="891" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.data_pokedex_entry">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="pokedex_no='479:W'" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.moves">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
-          <filtering enabled="true" text="name='Thunder Wave'">
+          <filtering enabled="true">
             <filter text="name='Thunder Wave'" />
             <filter text="name LIKE '%Thunder%Wave%'" />
             <filter text="name LIKE '%Thunder Wave%'" />
@@ -1005,110 +1054,163 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php">
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Characters.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/PtuApp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="121" column="69" lean-forward="false" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1/PtuAPI.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
+        <state relative-caret-position="242">
+          <caret line="1186" column="7" lean-forward="true" selection-start-line="1186" selection-start-column="7" selection-end-line="1186" selection-end-column="7" />
           <folding>
-            <marker date="1510192576510" expanded="true" signature="10572:10614" ph="SELECT * FRO... users" />
-            <marker date="1510192576510" expanded="true" signature="10992:11058" ph="INSERT INTO users... " />
-            <marker date="1510192576510" expanded="true" signature="11287:11351" ph="SELECT COUNT... users" />
-            <marker date="1510192576510" expanded="true" signature="11597:11643" ph="SELECT usern... users" />
-            <marker date="1510192576510" expanded="true" signature="13249:13384" ph="SELECT campa... campaigns" />
-            <marker date="1510192576510" expanded="true" signature="13675:13810" ph="SELECT campa... campaigns" />
-            <marker date="1510192576510" expanded="true" signature="14180:14298" ph="INSERT INTO campaigns... " />
-            <marker date="1510192576510" expanded="true" signature="14684:14746" ph="UPDATE campa... " />
+            <element signature="e#42#57#0#PHP" expanded="true" />
+            <marker date="1511029722398" expanded="true" signature="100298:100337" ph="INSERT INTO characters... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/BaseModelCriteria.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="11" column="62" lean-forward="false" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+        <state relative-caret-position="100">
+          <caret line="198" column="7" lean-forward="true" selection-start-line="198" selection-start-column="7" selection-end-line="198" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/test-convert-moves.php">
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/Moves.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        <state relative-caret-position="-700">
+          <caret line="2127" column="27" lean-forward="false" selection-start-line="2127" selection-start-column="20" selection-end-line="2127" selection-end-column="27" />
           <folding>
-            <marker date="1510183532866" expanded="true" signature="207:446" ph="INSERT INTO moves... " />
+            <marker date="1511029724536" expanded="true" signature="35019:35053" ph="INSERT INTO moves... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/MovesQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/PokedexMoves.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="854">
+          <caret line="620" column="20" lean-forward="false" selection-start-line="620" selection-start-column="20" selection-end-line="620" selection-end-column="20" />
+          <folding>
+            <marker date="1511033575056" expanded="true" signature="31223:31265" ph="INSERT INTO pokedex_moves... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/ModelCriteria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="399" column="30" lean-forward="true" selection-start-line="399" selection-start-column="30" selection-end-line="399" selection-end-column="30" />
+          <folding>
+            <marker date="1508719831189" expanded="true" signature="56437:56449" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="265" column="43" lean-forward="false" selection-start-line="265" selection-start-column="43" selection-end-line="265" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
           <folding>
             <marker date="1508794241477" expanded="true" signature="216:301" ph="INSERT INTO data_pokedex_entry... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/pages/test-convert-pokedex-moves.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="407" column="87" lean-forward="true" selection-start-line="407" selection-start-column="87" selection-end-line="407" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/char-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/pokemon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+        <state relative-caret-position="931">
+          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
-            <marker date="1510199318772" expanded="true" signature="7911:7918" ph="..." />
-            <marker date="1510199318772" expanded="true" signature="8859:8866" ph="..." />
-            <marker date="1510199318772" expanded="true" signature="9710:9717" ph="..." />
-            <marker date="1510199318772" expanded="true" signature="10553:10560" ph="..." />
-            <marker date="1510199318772" expanded="true" signature="12710:12717" ph="..." />
-            <marker date="1510199318772" expanded="true" signature="15470:15477" ph="..." />
+            <element signature="e#139#183#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-io.js">
+    <entry file="file://$PROJECT_DIR$/host.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+        <state relative-caret-position="640">
+          <caret line="268" column="8" lean-forward="false" selection-start-line="268" selection-start-column="8" selection-end-line="268" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/ptu-player.js">
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.pokedex_moves">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" text="pokedex_no IN ('179','374','304','029','092','667','557','674','418','387','029','032','158','281','280','280','280','236','532','236','479:W','479:W','007')">
+            <filter text="pokedex_no IN ('179','374','304','029','092','667','557','674','418','387','029','032','158','281','280','280','280','236','532','236','479:W','479:W','007')" />
+            <filter text="pokedex_no='178'" />
+            <filter text="pokedex_no='179'" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4613302b-2885-4131-b22c-abd2832d0c38/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+        <state relative-caret-position="735">
+          <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/a3d9031/4613302b-2885-4131-b22c-abd2832d0c38/absorrco_ptu_toolkit.characters">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/Runtime/ActiveQuery/Criteria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="723">
+          <caret line="2643" column="0" lean-forward="false" selection-start-line="2643" selection-start-column="0" selection-end-line="2643" selection-end-column="0" />
+          <folding>
+            <marker date="1508719830997" expanded="true" signature="71656:71765" ph="INSERT INTO ${$tableName}... " />
+            <marker date="1508719830997" expanded="true" signature="81301:81358" ph="SELECT COUNT... ${$selectSql}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Base/MovesQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="755">
+          <caret line="167" column="31" lean-forward="false" selection-start-line="167" selection-start-column="31" selection-end-line="167" selection-end-column="31" />
+          <folding>
+            <element signature="e#42#57#0#PHP" expanded="true" />
+            <marker date="1511029724747" expanded="true" signature="16344:16491" ph="SELECT move_... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/propel2/src/Propel/PtuToolkit/Characters.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="606">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <element signature="e#37#45#0#PHP" expanded="true" />
+            <marker date="1511125688374" expanded="true" signature="562:1163" ph="SELECT moves... moves" />
+            <marker date="1511125688374" expanded="true" signature="852:951" ph="SELECT * FRO... pokedex_moves" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/char-edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="898">
+          <caret line="226" column="7" lean-forward="true" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
           <folding />
         </state>
       </provider>

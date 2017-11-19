@@ -23,6 +23,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery orderByCharacterId($order = Criteria::ASC) Order by the character_id column
  * @method     ChildCharactersQuery orderByCampaignId($order = Criteria::ASC) Order by the campaign_id column
  * @method     ChildCharactersQuery orderByType($order = Criteria::ASC) Order by the type column
+ * @method     ChildCharactersQuery orderByPokedexNo($order = Criteria::ASC) Order by the pokedex_no column
  * @method     ChildCharactersQuery orderByPokedexId($order = Criteria::ASC) Order by the pokedex_id column
  * @method     ChildCharactersQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method     ChildCharactersQuery orderByOwner($order = Criteria::ASC) Order by the owner column
@@ -77,10 +78,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery orderByBackgroundPthc3($order = Criteria::ASC) Order by the background_pthc3 column
  * @method     ChildCharactersQuery orderByNotes($order = Criteria::ASC) Order by the notes column
  * @method     ChildCharactersQuery orderByNature($order = Criteria::ASC) Order by the nature column
+ * @method     ChildCharactersQuery orderBySheetType($order = Criteria::ASC) Order by the sheet_type column
  *
  * @method     ChildCharactersQuery groupByCharacterId() Group by the character_id column
  * @method     ChildCharactersQuery groupByCampaignId() Group by the campaign_id column
  * @method     ChildCharactersQuery groupByType() Group by the type column
+ * @method     ChildCharactersQuery groupByPokedexNo() Group by the pokedex_no column
  * @method     ChildCharactersQuery groupByPokedexId() Group by the pokedex_id column
  * @method     ChildCharactersQuery groupByName() Group by the name column
  * @method     ChildCharactersQuery groupByOwner() Group by the owner column
@@ -135,6 +138,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery groupByBackgroundPthc3() Group by the background_pthc3 column
  * @method     ChildCharactersQuery groupByNotes() Group by the notes column
  * @method     ChildCharactersQuery groupByNature() Group by the nature column
+ * @method     ChildCharactersQuery groupBySheetType() Group by the sheet_type column
  *
  * @method     ChildCharactersQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildCharactersQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -202,7 +206,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters findOneByCharacterId(int $character_id) Return the first ChildCharacters filtered by the character_id column
  * @method     ChildCharacters findOneByCampaignId(int $campaign_id) Return the first ChildCharacters filtered by the campaign_id column
  * @method     ChildCharacters findOneByType(string $type) Return the first ChildCharacters filtered by the type column
- * @method     ChildCharacters findOneByPokedexId(string $pokedex_id) Return the first ChildCharacters filtered by the pokedex_id column
+ * @method     ChildCharacters findOneByPokedexNo(string $pokedex_no) Return the first ChildCharacters filtered by the pokedex_no column
+ * @method     ChildCharacters findOneByPokedexId(int $pokedex_id) Return the first ChildCharacters filtered by the pokedex_id column
  * @method     ChildCharacters findOneByName(string $name) Return the first ChildCharacters filtered by the name column
  * @method     ChildCharacters findOneByOwner(int $owner) Return the first ChildCharacters filtered by the owner column
  * @method     ChildCharacters findOneByAge(string $age) Return the first ChildCharacters filtered by the age column
@@ -255,7 +260,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters findOneByBackgroundPthc2(string $background_pthc2) Return the first ChildCharacters filtered by the background_pthc2 column
  * @method     ChildCharacters findOneByBackgroundPthc3(string $background_pthc3) Return the first ChildCharacters filtered by the background_pthc3 column
  * @method     ChildCharacters findOneByNotes(string $notes) Return the first ChildCharacters filtered by the notes column
- * @method     ChildCharacters findOneByNature(string $nature) Return the first ChildCharacters filtered by the nature column *
+ * @method     ChildCharacters findOneByNature(string $nature) Return the first ChildCharacters filtered by the nature column
+ * @method     ChildCharacters findOneBySheetType(string $sheet_type) Return the first ChildCharacters filtered by the sheet_type column *
 
  * @method     ChildCharacters requirePk($key, ConnectionInterface $con = null) Return the ChildCharacters by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOne(ConnectionInterface $con = null) Return the first ChildCharacters matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -263,7 +269,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters requireOneByCharacterId(int $character_id) Return the first ChildCharacters filtered by the character_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByCampaignId(int $campaign_id) Return the first ChildCharacters filtered by the campaign_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByType(string $type) Return the first ChildCharacters filtered by the type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildCharacters requireOneByPokedexId(string $pokedex_id) Return the first ChildCharacters filtered by the pokedex_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByPokedexNo(string $pokedex_no) Return the first ChildCharacters filtered by the pokedex_no column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByPokedexId(int $pokedex_id) Return the first ChildCharacters filtered by the pokedex_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByName(string $name) Return the first ChildCharacters filtered by the name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByOwner(int $owner) Return the first ChildCharacters filtered by the owner column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByAge(string $age) Return the first ChildCharacters filtered by the age column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -317,12 +324,14 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters requireOneByBackgroundPthc3(string $background_pthc3) Return the first ChildCharacters filtered by the background_pthc3 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByNotes(string $notes) Return the first ChildCharacters filtered by the notes column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByNature(string $nature) Return the first ChildCharacters filtered by the nature column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneBySheetType(string $sheet_type) Return the first ChildCharacters filtered by the sheet_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildCharacters[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildCharacters objects based on current ModelCriteria
  * @method     ChildCharacters[]|ObjectCollection findByCharacterId(int $character_id) Return ChildCharacters objects filtered by the character_id column
  * @method     ChildCharacters[]|ObjectCollection findByCampaignId(int $campaign_id) Return ChildCharacters objects filtered by the campaign_id column
  * @method     ChildCharacters[]|ObjectCollection findByType(string $type) Return ChildCharacters objects filtered by the type column
- * @method     ChildCharacters[]|ObjectCollection findByPokedexId(string $pokedex_id) Return ChildCharacters objects filtered by the pokedex_id column
+ * @method     ChildCharacters[]|ObjectCollection findByPokedexNo(string $pokedex_no) Return ChildCharacters objects filtered by the pokedex_no column
+ * @method     ChildCharacters[]|ObjectCollection findByPokedexId(int $pokedex_id) Return ChildCharacters objects filtered by the pokedex_id column
  * @method     ChildCharacters[]|ObjectCollection findByName(string $name) Return ChildCharacters objects filtered by the name column
  * @method     ChildCharacters[]|ObjectCollection findByOwner(int $owner) Return ChildCharacters objects filtered by the owner column
  * @method     ChildCharacters[]|ObjectCollection findByAge(string $age) Return ChildCharacters objects filtered by the age column
@@ -376,6 +385,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters[]|ObjectCollection findByBackgroundPthc3(string $background_pthc3) Return ChildCharacters objects filtered by the background_pthc3 column
  * @method     ChildCharacters[]|ObjectCollection findByNotes(string $notes) Return ChildCharacters objects filtered by the notes column
  * @method     ChildCharacters[]|ObjectCollection findByNature(string $nature) Return ChildCharacters objects filtered by the nature column
+ * @method     ChildCharacters[]|ObjectCollection findBySheetType(string $sheet_type) Return ChildCharacters objects filtered by the sheet_type column
  * @method     ChildCharacters[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -474,7 +484,7 @@ abstract class CharactersQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT character_id, campaign_id, type, pokedex_id, name, owner, age, weight, height, sex, base_type1, base_type2, level, exp, base_hp, base_atk, base_def, base_satk, base_sdef, base_spd, add_hp, add_atk, add_def, add_satk, add_sdef, add_spd, health, injuries, money, skill_acrobatics, skill_athletics, skill_charm, skill_combat, skill_command, skill_general_ed, skill_medicine_ed, skill_occult_ed, skill_pokemon_ed, skill_technology_ed, skill_focus, skill_guile, skill_intimidate, skill_intuition, skill_perception, skill_stealth, skill_survival, ap_spent, ap_bound, ap_drained, background_name, background_adept, background_novice, background_pthc1, background_pthc2, background_pthc3, notes, nature FROM characters WHERE character_id = :p0';
+        $sql = 'SELECT character_id, campaign_id, type, pokedex_no, pokedex_id, name, owner, age, weight, height, sex, base_type1, base_type2, level, exp, base_hp, base_atk, base_def, base_satk, base_sdef, base_spd, add_hp, add_atk, add_def, add_satk, add_sdef, add_spd, health, injuries, money, skill_acrobatics, skill_athletics, skill_charm, skill_combat, skill_command, skill_general_ed, skill_medicine_ed, skill_occult_ed, skill_pokemon_ed, skill_technology_ed, skill_focus, skill_guile, skill_intimidate, skill_intuition, skill_perception, skill_stealth, skill_survival, ap_spent, ap_bound, ap_drained, background_name, background_adept, background_novice, background_pthc1, background_pthc2, background_pthc3, notes, nature, sheet_type FROM characters WHERE character_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -674,23 +684,64 @@ abstract class CharactersQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the pokedex_no column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByPokedexNo('fooValue');   // WHERE pokedex_no = 'fooValue'
+     * $query->filterByPokedexNo('%fooValue%', Criteria::LIKE); // WHERE pokedex_no LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $pokedexNo The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByPokedexNo($pokedexNo = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($pokedexNo)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_POKEDEX_NO, $pokedexNo, $comparison);
+    }
+
+    /**
      * Filter the query on the pokedex_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByPokedexId('fooValue');   // WHERE pokedex_id = 'fooValue'
-     * $query->filterByPokedexId('%fooValue%', Criteria::LIKE); // WHERE pokedex_id LIKE '%fooValue%'
+     * $query->filterByPokedexId(1234); // WHERE pokedex_id = 1234
+     * $query->filterByPokedexId(array(12, 34)); // WHERE pokedex_id IN (12, 34)
+     * $query->filterByPokedexId(array('min' => 12)); // WHERE pokedex_id > 12
      * </code>
      *
-     * @param     string $pokedexId The value to use as filter.
+     * @param     mixed $pokedexId The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildCharactersQuery The current query, for fluid interface
      */
     public function filterByPokedexId($pokedexId = null, $comparison = null)
     {
-        if (null === $comparison) {
-            if (is_array($pokedexId)) {
+        if (is_array($pokedexId)) {
+            $useMinMax = false;
+            if (isset($pokedexId['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_POKEDEX_ID, $pokedexId['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($pokedexId['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_POKEDEX_ID, $pokedexId['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
         }
@@ -2629,6 +2680,31 @@ abstract class CharactersQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CharactersTableMap::COL_NATURE, $nature, $comparison);
+    }
+
+    /**
+     * Filter the query on the sheet_type column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterBySheetType('fooValue');   // WHERE sheet_type = 'fooValue'
+     * $query->filterBySheetType('%fooValue%', Criteria::LIKE); // WHERE sheet_type LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $sheetType The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterBySheetType($sheetType = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($sheetType)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_SHEET_TYPE, $sheetType, $comparison);
     }
 
     /**

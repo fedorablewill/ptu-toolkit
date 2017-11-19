@@ -7,18 +7,39 @@ if (file_exists($file = __DIR__.'/../lib/propel2/vendor/autoload.php')) {
 }
 
 use Propel\PtuToolkit\CharactersQuery;
+use Propel\PtuToolkit\DataPokedexEntryQuery;
 use Propel\Runtime\Propel;
 
 Propel::init(__DIR__ . '/../lib/propel2/config.php');
 
 $campaign_id = 34;
+$character_id = $_GET['id'];
 
 $character = CharactersQuery::create()
     ->filterByCampaignId($campaign_id)
-    ->findByCharacterId($_GET['id'])[0];
+    ->findByCharacterId($character_id)[0];
+
+$pokedex_entry = DataPokedexEntryQuery::create()
+    ->filterByPokedexNo($character->getPokedexNo())
+    ->filterByPokedexId($character->getPokedexId())
+    ->findOne();
+
+$pokedex_data = json_decode(stream_get_contents($pokedex_entry->getData()), true);
+
+$TYPE_LIST = array("Bug","Dragon","Ice","Fighting","Fire","Flying","Grass","Ghost","Ground","Electric","Normal","Poison","Psychic","Rock","Water","Dark","Steel");
+
+$type_list1 = "";
+$type_list2 = "";
+
+foreach ($TYPE_LIST as $type) {
+    $type_list1 .= $character->getType1() == $type ? '<option selected>'.$type.'</option>' : '<option>'.$type.'</option>';
+    $type_list2 .= $character->getType2() == $type ? '<option selected>'.$type.'</option>' : '<option>'.$type.'</option>';
+}
+
+$MOVES_LIST = $character->getLearnableMovesJSON();
 ?>
 
-<div class="modal fade" id="modalSimpleSheet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalCharSheet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-char-id="<?php echo $character_id;?>">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,60 +56,65 @@ $character = CharactersQuery::create()
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-name">Name</label>
-                    <input class="form-control" type="text" id="addmon-name" value="<?php echo $character->getName()?>" required />
+                    <input class="form-control" type="text" id="addmon-name" data-field="name" value="<?php echo $character->getName()?>" required />
                 </div>
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="addmon-dex" value="<?php echo $character->getPokedexId()?>" required />
+                    <input class="form-control" type="text" id="addmon-dex" data-field="pokedex" value="<?php echo $character->getPokedexId()?>" required />
                 </div>
                 <?php endif; ?>
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-type1">Type 1</label>
-                        <select class="form-control" id="addmon-type1" data-required="POKEMON"><option></option></select>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-type1">Type 1</label>
+                            <select class="form-control" id="addmon-type1" data-field="type1" <?php
+                            if ($character->getType() == "POKEMON") echo "required"; ?>><option></option><?php
+                                echo $type_list1 ?></select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-type2">Type 2</label>
-                        <select class="form-control" id="addmon-type2" data-populate="type"><option></option></select>
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-type2">Type 2</label>
+                            <select class="form-control" id="addmon-type2" data-populate="type" data-field="type2"><option></option><?php
+                                echo $type_list2 ?></select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-level">Level</label>
-                        <input class="form-control" type="number" id="addmon-level" data-field="level" required />
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-level">Level</label>
+                            <input class="form-control" type="number" id="addmon-level" data-field="level" value="<?php echo $character->getLevel()?>"  required />
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-exp">EXP</label>
-                        <input class="form-control" type="number" id="addmon-exp" data-field="EXP" value="0" />
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-exp">EXP</label>
+                            <input class="form-control" type="number" id="addmon-exp" data-field="EXP" value="<?php echo $character->getExp()?>"  />
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-gender">Gender</label>
-                        <select class="form-control" id="addmon-gender" data-field="gender" required>
-                            <option>Genderless</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
+                    <div class="col-xs-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="addmon-gender">Gender</label>
+                            <select class="form-control" id="addmon-gender" data-field="sex" value="<?php echo $character->getSex()?>"  required>
+                                <option>Genderless</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
                     </div>
+                    <?php if ($character->getType() == "POKEMON"): ?>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="addmon-nature">Nature</label>
+                                <select class="form-control" id="addmon-nature" data-field="nature" data-populate="nature" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <?php if ($character->getType() == "POKEMON"): ?>
-                <div class="col-xs-6">
-                    <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-nature">Nature</label>
-                        <select class="form-control" id="addmon-nature" data-field="nature" data-populate="nature" required>
-                            <option></option>
-                        </select>
-                    </div>
-                </div>
-                <?php endif; ?>
 
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
@@ -155,15 +181,7 @@ $character = CharactersQuery::create()
                 <!-- TODO: make moves add/remove -->
                 <label for="addmon-moves">Moves</label>
                 <div id="addmon-moves">
-                    <select class="form-control" title="Move 1" required data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 2" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 3" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 4" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 5" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 6" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 7" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 8" data-populate="move"><option></option></select>
-                    <select class="form-control" title="Move 9" data-populate="move"><option></option></select>
+                    <input class="form-control" title="Move" />
                 </div>
                 <label for="addmon-moves">Abilities</label>
                 <div id="addmon-abilities">
@@ -180,3 +198,31 @@ $character = CharactersQuery::create()
         </div>
     </div>
 </div>
+
+<script>
+    $("#addmon-dex").autocomplete({
+        source: mon_list
+    });
+
+    var moves_list = [
+        <?php foreach ($MOVES_LIST as $move) :?>{
+            "label": "<?php echo $move["Name"] ?> ",
+            "value": "<?php echo $move["MoveId"] ?>",
+            "LevelLearned": "<?php echo $move["LevelLearned"] ?>",
+            "TechnicalMachineId": "<?php echo $move["TechnicalMachineId"] ?>",
+            "Natural": "<?php echo $move["Natural"] ?>",
+            "EggMove": "<?php echo $move["EggMove"] ?>"
+        },<?php endforeach; ?>{"label": "test", "value": "ehh", "LevelLearned": "1"}
+    ];
+
+    $("#addmon-moves input").autocomplete({
+        source: moves_list,
+        create: function () {
+            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                return $('<li>')
+                    .append('<a>' + item.label + '<span class="pull-right">lvl ' + item["LevelLearned"] + '</span></a>')
+                    .appendTo(ul);
+            };
+        }
+    });
+</script>

@@ -31,3 +31,10 @@ function fetchCharacterMoves(characterId, callback) {
 function fetchPage(pageName, callback) {
     $.get("/pages/" + pageName + ".php", callback)
 }
+
+function createCharacterEditor(character_id) {
+    $.get("/pages/char-edit.php", {"id": character_id}, function (html) {
+        $("#io-modal").append(html);
+        $("#modalCharSheet").modal('show')
+    });
+}

@@ -74,7 +74,17 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildMovesQuery rightJoinWithCharacterMoves() Adds a RIGHT JOIN clause and with to the query using the CharacterMoves relation
  * @method     ChildMovesQuery innerJoinWithCharacterMoves() Adds a INNER JOIN clause and with to the query using the CharacterMoves relation
  *
- * @method     \Propel\PtuToolkit\DataPokedexQuery|\Propel\PtuToolkit\CharacterMovesQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     ChildMovesQuery leftJoinPokedexMoves($relationAlias = null) Adds a LEFT JOIN clause to the query using the PokedexMoves relation
+ * @method     ChildMovesQuery rightJoinPokedexMoves($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PokedexMoves relation
+ * @method     ChildMovesQuery innerJoinPokedexMoves($relationAlias = null) Adds a INNER JOIN clause to the query using the PokedexMoves relation
+ *
+ * @method     ChildMovesQuery joinWithPokedexMoves($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PokedexMoves relation
+ *
+ * @method     ChildMovesQuery leftJoinWithPokedexMoves() Adds a LEFT JOIN clause and with to the query using the PokedexMoves relation
+ * @method     ChildMovesQuery rightJoinWithPokedexMoves() Adds a RIGHT JOIN clause and with to the query using the PokedexMoves relation
+ * @method     ChildMovesQuery innerJoinWithPokedexMoves() Adds a INNER JOIN clause and with to the query using the PokedexMoves relation
+ *
+ * @method     \Propel\PtuToolkit\DataPokedexQuery|\Propel\PtuToolkit\CharacterMovesQuery|\Propel\PtuToolkit\PokedexMovesQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildMoves findOne(ConnectionInterface $con = null) Return the first ChildMoves matching the query
  * @method     ChildMoves findOneOrCreate(ConnectionInterface $con = null) Return the first ChildMoves matching the query, or a new ChildMoves object populated from the query conditions when no match is found
@@ -807,6 +817,79 @@ abstract class MovesQuery extends ModelCriteria
         return $this
             ->joinCharacterMoves($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'CharacterMoves', '\Propel\PtuToolkit\CharacterMovesQuery');
+    }
+
+    /**
+     * Filter the query by a related \Propel\PtuToolkit\PokedexMoves object
+     *
+     * @param \Propel\PtuToolkit\PokedexMoves|ObjectCollection $pokedexMoves the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildMovesQuery The current query, for fluid interface
+     */
+    public function filterByPokedexMoves($pokedexMoves, $comparison = null)
+    {
+        if ($pokedexMoves instanceof \Propel\PtuToolkit\PokedexMoves) {
+            return $this
+                ->addUsingAlias(MovesTableMap::COL_MOVE_ID, $pokedexMoves->getMoveId(), $comparison);
+        } elseif ($pokedexMoves instanceof ObjectCollection) {
+            return $this
+                ->usePokedexMovesQuery()
+                ->filterByPrimaryKeys($pokedexMoves->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByPokedexMoves() only accepts arguments of type \Propel\PtuToolkit\PokedexMoves or Collection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PokedexMoves relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildMovesQuery The current query, for fluid interface
+     */
+    public function joinPokedexMoves($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PokedexMoves');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PokedexMoves');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PokedexMoves relation PokedexMoves object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \Propel\PtuToolkit\PokedexMovesQuery A secondary query class using the current class as primary query
+     */
+    public function usePokedexMovesQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPokedexMoves($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PokedexMoves', '\Propel\PtuToolkit\PokedexMovesQuery');
     }
 
     /**

@@ -4,20 +4,17 @@ namespace Propel\PtuToolkit\Base;
 
 use \Exception;
 use \PDO;
-use Propel\PtuToolkit\DataPokedex as ChildDataPokedex;
 use Propel\PtuToolkit\DataPokedexEntry as ChildDataPokedexEntry;
 use Propel\PtuToolkit\DataPokedexEntryQuery as ChildDataPokedexEntryQuery;
-use Propel\PtuToolkit\DataPokedexQuery as ChildDataPokedexQuery;
-use Propel\PtuToolkit\PokedexMoves as ChildPokedexMoves;
+use Propel\PtuToolkit\Moves as ChildMoves;
+use Propel\PtuToolkit\MovesQuery as ChildMovesQuery;
 use Propel\PtuToolkit\PokedexMovesQuery as ChildPokedexMovesQuery;
-use Propel\PtuToolkit\Map\DataPokedexEntryTableMap;
 use Propel\PtuToolkit\Map\PokedexMovesTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 use Propel\Runtime\Collection\Collection;
-use Propel\Runtime\Collection\ObjectCollection;
 use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\BadMethodCallException;
 use Propel\Runtime\Exception\LogicException;
@@ -26,18 +23,18 @@ use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
 
 /**
- * Base class that represents a row from the 'data_pokedex_entry' table.
+ * Base class that represents a row from the 'pokedex_moves' table.
  *
  *
  *
  * @package    propel.generator.Propel.PtuToolkit.Base
  */
-abstract class DataPokedexEntry implements ActiveRecordInterface
+abstract class PokedexMoves implements ActiveRecordInterface
 {
     /**
      * TableMap class name
      */
-    const TABLE_MAP = '\\Propel\\PtuToolkit\\Map\\DataPokedexEntryTableMap';
+    const TABLE_MAP = '\\Propel\\PtuToolkit\\Map\\PokedexMovesTableMap';
 
 
     /**
@@ -67,6 +64,13 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     protected $virtualColumns = array();
 
     /**
+     * The value for the pokedex_move_id field.
+     *
+     * @var        int
+     */
+    protected $pokedex_move_id;
+
+    /**
      * The value for the pokedex_no field.
      *
      * @var        string
@@ -81,22 +85,50 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     protected $pokedex_id;
 
     /**
-     * The value for the data field.
+     * The value for the move_id field.
      *
-     * @var        string
+     * @var        int
      */
-    protected $data;
+    protected $move_id;
 
     /**
-     * @var        ChildDataPokedex
+     * The value for the level_learned field.
+     *
+     * @var        int
      */
-    protected $aDataPokedex;
+    protected $level_learned;
 
     /**
-     * @var        ObjectCollection|ChildPokedexMoves[] Collection to store aggregation of ChildPokedexMoves objects.
+     * The value for the tm_id field.
+     *
+     * @var        int
      */
-    protected $collPokedexMovess;
-    protected $collPokedexMovessPartial;
+    protected $tm_id;
+
+    /**
+     * The value for the is_natural field.
+     *
+     * @var        boolean
+     */
+    protected $is_natural;
+
+    /**
+     * The value for the is_egg_move field.
+     *
+     * Note: this column has a database default value of: false
+     * @var        boolean
+     */
+    protected $is_egg_move;
+
+    /**
+     * @var        ChildDataPokedexEntry
+     */
+    protected $aDataPokedexEntry;
+
+    /**
+     * @var        ChildMoves
+     */
+    protected $aMoves;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -107,16 +139,23 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     protected $alreadyInSave = false;
 
     /**
-     * An array of objects scheduled for deletion.
-     * @var ObjectCollection|ChildPokedexMoves[]
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see __construct()
      */
-    protected $pokedexMovessScheduledForDeletion = null;
+    public function applyDefaultValues()
+    {
+        $this->is_egg_move = false;
+    }
 
     /**
-     * Initializes internal state of Propel\PtuToolkit\Base\DataPokedexEntry object.
+     * Initializes internal state of Propel\PtuToolkit\Base\PokedexMoves object.
+     * @see applyDefaults()
      */
     public function __construct()
     {
+        $this->applyDefaultValues();
     }
 
     /**
@@ -208,9 +247,9 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     }
 
     /**
-     * Compares this with another <code>DataPokedexEntry</code> instance.  If
-     * <code>obj</code> is an instance of <code>DataPokedexEntry</code>, delegates to
-     * <code>equals(DataPokedexEntry)</code>.  Otherwise, returns <code>false</code>.
+     * Compares this with another <code>PokedexMoves</code> instance.  If
+     * <code>obj</code> is an instance of <code>PokedexMoves</code>, delegates to
+     * <code>equals(PokedexMoves)</code>.  Otherwise, returns <code>false</code>.
      *
      * @param  mixed   $obj The object to compare to.
      * @return boolean Whether equal to the object specified.
@@ -276,7 +315,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * @param string $name  The virtual column name
      * @param mixed  $value The value to give to the virtual column
      *
-     * @return $this|DataPokedexEntry The current object, for fluid interface
+     * @return $this|PokedexMoves The current object, for fluid interface
      */
     public function setVirtualColumn($name, $value)
     {
@@ -338,6 +377,16 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     }
 
     /**
+     * Get the [pokedex_move_id] column value.
+     *
+     * @return int
+     */
+    public function getPokedexMoveId()
+    {
+        return $this->pokedex_move_id;
+    }
+
+    /**
      * Get the [pokedex_no] column value.
      *
      * @return string
@@ -358,20 +407,100 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     }
 
     /**
-     * Get the [data] column value.
+     * Get the [move_id] column value.
      *
-     * @return string
+     * @return int
      */
-    public function getData()
+    public function getMoveId()
     {
-        return $this->data;
+        return $this->move_id;
     }
+
+    /**
+     * Get the [level_learned] column value.
+     *
+     * @return int
+     */
+    public function getLevelLearned()
+    {
+        return $this->level_learned;
+    }
+
+    /**
+     * Get the [tm_id] column value.
+     *
+     * @return int
+     */
+    public function getTechnicalMachineId()
+    {
+        return $this->tm_id;
+    }
+
+    /**
+     * Get the [is_natural] column value.
+     *
+     * @return boolean
+     */
+    public function getNatural()
+    {
+        return $this->is_natural;
+    }
+
+    /**
+     * Get the [is_natural] column value.
+     *
+     * @return boolean
+     */
+    public function isNatural()
+    {
+        return $this->getNatural();
+    }
+
+    /**
+     * Get the [is_egg_move] column value.
+     *
+     * @return boolean
+     */
+    public function getEggMove()
+    {
+        return $this->is_egg_move;
+    }
+
+    /**
+     * Get the [is_egg_move] column value.
+     *
+     * @return boolean
+     */
+    public function isEggMove()
+    {
+        return $this->getEggMove();
+    }
+
+    /**
+     * Set the value of [pokedex_move_id] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
+     */
+    public function setPokedexMoveId($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->pokedex_move_id !== $v) {
+            $this->pokedex_move_id = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_POKEDEX_MOVE_ID] = true;
+        }
+
+        return $this;
+    } // setPokedexMoveId()
 
     /**
      * Set the value of [pokedex_no] column.
      *
      * @param string $v new value
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object (for fluent API support)
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
      */
     public function setPokedexNo($v)
     {
@@ -381,7 +510,11 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
 
         if ($this->pokedex_no !== $v) {
             $this->pokedex_no = $v;
-            $this->modifiedColumns[DataPokedexEntryTableMap::COL_POKEDEX_NO] = true;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_POKEDEX_NO] = true;
+        }
+
+        if ($this->aDataPokedexEntry !== null && $this->aDataPokedexEntry->getPokedexNo() !== $v) {
+            $this->aDataPokedexEntry = null;
         }
 
         return $this;
@@ -391,7 +524,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * Set the value of [pokedex_id] column.
      *
      * @param int $v new value
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object (for fluent API support)
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
      */
     public function setPokedexId($v)
     {
@@ -401,38 +534,135 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
 
         if ($this->pokedex_id !== $v) {
             $this->pokedex_id = $v;
-            $this->modifiedColumns[DataPokedexEntryTableMap::COL_POKEDEX_ID] = true;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_POKEDEX_ID] = true;
         }
 
-        if ($this->aDataPokedex !== null && $this->aDataPokedex->getPokedexId() !== $v) {
-            $this->aDataPokedex = null;
+        if ($this->aDataPokedexEntry !== null && $this->aDataPokedexEntry->getPokedexId() !== $v) {
+            $this->aDataPokedexEntry = null;
         }
 
         return $this;
     } // setPokedexId()
 
     /**
-     * Set the value of [data] column.
+     * Set the value of [move_id] column.
      *
-     * @param string $v new value
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object (for fluent API support)
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
      */
-    public function setData($v)
+    public function setMoveId($v)
     {
-        // Because BLOB columns are streams in PDO we have to assume that they are
-        // always modified when a new value is passed in.  For example, the contents
-        // of the stream itself may have changed externally.
-        if (!is_resource($v) && $v !== null) {
-            $this->data = fopen('php://memory', 'r+');
-            fwrite($this->data, $v);
-            rewind($this->data);
-        } else { // it's already a stream
-            $this->data = $v;
+        if ($v !== null) {
+            $v = (int) $v;
         }
-        $this->modifiedColumns[DataPokedexEntryTableMap::COL_DATA] = true;
+
+        if ($this->move_id !== $v) {
+            $this->move_id = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_MOVE_ID] = true;
+        }
+
+        if ($this->aMoves !== null && $this->aMoves->getMoveId() !== $v) {
+            $this->aMoves = null;
+        }
 
         return $this;
-    } // setData()
+    } // setMoveId()
+
+    /**
+     * Set the value of [level_learned] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
+     */
+    public function setLevelLearned($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->level_learned !== $v) {
+            $this->level_learned = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_LEVEL_LEARNED] = true;
+        }
+
+        return $this;
+    } // setLevelLearned()
+
+    /**
+     * Set the value of [tm_id] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
+     */
+    public function setTechnicalMachineId($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->tm_id !== $v) {
+            $this->tm_id = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_TM_ID] = true;
+        }
+
+        return $this;
+    } // setTechnicalMachineId()
+
+    /**
+     * Sets the value of the [is_natural] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     *
+     * @param  boolean|integer|string $v The new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
+     */
+    public function setNatural($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->is_natural !== $v) {
+            $this->is_natural = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_IS_NATURAL] = true;
+        }
+
+        return $this;
+    } // setNatural()
+
+    /**
+     * Sets the value of the [is_egg_move] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     *
+     * @param  boolean|integer|string $v The new value
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
+     */
+    public function setEggMove($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->is_egg_move !== $v) {
+            $this->is_egg_move = $v;
+            $this->modifiedColumns[PokedexMovesTableMap::COL_IS_EGG_MOVE] = true;
+        }
+
+        return $this;
+    } // setEggMove()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -444,6 +674,10 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->is_egg_move !== false) {
+                return false;
+            }
+
         // otherwise, everything was equal, so return TRUE
         return true;
     } // hasOnlyDefaultValues()
@@ -470,20 +704,29 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     {
         try {
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : DataPokedexEntryTableMap::translateFieldName('PokedexNo', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : PokedexMovesTableMap::translateFieldName('PokedexMoveId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->pokedex_move_id = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : PokedexMovesTableMap::translateFieldName('PokedexNo', TableMap::TYPE_PHPNAME, $indexType)];
             $this->pokedex_no = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : DataPokedexEntryTableMap::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : PokedexMovesTableMap::translateFieldName('PokedexId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->pokedex_id = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : DataPokedexEntryTableMap::translateFieldName('Data', TableMap::TYPE_PHPNAME, $indexType)];
-            if (null !== $col) {
-                $this->data = fopen('php://memory', 'r+');
-                fwrite($this->data, $col);
-                rewind($this->data);
-            } else {
-                $this->data = null;
-            }
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : PokedexMovesTableMap::translateFieldName('MoveId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->move_id = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : PokedexMovesTableMap::translateFieldName('LevelLearned', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->level_learned = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : PokedexMovesTableMap::translateFieldName('TechnicalMachineId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->tm_id = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : PokedexMovesTableMap::translateFieldName('Natural', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->is_natural = (null !== $col) ? (boolean) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : PokedexMovesTableMap::translateFieldName('EggMove', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->is_egg_move = (null !== $col) ? (boolean) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -492,10 +735,10 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = DataPokedexEntryTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = PokedexMovesTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PtuToolkit\\DataPokedexEntry'), 0, $e);
+            throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PtuToolkit\\PokedexMoves'), 0, $e);
         }
     }
 
@@ -514,8 +757,14 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function ensureConsistency()
     {
-        if ($this->aDataPokedex !== null && $this->pokedex_id !== $this->aDataPokedex->getPokedexId()) {
-            $this->aDataPokedex = null;
+        if ($this->aDataPokedexEntry !== null && $this->pokedex_no !== $this->aDataPokedexEntry->getPokedexNo()) {
+            $this->aDataPokedexEntry = null;
+        }
+        if ($this->aDataPokedexEntry !== null && $this->pokedex_id !== $this->aDataPokedexEntry->getPokedexId()) {
+            $this->aDataPokedexEntry = null;
+        }
+        if ($this->aMoves !== null && $this->move_id !== $this->aMoves->getMoveId()) {
+            $this->aMoves = null;
         }
     } // ensureConsistency
 
@@ -540,13 +789,13 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getReadConnection(DataPokedexEntryTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getReadConnection(PokedexMovesTableMap::DATABASE_NAME);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $dataFetcher = ChildDataPokedexEntryQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
+        $dataFetcher = ChildPokedexMovesQuery::create(null, $this->buildPkeyCriteria())->setFormatter(ModelCriteria::FORMAT_STATEMENT)->find($con);
         $row = $dataFetcher->fetch();
         $dataFetcher->close();
         if (!$row) {
@@ -556,9 +805,8 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aDataPokedex = null;
-            $this->collPokedexMovess = null;
-
+            $this->aDataPokedexEntry = null;
+            $this->aMoves = null;
         } // if (deep)
     }
 
@@ -568,8 +816,8 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * @param      ConnectionInterface $con
      * @return void
      * @throws PropelException
-     * @see DataPokedexEntry::setDeleted()
-     * @see DataPokedexEntry::isDeleted()
+     * @see PokedexMoves::setDeleted()
+     * @see PokedexMoves::isDeleted()
      */
     public function delete(ConnectionInterface $con = null)
     {
@@ -578,11 +826,11 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(DataPokedexEntryTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(PokedexMovesTableMap::DATABASE_NAME);
         }
 
         $con->transaction(function () use ($con) {
-            $deleteQuery = ChildDataPokedexEntryQuery::create()
+            $deleteQuery = ChildPokedexMovesQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -617,7 +865,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
         }
 
         if ($con === null) {
-            $con = Propel::getServiceContainer()->getWriteConnection(DataPokedexEntryTableMap::DATABASE_NAME);
+            $con = Propel::getServiceContainer()->getWriteConnection(PokedexMovesTableMap::DATABASE_NAME);
         }
 
         return $con->transaction(function () use ($con) {
@@ -636,7 +884,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                DataPokedexEntryTableMap::addInstanceToPool($this);
+                PokedexMovesTableMap::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -667,11 +915,18 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aDataPokedex !== null) {
-                if ($this->aDataPokedex->isModified() || $this->aDataPokedex->isNew()) {
-                    $affectedRows += $this->aDataPokedex->save($con);
+            if ($this->aDataPokedexEntry !== null) {
+                if ($this->aDataPokedexEntry->isModified() || $this->aDataPokedexEntry->isNew()) {
+                    $affectedRows += $this->aDataPokedexEntry->save($con);
                 }
-                $this->setDataPokedex($this->aDataPokedex);
+                $this->setDataPokedexEntry($this->aDataPokedexEntry);
+            }
+
+            if ($this->aMoves !== null) {
+                if ($this->aMoves->isModified() || $this->aMoves->isNew()) {
+                    $affectedRows += $this->aMoves->save($con);
+                }
+                $this->setMoves($this->aMoves);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -682,29 +937,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
                 } else {
                     $affectedRows += $this->doUpdate($con);
                 }
-                // Rewind the data LOB column, since PDO does not rewind after inserting value.
-                if ($this->data !== null && is_resource($this->data)) {
-                    rewind($this->data);
-                }
-
                 $this->resetModified();
-            }
-
-            if ($this->pokedexMovessScheduledForDeletion !== null) {
-                if (!$this->pokedexMovessScheduledForDeletion->isEmpty()) {
-                    \Propel\PtuToolkit\PokedexMovesQuery::create()
-                        ->filterByPrimaryKeys($this->pokedexMovessScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
-                    $this->pokedexMovessScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collPokedexMovess !== null) {
-                foreach ($this->collPokedexMovess as $referrerFK) {
-                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
-                }
             }
 
             $this->alreadyInSave = false;
@@ -727,20 +960,39 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
         $modifiedColumns = array();
         $index = 0;
 
+        $this->modifiedColumns[PokedexMovesTableMap::COL_POKEDEX_MOVE_ID] = true;
+        if (null !== $this->pokedex_move_id) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . PokedexMovesTableMap::COL_POKEDEX_MOVE_ID . ')');
+        }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_POKEDEX_NO)) {
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_MOVE_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'pokedex_move_id';
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_NO)) {
             $modifiedColumns[':p' . $index++]  = 'pokedex_no';
         }
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_POKEDEX_ID)) {
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_ID)) {
             $modifiedColumns[':p' . $index++]  = 'pokedex_id';
         }
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_DATA)) {
-            $modifiedColumns[':p' . $index++]  = 'data';
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_MOVE_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'move_id';
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_LEVEL_LEARNED)) {
+            $modifiedColumns[':p' . $index++]  = 'level_learned';
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_TM_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'tm_id';
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_IS_NATURAL)) {
+            $modifiedColumns[':p' . $index++]  = 'is_natural';
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_IS_EGG_MOVE)) {
+            $modifiedColumns[':p' . $index++]  = 'is_egg_move';
         }
 
         $sql = sprintf(
-            'INSERT INTO data_pokedex_entry (%s) VALUES (%s)',
+            'INSERT INTO pokedex_moves (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -749,17 +1001,29 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
+                    case 'pokedex_move_id':
+                        $stmt->bindValue($identifier, $this->pokedex_move_id, PDO::PARAM_INT);
+                        break;
                     case 'pokedex_no':
                         $stmt->bindValue($identifier, $this->pokedex_no, PDO::PARAM_STR);
                         break;
                     case 'pokedex_id':
                         $stmt->bindValue($identifier, $this->pokedex_id, PDO::PARAM_INT);
                         break;
-                    case 'data':
-                        if (is_resource($this->data)) {
-                            rewind($this->data);
-                        }
-                        $stmt->bindValue($identifier, $this->data, PDO::PARAM_LOB);
+                    case 'move_id':
+                        $stmt->bindValue($identifier, $this->move_id, PDO::PARAM_INT);
+                        break;
+                    case 'level_learned':
+                        $stmt->bindValue($identifier, $this->level_learned, PDO::PARAM_INT);
+                        break;
+                    case 'tm_id':
+                        $stmt->bindValue($identifier, $this->tm_id, PDO::PARAM_INT);
+                        break;
+                    case 'is_natural':
+                        $stmt->bindValue($identifier, (int) $this->is_natural, PDO::PARAM_INT);
+                        break;
+                    case 'is_egg_move':
+                        $stmt->bindValue($identifier, (int) $this->is_egg_move, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -768,6 +1032,13 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), 0, $e);
         }
+
+        try {
+            $pk = $con->lastInsertId();
+        } catch (Exception $e) {
+            throw new PropelException('Unable to get autoincrement id.', 0, $e);
+        }
+        $this->setPokedexMoveId($pk);
 
         $this->setNew(false);
     }
@@ -800,7 +1071,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function getByName($name, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = DataPokedexEntryTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = PokedexMovesTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -817,13 +1088,28 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     {
         switch ($pos) {
             case 0:
-                return $this->getPokedexNo();
+                return $this->getPokedexMoveId();
                 break;
             case 1:
-                return $this->getPokedexId();
+                return $this->getPokedexNo();
                 break;
             case 2:
-                return $this->getData();
+                return $this->getPokedexId();
+                break;
+            case 3:
+                return $this->getMoveId();
+                break;
+            case 4:
+                return $this->getLevelLearned();
+                break;
+            case 5:
+                return $this->getTechnicalMachineId();
+                break;
+            case 6:
+                return $this->getNatural();
+                break;
+            case 7:
+                return $this->getEggMove();
                 break;
             default:
                 return null;
@@ -849,15 +1135,20 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
 
-        if (isset($alreadyDumpedObjects['DataPokedexEntry'][$this->hashCode()])) {
+        if (isset($alreadyDumpedObjects['PokedexMoves'][$this->hashCode()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['DataPokedexEntry'][$this->hashCode()] = true;
-        $keys = DataPokedexEntryTableMap::getFieldNames($keyType);
+        $alreadyDumpedObjects['PokedexMoves'][$this->hashCode()] = true;
+        $keys = PokedexMovesTableMap::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getPokedexNo(),
-            $keys[1] => $this->getPokedexId(),
-            $keys[2] => $this->getData(),
+            $keys[0] => $this->getPokedexMoveId(),
+            $keys[1] => $this->getPokedexNo(),
+            $keys[2] => $this->getPokedexId(),
+            $keys[3] => $this->getMoveId(),
+            $keys[4] => $this->getLevelLearned(),
+            $keys[5] => $this->getTechnicalMachineId(),
+            $keys[6] => $this->getNatural(),
+            $keys[7] => $this->getEggMove(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -865,35 +1156,35 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->aDataPokedex) {
+            if (null !== $this->aDataPokedexEntry) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'dataPokedex';
+                        $key = 'dataPokedexEntry';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'data_pokedex';
+                        $key = 'data_pokedex_entry';
                         break;
                     default:
-                        $key = 'DataPokedex';
+                        $key = 'DataPokedexEntry';
                 }
 
-                $result[$key] = $this->aDataPokedex->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+                $result[$key] = $this->aDataPokedexEntry->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collPokedexMovess) {
+            if (null !== $this->aMoves) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
-                        $key = 'pokedexMovess';
+                        $key = 'moves';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'pokedex_movess';
+                        $key = 'moves';
                         break;
                     default:
-                        $key = 'PokedexMovess';
+                        $key = 'Moves';
                 }
 
-                $result[$key] = $this->collPokedexMovess->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->aMoves->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -909,11 +1200,11 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      *                one of the class type constants TableMap::TYPE_PHPNAME, TableMap::TYPE_CAMELNAME
      *                TableMap::TYPE_COLNAME, TableMap::TYPE_FIELDNAME, TableMap::TYPE_NUM.
      *                Defaults to TableMap::TYPE_PHPNAME.
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry
+     * @return $this|\Propel\PtuToolkit\PokedexMoves
      */
     public function setByName($name, $value, $type = TableMap::TYPE_PHPNAME)
     {
-        $pos = DataPokedexEntryTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
+        $pos = PokedexMovesTableMap::translateFieldName($name, $type, TableMap::TYPE_NUM);
 
         return $this->setByPosition($pos, $value);
     }
@@ -924,19 +1215,34 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      *
      * @param  int $pos position in xml schema
      * @param  mixed $value field value
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry
+     * @return $this|\Propel\PtuToolkit\PokedexMoves
      */
     public function setByPosition($pos, $value)
     {
         switch ($pos) {
             case 0:
-                $this->setPokedexNo($value);
+                $this->setPokedexMoveId($value);
                 break;
             case 1:
-                $this->setPokedexId($value);
+                $this->setPokedexNo($value);
                 break;
             case 2:
-                $this->setData($value);
+                $this->setPokedexId($value);
+                break;
+            case 3:
+                $this->setMoveId($value);
+                break;
+            case 4:
+                $this->setLevelLearned($value);
+                break;
+            case 5:
+                $this->setTechnicalMachineId($value);
+                break;
+            case 6:
+                $this->setNatural($value);
+                break;
+            case 7:
+                $this->setEggMove($value);
                 break;
         } // switch()
 
@@ -962,16 +1268,31 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function fromArray($arr, $keyType = TableMap::TYPE_PHPNAME)
     {
-        $keys = DataPokedexEntryTableMap::getFieldNames($keyType);
+        $keys = PokedexMovesTableMap::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) {
-            $this->setPokedexNo($arr[$keys[0]]);
+            $this->setPokedexMoveId($arr[$keys[0]]);
         }
         if (array_key_exists($keys[1], $arr)) {
-            $this->setPokedexId($arr[$keys[1]]);
+            $this->setPokedexNo($arr[$keys[1]]);
         }
         if (array_key_exists($keys[2], $arr)) {
-            $this->setData($arr[$keys[2]]);
+            $this->setPokedexId($arr[$keys[2]]);
+        }
+        if (array_key_exists($keys[3], $arr)) {
+            $this->setMoveId($arr[$keys[3]]);
+        }
+        if (array_key_exists($keys[4], $arr)) {
+            $this->setLevelLearned($arr[$keys[4]]);
+        }
+        if (array_key_exists($keys[5], $arr)) {
+            $this->setTechnicalMachineId($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setNatural($arr[$keys[6]]);
+        }
+        if (array_key_exists($keys[7], $arr)) {
+            $this->setEggMove($arr[$keys[7]]);
         }
     }
 
@@ -992,7 +1313,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * @param string $data The source data to import from
      * @param string $keyType The type of keys the array uses.
      *
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object, for fluid interface
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object, for fluid interface
      */
     public function importFrom($parser, $data, $keyType = TableMap::TYPE_PHPNAME)
     {
@@ -1012,16 +1333,31 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(DataPokedexEntryTableMap::DATABASE_NAME);
+        $criteria = new Criteria(PokedexMovesTableMap::DATABASE_NAME);
 
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_POKEDEX_NO)) {
-            $criteria->add(DataPokedexEntryTableMap::COL_POKEDEX_NO, $this->pokedex_no);
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_MOVE_ID)) {
+            $criteria->add(PokedexMovesTableMap::COL_POKEDEX_MOVE_ID, $this->pokedex_move_id);
         }
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_POKEDEX_ID)) {
-            $criteria->add(DataPokedexEntryTableMap::COL_POKEDEX_ID, $this->pokedex_id);
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_NO)) {
+            $criteria->add(PokedexMovesTableMap::COL_POKEDEX_NO, $this->pokedex_no);
         }
-        if ($this->isColumnModified(DataPokedexEntryTableMap::COL_DATA)) {
-            $criteria->add(DataPokedexEntryTableMap::COL_DATA, $this->data);
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_POKEDEX_ID)) {
+            $criteria->add(PokedexMovesTableMap::COL_POKEDEX_ID, $this->pokedex_id);
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_MOVE_ID)) {
+            $criteria->add(PokedexMovesTableMap::COL_MOVE_ID, $this->move_id);
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_LEVEL_LEARNED)) {
+            $criteria->add(PokedexMovesTableMap::COL_LEVEL_LEARNED, $this->level_learned);
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_TM_ID)) {
+            $criteria->add(PokedexMovesTableMap::COL_TM_ID, $this->tm_id);
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_IS_NATURAL)) {
+            $criteria->add(PokedexMovesTableMap::COL_IS_NATURAL, $this->is_natural);
+        }
+        if ($this->isColumnModified(PokedexMovesTableMap::COL_IS_EGG_MOVE)) {
+            $criteria->add(PokedexMovesTableMap::COL_IS_EGG_MOVE, $this->is_egg_move);
         }
 
         return $criteria;
@@ -1039,9 +1375,8 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function buildPkeyCriteria()
     {
-        $criteria = ChildDataPokedexEntryQuery::create();
-        $criteria->add(DataPokedexEntryTableMap::COL_POKEDEX_NO, $this->pokedex_no);
-        $criteria->add(DataPokedexEntryTableMap::COL_POKEDEX_ID, $this->pokedex_id);
+        $criteria = ChildPokedexMovesQuery::create();
+        $criteria->add(PokedexMovesTableMap::COL_POKEDEX_MOVE_ID, $this->pokedex_move_id);
 
         return $criteria;
     }
@@ -1054,18 +1389,10 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function hashCode()
     {
-        $validPk = null !== $this->getPokedexNo() &&
-            null !== $this->getPokedexId();
+        $validPk = null !== $this->getPokedexMoveId();
 
-        $validPrimaryKeyFKs = 1;
+        $validPrimaryKeyFKs = 0;
         $primaryKeyFKs = [];
-
-        //relation data_pokedex_entry_fk_03e4d5 to table data_pokedex
-        if ($this->aDataPokedex && $hash = spl_object_hash($this->aDataPokedex)) {
-            $primaryKeyFKs[] = $hash;
-        } else {
-            $validPrimaryKeyFKs = false;
-        }
 
         if ($validPk) {
             return crc32(json_encode($this->getPrimaryKey(), JSON_UNESCAPED_UNICODE));
@@ -1077,29 +1404,23 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     }
 
     /**
-     * Returns the composite primary key for this object.
-     * The array elements will be in same order as specified in XML.
-     * @return array
+     * Returns the primary key for this object (row).
+     * @return int
      */
     public function getPrimaryKey()
     {
-        $pks = array();
-        $pks[0] = $this->getPokedexNo();
-        $pks[1] = $this->getPokedexId();
-
-        return $pks;
+        return $this->getPokedexMoveId();
     }
 
     /**
-     * Set the [composite] primary key.
+     * Generic method to set the primary key (pokedex_move_id column).
      *
-     * @param      array $keys The elements of the composite key (order must match the order in XML file).
+     * @param       int $key Primary key.
      * @return void
      */
-    public function setPrimaryKey($keys)
+    public function setPrimaryKey($key)
     {
-        $this->setPokedexNo($keys[0]);
-        $this->setPokedexId($keys[1]);
+        $this->setPokedexMoveId($key);
     }
 
     /**
@@ -1108,7 +1429,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function isPrimaryKeyNull()
     {
-        return (null === $this->getPokedexNo()) && (null === $this->getPokedexId());
+        return null === $this->getPokedexMoveId();
     }
 
     /**
@@ -1117,7 +1438,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param      object $copyObj An object of \Propel\PtuToolkit\DataPokedexEntry (or compatible) type.
+     * @param      object $copyObj An object of \Propel\PtuToolkit\PokedexMoves (or compatible) type.
      * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param      boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
@@ -1126,23 +1447,14 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     {
         $copyObj->setPokedexNo($this->getPokedexNo());
         $copyObj->setPokedexId($this->getPokedexId());
-        $copyObj->setData($this->getData());
-
-        if ($deepCopy) {
-            // important: temporarily setNew(false) because this affects the behavior of
-            // the getter/setter methods for fkey referrer objects.
-            $copyObj->setNew(false);
-
-            foreach ($this->getPokedexMovess() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addPokedexMoves($relObj->copy($deepCopy));
-                }
-            }
-
-        } // if ($deepCopy)
-
+        $copyObj->setMoveId($this->getMoveId());
+        $copyObj->setLevelLearned($this->getLevelLearned());
+        $copyObj->setTechnicalMachineId($this->getTechnicalMachineId());
+        $copyObj->setNatural($this->getNatural());
+        $copyObj->setEggMove($this->getEggMove());
         if ($makeNew) {
             $copyObj->setNew(true);
+            $copyObj->setPokedexMoveId(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -1155,7 +1467,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      * objects.
      *
      * @param  boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return \Propel\PtuToolkit\DataPokedexEntry Clone of current object.
+     * @return \Propel\PtuToolkit\PokedexMoves Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1169,13 +1481,13 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     }
 
     /**
-     * Declares an association between this object and a ChildDataPokedex object.
+     * Declares an association between this object and a ChildDataPokedexEntry object.
      *
-     * @param  ChildDataPokedex $v
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object (for fluent API support)
+     * @param  ChildDataPokedexEntry $v
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setDataPokedex(ChildDataPokedex $v = null)
+    public function setDataPokedexEntry(ChildDataPokedexEntry $v = null)
     {
         if ($v === null) {
             $this->setPokedexId(NULL);
@@ -1183,12 +1495,18 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
             $this->setPokedexId($v->getPokedexId());
         }
 
-        $this->aDataPokedex = $v;
+        if ($v === null) {
+            $this->setPokedexNo(NULL);
+        } else {
+            $this->setPokedexNo($v->getPokedexNo());
+        }
+
+        $this->aDataPokedexEntry = $v;
 
         // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the ChildDataPokedex object, it will not be re-added.
+        // If this object has already been added to the ChildDataPokedexEntry object, it will not be re-added.
         if ($v !== null) {
-            $v->addDataPokedexEntry($this);
+            $v->addPokedexMoves($this);
         }
 
 
@@ -1197,293 +1515,77 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
 
 
     /**
-     * Get the associated ChildDataPokedex object
+     * Get the associated ChildDataPokedexEntry object
      *
      * @param  ConnectionInterface $con Optional Connection object.
-     * @return ChildDataPokedex The associated ChildDataPokedex object.
+     * @return ChildDataPokedexEntry The associated ChildDataPokedexEntry object.
      * @throws PropelException
      */
-    public function getDataPokedex(ConnectionInterface $con = null)
+    public function getDataPokedexEntry(ConnectionInterface $con = null)
     {
-        if ($this->aDataPokedex === null && ($this->pokedex_id != 0)) {
-            $this->aDataPokedex = ChildDataPokedexQuery::create()->findPk($this->pokedex_id, $con);
+        if ($this->aDataPokedexEntry === null && ($this->pokedex_id != 0 && ($this->pokedex_no !== "" && $this->pokedex_no !== null))) {
+            $this->aDataPokedexEntry = ChildDataPokedexEntryQuery::create()->findPk(array($this->pokedex_no, $this->pokedex_id), $con);
             /* The following can be used additionally to
                 guarantee the related object contains a reference
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aDataPokedex->addDataPokedexEntries($this);
+                $this->aDataPokedexEntry->addPokedexMovess($this);
              */
         }
 
-        return $this->aDataPokedex;
-    }
-
-
-    /**
-     * Initializes a collection based on the name of a relation.
-     * Avoids crafting an 'init[$relationName]s' method name
-     * that wouldn't work when StandardEnglishPluralizer is used.
-     *
-     * @param      string $relationName The name of the relation to initialize
-     * @return void
-     */
-    public function initRelation($relationName)
-    {
-        if ('PokedexMoves' == $relationName) {
-            $this->initPokedexMovess();
-            return;
-        }
+        return $this->aDataPokedexEntry;
     }
 
     /**
-     * Clears out the collPokedexMovess collection
+     * Declares an association between this object and a ChildMoves object.
      *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return void
-     * @see        addPokedexMovess()
-     */
-    public function clearPokedexMovess()
-    {
-        $this->collPokedexMovess = null; // important to set this to NULL since that means it is uninitialized
-    }
-
-    /**
-     * Reset is the collPokedexMovess collection loaded partially.
-     */
-    public function resetPartialPokedexMovess($v = true)
-    {
-        $this->collPokedexMovessPartial = $v;
-    }
-
-    /**
-     * Initializes the collPokedexMovess collection.
-     *
-     * By default this just sets the collPokedexMovess collection to an empty array (like clearcollPokedexMovess());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param      boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initPokedexMovess($overrideExisting = true)
-    {
-        if (null !== $this->collPokedexMovess && !$overrideExisting) {
-            return;
-        }
-
-        $collectionClassName = PokedexMovesTableMap::getTableMap()->getCollectionClassName();
-
-        $this->collPokedexMovess = new $collectionClassName;
-        $this->collPokedexMovess->setModel('\Propel\PtuToolkit\PokedexMoves');
-    }
-
-    /**
-     * Gets an array of ChildPokedexMoves objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this ChildDataPokedexEntry is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      ConnectionInterface $con optional connection object
-     * @return ObjectCollection|ChildPokedexMoves[] List of ChildPokedexMoves objects
+     * @param  ChildMoves $v
+     * @return $this|\Propel\PtuToolkit\PokedexMoves The current object (for fluent API support)
      * @throws PropelException
      */
-    public function getPokedexMovess(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function setMoves(ChildMoves $v = null)
     {
-        $partial = $this->collPokedexMovessPartial && !$this->isNew();
-        if (null === $this->collPokedexMovess || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collPokedexMovess) {
-                // return empty collection
-                $this->initPokedexMovess();
-            } else {
-                $collPokedexMovess = ChildPokedexMovesQuery::create(null, $criteria)
-                    ->filterByDataPokedexEntry($this)
-                    ->find($con);
-
-                if (null !== $criteria) {
-                    if (false !== $this->collPokedexMovessPartial && count($collPokedexMovess)) {
-                        $this->initPokedexMovess(false);
-
-                        foreach ($collPokedexMovess as $obj) {
-                            if (false == $this->collPokedexMovess->contains($obj)) {
-                                $this->collPokedexMovess->append($obj);
-                            }
-                        }
-
-                        $this->collPokedexMovessPartial = true;
-                    }
-
-                    return $collPokedexMovess;
-                }
-
-                if ($partial && $this->collPokedexMovess) {
-                    foreach ($this->collPokedexMovess as $obj) {
-                        if ($obj->isNew()) {
-                            $collPokedexMovess[] = $obj;
-                        }
-                    }
-                }
-
-                $this->collPokedexMovess = $collPokedexMovess;
-                $this->collPokedexMovessPartial = false;
-            }
+        if ($v === null) {
+            $this->setMoveId(NULL);
+        } else {
+            $this->setMoveId($v->getMoveId());
         }
 
-        return $this->collPokedexMovess;
-    }
+        $this->aMoves = $v;
 
-    /**
-     * Sets a collection of ChildPokedexMoves objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param      Collection $pokedexMovess A Propel collection.
-     * @param      ConnectionInterface $con Optional connection object
-     * @return $this|ChildDataPokedexEntry The current object (for fluent API support)
-     */
-    public function setPokedexMovess(Collection $pokedexMovess, ConnectionInterface $con = null)
-    {
-        /** @var ChildPokedexMoves[] $pokedexMovessToDelete */
-        $pokedexMovessToDelete = $this->getPokedexMovess(new Criteria(), $con)->diff($pokedexMovess);
-
-
-        $this->pokedexMovessScheduledForDeletion = $pokedexMovessToDelete;
-
-        foreach ($pokedexMovessToDelete as $pokedexMovesRemoved) {
-            $pokedexMovesRemoved->setDataPokedexEntry(null);
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the ChildMoves object, it will not be re-added.
+        if ($v !== null) {
+            $v->addPokedexMoves($this);
         }
 
-        $this->collPokedexMovess = null;
-        foreach ($pokedexMovess as $pokedexMoves) {
-            $this->addPokedexMoves($pokedexMoves);
-        }
-
-        $this->collPokedexMovess = $pokedexMovess;
-        $this->collPokedexMovessPartial = false;
 
         return $this;
     }
 
+
     /**
-     * Returns the number of related PokedexMoves objects.
+     * Get the associated ChildMoves object
      *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct
-     * @param      ConnectionInterface $con
-     * @return int             Count of related PokedexMoves objects.
+     * @param  ConnectionInterface $con Optional Connection object.
+     * @return ChildMoves The associated ChildMoves object.
      * @throws PropelException
      */
-    public function countPokedexMovess(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function getMoves(ConnectionInterface $con = null)
     {
-        $partial = $this->collPokedexMovessPartial && !$this->isNew();
-        if (null === $this->collPokedexMovess || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collPokedexMovess) {
-                return 0;
-            }
-
-            if ($partial && !$criteria) {
-                return count($this->getPokedexMovess());
-            }
-
-            $query = ChildPokedexMovesQuery::create(null, $criteria);
-            if ($distinct) {
-                $query->distinct();
-            }
-
-            return $query
-                ->filterByDataPokedexEntry($this)
-                ->count($con);
+        if ($this->aMoves === null && ($this->move_id != 0)) {
+            $this->aMoves = ChildMovesQuery::create()->findPk($this->move_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aMoves->addPokedexMovess($this);
+             */
         }
 
-        return count($this->collPokedexMovess);
-    }
-
-    /**
-     * Method called to associate a ChildPokedexMoves object to this object
-     * through the ChildPokedexMoves foreign key attribute.
-     *
-     * @param  ChildPokedexMoves $l ChildPokedexMoves
-     * @return $this|\Propel\PtuToolkit\DataPokedexEntry The current object (for fluent API support)
-     */
-    public function addPokedexMoves(ChildPokedexMoves $l)
-    {
-        if ($this->collPokedexMovess === null) {
-            $this->initPokedexMovess();
-            $this->collPokedexMovessPartial = true;
-        }
-
-        if (!$this->collPokedexMovess->contains($l)) {
-            $this->doAddPokedexMoves($l);
-
-            if ($this->pokedexMovessScheduledForDeletion and $this->pokedexMovessScheduledForDeletion->contains($l)) {
-                $this->pokedexMovessScheduledForDeletion->remove($this->pokedexMovessScheduledForDeletion->search($l));
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param ChildPokedexMoves $pokedexMoves The ChildPokedexMoves object to add.
-     */
-    protected function doAddPokedexMoves(ChildPokedexMoves $pokedexMoves)
-    {
-        $this->collPokedexMovess[]= $pokedexMoves;
-        $pokedexMoves->setDataPokedexEntry($this);
-    }
-
-    /**
-     * @param  ChildPokedexMoves $pokedexMoves The ChildPokedexMoves object to remove.
-     * @return $this|ChildDataPokedexEntry The current object (for fluent API support)
-     */
-    public function removePokedexMoves(ChildPokedexMoves $pokedexMoves)
-    {
-        if ($this->getPokedexMovess()->contains($pokedexMoves)) {
-            $pos = $this->collPokedexMovess->search($pokedexMoves);
-            $this->collPokedexMovess->remove($pos);
-            if (null === $this->pokedexMovessScheduledForDeletion) {
-                $this->pokedexMovessScheduledForDeletion = clone $this->collPokedexMovess;
-                $this->pokedexMovessScheduledForDeletion->clear();
-            }
-            $this->pokedexMovessScheduledForDeletion[]= clone $pokedexMoves;
-            $pokedexMoves->setDataPokedexEntry(null);
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this DataPokedexEntry is new, it will return
-     * an empty collection; or if this DataPokedexEntry has previously
-     * been saved, it will retrieve related PokedexMovess from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in DataPokedexEntry.
-     *
-     * @param      Criteria $criteria optional Criteria object to narrow the query
-     * @param      ConnectionInterface $con optional connection object
-     * @param      string $joinBehavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return ObjectCollection|ChildPokedexMoves[] List of ChildPokedexMoves objects
-     */
-    public function getPokedexMovessJoinMoves(Criteria $criteria = null, ConnectionInterface $con = null, $joinBehavior = Criteria::LEFT_JOIN)
-    {
-        $query = ChildPokedexMovesQuery::create(null, $criteria);
-        $query->joinWith('Moves', $joinBehavior);
-
-        return $this->getPokedexMovess($query, $con);
+        return $this->aMoves;
     }
 
     /**
@@ -1493,14 +1595,23 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function clear()
     {
-        if (null !== $this->aDataPokedex) {
-            $this->aDataPokedex->removeDataPokedexEntry($this);
+        if (null !== $this->aDataPokedexEntry) {
+            $this->aDataPokedexEntry->removePokedexMoves($this);
         }
+        if (null !== $this->aMoves) {
+            $this->aMoves->removePokedexMoves($this);
+        }
+        $this->pokedex_move_id = null;
         $this->pokedex_no = null;
         $this->pokedex_id = null;
-        $this->data = null;
+        $this->move_id = null;
+        $this->level_learned = null;
+        $this->tm_id = null;
+        $this->is_natural = null;
+        $this->is_egg_move = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
@@ -1517,15 +1628,10 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
-            if ($this->collPokedexMovess) {
-                foreach ($this->collPokedexMovess as $o) {
-                    $o->clearAllReferences($deep);
-                }
-            }
         } // if ($deep)
 
-        $this->collPokedexMovess = null;
-        $this->aDataPokedex = null;
+        $this->aDataPokedexEntry = null;
+        $this->aMoves = null;
     }
 
     /**
@@ -1535,7 +1641,7 @@ abstract class DataPokedexEntry implements ActiveRecordInterface
      */
     public function __toString()
     {
-        return (string) $this->exportTo(DataPokedexEntryTableMap::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(PokedexMovesTableMap::DEFAULT_STRING_FORMAT);
     }
 
     /**

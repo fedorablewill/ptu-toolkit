@@ -440,6 +440,8 @@
 
             <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle
             </button>
+
+            <button class="btn btn-danger btn-raised" onclick="onClickConnect()">Reconnect</button>
         </div>
     </div>
 

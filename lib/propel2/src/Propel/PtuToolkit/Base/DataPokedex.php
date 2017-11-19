@@ -628,10 +628,9 @@ abstract class DataPokedex implements ActiveRecordInterface
 
             if ($this->dataPokedexEntriesScheduledForDeletion !== null) {
                 if (!$this->dataPokedexEntriesScheduledForDeletion->isEmpty()) {
-                    foreach ($this->dataPokedexEntriesScheduledForDeletion as $dataPokedexEntry) {
-                        // need to save related object because we set the relation to null
-                        $dataPokedexEntry->save($con);
-                    }
+                    \Propel\PtuToolkit\DataPokedexEntryQuery::create()
+                        ->filterByPrimaryKeys($this->dataPokedexEntriesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
                     $this->dataPokedexEntriesScheduledForDeletion = null;
                 }
             }
@@ -1243,7 +1242,10 @@ abstract class DataPokedex implements ActiveRecordInterface
         $dataPokedexEntriesToDelete = $this->getDataPokedexEntries(new Criteria(), $con)->diff($dataPokedexEntries);
 
 
-        $this->dataPokedexEntriesScheduledForDeletion = $dataPokedexEntriesToDelete;
+        //since at least one column in the foreign key is at the same time a PK
+        //we can not just set a PK to NULL in the lines below. We have to store
+        //a backup of all values, so we are able to manipulate these items based on the onDelete value later.
+        $this->dataPokedexEntriesScheduledForDeletion = clone $dataPokedexEntriesToDelete;
 
         foreach ($dataPokedexEntriesToDelete as $dataPokedexEntryRemoved) {
             $dataPokedexEntryRemoved->setDataPokedex(null);
@@ -1341,7 +1343,7 @@ abstract class DataPokedex implements ActiveRecordInterface
                 $this->dataPokedexEntriesScheduledForDeletion = clone $this->collDataPokedexEntries;
                 $this->dataPokedexEntriesScheduledForDeletion->clear();
             }
-            $this->dataPokedexEntriesScheduledForDeletion[]= $dataPokedexEntry;
+            $this->dataPokedexEntriesScheduledForDeletion[]= clone $dataPokedexEntry;
             $dataPokedexEntry->setDataPokedex(null);
         }
 

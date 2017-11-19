@@ -46,7 +46,17 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildDataPokedexEntryQuery rightJoinWithDataPokedex() Adds a RIGHT JOIN clause and with to the query using the DataPokedex relation
  * @method     ChildDataPokedexEntryQuery innerJoinWithDataPokedex() Adds a INNER JOIN clause and with to the query using the DataPokedex relation
  *
- * @method     \Propel\PtuToolkit\DataPokedexQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
+ * @method     ChildDataPokedexEntryQuery leftJoinPokedexMoves($relationAlias = null) Adds a LEFT JOIN clause to the query using the PokedexMoves relation
+ * @method     ChildDataPokedexEntryQuery rightJoinPokedexMoves($relationAlias = null) Adds a RIGHT JOIN clause to the query using the PokedexMoves relation
+ * @method     ChildDataPokedexEntryQuery innerJoinPokedexMoves($relationAlias = null) Adds a INNER JOIN clause to the query using the PokedexMoves relation
+ *
+ * @method     ChildDataPokedexEntryQuery joinWithPokedexMoves($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the PokedexMoves relation
+ *
+ * @method     ChildDataPokedexEntryQuery leftJoinWithPokedexMoves() Adds a LEFT JOIN clause and with to the query using the PokedexMoves relation
+ * @method     ChildDataPokedexEntryQuery rightJoinWithPokedexMoves() Adds a RIGHT JOIN clause and with to the query using the PokedexMoves relation
+ * @method     ChildDataPokedexEntryQuery innerJoinWithPokedexMoves() Adds a INNER JOIN clause and with to the query using the PokedexMoves relation
+ *
+ * @method     \Propel\PtuToolkit\DataPokedexQuery|\Propel\PtuToolkit\PokedexMovesQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
  * @method     ChildDataPokedexEntry findOne(ConnectionInterface $con = null) Return the first ChildDataPokedexEntry matching the query
  * @method     ChildDataPokedexEntry findOneOrCreate(ConnectionInterface $con = null) Return the first ChildDataPokedexEntry matching the query, or a new ChildDataPokedexEntry object populated from the query conditions when no match is found
@@ -115,10 +125,10 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      * Go fast if the query is untouched.
      *
      * <code>
-     * $obj  = $c->findPk(12, $con);
+     * $obj = $c->findPk(array(12, 34), $con);
      * </code>
      *
-     * @param mixed $key Primary key to use for the query
+     * @param array[$pokedex_no, $pokedex_id] $key Primary key to use for the query
      * @param ConnectionInterface $con an optional connection object
      *
      * @return ChildDataPokedexEntry|array|mixed the result, formatted by the current formatter
@@ -143,7 +153,7 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
             return $this->findPkComplex($key, $con);
         }
 
-        if ((null !== ($obj = DataPokedexEntryTableMap::getInstanceFromPool(null === $key || is_scalar($key) || is_callable([$key, '__toString']) ? (string) $key : $key)))) {
+        if ((null !== ($obj = DataPokedexEntryTableMap::getInstanceFromPool(serialize([(null === $key[0] || is_scalar($key[0]) || is_callable([$key[0], '__toString']) ? (string) $key[0] : $key[0]), (null === $key[1] || is_scalar($key[1]) || is_callable([$key[1], '__toString']) ? (string) $key[1] : $key[1])]))))) {
             // the object is already in the instance pool
             return $obj;
         }
@@ -164,10 +174,11 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT pokedex_no, pokedex_id, data FROM data_pokedex_entry WHERE pokedex_no = :p0';
+        $sql = 'SELECT pokedex_no, pokedex_id, data FROM data_pokedex_entry WHERE pokedex_no = :p0 AND pokedex_id = :p1';
         try {
             $stmt = $con->prepare($sql);
-            $stmt->bindValue(':p0', $key, PDO::PARAM_STR);
+            $stmt->bindValue(':p0', $key[0], PDO::PARAM_STR);
+            $stmt->bindValue(':p1', $key[1], PDO::PARAM_INT);
             $stmt->execute();
         } catch (Exception $e) {
             Propel::log($e->getMessage(), Propel::LOG_ERR);
@@ -178,7 +189,7 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
             /** @var ChildDataPokedexEntry $obj */
             $obj = new ChildDataPokedexEntry();
             $obj->hydrate($row);
-            DataPokedexEntryTableMap::addInstanceToPool($obj, null === $key || is_scalar($key) || is_callable([$key, '__toString']) ? (string) $key : $key);
+            DataPokedexEntryTableMap::addInstanceToPool($obj, serialize([(null === $key[0] || is_scalar($key[0]) || is_callable([$key[0], '__toString']) ? (string) $key[0] : $key[0]), (null === $key[1] || is_scalar($key[1]) || is_callable([$key[1], '__toString']) ? (string) $key[1] : $key[1])]));
         }
         $stmt->closeCursor();
 
@@ -207,7 +218,7 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
     /**
      * Find objects by primary key
      * <code>
-     * $objs = $c->findPks(array(12, 56, 832), $con);
+     * $objs = $c->findPks(array(array(12, 56), array(832, 123), array(123, 456)), $con);
      * </code>
      * @param     array $keys Primary keys to use for the query
      * @param     ConnectionInterface $con an optional connection object
@@ -237,8 +248,10 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      */
     public function filterByPrimaryKey($key)
     {
+        $this->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_NO, $key[0], Criteria::EQUAL);
+        $this->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_ID, $key[1], Criteria::EQUAL);
 
-        return $this->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_NO, $key, Criteria::EQUAL);
+        return $this;
     }
 
     /**
@@ -250,8 +263,17 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      */
     public function filterByPrimaryKeys($keys)
     {
+        if (empty($keys)) {
+            return $this->add(null, '1<>1', Criteria::CUSTOM);
+        }
+        foreach ($keys as $key) {
+            $cton0 = $this->getNewCriterion(DataPokedexEntryTableMap::COL_POKEDEX_NO, $key[0], Criteria::EQUAL);
+            $cton1 = $this->getNewCriterion(DataPokedexEntryTableMap::COL_POKEDEX_ID, $key[1], Criteria::EQUAL);
+            $cton0->addAnd($cton1);
+            $this->addOr($cton0);
+        }
 
-        return $this->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_NO, $keys, Criteria::IN);
+        return $this;
     }
 
     /**
@@ -371,7 +393,7 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      *
      * @return $this|ChildDataPokedexEntryQuery The current query, for fluid interface
      */
-    public function joinDataPokedex($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinDataPokedex($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('DataPokedex');
@@ -406,11 +428,80 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
      *
      * @return \Propel\PtuToolkit\DataPokedexQuery A secondary query class using the current class as primary query
      */
-    public function useDataPokedexQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useDataPokedexQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
             ->joinDataPokedex($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'DataPokedex', '\Propel\PtuToolkit\DataPokedexQuery');
+    }
+
+    /**
+     * Filter the query by a related \Propel\PtuToolkit\PokedexMoves object
+     *
+     * @param \Propel\PtuToolkit\PokedexMoves|ObjectCollection $pokedexMoves the related object to use as filter
+     * @param string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ChildDataPokedexEntryQuery The current query, for fluid interface
+     */
+    public function filterByPokedexMoves($pokedexMoves, $comparison = null)
+    {
+        if ($pokedexMoves instanceof \Propel\PtuToolkit\PokedexMoves) {
+            return $this
+                ->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_ID, $pokedexMoves->getPokedexId(), $comparison)
+                ->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_NO, $pokedexMoves->getPokedexNo(), $comparison);
+        } else {
+            throw new PropelException('filterByPokedexMoves() only accepts arguments of type \Propel\PtuToolkit\PokedexMoves');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the PokedexMoves relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return $this|ChildDataPokedexEntryQuery The current query, for fluid interface
+     */
+    public function joinPokedexMoves($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('PokedexMoves');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'PokedexMoves');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the PokedexMoves relation PokedexMoves object
+     *
+     * @see useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return \Propel\PtuToolkit\PokedexMovesQuery A secondary query class using the current class as primary query
+     */
+    public function usePokedexMovesQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinPokedexMoves($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'PokedexMoves', '\Propel\PtuToolkit\PokedexMovesQuery');
     }
 
     /**
@@ -423,7 +514,9 @@ abstract class DataPokedexEntryQuery extends ModelCriteria
     public function prune($dataPokedexEntry = null)
     {
         if ($dataPokedexEntry) {
-            $this->addUsingAlias(DataPokedexEntryTableMap::COL_POKEDEX_NO, $dataPokedexEntry->getPokedexNo(), Criteria::NOT_EQUAL);
+            $this->addCond('pruneCond0', $this->getAliasedColName(DataPokedexEntryTableMap::COL_POKEDEX_NO), $dataPokedexEntry->getPokedexNo(), Criteria::NOT_EQUAL);
+            $this->addCond('pruneCond1', $this->getAliasedColName(DataPokedexEntryTableMap::COL_POKEDEX_ID), $dataPokedexEntry->getPokedexId(), Criteria::NOT_EQUAL);
+            $this->combine(array('pruneCond0', 'pruneCond1'), Criteria::LOGICAL_OR);
         }
 
         return $this;

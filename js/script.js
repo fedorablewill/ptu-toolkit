@@ -262,6 +262,9 @@ function fetchPokemon(offset, size) {
         if ($.isEmptyObject(json)) {
             $("[data-populate='dex']").autocomplete({
                 source: mon_list
+            }).focus(function() {
+                var val = $(this).val() === "" ? " " : $(this).val();
+                $(this).autocomplete('search', val);
             });
         }
         else {

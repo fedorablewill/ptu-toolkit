@@ -316,8 +316,6 @@ function performMove(move, target_id, dealer_id, mods) {
     var damageDone = 0;
     var canMove = true;
 
-    if (current_move.length > 0)
-
     current_move = {"dealer": dealer_id, "target": target_id, "move": move};
 
 
