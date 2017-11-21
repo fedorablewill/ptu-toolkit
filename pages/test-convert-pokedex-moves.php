@@ -56,13 +56,13 @@ foreach ($entries as $entry) {
 
         if ($move_entry != null) {
             print "Dex #".$entry->getPokedexNo();
-            fwrite($handle, $entry->getPokedexId());
-            fwrite($handle, $entry->getPokedexNo());
-            fwrite($handle, $move_entry->getMoveId());
-            fwrite($handle, (array_key_exists("LevelLearned", $move)) ? $move["LevelLearned"] : '');
-            fwrite($handle, (array_key_exists("TechnicalMachineId", $move)) ? $move["TechnicalMachineId"] : '');
-            fwrite($handle, (array_key_exists("Natural", $move)) ? $move["Natural"] : '');
-            fwrite($handle, (array_key_exists("EggMove", $move)) ? $move["EggMove"] : '');
+            fwrite($handle, $entry->getPokedexId().',');
+            fwrite($handle, $entry->getPokedexNo().',');
+            fwrite($handle, $move_entry->getMoveId().',');
+            fwrite($handle, (array_key_exists("LevelLearned", $move) ? $move["LevelLearned"] : 'NULL').',');
+            fwrite($handle, (array_key_exists("TechnicalMachineId", $move) ? $move["TechnicalMachineId"] : 'NULL').',');
+            fwrite($handle, (array_key_exists("Natural", $move) ? 1 : 'NULL').',');
+            fwrite($handle, (array_key_exists("EggMove", $move) ? $move["EggMove"] : 'NULL').';');
         }
     }
 }
