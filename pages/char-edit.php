@@ -37,6 +37,7 @@ foreach ($TYPE_LIST as $type) {
 }
 
 $MOVES_LIST = $character->getLearnableMovesJSON();
+$moves = $character->getCharacterMovessJoinMoves();
 ?>
 
 <div class="modal fade" id="modalCharSheet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-char-id="<?php echo $character_id;?>">
@@ -61,7 +62,7 @@ $MOVES_LIST = $character->getLearnableMovesJSON();
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
                     <label class="control-label" for="addmon-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="addmon-dex" data-field="pokedex" value="<?php echo $character->getPokedexId()?>" required />
+                    <input class="form-control" type="text" id="addmon-dex" data-field="pokedex" value="<?php echo $character->getPokedexNo()?>" required />
                 </div>
                 <?php endif; ?>
                 <div class="row">
@@ -181,7 +182,12 @@ $MOVES_LIST = $character->getLearnableMovesJSON();
                 <!-- TODO: make moves add/remove -->
                 <label for="addmon-moves">Moves</label>
                 <div id="addmon-moves">
+                    <?php if ($moves->count() > 0) : ?>
+                    <?php foreach ($moves as $move) : ?>
+                    <input class="form-control" title="Move" value="<?php echo $move->getMoveId() ?>" />
+                    <?php endforeach; else : ?>
                     <input class="form-control" title="Move" />
+                    <?php endif; ?>
                 </div>
                 <label for="addmon-moves">Abilities</label>
                 <div id="addmon-abilities">
@@ -219,8 +225,24 @@ $MOVES_LIST = $character->getLearnableMovesJSON();
         source: moves_list,
         create: function () {
             $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                var info = '<span class="pull-right">';
+
+                if (item['Natural'] !== "")
+                    info += ' N';
+
+                if (item['EggMove'] !== "")
+                    info += ' <img src="img/ico_egg.png" height="12"/>';
+
+                if (item['TechnicalMachineId'] !== "")
+                    info += ' TM';
+
+                if (item['LevelLearned'] !== "")
+                    info += ' lvl' + item["LevelLearned"];
+
+                info += '</span>';
+
                 return $('<li>')
-                    .append('<a>' + item.label + '<span class="pull-right">lvl ' + item["LevelLearned"] + '</span></a>')
+                    .append('<a>' + item.label + info + '</a>')
                     .appendTo(ul);
             };
         }
