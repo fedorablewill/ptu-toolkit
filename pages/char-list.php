@@ -18,22 +18,27 @@ $characters = CharactersQuery::create()
     ->filterByOwner(null)
     ->find();
 
-foreach ($characters as $character): ?>
+$output = array();
 
-    <div class="char-list char-list-select">
-        <div class="char-item char-owner" data-id="<?php echo $character->getCharacterId();?>">
-            <span class="char-name"><strong><?php echo $character->getName();?></strong></span>
-            <?php
-            $ownedChars = CharactersQuery::create()
-                ->findByOwner($character->getCharacterId());
+foreach ($characters as $character) {
+    $char = array(
+        "id" => $character->getCharacterId(),
+        "name" => $character->getName(),
+        "owned" => array()
+    );
 
-            foreach ($ownedChars as $ownedChar): ?>
-                <div class="char-item char-owned" data-id="<?php echo $ownedChar->getCharacterId();?>">
+    $ownedChars = CharactersQuery::create()
+        ->findByOwner($character->getCharacterId());
 
-                    <span class="char-name"><?php echo $ownedChar->getName();?></span>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
+    foreach ($ownedChars as $ownedChar) {
+        array_push($char['owned'], array(
+            "id" => $ownedChar->getCharacterId(),
+            "name" => $ownedChar->getName()
+        ));
+    }
 
-<?php endforeach; ?>
+    array_push($output, $char);
+}
+
+echo json_encode($output);
+

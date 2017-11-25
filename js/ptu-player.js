@@ -1,3 +1,10 @@
+/**
+ *  Player Client Functionality
+ */
+
+// Imports
+$.getScript('js/script.js');
+$.getScript('js/ptu-io.js');
 
 function createPlayerList() {
     fetchPage('char-list', function (html) {

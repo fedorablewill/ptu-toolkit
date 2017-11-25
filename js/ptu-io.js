@@ -34,7 +34,7 @@ function fetchPage(pageName, callback) {
 
 function createCharacterEditor(character_id) {
     $.get("/pages/char-edit.php", {"id": character_id}, function (html) {
-        $("#io-modal").append(html);
+        $("#io-modal").html(html);
         $("#modalCharSheet").modal('show')
     });
 }

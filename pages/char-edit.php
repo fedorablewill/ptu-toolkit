@@ -1,5 +1,7 @@
 <?php
 
+$TYPE_LIST = array("Bug","Dragon","Ice","Fighting","Fire","Flying","Grass","Ghost","Ground","Electric","Normal","Poison","Psychic","Rock","Water","Dark","Steel");
+
 if (file_exists($file = __DIR__.'/../lib/propel2/vendor/autoload.php')) {
     $loader = require $file;
 
@@ -19,14 +21,15 @@ $character = CharactersQuery::create()
     ->filterByCampaignId($campaign_id)
     ->findByCharacterId($character_id)[0];
 
-$pokedex_entry = DataPokedexEntryQuery::create()
-    ->filterByPokedexNo($character->getPokedexNo())
-    ->filterByPokedexId($character->getPokedexId())
-    ->findOne();
+if ($character->getType() === "POKEMON") {
+    $pokedex_entry = DataPokedexEntryQuery::create()
+        ->filterByPokedexNo($character->getPokedexNo())
+        ->filterByPokedexId($character->getPokedexId())
+        ->findOne();
 
-$pokedex_data = json_decode(stream_get_contents($pokedex_entry->getData()), true);
-
-$TYPE_LIST = array("Bug","Dragon","Ice","Fighting","Fire","Flying","Grass","Ghost","Ground","Electric","Normal","Poison","Psychic","Rock","Water","Dark","Steel");
+    if ($pokedex_entry != null)
+        $pokedex_data = json_decode(stream_get_contents($pokedex_entry->getData()), true);
+}
 
 $type_list1 = "";
 $type_list2 = "";
