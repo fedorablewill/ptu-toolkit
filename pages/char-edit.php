@@ -51,57 +51,57 @@ $moves = $character->getCharacterMovessJoinMoves();
                 <h3 class="modal-title text-danger" id="myModalLabel">Add/Edit Pokémon</h3>
             </div>
 
-            <input type="hidden" id="addmon-id" value="" />
+            <input type="hidden" id="char-id" value="" />
 
-            <div class="modal-body form-addmon">
+            <div class="modal-body form-char">
                 <small><i>Feature is work in progress</i></small>
 
                 <h4>Basic Info</h4>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-name">Name</label>
-                    <input class="form-control" type="text" id="addmon-name" data-field="name" value="<?php echo $character->getName()?>" required />
+                    <label class="control-label" for="char-name">Name</label>
+                    <input class="form-control" type="text" id="char-name" data-field="name" value="<?php echo $character->getName()?>" required />
                 </div>
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="addmon-dex" data-field="pokedex" value="<?php echo $character->getPokedexNo()?>" required />
+                    <label class="control-label" for="char-dex">Pokédex ID</label>
+                    <input class="form-control" type="text" id="char-dex" data-field="pokedex" value="<?php echo $character->getPokedexNo()?>" required />
                 </div>
                 <?php endif; ?>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-type1">Type 1</label>
-                            <select class="form-control" id="addmon-type1" data-field="type1" <?php
+                            <label class="control-label" for="char-type1">Type 1</label>
+                            <select class="form-control" id="char-type1" data-field="type1" <?php
                             if ($character->getType() == "POKEMON") echo "required"; ?>><option></option><?php
                                 echo $type_list1 ?></select>
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-type2">Type 2</label>
-                            <select class="form-control" id="addmon-type2" data-populate="type" data-field="type2"><option></option><?php
+                            <label class="control-label" for="char-type2">Type 2</label>
+                            <select class="form-control" id="char-type2" data-populate="type" data-field="type2"><option></option><?php
                                 echo $type_list2 ?></select>
                         </div>
                     </div>
 
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-level">Level</label>
-                            <input class="form-control" type="number" id="addmon-level" data-field="level" value="<?php echo $character->getLevel()?>"  required />
+                            <label class="control-label" for="char-level">Level</label>
+                            <input class="form-control" type="number" id="char-level" data-field="level" value="<?php echo $character->getLevel()?>"  required />
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-exp">EXP</label>
-                            <input class="form-control" type="number" id="addmon-exp" data-field="EXP" value="<?php echo $character->getExp()?>"  />
+                            <label class="control-label" for="char-exp">EXP</label>
+                            <input class="form-control" type="number" id="char-exp" data-field="EXP" value="<?php echo $character->getExp()?>"  />
                         </div>
                     </div>
 
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
-                            <label class="control-label" for="addmon-gender">Gender</label>
-                            <select class="form-control" id="addmon-gender" data-field="sex" value="<?php echo $character->getSex()?>"  required>
+                            <label class="control-label" for="char-gender">Gender</label>
+                            <select class="form-control" id="char-gender" data-field="sex" value="<?php echo $character->getSex()?>"  required>
                                 <option>Genderless</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -111,8 +111,8 @@ $moves = $character->getCharacterMovessJoinMoves();
                     <?php if ($character->getType() == "POKEMON"): ?>
                         <div class="col-xs-6">
                             <div class="form-group label-floating">
-                                <label class="control-label" for="addmon-nature">Nature</label>
-                                <select class="form-control" id="addmon-nature" data-field="nature" data-populate="nature" required>
+                                <label class="control-label" for="char-nature">Nature</label>
+                                <select class="form-control" id="char-nature" data-field="nature" data-populate="nature" required>
                                     <option></option>
                                 </select>
                             </div>
@@ -122,14 +122,14 @@ $moves = $character->getCharacterMovessJoinMoves();
 
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-discover">Discovered at</label>
-                    <input class="form-control" type="text" id="addmon-discover" data-field="discovery" />
+                    <label class="control-label" for="char-discover">Discovered at</label>
+                    <input class="form-control" type="text" id="char-discover" data-field="discovery" />
                     <p class="help-block">Where was the Pokémon found</p>
                 </div>
                 <?php endif; ?>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-item">Held Item</label>
-                    <input class="form-control" type="text" id="addmon-item" data-field="held-item" />
+                    <label class="control-label" for="char-item">Held Item</label>
+                    <input class="form-control" type="text" id="char-item" data-field="held-item" />
                 </div>
 
                 <hr/>
@@ -138,14 +138,14 @@ $moves = $character->getCharacterMovessJoinMoves();
 
                 <div class="col-xs-6">
                     <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-health">Current Health</label>
-                        <input class="form-control" type="number" id="addmon-health" data-field="health" />
+                        <label class="control-label" for="char-health">Current Health</label>
+                        <input class="form-control" type="number" id="char-health" data-field="health" />
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="form-group label-floating">
-                        <label class="control-label" for="addmon-injure">Injuries</label>
-                        <input class="form-control" type="number" id="addmon-injure" data-field="injuries" value="0" />
+                        <label class="control-label" for="char-injure">Injuries</label>
+                        <input class="form-control" type="number" id="char-injure" data-field="injuries" value="0" />
                     </div>
                 </div>
 
@@ -154,28 +154,28 @@ $moves = $character->getCharacterMovessJoinMoves();
                 <h4>Stats <small class="text-warning" id="warn-stats"></small></h4>
 
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-hp">HP (Stat)</label>
-                    <input class="form-control" type="number" id="addmon-hp" data-field="hp" required />
+                    <label class="control-label" for="char-hp">HP (Stat)</label>
+                    <input class="form-control" type="number" id="char-hp" data-field="hp" required />
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-atk">Attack</label>
-                    <input class="form-control" type="number" id="addmon-atk" data-field="atk" required />
+                    <label class="control-label" for="char-atk">Attack</label>
+                    <input class="form-control" type="number" id="char-atk" data-field="atk" required />
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-def">Defense</label>
-                    <input class="form-control" type="number" id="addmon-def" data-field="def" required />
+                    <label class="control-label" for="char-def">Defense</label>
+                    <input class="form-control" type="number" id="char-def" data-field="def" required />
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-spatk">Special Attack</label>
-                    <input class="form-control" type="number" id="addmon-spatk" data-field="spatk" required />
+                    <label class="control-label" for="char-spatk">Special Attack</label>
+                    <input class="form-control" type="number" id="char-spatk" data-field="spatk" required />
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-spdef">Special Defense</label>
-                    <input class="form-control" type="number" id="addmon-spdef" data-field="spdef" required />
+                    <label class="control-label" for="char-spdef">Special Defense</label>
+                    <input class="form-control" type="number" id="char-spdef" data-field="spdef" required />
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="addmon-speed">Speed</label>
-                    <input class="form-control" type="number" id="addmon-speed" data-field="speed" required />
+                    <label class="control-label" for="char-speed">Speed</label>
+                    <input class="form-control" type="number" id="char-speed" data-field="speed" required />
                 </div>
 
                 <hr/>
@@ -183,17 +183,34 @@ $moves = $character->getCharacterMovessJoinMoves();
                 <h4>Moves & Abilities</h4>
 
                 <!-- TODO: make moves add/remove -->
-                <label for="addmon-moves">Moves</label>
-                <div id="addmon-moves">
+                <label for="char-moves">Moves</label>
+                <div id="char-moves">
                     <?php if ($moves->count() > 0) : ?>
                     <?php foreach ($moves as $move) : ?>
-                    <input class="form-control" title="Move" value="<?php echo $move->getMoveId() ?>" />
+                    <div class="input-group">
+                        <input class="form-control" title="Move" value="<?php echo $move->getMoveName() ?>" data-value="<?php echo $move->getMoveId() ?>" />
+                        <span class="input-group-addon input-group-action">
+                            <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </span>
+                    </div>
                     <?php endforeach; else : ?>
-                    <input class="form-control" title="Move" />
+                    <div class="input-group">
+                        <input class="form-control" title="Move" />
+                        <span class="input-group-addon input-group-action">
+                            <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </span>
+                    </div>
                     <?php endif; ?>
+                    <button class="btn btn-simple btn-success" onclick="addMove($(this))">
+                        <i class="material-icons">add</i> Add Move
+                    </button>
                 </div>
-                <label for="addmon-moves">Abilities</label>
-                <div id="addmon-abilities">
+                <label for="char-abilities">Abilities</label>
+                <div id="char-abilities">
                     <select class="form-control" title="Ability 1" data-required="POKEMON" data-populate="ability"><option></option></select>
                     <select class="form-control" title="Ability 2" data-populate="ability"><option></option></select>
                     <select class="form-control" title="Ability 3" data-populate="ability"><option></option></select>
@@ -202,21 +219,31 @@ $moves = $character->getCharacterMovessJoinMoves();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="btn-addmon">Save</button>
+                <button type="button" class="btn btn-success" id="btn-char">Save</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- TODO: move all CSS to common file -->
+<style>
+    .input-group-action {
+        padding: 0 !important;
+    }
+</style>
+
 <script>
-    $("#addmon-dex").autocomplete({
+    $("#char-dex").autocomplete({
         source: mon_list
+    }).focus(function() {
+        var val = $(this).val() === "" ? " " : $(this).val();
+        $(this).autocomplete('search', val);
     });
 
     var moves_list = [
         <?php foreach ($MOVES_LIST as $move) :?>{
-            "label": "<?php echo $move["Name"] ?> ",
-            "value": "<?php echo $move["MoveId"] ?>",
+            "value": "<?php echo $move["Name"] ?> ",
+            "MoveId": "<?php echo $move["MoveId"] ?>",
             "LevelLearned": "<?php echo $move["LevelLearned"] ?>",
             "TechnicalMachineId": "<?php echo $move["TechnicalMachineId"] ?>",
             "Natural": "<?php echo $move["Natural"] ?>",
@@ -224,30 +251,58 @@ $moves = $character->getCharacterMovessJoinMoves();
         },<?php endforeach; ?>{"label": "test", "value": "ehh", "LevelLearned": "1"}
     ];
 
-    $("#addmon-moves input").autocomplete({
-        source: moves_list,
-        create: function () {
-            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
-                var info = '<span class="pull-right">';
-
-                if (item['Natural'] !== "")
-                    info += ' N';
-
-                if (item['EggMove'] !== "")
-                    info += ' <img src="img/ico_egg.png" height="12"/>';
-
-                if (item['TechnicalMachineId'] !== "")
-                    info += ' TM';
-
-                if (item['LevelLearned'] !== "")
-                    info += ' lvl' + item["LevelLearned"];
-
-                info += '</span>';
-
-                return $('<li>')
-                    .append('<a>' + item.label + info + '</a>')
-                    .appendTo(ul);
-            };
-        }
+    $("#char-moves").find("input").each(function () {
+        initMoveInput($(this));
     });
+
+    function initMoveInput(elem) {
+        elem.autocomplete({
+            source: moves_list,
+            create: function () {
+                $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                    var info = '<span class="pull-right">';
+
+                    if (item['Natural'] !== "")
+                        info += ' N';
+
+                    if (item['EggMove'] !== "")
+                        info += ' <img src="img/ico_egg.png" height="12"/>';
+
+                    if (item['TechnicalMachineId'] !== "")
+                        info += ' TM';
+
+                    if (item['LevelLearned'] !== "")
+                        info += ' lvl' + item["LevelLearned"];
+
+                    info += '</span>';
+
+                    return $('<li>')
+                        .append('<a>' + item.label + info + '</a>')
+                        .appendTo(ul);
+                };
+            },
+            select: function (event, ui) {
+                $(this).attr("data-value", ui.item['MoveId']);
+            }
+        }).focus(function() {
+            var val = $(this).val() === "" ? " " : $(this).val();
+            $(this).autocomplete('search', val);
+        });
+
+        return elem;
+    }
+
+    function addMove(elem) {
+        elem.before($('<div class="input-group">').append(
+            initMoveInput($('<input class="form-control" title="Move" />')),
+            '                        <span class="input-group-addon input-group-action">\n' +
+            '                            <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">\n' +
+            '                                <i class="material-icons">delete</i>\n' +
+            '                            </button>\n' +
+            '                        </span>\n'));
+    }
+
+    function removeMove(elem) {
+        elem.parent().parent().remove();
+    }
 </script>
