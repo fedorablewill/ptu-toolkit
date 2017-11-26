@@ -226,17 +226,17 @@ function getStatByAction(stat_name, action_data, battler) {
 
     switch (stat_name) {
         case "HP":
-            return character.BaseHp + character.AddHp;
+            return character.BaseHp + character.AddHp + character.LvlUpHp;
         case "ATK":
-            return character.BaseAtk + character.AddAtk;
+            return character.BaseAtk + character.AddAtk + character.LvlUpAtk;
         case "DEF":
-            return character.BaseDef + character.AddDef;
+            return character.BaseDef + character.AddDef + character.LvlUpDef;
         case "SATK":
-            return character.BaseSatk + character.AddSatk;
+            return character.BaseSatk + character.AddSatk + character.LvlUpSatk;
         case "SDEF":
-            return character.BaseSdef + character.AddSdef;
+            return character.BaseSdef + character.AddSdef + character.LvlUpSdef;
         case "SPD":
-            return character.BaseSpd + character.AddSpd;
+            return character.BaseSpd + character.AddSpd + character.LvlUpSpd;
         default:
             return 0;
     }

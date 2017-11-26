@@ -23,10 +23,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildBattleEntriesQuery orderByBattleEntryId($order = Criteria::ASC) Order by the battle_entry_id column
  * @method     ChildBattleEntriesQuery orderByBattleId($order = Criteria::ASC) Order by the battle_id column
  * @method     ChildBattleEntriesQuery orderByCharacterId($order = Criteria::ASC) Order by the character_id column
+ * @method     ChildBattleEntriesQuery orderByAfflictions($order = Criteria::ASC) Order by the afflictions column
  *
  * @method     ChildBattleEntriesQuery groupByBattleEntryId() Group by the battle_entry_id column
  * @method     ChildBattleEntriesQuery groupByBattleId() Group by the battle_id column
  * @method     ChildBattleEntriesQuery groupByCharacterId() Group by the character_id column
+ * @method     ChildBattleEntriesQuery groupByAfflictions() Group by the afflictions column
  *
  * @method     ChildBattleEntriesQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildBattleEntriesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -63,7 +65,8 @@ use Propel\Runtime\Exception\PropelException;
  *
  * @method     ChildBattleEntries findOneByBattleEntryId(int $battle_entry_id) Return the first ChildBattleEntries filtered by the battle_entry_id column
  * @method     ChildBattleEntries findOneByBattleId(int $battle_id) Return the first ChildBattleEntries filtered by the battle_id column
- * @method     ChildBattleEntries findOneByCharacterId(int $character_id) Return the first ChildBattleEntries filtered by the character_id column *
+ * @method     ChildBattleEntries findOneByCharacterId(int $character_id) Return the first ChildBattleEntries filtered by the character_id column
+ * @method     ChildBattleEntries findOneByAfflictions(string $afflictions) Return the first ChildBattleEntries filtered by the afflictions column *
 
  * @method     ChildBattleEntries requirePk($key, ConnectionInterface $con = null) Return the ChildBattleEntries by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildBattleEntries requireOne(ConnectionInterface $con = null) Return the first ChildBattleEntries matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -71,11 +74,13 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildBattleEntries requireOneByBattleEntryId(int $battle_entry_id) Return the first ChildBattleEntries filtered by the battle_entry_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildBattleEntries requireOneByBattleId(int $battle_id) Return the first ChildBattleEntries filtered by the battle_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildBattleEntries requireOneByCharacterId(int $character_id) Return the first ChildBattleEntries filtered by the character_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildBattleEntries requireOneByAfflictions(string $afflictions) Return the first ChildBattleEntries filtered by the afflictions column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildBattleEntries[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildBattleEntries objects based on current ModelCriteria
  * @method     ChildBattleEntries[]|ObjectCollection findByBattleEntryId(int $battle_entry_id) Return ChildBattleEntries objects filtered by the battle_entry_id column
  * @method     ChildBattleEntries[]|ObjectCollection findByBattleId(int $battle_id) Return ChildBattleEntries objects filtered by the battle_id column
  * @method     ChildBattleEntries[]|ObjectCollection findByCharacterId(int $character_id) Return ChildBattleEntries objects filtered by the character_id column
+ * @method     ChildBattleEntries[]|ObjectCollection findByAfflictions(string $afflictions) Return ChildBattleEntries objects filtered by the afflictions column
  * @method     ChildBattleEntries[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -174,7 +179,7 @@ abstract class BattleEntriesQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT battle_entry_id, battle_id, character_id FROM battle_entries WHERE battle_entry_id = :p0';
+        $sql = 'SELECT battle_entry_id, battle_id, character_id, afflictions FROM battle_entries WHERE battle_entry_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -389,6 +394,31 @@ abstract class BattleEntriesQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(BattleEntriesTableMap::COL_CHARACTER_ID, $characterId, $comparison);
+    }
+
+    /**
+     * Filter the query on the afflictions column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByAfflictions('fooValue');   // WHERE afflictions = 'fooValue'
+     * $query->filterByAfflictions('%fooValue%', Criteria::LIKE); // WHERE afflictions LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $afflictions The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildBattleEntriesQuery The current query, for fluid interface
+     */
+    public function filterByAfflictions($afflictions = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($afflictions)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(BattleEntriesTableMap::COL_AFFLICTIONS, $afflictions, $comparison);
     }
 
     /**

@@ -1381,7 +1381,7 @@ abstract class Moves implements ActiveRecordInterface
                         $key = 'pokedexMovess';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'pokedex-movess';
+                        $key = 'pokedex_movess';
                         break;
                     default:
                         $key = 'PokedexMovess';

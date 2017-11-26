@@ -85,6 +85,13 @@ abstract class BattleEntries implements ActiveRecordInterface
     protected $character_id;
 
     /**
+     * The value for the afflictions field.
+     *
+     * @var        string
+     */
+    protected $afflictions;
+
+    /**
      * @var        ChildBattles
      */
     protected $aBattles;
@@ -358,6 +365,16 @@ abstract class BattleEntries implements ActiveRecordInterface
     }
 
     /**
+     * Get the [afflictions] column value.
+     *
+     * @return string
+     */
+    public function getAfflictions()
+    {
+        return $this->afflictions;
+    }
+
+    /**
      * Set the value of [battle_entry_id] column.
      *
      * @param int $v new value
@@ -426,6 +443,26 @@ abstract class BattleEntries implements ActiveRecordInterface
     } // setCharacterId()
 
     /**
+     * Set the value of [afflictions] column.
+     *
+     * @param string $v new value
+     * @return $this|\Propel\PtuToolkit\BattleEntries The current object (for fluent API support)
+     */
+    public function setAfflictions($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->afflictions !== $v) {
+            $this->afflictions = $v;
+            $this->modifiedColumns[BattleEntriesTableMap::COL_AFFLICTIONS] = true;
+        }
+
+        return $this;
+    } // setAfflictions()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -469,6 +506,9 @@ abstract class BattleEntries implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : BattleEntriesTableMap::translateFieldName('CharacterId', TableMap::TYPE_PHPNAME, $indexType)];
             $this->character_id = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : BattleEntriesTableMap::translateFieldName('Afflictions', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->afflictions = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -477,7 +517,7 @@ abstract class BattleEntries implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 3; // 3 = BattleEntriesTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = BattleEntriesTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PtuToolkit\\BattleEntries'), 0, $e);
@@ -714,6 +754,9 @@ abstract class BattleEntries implements ActiveRecordInterface
         if ($this->isColumnModified(BattleEntriesTableMap::COL_CHARACTER_ID)) {
             $modifiedColumns[':p' . $index++]  = 'character_id';
         }
+        if ($this->isColumnModified(BattleEntriesTableMap::COL_AFFLICTIONS)) {
+            $modifiedColumns[':p' . $index++]  = 'afflictions';
+        }
 
         $sql = sprintf(
             'INSERT INTO battle_entries (%s) VALUES (%s)',
@@ -733,6 +776,9 @@ abstract class BattleEntries implements ActiveRecordInterface
                         break;
                     case 'character_id':
                         $stmt->bindValue($identifier, $this->character_id, PDO::PARAM_INT);
+                        break;
+                    case 'afflictions':
+                        $stmt->bindValue($identifier, $this->afflictions, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -805,6 +851,9 @@ abstract class BattleEntries implements ActiveRecordInterface
             case 2:
                 return $this->getCharacterId();
                 break;
+            case 3:
+                return $this->getAfflictions();
+                break;
             default:
                 return null;
                 break;
@@ -838,6 +887,7 @@ abstract class BattleEntries implements ActiveRecordInterface
             $keys[0] => $this->getBattleEntryId(),
             $keys[1] => $this->getBattleId(),
             $keys[2] => $this->getCharacterId(),
+            $keys[3] => $this->getAfflictions(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -918,6 +968,9 @@ abstract class BattleEntries implements ActiveRecordInterface
             case 2:
                 $this->setCharacterId($value);
                 break;
+            case 3:
+                $this->setAfflictions($value);
+                break;
         } // switch()
 
         return $this;
@@ -952,6 +1005,9 @@ abstract class BattleEntries implements ActiveRecordInterface
         }
         if (array_key_exists($keys[2], $arr)) {
             $this->setCharacterId($arr[$keys[2]]);
+        }
+        if (array_key_exists($keys[3], $arr)) {
+            $this->setAfflictions($arr[$keys[3]]);
         }
     }
 
@@ -1002,6 +1058,9 @@ abstract class BattleEntries implements ActiveRecordInterface
         }
         if ($this->isColumnModified(BattleEntriesTableMap::COL_CHARACTER_ID)) {
             $criteria->add(BattleEntriesTableMap::COL_CHARACTER_ID, $this->character_id);
+        }
+        if ($this->isColumnModified(BattleEntriesTableMap::COL_AFFLICTIONS)) {
+            $criteria->add(BattleEntriesTableMap::COL_AFFLICTIONS, $this->afflictions);
         }
 
         return $criteria;
@@ -1091,6 +1150,7 @@ abstract class BattleEntries implements ActiveRecordInterface
     {
         $copyObj->setBattleId($this->getBattleId());
         $copyObj->setCharacterId($this->getCharacterId());
+        $copyObj->setAfflictions($this->getAfflictions());
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setBattleEntryId(NULL); // this is a auto-increment column, so set to default value
@@ -1237,6 +1297,7 @@ abstract class BattleEntries implements ActiveRecordInterface
         $this->battle_entry_id = null;
         $this->battle_id = null;
         $this->character_id = null;
+        $this->afflictions = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->resetModified();

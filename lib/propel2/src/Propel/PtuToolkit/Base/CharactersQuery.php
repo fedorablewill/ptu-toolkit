@@ -41,6 +41,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery orderByBaseSatk($order = Criteria::ASC) Order by the base_satk column
  * @method     ChildCharactersQuery orderByBaseSdef($order = Criteria::ASC) Order by the base_sdef column
  * @method     ChildCharactersQuery orderByBaseSpd($order = Criteria::ASC) Order by the base_spd column
+ * @method     ChildCharactersQuery orderByLvlUpHp($order = Criteria::ASC) Order by the lvl_up_hp column
+ * @method     ChildCharactersQuery orderByLvlUpAtk($order = Criteria::ASC) Order by the lvl_up_atk column
+ * @method     ChildCharactersQuery orderByLvlUpDef($order = Criteria::ASC) Order by the lvl_up_def column
+ * @method     ChildCharactersQuery orderByLvlUpSatk($order = Criteria::ASC) Order by the lvl_up_satk column
+ * @method     ChildCharactersQuery orderByLvlUpSdef($order = Criteria::ASC) Order by the lvl_up_sdef column
+ * @method     ChildCharactersQuery orderByLvlUpSpd($order = Criteria::ASC) Order by the lvl_up_spd column
  * @method     ChildCharactersQuery orderByAddHp($order = Criteria::ASC) Order by the add_hp column
  * @method     ChildCharactersQuery orderByAddAtk($order = Criteria::ASC) Order by the add_atk column
  * @method     ChildCharactersQuery orderByAddDef($order = Criteria::ASC) Order by the add_def column
@@ -76,6 +82,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery orderByBackgroundPthc1($order = Criteria::ASC) Order by the background_pthc1 column
  * @method     ChildCharactersQuery orderByBackgroundPthc2($order = Criteria::ASC) Order by the background_pthc2 column
  * @method     ChildCharactersQuery orderByBackgroundPthc3($order = Criteria::ASC) Order by the background_pthc3 column
+ * @method     ChildCharactersQuery orderByAfflictions($order = Criteria::ASC) Order by the afflictions column
  * @method     ChildCharactersQuery orderByNotes($order = Criteria::ASC) Order by the notes column
  * @method     ChildCharactersQuery orderByNature($order = Criteria::ASC) Order by the nature column
  * @method     ChildCharactersQuery orderBySheetType($order = Criteria::ASC) Order by the sheet_type column
@@ -101,6 +108,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery groupByBaseSatk() Group by the base_satk column
  * @method     ChildCharactersQuery groupByBaseSdef() Group by the base_sdef column
  * @method     ChildCharactersQuery groupByBaseSpd() Group by the base_spd column
+ * @method     ChildCharactersQuery groupByLvlUpHp() Group by the lvl_up_hp column
+ * @method     ChildCharactersQuery groupByLvlUpAtk() Group by the lvl_up_atk column
+ * @method     ChildCharactersQuery groupByLvlUpDef() Group by the lvl_up_def column
+ * @method     ChildCharactersQuery groupByLvlUpSatk() Group by the lvl_up_satk column
+ * @method     ChildCharactersQuery groupByLvlUpSdef() Group by the lvl_up_sdef column
+ * @method     ChildCharactersQuery groupByLvlUpSpd() Group by the lvl_up_spd column
  * @method     ChildCharactersQuery groupByAddHp() Group by the add_hp column
  * @method     ChildCharactersQuery groupByAddAtk() Group by the add_atk column
  * @method     ChildCharactersQuery groupByAddDef() Group by the add_def column
@@ -136,6 +149,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharactersQuery groupByBackgroundPthc1() Group by the background_pthc1 column
  * @method     ChildCharactersQuery groupByBackgroundPthc2() Group by the background_pthc2 column
  * @method     ChildCharactersQuery groupByBackgroundPthc3() Group by the background_pthc3 column
+ * @method     ChildCharactersQuery groupByAfflictions() Group by the afflictions column
  * @method     ChildCharactersQuery groupByNotes() Group by the notes column
  * @method     ChildCharactersQuery groupByNature() Group by the nature column
  * @method     ChildCharactersQuery groupBySheetType() Group by the sheet_type column
@@ -224,6 +238,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters findOneByBaseSatk(int $base_satk) Return the first ChildCharacters filtered by the base_satk column
  * @method     ChildCharacters findOneByBaseSdef(int $base_sdef) Return the first ChildCharacters filtered by the base_sdef column
  * @method     ChildCharacters findOneByBaseSpd(int $base_spd) Return the first ChildCharacters filtered by the base_spd column
+ * @method     ChildCharacters findOneByLvlUpHp(int $lvl_up_hp) Return the first ChildCharacters filtered by the lvl_up_hp column
+ * @method     ChildCharacters findOneByLvlUpAtk(int $lvl_up_atk) Return the first ChildCharacters filtered by the lvl_up_atk column
+ * @method     ChildCharacters findOneByLvlUpDef(int $lvl_up_def) Return the first ChildCharacters filtered by the lvl_up_def column
+ * @method     ChildCharacters findOneByLvlUpSatk(int $lvl_up_satk) Return the first ChildCharacters filtered by the lvl_up_satk column
+ * @method     ChildCharacters findOneByLvlUpSdef(int $lvl_up_sdef) Return the first ChildCharacters filtered by the lvl_up_sdef column
+ * @method     ChildCharacters findOneByLvlUpSpd(int $lvl_up_spd) Return the first ChildCharacters filtered by the lvl_up_spd column
  * @method     ChildCharacters findOneByAddHp(int $add_hp) Return the first ChildCharacters filtered by the add_hp column
  * @method     ChildCharacters findOneByAddAtk(int $add_atk) Return the first ChildCharacters filtered by the add_atk column
  * @method     ChildCharacters findOneByAddDef(int $add_def) Return the first ChildCharacters filtered by the add_def column
@@ -259,6 +279,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters findOneByBackgroundPthc1(string $background_pthc1) Return the first ChildCharacters filtered by the background_pthc1 column
  * @method     ChildCharacters findOneByBackgroundPthc2(string $background_pthc2) Return the first ChildCharacters filtered by the background_pthc2 column
  * @method     ChildCharacters findOneByBackgroundPthc3(string $background_pthc3) Return the first ChildCharacters filtered by the background_pthc3 column
+ * @method     ChildCharacters findOneByAfflictions(string $afflictions) Return the first ChildCharacters filtered by the afflictions column
  * @method     ChildCharacters findOneByNotes(string $notes) Return the first ChildCharacters filtered by the notes column
  * @method     ChildCharacters findOneByNature(string $nature) Return the first ChildCharacters filtered by the nature column
  * @method     ChildCharacters findOneBySheetType(string $sheet_type) Return the first ChildCharacters filtered by the sheet_type column *
@@ -287,6 +308,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters requireOneByBaseSatk(int $base_satk) Return the first ChildCharacters filtered by the base_satk column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByBaseSdef(int $base_sdef) Return the first ChildCharacters filtered by the base_sdef column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByBaseSpd(int $base_spd) Return the first ChildCharacters filtered by the base_spd column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpHp(int $lvl_up_hp) Return the first ChildCharacters filtered by the lvl_up_hp column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpAtk(int $lvl_up_atk) Return the first ChildCharacters filtered by the lvl_up_atk column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpDef(int $lvl_up_def) Return the first ChildCharacters filtered by the lvl_up_def column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpSatk(int $lvl_up_satk) Return the first ChildCharacters filtered by the lvl_up_satk column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpSdef(int $lvl_up_sdef) Return the first ChildCharacters filtered by the lvl_up_sdef column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByLvlUpSpd(int $lvl_up_spd) Return the first ChildCharacters filtered by the lvl_up_spd column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByAddHp(int $add_hp) Return the first ChildCharacters filtered by the add_hp column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByAddAtk(int $add_atk) Return the first ChildCharacters filtered by the add_atk column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByAddDef(int $add_def) Return the first ChildCharacters filtered by the add_def column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -322,6 +349,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters requireOneByBackgroundPthc1(string $background_pthc1) Return the first ChildCharacters filtered by the background_pthc1 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByBackgroundPthc2(string $background_pthc2) Return the first ChildCharacters filtered by the background_pthc2 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByBackgroundPthc3(string $background_pthc3) Return the first ChildCharacters filtered by the background_pthc3 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildCharacters requireOneByAfflictions(string $afflictions) Return the first ChildCharacters filtered by the afflictions column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByNotes(string $notes) Return the first ChildCharacters filtered by the notes column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneByNature(string $nature) Return the first ChildCharacters filtered by the nature column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildCharacters requireOneBySheetType(string $sheet_type) Return the first ChildCharacters filtered by the sheet_type column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -348,6 +376,12 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters[]|ObjectCollection findByBaseSatk(int $base_satk) Return ChildCharacters objects filtered by the base_satk column
  * @method     ChildCharacters[]|ObjectCollection findByBaseSdef(int $base_sdef) Return ChildCharacters objects filtered by the base_sdef column
  * @method     ChildCharacters[]|ObjectCollection findByBaseSpd(int $base_spd) Return ChildCharacters objects filtered by the base_spd column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpHp(int $lvl_up_hp) Return ChildCharacters objects filtered by the lvl_up_hp column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpAtk(int $lvl_up_atk) Return ChildCharacters objects filtered by the lvl_up_atk column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpDef(int $lvl_up_def) Return ChildCharacters objects filtered by the lvl_up_def column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpSatk(int $lvl_up_satk) Return ChildCharacters objects filtered by the lvl_up_satk column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpSdef(int $lvl_up_sdef) Return ChildCharacters objects filtered by the lvl_up_sdef column
+ * @method     ChildCharacters[]|ObjectCollection findByLvlUpSpd(int $lvl_up_spd) Return ChildCharacters objects filtered by the lvl_up_spd column
  * @method     ChildCharacters[]|ObjectCollection findByAddHp(int $add_hp) Return ChildCharacters objects filtered by the add_hp column
  * @method     ChildCharacters[]|ObjectCollection findByAddAtk(int $add_atk) Return ChildCharacters objects filtered by the add_atk column
  * @method     ChildCharacters[]|ObjectCollection findByAddDef(int $add_def) Return ChildCharacters objects filtered by the add_def column
@@ -383,6 +417,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildCharacters[]|ObjectCollection findByBackgroundPthc1(string $background_pthc1) Return ChildCharacters objects filtered by the background_pthc1 column
  * @method     ChildCharacters[]|ObjectCollection findByBackgroundPthc2(string $background_pthc2) Return ChildCharacters objects filtered by the background_pthc2 column
  * @method     ChildCharacters[]|ObjectCollection findByBackgroundPthc3(string $background_pthc3) Return ChildCharacters objects filtered by the background_pthc3 column
+ * @method     ChildCharacters[]|ObjectCollection findByAfflictions(string $afflictions) Return ChildCharacters objects filtered by the afflictions column
  * @method     ChildCharacters[]|ObjectCollection findByNotes(string $notes) Return ChildCharacters objects filtered by the notes column
  * @method     ChildCharacters[]|ObjectCollection findByNature(string $nature) Return ChildCharacters objects filtered by the nature column
  * @method     ChildCharacters[]|ObjectCollection findBySheetType(string $sheet_type) Return ChildCharacters objects filtered by the sheet_type column
@@ -484,7 +519,7 @@ abstract class CharactersQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT character_id, campaign_id, type, pokedex_no, pokedex_id, name, owner, age, weight, height, sex, base_type1, base_type2, level, exp, base_hp, base_atk, base_def, base_satk, base_sdef, base_spd, add_hp, add_atk, add_def, add_satk, add_sdef, add_spd, health, injuries, money, skill_acrobatics, skill_athletics, skill_charm, skill_combat, skill_command, skill_general_ed, skill_medicine_ed, skill_occult_ed, skill_pokemon_ed, skill_technology_ed, skill_focus, skill_guile, skill_intimidate, skill_intuition, skill_perception, skill_stealth, skill_survival, ap_spent, ap_bound, ap_drained, background_name, background_adept, background_novice, background_pthc1, background_pthc2, background_pthc3, notes, nature, sheet_type FROM characters WHERE character_id = :p0';
+        $sql = 'SELECT character_id, campaign_id, type, pokedex_no, pokedex_id, name, owner, age, weight, height, sex, base_type1, base_type2, level, exp, base_hp, base_atk, base_def, base_satk, base_sdef, base_spd, lvl_up_hp, lvl_up_atk, lvl_up_def, lvl_up_satk, lvl_up_sdef, lvl_up_spd, add_hp, add_atk, add_def, add_satk, add_sdef, add_spd, health, injuries, money, skill_acrobatics, skill_athletics, skill_charm, skill_combat, skill_command, skill_general_ed, skill_medicine_ed, skill_occult_ed, skill_pokemon_ed, skill_technology_ed, skill_focus, skill_guile, skill_intimidate, skill_intuition, skill_perception, skill_stealth, skill_survival, ap_spent, ap_bound, ap_drained, background_name, background_adept, background_novice, background_pthc1, background_pthc2, background_pthc3, afflictions, notes, nature, sheet_type FROM characters WHERE character_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -1291,6 +1326,252 @@ abstract class CharactersQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CharactersTableMap::COL_BASE_SPD, $baseSpd, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_hp column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpHp(1234); // WHERE lvl_up_hp = 1234
+     * $query->filterByLvlUpHp(array(12, 34)); // WHERE lvl_up_hp IN (12, 34)
+     * $query->filterByLvlUpHp(array('min' => 12)); // WHERE lvl_up_hp > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpHp The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpHp($lvlUpHp = null, $comparison = null)
+    {
+        if (is_array($lvlUpHp)) {
+            $useMinMax = false;
+            if (isset($lvlUpHp['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_HP, $lvlUpHp['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpHp['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_HP, $lvlUpHp['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_HP, $lvlUpHp, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_atk column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpAtk(1234); // WHERE lvl_up_atk = 1234
+     * $query->filterByLvlUpAtk(array(12, 34)); // WHERE lvl_up_atk IN (12, 34)
+     * $query->filterByLvlUpAtk(array('min' => 12)); // WHERE lvl_up_atk > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpAtk The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpAtk($lvlUpAtk = null, $comparison = null)
+    {
+        if (is_array($lvlUpAtk)) {
+            $useMinMax = false;
+            if (isset($lvlUpAtk['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_ATK, $lvlUpAtk['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpAtk['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_ATK, $lvlUpAtk['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_ATK, $lvlUpAtk, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_def column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpDef(1234); // WHERE lvl_up_def = 1234
+     * $query->filterByLvlUpDef(array(12, 34)); // WHERE lvl_up_def IN (12, 34)
+     * $query->filterByLvlUpDef(array('min' => 12)); // WHERE lvl_up_def > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpDef The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpDef($lvlUpDef = null, $comparison = null)
+    {
+        if (is_array($lvlUpDef)) {
+            $useMinMax = false;
+            if (isset($lvlUpDef['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_DEF, $lvlUpDef['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpDef['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_DEF, $lvlUpDef['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_DEF, $lvlUpDef, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_satk column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpSatk(1234); // WHERE lvl_up_satk = 1234
+     * $query->filterByLvlUpSatk(array(12, 34)); // WHERE lvl_up_satk IN (12, 34)
+     * $query->filterByLvlUpSatk(array('min' => 12)); // WHERE lvl_up_satk > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpSatk The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpSatk($lvlUpSatk = null, $comparison = null)
+    {
+        if (is_array($lvlUpSatk)) {
+            $useMinMax = false;
+            if (isset($lvlUpSatk['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SATK, $lvlUpSatk['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpSatk['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SATK, $lvlUpSatk['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SATK, $lvlUpSatk, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_sdef column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpSdef(1234); // WHERE lvl_up_sdef = 1234
+     * $query->filterByLvlUpSdef(array(12, 34)); // WHERE lvl_up_sdef IN (12, 34)
+     * $query->filterByLvlUpSdef(array('min' => 12)); // WHERE lvl_up_sdef > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpSdef The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpSdef($lvlUpSdef = null, $comparison = null)
+    {
+        if (is_array($lvlUpSdef)) {
+            $useMinMax = false;
+            if (isset($lvlUpSdef['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SDEF, $lvlUpSdef['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpSdef['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SDEF, $lvlUpSdef['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SDEF, $lvlUpSdef, $comparison);
+    }
+
+    /**
+     * Filter the query on the lvl_up_spd column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLvlUpSpd(1234); // WHERE lvl_up_spd = 1234
+     * $query->filterByLvlUpSpd(array(12, 34)); // WHERE lvl_up_spd IN (12, 34)
+     * $query->filterByLvlUpSpd(array('min' => 12)); // WHERE lvl_up_spd > 12
+     * </code>
+     *
+     * @param     mixed $lvlUpSpd The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByLvlUpSpd($lvlUpSpd = null, $comparison = null)
+    {
+        if (is_array($lvlUpSpd)) {
+            $useMinMax = false;
+            if (isset($lvlUpSpd['min'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SPD, $lvlUpSpd['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($lvlUpSpd['max'])) {
+                $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SPD, $lvlUpSpd['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_LVL_UP_SPD, $lvlUpSpd, $comparison);
     }
 
     /**
@@ -2630,6 +2911,31 @@ abstract class CharactersQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CharactersTableMap::COL_BACKGROUND_PTHC3, $backgroundPthc3, $comparison);
+    }
+
+    /**
+     * Filter the query on the afflictions column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByAfflictions('fooValue');   // WHERE afflictions = 'fooValue'
+     * $query->filterByAfflictions('%fooValue%', Criteria::LIKE); // WHERE afflictions LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $afflictions The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildCharactersQuery The current query, for fluid interface
+     */
+    public function filterByAfflictions($afflictions = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($afflictions)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CharactersTableMap::COL_AFFLICTIONS, $afflictions, $comparison);
     }
 
     /**

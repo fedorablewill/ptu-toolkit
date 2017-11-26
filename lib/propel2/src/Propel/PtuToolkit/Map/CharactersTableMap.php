@@ -59,7 +59,7 @@ class CharactersTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 59;
+    const NUM_COLUMNS = 66;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class CharactersTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 59;
+    const NUM_HYDRATE_COLUMNS = 66;
 
     /**
      * the column name for the character_id field
@@ -175,6 +175,36 @@ class CharactersTableMap extends TableMap
      * the column name for the base_spd field
      */
     const COL_BASE_SPD = 'characters.base_spd';
+
+    /**
+     * the column name for the lvl_up_hp field
+     */
+    const COL_LVL_UP_HP = 'characters.lvl_up_hp';
+
+    /**
+     * the column name for the lvl_up_atk field
+     */
+    const COL_LVL_UP_ATK = 'characters.lvl_up_atk';
+
+    /**
+     * the column name for the lvl_up_def field
+     */
+    const COL_LVL_UP_DEF = 'characters.lvl_up_def';
+
+    /**
+     * the column name for the lvl_up_satk field
+     */
+    const COL_LVL_UP_SATK = 'characters.lvl_up_satk';
+
+    /**
+     * the column name for the lvl_up_sdef field
+     */
+    const COL_LVL_UP_SDEF = 'characters.lvl_up_sdef';
+
+    /**
+     * the column name for the lvl_up_spd field
+     */
+    const COL_LVL_UP_SPD = 'characters.lvl_up_spd';
 
     /**
      * the column name for the add_hp field
@@ -352,6 +382,11 @@ class CharactersTableMap extends TableMap
     const COL_BACKGROUND_PTHC3 = 'characters.background_pthc3';
 
     /**
+     * the column name for the afflictions field
+     */
+    const COL_AFFLICTIONS = 'characters.afflictions';
+
+    /**
      * the column name for the notes field
      */
     const COL_NOTES = 'characters.notes';
@@ -378,11 +413,11 @@ class CharactersTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('CharacterId', 'CampaignId', 'Type', 'PokedexNo', 'PokedexId', 'Name', 'Owner', 'Age', 'Weight', 'Height', 'Sex', 'Type1', 'Type2', 'Level', 'Exp', 'BaseHp', 'BaseAtk', 'BaseDef', 'BaseSatk', 'BaseSdef', 'BaseSpd', 'AddHp', 'AddAtk', 'AddDef', 'AddSatk', 'AddSdef', 'AddSpd', 'Health', 'Injuries', 'Money', 'SkillAcrobatics', 'SkillAthletics', 'SkillCharm', 'SkillCombat', 'SkillCommand', 'SkillGeneralEd', 'SkillMedicineEd', 'SkillOccultEd', 'SkillPokemonEd', 'SkillTechnologyEd', 'SkillFocus', 'SkillGuile', 'SkillIntimidate', 'SkillIntuition', 'SkillPerception', 'SkillStealth', 'SkillSurvival', 'ApSpent', 'ApBound', 'ApDrained', 'BackgroundName', 'BackgroundAdept', 'BackgroundNovice', 'BackgroundPthc1', 'BackgroundPthc2', 'BackgroundPthc3', 'Notes', 'Nature', 'SheetType', ),
-        self::TYPE_CAMELNAME     => array('characterId', 'campaignId', 'type', 'pokedexNo', 'pokedexId', 'name', 'owner', 'age', 'weight', 'height', 'sex', 'type1', 'type2', 'level', 'exp', 'baseHp', 'baseAtk', 'baseDef', 'baseSatk', 'baseSdef', 'baseSpd', 'addHp', 'addAtk', 'addDef', 'addSatk', 'addSdef', 'addSpd', 'health', 'injuries', 'money', 'skillAcrobatics', 'skillAthletics', 'skillCharm', 'skillCombat', 'skillCommand', 'skillGeneralEd', 'skillMedicineEd', 'skillOccultEd', 'skillPokemonEd', 'skillTechnologyEd', 'skillFocus', 'skillGuile', 'skillIntimidate', 'skillIntuition', 'skillPerception', 'skillStealth', 'skillSurvival', 'apSpent', 'apBound', 'apDrained', 'backgroundName', 'backgroundAdept', 'backgroundNovice', 'backgroundPthc1', 'backgroundPthc2', 'backgroundPthc3', 'notes', 'nature', 'sheetType', ),
-        self::TYPE_COLNAME       => array(CharactersTableMap::COL_CHARACTER_ID, CharactersTableMap::COL_CAMPAIGN_ID, CharactersTableMap::COL_TYPE, CharactersTableMap::COL_POKEDEX_NO, CharactersTableMap::COL_POKEDEX_ID, CharactersTableMap::COL_NAME, CharactersTableMap::COL_OWNER, CharactersTableMap::COL_AGE, CharactersTableMap::COL_WEIGHT, CharactersTableMap::COL_HEIGHT, CharactersTableMap::COL_SEX, CharactersTableMap::COL_BASE_TYPE1, CharactersTableMap::COL_BASE_TYPE2, CharactersTableMap::COL_LEVEL, CharactersTableMap::COL_EXP, CharactersTableMap::COL_BASE_HP, CharactersTableMap::COL_BASE_ATK, CharactersTableMap::COL_BASE_DEF, CharactersTableMap::COL_BASE_SATK, CharactersTableMap::COL_BASE_SDEF, CharactersTableMap::COL_BASE_SPD, CharactersTableMap::COL_ADD_HP, CharactersTableMap::COL_ADD_ATK, CharactersTableMap::COL_ADD_DEF, CharactersTableMap::COL_ADD_SATK, CharactersTableMap::COL_ADD_SDEF, CharactersTableMap::COL_ADD_SPD, CharactersTableMap::COL_HEALTH, CharactersTableMap::COL_INJURIES, CharactersTableMap::COL_MONEY, CharactersTableMap::COL_SKILL_ACROBATICS, CharactersTableMap::COL_SKILL_ATHLETICS, CharactersTableMap::COL_SKILL_CHARM, CharactersTableMap::COL_SKILL_COMBAT, CharactersTableMap::COL_SKILL_COMMAND, CharactersTableMap::COL_SKILL_GENERAL_ED, CharactersTableMap::COL_SKILL_MEDICINE_ED, CharactersTableMap::COL_SKILL_OCCULT_ED, CharactersTableMap::COL_SKILL_POKEMON_ED, CharactersTableMap::COL_SKILL_TECHNOLOGY_ED, CharactersTableMap::COL_SKILL_FOCUS, CharactersTableMap::COL_SKILL_GUILE, CharactersTableMap::COL_SKILL_INTIMIDATE, CharactersTableMap::COL_SKILL_INTUITION, CharactersTableMap::COL_SKILL_PERCEPTION, CharactersTableMap::COL_SKILL_STEALTH, CharactersTableMap::COL_SKILL_SURVIVAL, CharactersTableMap::COL_AP_SPENT, CharactersTableMap::COL_AP_BOUND, CharactersTableMap::COL_AP_DRAINED, CharactersTableMap::COL_BACKGROUND_NAME, CharactersTableMap::COL_BACKGROUND_ADEPT, CharactersTableMap::COL_BACKGROUND_NOVICE, CharactersTableMap::COL_BACKGROUND_PTHC1, CharactersTableMap::COL_BACKGROUND_PTHC2, CharactersTableMap::COL_BACKGROUND_PTHC3, CharactersTableMap::COL_NOTES, CharactersTableMap::COL_NATURE, CharactersTableMap::COL_SHEET_TYPE, ),
-        self::TYPE_FIELDNAME     => array('character_id', 'campaign_id', 'type', 'pokedex_no', 'pokedex_id', 'name', 'owner', 'age', 'weight', 'height', 'sex', 'base_type1', 'base_type2', 'level', 'exp', 'base_hp', 'base_atk', 'base_def', 'base_satk', 'base_sdef', 'base_spd', 'add_hp', 'add_atk', 'add_def', 'add_satk', 'add_sdef', 'add_spd', 'health', 'injuries', 'money', 'skill_acrobatics', 'skill_athletics', 'skill_charm', 'skill_combat', 'skill_command', 'skill_general_ed', 'skill_medicine_ed', 'skill_occult_ed', 'skill_pokemon_ed', 'skill_technology_ed', 'skill_focus', 'skill_guile', 'skill_intimidate', 'skill_intuition', 'skill_perception', 'skill_stealth', 'skill_survival', 'ap_spent', 'ap_bound', 'ap_drained', 'background_name', 'background_adept', 'background_novice', 'background_pthc1', 'background_pthc2', 'background_pthc3', 'notes', 'nature', 'sheet_type', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, )
+        self::TYPE_PHPNAME       => array('CharacterId', 'CampaignId', 'Type', 'PokedexNo', 'PokedexId', 'Name', 'Owner', 'Age', 'Weight', 'Height', 'Sex', 'Type1', 'Type2', 'Level', 'Exp', 'BaseHp', 'BaseAtk', 'BaseDef', 'BaseSatk', 'BaseSdef', 'BaseSpd', 'LvlUpHp', 'LvlUpAtk', 'LvlUpDef', 'LvlUpSatk', 'LvlUpSdef', 'LvlUpSpd', 'AddHp', 'AddAtk', 'AddDef', 'AddSatk', 'AddSdef', 'AddSpd', 'Health', 'Injuries', 'Money', 'SkillAcrobatics', 'SkillAthletics', 'SkillCharm', 'SkillCombat', 'SkillCommand', 'SkillGeneralEd', 'SkillMedicineEd', 'SkillOccultEd', 'SkillPokemonEd', 'SkillTechnologyEd', 'SkillFocus', 'SkillGuile', 'SkillIntimidate', 'SkillIntuition', 'SkillPerception', 'SkillStealth', 'SkillSurvival', 'ApSpent', 'ApBound', 'ApDrained', 'BackgroundName', 'BackgroundAdept', 'BackgroundNovice', 'BackgroundPthc1', 'BackgroundPthc2', 'BackgroundPthc3', 'Afflictions', 'Notes', 'Nature', 'SheetType', ),
+        self::TYPE_CAMELNAME     => array('characterId', 'campaignId', 'type', 'pokedexNo', 'pokedexId', 'name', 'owner', 'age', 'weight', 'height', 'sex', 'type1', 'type2', 'level', 'exp', 'baseHp', 'baseAtk', 'baseDef', 'baseSatk', 'baseSdef', 'baseSpd', 'lvlUpHp', 'lvlUpAtk', 'lvlUpDef', 'lvlUpSatk', 'lvlUpSdef', 'lvlUpSpd', 'addHp', 'addAtk', 'addDef', 'addSatk', 'addSdef', 'addSpd', 'health', 'injuries', 'money', 'skillAcrobatics', 'skillAthletics', 'skillCharm', 'skillCombat', 'skillCommand', 'skillGeneralEd', 'skillMedicineEd', 'skillOccultEd', 'skillPokemonEd', 'skillTechnologyEd', 'skillFocus', 'skillGuile', 'skillIntimidate', 'skillIntuition', 'skillPerception', 'skillStealth', 'skillSurvival', 'apSpent', 'apBound', 'apDrained', 'backgroundName', 'backgroundAdept', 'backgroundNovice', 'backgroundPthc1', 'backgroundPthc2', 'backgroundPthc3', 'afflictions', 'notes', 'nature', 'sheetType', ),
+        self::TYPE_COLNAME       => array(CharactersTableMap::COL_CHARACTER_ID, CharactersTableMap::COL_CAMPAIGN_ID, CharactersTableMap::COL_TYPE, CharactersTableMap::COL_POKEDEX_NO, CharactersTableMap::COL_POKEDEX_ID, CharactersTableMap::COL_NAME, CharactersTableMap::COL_OWNER, CharactersTableMap::COL_AGE, CharactersTableMap::COL_WEIGHT, CharactersTableMap::COL_HEIGHT, CharactersTableMap::COL_SEX, CharactersTableMap::COL_BASE_TYPE1, CharactersTableMap::COL_BASE_TYPE2, CharactersTableMap::COL_LEVEL, CharactersTableMap::COL_EXP, CharactersTableMap::COL_BASE_HP, CharactersTableMap::COL_BASE_ATK, CharactersTableMap::COL_BASE_DEF, CharactersTableMap::COL_BASE_SATK, CharactersTableMap::COL_BASE_SDEF, CharactersTableMap::COL_BASE_SPD, CharactersTableMap::COL_LVL_UP_HP, CharactersTableMap::COL_LVL_UP_ATK, CharactersTableMap::COL_LVL_UP_DEF, CharactersTableMap::COL_LVL_UP_SATK, CharactersTableMap::COL_LVL_UP_SDEF, CharactersTableMap::COL_LVL_UP_SPD, CharactersTableMap::COL_ADD_HP, CharactersTableMap::COL_ADD_ATK, CharactersTableMap::COL_ADD_DEF, CharactersTableMap::COL_ADD_SATK, CharactersTableMap::COL_ADD_SDEF, CharactersTableMap::COL_ADD_SPD, CharactersTableMap::COL_HEALTH, CharactersTableMap::COL_INJURIES, CharactersTableMap::COL_MONEY, CharactersTableMap::COL_SKILL_ACROBATICS, CharactersTableMap::COL_SKILL_ATHLETICS, CharactersTableMap::COL_SKILL_CHARM, CharactersTableMap::COL_SKILL_COMBAT, CharactersTableMap::COL_SKILL_COMMAND, CharactersTableMap::COL_SKILL_GENERAL_ED, CharactersTableMap::COL_SKILL_MEDICINE_ED, CharactersTableMap::COL_SKILL_OCCULT_ED, CharactersTableMap::COL_SKILL_POKEMON_ED, CharactersTableMap::COL_SKILL_TECHNOLOGY_ED, CharactersTableMap::COL_SKILL_FOCUS, CharactersTableMap::COL_SKILL_GUILE, CharactersTableMap::COL_SKILL_INTIMIDATE, CharactersTableMap::COL_SKILL_INTUITION, CharactersTableMap::COL_SKILL_PERCEPTION, CharactersTableMap::COL_SKILL_STEALTH, CharactersTableMap::COL_SKILL_SURVIVAL, CharactersTableMap::COL_AP_SPENT, CharactersTableMap::COL_AP_BOUND, CharactersTableMap::COL_AP_DRAINED, CharactersTableMap::COL_BACKGROUND_NAME, CharactersTableMap::COL_BACKGROUND_ADEPT, CharactersTableMap::COL_BACKGROUND_NOVICE, CharactersTableMap::COL_BACKGROUND_PTHC1, CharactersTableMap::COL_BACKGROUND_PTHC2, CharactersTableMap::COL_BACKGROUND_PTHC3, CharactersTableMap::COL_AFFLICTIONS, CharactersTableMap::COL_NOTES, CharactersTableMap::COL_NATURE, CharactersTableMap::COL_SHEET_TYPE, ),
+        self::TYPE_FIELDNAME     => array('character_id', 'campaign_id', 'type', 'pokedex_no', 'pokedex_id', 'name', 'owner', 'age', 'weight', 'height', 'sex', 'base_type1', 'base_type2', 'level', 'exp', 'base_hp', 'base_atk', 'base_def', 'base_satk', 'base_sdef', 'base_spd', 'lvl_up_hp', 'lvl_up_atk', 'lvl_up_def', 'lvl_up_satk', 'lvl_up_sdef', 'lvl_up_spd', 'add_hp', 'add_atk', 'add_def', 'add_satk', 'add_sdef', 'add_spd', 'health', 'injuries', 'money', 'skill_acrobatics', 'skill_athletics', 'skill_charm', 'skill_combat', 'skill_command', 'skill_general_ed', 'skill_medicine_ed', 'skill_occult_ed', 'skill_pokemon_ed', 'skill_technology_ed', 'skill_focus', 'skill_guile', 'skill_intimidate', 'skill_intuition', 'skill_perception', 'skill_stealth', 'skill_survival', 'ap_spent', 'ap_bound', 'ap_drained', 'background_name', 'background_adept', 'background_novice', 'background_pthc1', 'background_pthc2', 'background_pthc3', 'afflictions', 'notes', 'nature', 'sheet_type', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, )
     );
 
     /**
@@ -392,11 +427,11 @@ class CharactersTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('CharacterId' => 0, 'CampaignId' => 1, 'Type' => 2, 'PokedexNo' => 3, 'PokedexId' => 4, 'Name' => 5, 'Owner' => 6, 'Age' => 7, 'Weight' => 8, 'Height' => 9, 'Sex' => 10, 'Type1' => 11, 'Type2' => 12, 'Level' => 13, 'Exp' => 14, 'BaseHp' => 15, 'BaseAtk' => 16, 'BaseDef' => 17, 'BaseSatk' => 18, 'BaseSdef' => 19, 'BaseSpd' => 20, 'AddHp' => 21, 'AddAtk' => 22, 'AddDef' => 23, 'AddSatk' => 24, 'AddSdef' => 25, 'AddSpd' => 26, 'Health' => 27, 'Injuries' => 28, 'Money' => 29, 'SkillAcrobatics' => 30, 'SkillAthletics' => 31, 'SkillCharm' => 32, 'SkillCombat' => 33, 'SkillCommand' => 34, 'SkillGeneralEd' => 35, 'SkillMedicineEd' => 36, 'SkillOccultEd' => 37, 'SkillPokemonEd' => 38, 'SkillTechnologyEd' => 39, 'SkillFocus' => 40, 'SkillGuile' => 41, 'SkillIntimidate' => 42, 'SkillIntuition' => 43, 'SkillPerception' => 44, 'SkillStealth' => 45, 'SkillSurvival' => 46, 'ApSpent' => 47, 'ApBound' => 48, 'ApDrained' => 49, 'BackgroundName' => 50, 'BackgroundAdept' => 51, 'BackgroundNovice' => 52, 'BackgroundPthc1' => 53, 'BackgroundPthc2' => 54, 'BackgroundPthc3' => 55, 'Notes' => 56, 'Nature' => 57, 'SheetType' => 58, ),
-        self::TYPE_CAMELNAME     => array('characterId' => 0, 'campaignId' => 1, 'type' => 2, 'pokedexNo' => 3, 'pokedexId' => 4, 'name' => 5, 'owner' => 6, 'age' => 7, 'weight' => 8, 'height' => 9, 'sex' => 10, 'type1' => 11, 'type2' => 12, 'level' => 13, 'exp' => 14, 'baseHp' => 15, 'baseAtk' => 16, 'baseDef' => 17, 'baseSatk' => 18, 'baseSdef' => 19, 'baseSpd' => 20, 'addHp' => 21, 'addAtk' => 22, 'addDef' => 23, 'addSatk' => 24, 'addSdef' => 25, 'addSpd' => 26, 'health' => 27, 'injuries' => 28, 'money' => 29, 'skillAcrobatics' => 30, 'skillAthletics' => 31, 'skillCharm' => 32, 'skillCombat' => 33, 'skillCommand' => 34, 'skillGeneralEd' => 35, 'skillMedicineEd' => 36, 'skillOccultEd' => 37, 'skillPokemonEd' => 38, 'skillTechnologyEd' => 39, 'skillFocus' => 40, 'skillGuile' => 41, 'skillIntimidate' => 42, 'skillIntuition' => 43, 'skillPerception' => 44, 'skillStealth' => 45, 'skillSurvival' => 46, 'apSpent' => 47, 'apBound' => 48, 'apDrained' => 49, 'backgroundName' => 50, 'backgroundAdept' => 51, 'backgroundNovice' => 52, 'backgroundPthc1' => 53, 'backgroundPthc2' => 54, 'backgroundPthc3' => 55, 'notes' => 56, 'nature' => 57, 'sheetType' => 58, ),
-        self::TYPE_COLNAME       => array(CharactersTableMap::COL_CHARACTER_ID => 0, CharactersTableMap::COL_CAMPAIGN_ID => 1, CharactersTableMap::COL_TYPE => 2, CharactersTableMap::COL_POKEDEX_NO => 3, CharactersTableMap::COL_POKEDEX_ID => 4, CharactersTableMap::COL_NAME => 5, CharactersTableMap::COL_OWNER => 6, CharactersTableMap::COL_AGE => 7, CharactersTableMap::COL_WEIGHT => 8, CharactersTableMap::COL_HEIGHT => 9, CharactersTableMap::COL_SEX => 10, CharactersTableMap::COL_BASE_TYPE1 => 11, CharactersTableMap::COL_BASE_TYPE2 => 12, CharactersTableMap::COL_LEVEL => 13, CharactersTableMap::COL_EXP => 14, CharactersTableMap::COL_BASE_HP => 15, CharactersTableMap::COL_BASE_ATK => 16, CharactersTableMap::COL_BASE_DEF => 17, CharactersTableMap::COL_BASE_SATK => 18, CharactersTableMap::COL_BASE_SDEF => 19, CharactersTableMap::COL_BASE_SPD => 20, CharactersTableMap::COL_ADD_HP => 21, CharactersTableMap::COL_ADD_ATK => 22, CharactersTableMap::COL_ADD_DEF => 23, CharactersTableMap::COL_ADD_SATK => 24, CharactersTableMap::COL_ADD_SDEF => 25, CharactersTableMap::COL_ADD_SPD => 26, CharactersTableMap::COL_HEALTH => 27, CharactersTableMap::COL_INJURIES => 28, CharactersTableMap::COL_MONEY => 29, CharactersTableMap::COL_SKILL_ACROBATICS => 30, CharactersTableMap::COL_SKILL_ATHLETICS => 31, CharactersTableMap::COL_SKILL_CHARM => 32, CharactersTableMap::COL_SKILL_COMBAT => 33, CharactersTableMap::COL_SKILL_COMMAND => 34, CharactersTableMap::COL_SKILL_GENERAL_ED => 35, CharactersTableMap::COL_SKILL_MEDICINE_ED => 36, CharactersTableMap::COL_SKILL_OCCULT_ED => 37, CharactersTableMap::COL_SKILL_POKEMON_ED => 38, CharactersTableMap::COL_SKILL_TECHNOLOGY_ED => 39, CharactersTableMap::COL_SKILL_FOCUS => 40, CharactersTableMap::COL_SKILL_GUILE => 41, CharactersTableMap::COL_SKILL_INTIMIDATE => 42, CharactersTableMap::COL_SKILL_INTUITION => 43, CharactersTableMap::COL_SKILL_PERCEPTION => 44, CharactersTableMap::COL_SKILL_STEALTH => 45, CharactersTableMap::COL_SKILL_SURVIVAL => 46, CharactersTableMap::COL_AP_SPENT => 47, CharactersTableMap::COL_AP_BOUND => 48, CharactersTableMap::COL_AP_DRAINED => 49, CharactersTableMap::COL_BACKGROUND_NAME => 50, CharactersTableMap::COL_BACKGROUND_ADEPT => 51, CharactersTableMap::COL_BACKGROUND_NOVICE => 52, CharactersTableMap::COL_BACKGROUND_PTHC1 => 53, CharactersTableMap::COL_BACKGROUND_PTHC2 => 54, CharactersTableMap::COL_BACKGROUND_PTHC3 => 55, CharactersTableMap::COL_NOTES => 56, CharactersTableMap::COL_NATURE => 57, CharactersTableMap::COL_SHEET_TYPE => 58, ),
-        self::TYPE_FIELDNAME     => array('character_id' => 0, 'campaign_id' => 1, 'type' => 2, 'pokedex_no' => 3, 'pokedex_id' => 4, 'name' => 5, 'owner' => 6, 'age' => 7, 'weight' => 8, 'height' => 9, 'sex' => 10, 'base_type1' => 11, 'base_type2' => 12, 'level' => 13, 'exp' => 14, 'base_hp' => 15, 'base_atk' => 16, 'base_def' => 17, 'base_satk' => 18, 'base_sdef' => 19, 'base_spd' => 20, 'add_hp' => 21, 'add_atk' => 22, 'add_def' => 23, 'add_satk' => 24, 'add_sdef' => 25, 'add_spd' => 26, 'health' => 27, 'injuries' => 28, 'money' => 29, 'skill_acrobatics' => 30, 'skill_athletics' => 31, 'skill_charm' => 32, 'skill_combat' => 33, 'skill_command' => 34, 'skill_general_ed' => 35, 'skill_medicine_ed' => 36, 'skill_occult_ed' => 37, 'skill_pokemon_ed' => 38, 'skill_technology_ed' => 39, 'skill_focus' => 40, 'skill_guile' => 41, 'skill_intimidate' => 42, 'skill_intuition' => 43, 'skill_perception' => 44, 'skill_stealth' => 45, 'skill_survival' => 46, 'ap_spent' => 47, 'ap_bound' => 48, 'ap_drained' => 49, 'background_name' => 50, 'background_adept' => 51, 'background_novice' => 52, 'background_pthc1' => 53, 'background_pthc2' => 54, 'background_pthc3' => 55, 'notes' => 56, 'nature' => 57, 'sheet_type' => 58, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, )
+        self::TYPE_PHPNAME       => array('CharacterId' => 0, 'CampaignId' => 1, 'Type' => 2, 'PokedexNo' => 3, 'PokedexId' => 4, 'Name' => 5, 'Owner' => 6, 'Age' => 7, 'Weight' => 8, 'Height' => 9, 'Sex' => 10, 'Type1' => 11, 'Type2' => 12, 'Level' => 13, 'Exp' => 14, 'BaseHp' => 15, 'BaseAtk' => 16, 'BaseDef' => 17, 'BaseSatk' => 18, 'BaseSdef' => 19, 'BaseSpd' => 20, 'LvlUpHp' => 21, 'LvlUpAtk' => 22, 'LvlUpDef' => 23, 'LvlUpSatk' => 24, 'LvlUpSdef' => 25, 'LvlUpSpd' => 26, 'AddHp' => 27, 'AddAtk' => 28, 'AddDef' => 29, 'AddSatk' => 30, 'AddSdef' => 31, 'AddSpd' => 32, 'Health' => 33, 'Injuries' => 34, 'Money' => 35, 'SkillAcrobatics' => 36, 'SkillAthletics' => 37, 'SkillCharm' => 38, 'SkillCombat' => 39, 'SkillCommand' => 40, 'SkillGeneralEd' => 41, 'SkillMedicineEd' => 42, 'SkillOccultEd' => 43, 'SkillPokemonEd' => 44, 'SkillTechnologyEd' => 45, 'SkillFocus' => 46, 'SkillGuile' => 47, 'SkillIntimidate' => 48, 'SkillIntuition' => 49, 'SkillPerception' => 50, 'SkillStealth' => 51, 'SkillSurvival' => 52, 'ApSpent' => 53, 'ApBound' => 54, 'ApDrained' => 55, 'BackgroundName' => 56, 'BackgroundAdept' => 57, 'BackgroundNovice' => 58, 'BackgroundPthc1' => 59, 'BackgroundPthc2' => 60, 'BackgroundPthc3' => 61, 'Afflictions' => 62, 'Notes' => 63, 'Nature' => 64, 'SheetType' => 65, ),
+        self::TYPE_CAMELNAME     => array('characterId' => 0, 'campaignId' => 1, 'type' => 2, 'pokedexNo' => 3, 'pokedexId' => 4, 'name' => 5, 'owner' => 6, 'age' => 7, 'weight' => 8, 'height' => 9, 'sex' => 10, 'type1' => 11, 'type2' => 12, 'level' => 13, 'exp' => 14, 'baseHp' => 15, 'baseAtk' => 16, 'baseDef' => 17, 'baseSatk' => 18, 'baseSdef' => 19, 'baseSpd' => 20, 'lvlUpHp' => 21, 'lvlUpAtk' => 22, 'lvlUpDef' => 23, 'lvlUpSatk' => 24, 'lvlUpSdef' => 25, 'lvlUpSpd' => 26, 'addHp' => 27, 'addAtk' => 28, 'addDef' => 29, 'addSatk' => 30, 'addSdef' => 31, 'addSpd' => 32, 'health' => 33, 'injuries' => 34, 'money' => 35, 'skillAcrobatics' => 36, 'skillAthletics' => 37, 'skillCharm' => 38, 'skillCombat' => 39, 'skillCommand' => 40, 'skillGeneralEd' => 41, 'skillMedicineEd' => 42, 'skillOccultEd' => 43, 'skillPokemonEd' => 44, 'skillTechnologyEd' => 45, 'skillFocus' => 46, 'skillGuile' => 47, 'skillIntimidate' => 48, 'skillIntuition' => 49, 'skillPerception' => 50, 'skillStealth' => 51, 'skillSurvival' => 52, 'apSpent' => 53, 'apBound' => 54, 'apDrained' => 55, 'backgroundName' => 56, 'backgroundAdept' => 57, 'backgroundNovice' => 58, 'backgroundPthc1' => 59, 'backgroundPthc2' => 60, 'backgroundPthc3' => 61, 'afflictions' => 62, 'notes' => 63, 'nature' => 64, 'sheetType' => 65, ),
+        self::TYPE_COLNAME       => array(CharactersTableMap::COL_CHARACTER_ID => 0, CharactersTableMap::COL_CAMPAIGN_ID => 1, CharactersTableMap::COL_TYPE => 2, CharactersTableMap::COL_POKEDEX_NO => 3, CharactersTableMap::COL_POKEDEX_ID => 4, CharactersTableMap::COL_NAME => 5, CharactersTableMap::COL_OWNER => 6, CharactersTableMap::COL_AGE => 7, CharactersTableMap::COL_WEIGHT => 8, CharactersTableMap::COL_HEIGHT => 9, CharactersTableMap::COL_SEX => 10, CharactersTableMap::COL_BASE_TYPE1 => 11, CharactersTableMap::COL_BASE_TYPE2 => 12, CharactersTableMap::COL_LEVEL => 13, CharactersTableMap::COL_EXP => 14, CharactersTableMap::COL_BASE_HP => 15, CharactersTableMap::COL_BASE_ATK => 16, CharactersTableMap::COL_BASE_DEF => 17, CharactersTableMap::COL_BASE_SATK => 18, CharactersTableMap::COL_BASE_SDEF => 19, CharactersTableMap::COL_BASE_SPD => 20, CharactersTableMap::COL_LVL_UP_HP => 21, CharactersTableMap::COL_LVL_UP_ATK => 22, CharactersTableMap::COL_LVL_UP_DEF => 23, CharactersTableMap::COL_LVL_UP_SATK => 24, CharactersTableMap::COL_LVL_UP_SDEF => 25, CharactersTableMap::COL_LVL_UP_SPD => 26, CharactersTableMap::COL_ADD_HP => 27, CharactersTableMap::COL_ADD_ATK => 28, CharactersTableMap::COL_ADD_DEF => 29, CharactersTableMap::COL_ADD_SATK => 30, CharactersTableMap::COL_ADD_SDEF => 31, CharactersTableMap::COL_ADD_SPD => 32, CharactersTableMap::COL_HEALTH => 33, CharactersTableMap::COL_INJURIES => 34, CharactersTableMap::COL_MONEY => 35, CharactersTableMap::COL_SKILL_ACROBATICS => 36, CharactersTableMap::COL_SKILL_ATHLETICS => 37, CharactersTableMap::COL_SKILL_CHARM => 38, CharactersTableMap::COL_SKILL_COMBAT => 39, CharactersTableMap::COL_SKILL_COMMAND => 40, CharactersTableMap::COL_SKILL_GENERAL_ED => 41, CharactersTableMap::COL_SKILL_MEDICINE_ED => 42, CharactersTableMap::COL_SKILL_OCCULT_ED => 43, CharactersTableMap::COL_SKILL_POKEMON_ED => 44, CharactersTableMap::COL_SKILL_TECHNOLOGY_ED => 45, CharactersTableMap::COL_SKILL_FOCUS => 46, CharactersTableMap::COL_SKILL_GUILE => 47, CharactersTableMap::COL_SKILL_INTIMIDATE => 48, CharactersTableMap::COL_SKILL_INTUITION => 49, CharactersTableMap::COL_SKILL_PERCEPTION => 50, CharactersTableMap::COL_SKILL_STEALTH => 51, CharactersTableMap::COL_SKILL_SURVIVAL => 52, CharactersTableMap::COL_AP_SPENT => 53, CharactersTableMap::COL_AP_BOUND => 54, CharactersTableMap::COL_AP_DRAINED => 55, CharactersTableMap::COL_BACKGROUND_NAME => 56, CharactersTableMap::COL_BACKGROUND_ADEPT => 57, CharactersTableMap::COL_BACKGROUND_NOVICE => 58, CharactersTableMap::COL_BACKGROUND_PTHC1 => 59, CharactersTableMap::COL_BACKGROUND_PTHC2 => 60, CharactersTableMap::COL_BACKGROUND_PTHC3 => 61, CharactersTableMap::COL_AFFLICTIONS => 62, CharactersTableMap::COL_NOTES => 63, CharactersTableMap::COL_NATURE => 64, CharactersTableMap::COL_SHEET_TYPE => 65, ),
+        self::TYPE_FIELDNAME     => array('character_id' => 0, 'campaign_id' => 1, 'type' => 2, 'pokedex_no' => 3, 'pokedex_id' => 4, 'name' => 5, 'owner' => 6, 'age' => 7, 'weight' => 8, 'height' => 9, 'sex' => 10, 'base_type1' => 11, 'base_type2' => 12, 'level' => 13, 'exp' => 14, 'base_hp' => 15, 'base_atk' => 16, 'base_def' => 17, 'base_satk' => 18, 'base_sdef' => 19, 'base_spd' => 20, 'lvl_up_hp' => 21, 'lvl_up_atk' => 22, 'lvl_up_def' => 23, 'lvl_up_satk' => 24, 'lvl_up_sdef' => 25, 'lvl_up_spd' => 26, 'add_hp' => 27, 'add_atk' => 28, 'add_def' => 29, 'add_satk' => 30, 'add_sdef' => 31, 'add_spd' => 32, 'health' => 33, 'injuries' => 34, 'money' => 35, 'skill_acrobatics' => 36, 'skill_athletics' => 37, 'skill_charm' => 38, 'skill_combat' => 39, 'skill_command' => 40, 'skill_general_ed' => 41, 'skill_medicine_ed' => 42, 'skill_occult_ed' => 43, 'skill_pokemon_ed' => 44, 'skill_technology_ed' => 45, 'skill_focus' => 46, 'skill_guile' => 47, 'skill_intimidate' => 48, 'skill_intuition' => 49, 'skill_perception' => 50, 'skill_stealth' => 51, 'skill_survival' => 52, 'ap_spent' => 53, 'ap_bound' => 54, 'ap_drained' => 55, 'background_name' => 56, 'background_adept' => 57, 'background_novice' => 58, 'background_pthc1' => 59, 'background_pthc2' => 60, 'background_pthc3' => 61, 'afflictions' => 62, 'notes' => 63, 'nature' => 64, 'sheet_type' => 65, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, )
     );
 
     /**
@@ -437,6 +472,12 @@ class CharactersTableMap extends TableMap
         $this->addColumn('base_satk', 'BaseSatk', 'INTEGER', true, null, null);
         $this->addColumn('base_sdef', 'BaseSdef', 'INTEGER', true, null, null);
         $this->addColumn('base_spd', 'BaseSpd', 'INTEGER', true, null, null);
+        $this->addColumn('lvl_up_hp', 'LvlUpHp', 'INTEGER', false, null, 0);
+        $this->addColumn('lvl_up_atk', 'LvlUpAtk', 'INTEGER', false, null, 0);
+        $this->addColumn('lvl_up_def', 'LvlUpDef', 'INTEGER', false, null, 0);
+        $this->addColumn('lvl_up_satk', 'LvlUpSatk', 'INTEGER', false, null, 0);
+        $this->addColumn('lvl_up_sdef', 'LvlUpSdef', 'INTEGER', false, null, 0);
+        $this->addColumn('lvl_up_spd', 'LvlUpSpd', 'INTEGER', false, null, 0);
         $this->addColumn('add_hp', 'AddHp', 'INTEGER', false, null, 0);
         $this->addColumn('add_atk', 'AddAtk', 'INTEGER', false, null, 0);
         $this->addColumn('add_def', 'AddDef', 'INTEGER', false, null, 0);
@@ -472,6 +513,7 @@ class CharactersTableMap extends TableMap
         $this->addColumn('background_pthc1', 'BackgroundPthc1', 'VARCHAR', false, 80, null);
         $this->addColumn('background_pthc2', 'BackgroundPthc2', 'VARCHAR', false, 80, null);
         $this->addColumn('background_pthc3', 'BackgroundPthc3', 'VARCHAR', false, 80, null);
+        $this->addColumn('afflictions', 'Afflictions', 'VARCHAR', false, 200, null);
         $this->addColumn('notes', 'Notes', 'LONGVARCHAR', false, null, null);
         $this->addColumn('nature', 'Nature', 'VARCHAR', false, 80, null);
         $this->addColumn('sheet_type', 'SheetType', 'CHAR', false, null, 'SIMPLE');
@@ -681,6 +723,12 @@ class CharactersTableMap extends TableMap
             $criteria->addSelectColumn(CharactersTableMap::COL_BASE_SATK);
             $criteria->addSelectColumn(CharactersTableMap::COL_BASE_SDEF);
             $criteria->addSelectColumn(CharactersTableMap::COL_BASE_SPD);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_HP);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_ATK);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_DEF);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_SATK);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_SDEF);
+            $criteria->addSelectColumn(CharactersTableMap::COL_LVL_UP_SPD);
             $criteria->addSelectColumn(CharactersTableMap::COL_ADD_HP);
             $criteria->addSelectColumn(CharactersTableMap::COL_ADD_ATK);
             $criteria->addSelectColumn(CharactersTableMap::COL_ADD_DEF);
@@ -716,6 +764,7 @@ class CharactersTableMap extends TableMap
             $criteria->addSelectColumn(CharactersTableMap::COL_BACKGROUND_PTHC1);
             $criteria->addSelectColumn(CharactersTableMap::COL_BACKGROUND_PTHC2);
             $criteria->addSelectColumn(CharactersTableMap::COL_BACKGROUND_PTHC3);
+            $criteria->addSelectColumn(CharactersTableMap::COL_AFFLICTIONS);
             $criteria->addSelectColumn(CharactersTableMap::COL_NOTES);
             $criteria->addSelectColumn(CharactersTableMap::COL_NATURE);
             $criteria->addSelectColumn(CharactersTableMap::COL_SHEET_TYPE);
@@ -741,6 +790,12 @@ class CharactersTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.base_satk');
             $criteria->addSelectColumn($alias . '.base_sdef');
             $criteria->addSelectColumn($alias . '.base_spd');
+            $criteria->addSelectColumn($alias . '.lvl_up_hp');
+            $criteria->addSelectColumn($alias . '.lvl_up_atk');
+            $criteria->addSelectColumn($alias . '.lvl_up_def');
+            $criteria->addSelectColumn($alias . '.lvl_up_satk');
+            $criteria->addSelectColumn($alias . '.lvl_up_sdef');
+            $criteria->addSelectColumn($alias . '.lvl_up_spd');
             $criteria->addSelectColumn($alias . '.add_hp');
             $criteria->addSelectColumn($alias . '.add_atk');
             $criteria->addSelectColumn($alias . '.add_def');
@@ -776,6 +831,7 @@ class CharactersTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.background_pthc1');
             $criteria->addSelectColumn($alias . '.background_pthc2');
             $criteria->addSelectColumn($alias . '.background_pthc3');
+            $criteria->addSelectColumn($alias . '.afflictions');
             $criteria->addSelectColumn($alias . '.notes');
             $criteria->addSelectColumn($alias . '.nature');
             $criteria->addSelectColumn($alias . '.sheet_type');

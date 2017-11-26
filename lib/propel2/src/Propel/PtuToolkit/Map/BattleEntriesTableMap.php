@@ -59,7 +59,7 @@ class BattleEntriesTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 3;
+    const NUM_COLUMNS = 4;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class BattleEntriesTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 3;
+    const NUM_HYDRATE_COLUMNS = 4;
 
     /**
      * the column name for the battle_entry_id field
@@ -87,6 +87,11 @@ class BattleEntriesTableMap extends TableMap
     const COL_CHARACTER_ID = 'battle_entries.character_id';
 
     /**
+     * the column name for the afflictions field
+     */
+    const COL_AFFLICTIONS = 'battle_entries.afflictions';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -98,11 +103,11 @@ class BattleEntriesTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('BattleEntryId', 'BattleId', 'CharacterId', ),
-        self::TYPE_CAMELNAME     => array('battleEntryId', 'battleId', 'characterId', ),
-        self::TYPE_COLNAME       => array(BattleEntriesTableMap::COL_BATTLE_ENTRY_ID, BattleEntriesTableMap::COL_BATTLE_ID, BattleEntriesTableMap::COL_CHARACTER_ID, ),
-        self::TYPE_FIELDNAME     => array('battle_entry_id', 'battle_id', 'character_id', ),
-        self::TYPE_NUM           => array(0, 1, 2, )
+        self::TYPE_PHPNAME       => array('BattleEntryId', 'BattleId', 'CharacterId', 'Afflictions', ),
+        self::TYPE_CAMELNAME     => array('battleEntryId', 'battleId', 'characterId', 'afflictions', ),
+        self::TYPE_COLNAME       => array(BattleEntriesTableMap::COL_BATTLE_ENTRY_ID, BattleEntriesTableMap::COL_BATTLE_ID, BattleEntriesTableMap::COL_CHARACTER_ID, BattleEntriesTableMap::COL_AFFLICTIONS, ),
+        self::TYPE_FIELDNAME     => array('battle_entry_id', 'battle_id', 'character_id', 'afflictions', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
     /**
@@ -112,11 +117,11 @@ class BattleEntriesTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('BattleEntryId' => 0, 'BattleId' => 1, 'CharacterId' => 2, ),
-        self::TYPE_CAMELNAME     => array('battleEntryId' => 0, 'battleId' => 1, 'characterId' => 2, ),
-        self::TYPE_COLNAME       => array(BattleEntriesTableMap::COL_BATTLE_ENTRY_ID => 0, BattleEntriesTableMap::COL_BATTLE_ID => 1, BattleEntriesTableMap::COL_CHARACTER_ID => 2, ),
-        self::TYPE_FIELDNAME     => array('battle_entry_id' => 0, 'battle_id' => 1, 'character_id' => 2, ),
-        self::TYPE_NUM           => array(0, 1, 2, )
+        self::TYPE_PHPNAME       => array('BattleEntryId' => 0, 'BattleId' => 1, 'CharacterId' => 2, 'Afflictions' => 3, ),
+        self::TYPE_CAMELNAME     => array('battleEntryId' => 0, 'battleId' => 1, 'characterId' => 2, 'afflictions' => 3, ),
+        self::TYPE_COLNAME       => array(BattleEntriesTableMap::COL_BATTLE_ENTRY_ID => 0, BattleEntriesTableMap::COL_BATTLE_ID => 1, BattleEntriesTableMap::COL_CHARACTER_ID => 2, BattleEntriesTableMap::COL_AFFLICTIONS => 3, ),
+        self::TYPE_FIELDNAME     => array('battle_entry_id' => 0, 'battle_id' => 1, 'character_id' => 2, 'afflictions' => 3, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
     /**
@@ -139,6 +144,7 @@ class BattleEntriesTableMap extends TableMap
         $this->addPrimaryKey('battle_entry_id', 'BattleEntryId', 'INTEGER', true, null, null);
         $this->addForeignKey('battle_id', 'BattleId', 'INTEGER', 'battles', 'battle_id', true, null, null);
         $this->addForeignKey('character_id', 'CharacterId', 'INTEGER', 'characters', 'character_id', true, null, null);
+        $this->addColumn('afflictions', 'Afflictions', 'VARCHAR', false, 200, null);
     } // initialize()
 
     /**
@@ -306,10 +312,12 @@ class BattleEntriesTableMap extends TableMap
             $criteria->addSelectColumn(BattleEntriesTableMap::COL_BATTLE_ENTRY_ID);
             $criteria->addSelectColumn(BattleEntriesTableMap::COL_BATTLE_ID);
             $criteria->addSelectColumn(BattleEntriesTableMap::COL_CHARACTER_ID);
+            $criteria->addSelectColumn(BattleEntriesTableMap::COL_AFFLICTIONS);
         } else {
             $criteria->addSelectColumn($alias . '.battle_entry_id');
             $criteria->addSelectColumn($alias . '.battle_id');
             $criteria->addSelectColumn($alias . '.character_id');
+            $criteria->addSelectColumn($alias . '.afflictions');
         }
     }
 

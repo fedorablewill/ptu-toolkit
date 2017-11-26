@@ -153,29 +153,139 @@ $moves = $character->getCharacterMovessJoinMoves();
 
                 <h4>Stats <small class="text-warning" id="warn-stats"></small></h4>
 
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-hp">HP (Stat)</label>
-                    <input class="form-control" type="number" id="char-hp" data-field="hp" required />
-                </div>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-atk">Attack</label>
-                    <input class="form-control" type="number" id="char-atk" data-field="atk" required />
-                </div>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-def">Defense</label>
-                    <input class="form-control" type="number" id="char-def" data-field="def" required />
-                </div>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-spatk">Special Attack</label>
-                    <input class="form-control" type="number" id="char-spatk" data-field="spatk" required />
-                </div>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-spdef">Special Defense</label>
-                    <input class="form-control" type="number" id="char-spdef" data-field="spdef" required />
-                </div>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-speed">Speed</label>
-                    <input class="form-control" type="number" id="char-speed" data-field="speed" required />
+                <div id="char-stats">
+                    <span class="char-stat-total" id="char-hp-total"><?php
+                        echo $character->getBaseHp() + $character->getLvlUpHp() + $character->getAddHp(); ?></span><label>HP (Stat)</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-hp">Base</label>
+                                <input class="form-control" type="number" id="char-base-hp" data-field="base-hp" value="<?php echo $character->getBaseHp() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-hp">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-hp" data-field="lvl-up-hp" value="<?php echo $character->getLvlUpHp() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-hp">Add</label>
+                                <input class="form-control" type="number" id="char-add-hp" data-field="add-hp" value="<?php echo $character->getAddHp() ?>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="char-stat-total" id="char-atk-total"><?php
+                        echo $character->getBaseAtk() + $character->getLvlUpAtk() + $character->getAddAtk(); ?></span><label>Attack</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-atk">Base</label>
+                                <input class="form-control" type="number" id="char-base-atk" data-field="base-atk" value="<?php echo $character->getBaseAtk() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-atk">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-atk" data-field="lvl-up-atk" value="<?php echo $character->getLvlUpAtk() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-atk">Add</label>
+                                <input class="form-control" type="number" id="char-add-atk" data-field="add-atk" value="<?php echo $character->getAddAtk() ?>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="char-stat-total" id="char-def-total"><?php
+                        echo $character->getBaseDef() + $character->getLvlUpDef() + $character->getAddDef(); ?></span><label>Defense</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-def">Base</label>
+                                <input class="form-control" type="number" id="char-base-def" data-field="base-def" value="<?php echo $character->getBaseDef() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-def">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-def" data-field="lvl-up-def" value="<?php echo $character->getLvlUpDef() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-def">Add</label>
+                                <input class="form-control" type="number" id="char-add-def" data-field="add-def" value="<?php echo $character->getAddDef() ?>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="char-stat-total" id="char-spatk-total"><?php
+                        echo $character->getBaseSatk() + $character->getLvlUpSatk() + $character->getAddSatk(); ?></span><label>Special Attack</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-spatk">Base</label>
+                                <input class="form-control" type="number" id="char-base-spatk" data-field="base-spatk" value="<?php echo $character->getBaseSatk() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-spatk">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-spatk" data-field="lvl-up-spatk" value="<?php echo $character->getLvlUpSatk() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-spatk">Add</label>
+                                <input class="form-control" type="number" id="char-add-spatk" data-field="add-spatk" value="<?php echo $character->getAddSatk() ?>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="char-stat-total" id="char-spdef-total"><?php
+                        echo $character->getBaseSdef() + $character->getLvlUpSdef() + $character->getAddSdef(); ?></span><label>Special Defense</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-spdef">Base</label>
+                                <input class="form-control" type="number" id="char-base-spdef" data-field="base-spdef" value="<?php echo $character->getBaseSdef() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-spdef">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-spdef" data-field="lvl-up-spdef" value="<?php echo $character->getLvlUpSdef() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-spdef">Add</label>
+                                <input class="form-control" type="number" id="char-add-spdef" data-field="add-spdef" value="<?php echo $character->getAddSdef() ?>" required />
+                            </div>
+                        </div>
+                    </div>
+                    <span class="char-stat-total" id="char-speed-total"><?php
+                        echo $character->getBaseSpd() + $character->getLvlUpSpd() + $character->getAddSpd(); ?></span><label>Speed</label>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-base-speed">Base</label>
+                                <input class="form-control" type="number" id="char-base-speed" data-field="base-speed" value="<?php echo $character->getBaseSpd() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-lvl-up-speed">Lvl-Up</label>
+                                <input class="form-control" type="number" id="char-lvl-up-speed" data-field="lvl-up-speed" value="<?php echo $character->getLvlUpSpd() ?>" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label" for="char-add-speed">Add</label>
+                                <input class="form-control" type="number" id="char-add-speed" data-field="add-speed" value="<?php echo $character->getAddSpd() ?>" required />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <hr/>
@@ -229,6 +339,13 @@ $moves = $character->getCharacterMovessJoinMoves();
 <style>
     .input-group-action {
         padding: 0 !important;
+    }
+
+    .char-stat-total {
+        width: 35px;
+        display: inline-block;
+        text-align: center;
+        font-weight: 400;
     }
 </style>
 

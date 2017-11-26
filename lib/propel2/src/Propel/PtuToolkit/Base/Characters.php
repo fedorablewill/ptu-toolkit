@@ -223,6 +223,54 @@ abstract class Characters implements ActiveRecordInterface
     protected $base_spd;
 
     /**
+     * The value for the lvl_up_hp field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_hp;
+
+    /**
+     * The value for the lvl_up_atk field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_atk;
+
+    /**
+     * The value for the lvl_up_def field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_def;
+
+    /**
+     * The value for the lvl_up_satk field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_satk;
+
+    /**
+     * The value for the lvl_up_sdef field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_sdef;
+
+    /**
+     * The value for the lvl_up_spd field.
+     *
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $lvl_up_spd;
+
+    /**
      * The value for the add_hp field.
      *
      * Note: this column has a database default value of: 0
@@ -496,6 +544,13 @@ abstract class Characters implements ActiveRecordInterface
     protected $background_pthc3;
 
     /**
+     * The value for the afflictions field.
+     *
+     * @var        string
+     */
+    protected $afflictions;
+
+    /**
      * The value for the notes field.
      *
      * @var        string
@@ -586,6 +641,12 @@ abstract class Characters implements ActiveRecordInterface
      */
     public function applyDefaultValues()
     {
+        $this->lvl_up_hp = 0;
+        $this->lvl_up_atk = 0;
+        $this->lvl_up_def = 0;
+        $this->lvl_up_satk = 0;
+        $this->lvl_up_sdef = 0;
+        $this->lvl_up_spd = 0;
         $this->add_hp = 0;
         $this->add_atk = 0;
         $this->add_def = 0;
@@ -1055,6 +1116,66 @@ abstract class Characters implements ActiveRecordInterface
     }
 
     /**
+     * Get the [lvl_up_hp] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpHp()
+    {
+        return $this->lvl_up_hp;
+    }
+
+    /**
+     * Get the [lvl_up_atk] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpAtk()
+    {
+        return $this->lvl_up_atk;
+    }
+
+    /**
+     * Get the [lvl_up_def] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpDef()
+    {
+        return $this->lvl_up_def;
+    }
+
+    /**
+     * Get the [lvl_up_satk] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpSatk()
+    {
+        return $this->lvl_up_satk;
+    }
+
+    /**
+     * Get the [lvl_up_sdef] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpSdef()
+    {
+        return $this->lvl_up_sdef;
+    }
+
+    /**
+     * Get the [lvl_up_spd] column value.
+     *
+     * @return int
+     */
+    public function getLvlUpSpd()
+    {
+        return $this->lvl_up_spd;
+    }
+
+    /**
      * Get the [add_hp] column value.
      *
      * @return int
@@ -1402,6 +1523,16 @@ abstract class Characters implements ActiveRecordInterface
     public function getBackgroundPthc3()
     {
         return $this->background_pthc3;
+    }
+
+    /**
+     * Get the [afflictions] column value.
+     *
+     * @return string
+     */
+    public function getAfflictions()
+    {
+        return $this->afflictions;
     }
 
     /**
@@ -1857,6 +1988,126 @@ abstract class Characters implements ActiveRecordInterface
 
         return $this;
     } // setBaseSpd()
+
+    /**
+     * Set the value of [lvl_up_hp] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpHp($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_hp !== $v) {
+            $this->lvl_up_hp = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_HP] = true;
+        }
+
+        return $this;
+    } // setLvlUpHp()
+
+    /**
+     * Set the value of [lvl_up_atk] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpAtk($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_atk !== $v) {
+            $this->lvl_up_atk = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_ATK] = true;
+        }
+
+        return $this;
+    } // setLvlUpAtk()
+
+    /**
+     * Set the value of [lvl_up_def] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpDef($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_def !== $v) {
+            $this->lvl_up_def = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_DEF] = true;
+        }
+
+        return $this;
+    } // setLvlUpDef()
+
+    /**
+     * Set the value of [lvl_up_satk] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpSatk($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_satk !== $v) {
+            $this->lvl_up_satk = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_SATK] = true;
+        }
+
+        return $this;
+    } // setLvlUpSatk()
+
+    /**
+     * Set the value of [lvl_up_sdef] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpSdef($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_sdef !== $v) {
+            $this->lvl_up_sdef = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_SDEF] = true;
+        }
+
+        return $this;
+    } // setLvlUpSdef()
+
+    /**
+     * Set the value of [lvl_up_spd] column.
+     *
+     * @param int $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setLvlUpSpd($v)
+    {
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->lvl_up_spd !== $v) {
+            $this->lvl_up_spd = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_LVL_UP_SPD] = true;
+        }
+
+        return $this;
+    } // setLvlUpSpd()
 
     /**
      * Set the value of [add_hp] column.
@@ -2559,6 +2810,26 @@ abstract class Characters implements ActiveRecordInterface
     } // setBackgroundPthc3()
 
     /**
+     * Set the value of [afflictions] column.
+     *
+     * @param string $v new value
+     * @return $this|\Propel\PtuToolkit\Characters The current object (for fluent API support)
+     */
+    public function setAfflictions($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->afflictions !== $v) {
+            $this->afflictions = $v;
+            $this->modifiedColumns[CharactersTableMap::COL_AFFLICTIONS] = true;
+        }
+
+        return $this;
+    } // setAfflictions()
+
+    /**
      * Set the value of [notes] column.
      *
      * @param string $v new value
@@ -2628,6 +2899,30 @@ abstract class Characters implements ActiveRecordInterface
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->lvl_up_hp !== 0) {
+                return false;
+            }
+
+            if ($this->lvl_up_atk !== 0) {
+                return false;
+            }
+
+            if ($this->lvl_up_def !== 0) {
+                return false;
+            }
+
+            if ($this->lvl_up_satk !== 0) {
+                return false;
+            }
+
+            if ($this->lvl_up_sdef !== 0) {
+                return false;
+            }
+
+            if ($this->lvl_up_spd !== 0) {
+                return false;
+            }
+
             if ($this->add_hp !== 0) {
                 return false;
             }
@@ -2833,118 +3128,139 @@ abstract class Characters implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 20 + $startcol : CharactersTableMap::translateFieldName('BaseSpd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->base_spd = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 21 + $startcol : CharactersTableMap::translateFieldName('AddHp', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 21 + $startcol : CharactersTableMap::translateFieldName('LvlUpHp', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_hp = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 22 + $startcol : CharactersTableMap::translateFieldName('LvlUpAtk', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_atk = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 23 + $startcol : CharactersTableMap::translateFieldName('LvlUpDef', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_def = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 24 + $startcol : CharactersTableMap::translateFieldName('LvlUpSatk', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_satk = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 25 + $startcol : CharactersTableMap::translateFieldName('LvlUpSdef', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_sdef = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 26 + $startcol : CharactersTableMap::translateFieldName('LvlUpSpd', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->lvl_up_spd = (null !== $col) ? (int) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 27 + $startcol : CharactersTableMap::translateFieldName('AddHp', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_hp = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 22 + $startcol : CharactersTableMap::translateFieldName('AddAtk', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 28 + $startcol : CharactersTableMap::translateFieldName('AddAtk', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_atk = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 23 + $startcol : CharactersTableMap::translateFieldName('AddDef', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 29 + $startcol : CharactersTableMap::translateFieldName('AddDef', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_def = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 24 + $startcol : CharactersTableMap::translateFieldName('AddSatk', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 30 + $startcol : CharactersTableMap::translateFieldName('AddSatk', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_satk = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 25 + $startcol : CharactersTableMap::translateFieldName('AddSdef', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 31 + $startcol : CharactersTableMap::translateFieldName('AddSdef', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_sdef = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 26 + $startcol : CharactersTableMap::translateFieldName('AddSpd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 32 + $startcol : CharactersTableMap::translateFieldName('AddSpd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->add_spd = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 27 + $startcol : CharactersTableMap::translateFieldName('Health', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 33 + $startcol : CharactersTableMap::translateFieldName('Health', TableMap::TYPE_PHPNAME, $indexType)];
             $this->health = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 28 + $startcol : CharactersTableMap::translateFieldName('Injuries', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 34 + $startcol : CharactersTableMap::translateFieldName('Injuries', TableMap::TYPE_PHPNAME, $indexType)];
             $this->injuries = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 29 + $startcol : CharactersTableMap::translateFieldName('Money', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 35 + $startcol : CharactersTableMap::translateFieldName('Money', TableMap::TYPE_PHPNAME, $indexType)];
             $this->money = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 30 + $startcol : CharactersTableMap::translateFieldName('SkillAcrobatics', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 36 + $startcol : CharactersTableMap::translateFieldName('SkillAcrobatics', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_acrobatics = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 31 + $startcol : CharactersTableMap::translateFieldName('SkillAthletics', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 37 + $startcol : CharactersTableMap::translateFieldName('SkillAthletics', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_athletics = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 32 + $startcol : CharactersTableMap::translateFieldName('SkillCharm', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 38 + $startcol : CharactersTableMap::translateFieldName('SkillCharm', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_charm = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 33 + $startcol : CharactersTableMap::translateFieldName('SkillCombat', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 39 + $startcol : CharactersTableMap::translateFieldName('SkillCombat', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_combat = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 34 + $startcol : CharactersTableMap::translateFieldName('SkillCommand', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 40 + $startcol : CharactersTableMap::translateFieldName('SkillCommand', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_command = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 35 + $startcol : CharactersTableMap::translateFieldName('SkillGeneralEd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 41 + $startcol : CharactersTableMap::translateFieldName('SkillGeneralEd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_general_ed = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 36 + $startcol : CharactersTableMap::translateFieldName('SkillMedicineEd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 42 + $startcol : CharactersTableMap::translateFieldName('SkillMedicineEd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_medicine_ed = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 37 + $startcol : CharactersTableMap::translateFieldName('SkillOccultEd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 43 + $startcol : CharactersTableMap::translateFieldName('SkillOccultEd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_occult_ed = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 38 + $startcol : CharactersTableMap::translateFieldName('SkillPokemonEd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 44 + $startcol : CharactersTableMap::translateFieldName('SkillPokemonEd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_pokemon_ed = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 39 + $startcol : CharactersTableMap::translateFieldName('SkillTechnologyEd', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 45 + $startcol : CharactersTableMap::translateFieldName('SkillTechnologyEd', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_technology_ed = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 40 + $startcol : CharactersTableMap::translateFieldName('SkillFocus', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 46 + $startcol : CharactersTableMap::translateFieldName('SkillFocus', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_focus = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 41 + $startcol : CharactersTableMap::translateFieldName('SkillGuile', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 47 + $startcol : CharactersTableMap::translateFieldName('SkillGuile', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_guile = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 42 + $startcol : CharactersTableMap::translateFieldName('SkillIntimidate', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 48 + $startcol : CharactersTableMap::translateFieldName('SkillIntimidate', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_intimidate = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 43 + $startcol : CharactersTableMap::translateFieldName('SkillIntuition', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 49 + $startcol : CharactersTableMap::translateFieldName('SkillIntuition', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_intuition = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 44 + $startcol : CharactersTableMap::translateFieldName('SkillPerception', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 50 + $startcol : CharactersTableMap::translateFieldName('SkillPerception', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_perception = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 45 + $startcol : CharactersTableMap::translateFieldName('SkillStealth', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 51 + $startcol : CharactersTableMap::translateFieldName('SkillStealth', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_stealth = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 46 + $startcol : CharactersTableMap::translateFieldName('SkillSurvival', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 52 + $startcol : CharactersTableMap::translateFieldName('SkillSurvival', TableMap::TYPE_PHPNAME, $indexType)];
             $this->skill_survival = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 47 + $startcol : CharactersTableMap::translateFieldName('ApSpent', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 53 + $startcol : CharactersTableMap::translateFieldName('ApSpent', TableMap::TYPE_PHPNAME, $indexType)];
             $this->ap_spent = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 48 + $startcol : CharactersTableMap::translateFieldName('ApBound', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 54 + $startcol : CharactersTableMap::translateFieldName('ApBound', TableMap::TYPE_PHPNAME, $indexType)];
             $this->ap_bound = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 49 + $startcol : CharactersTableMap::translateFieldName('ApDrained', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 55 + $startcol : CharactersTableMap::translateFieldName('ApDrained', TableMap::TYPE_PHPNAME, $indexType)];
             $this->ap_drained = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 50 + $startcol : CharactersTableMap::translateFieldName('BackgroundName', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 56 + $startcol : CharactersTableMap::translateFieldName('BackgroundName', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_name = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 51 + $startcol : CharactersTableMap::translateFieldName('BackgroundAdept', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 57 + $startcol : CharactersTableMap::translateFieldName('BackgroundAdept', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_adept = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 52 + $startcol : CharactersTableMap::translateFieldName('BackgroundNovice', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 58 + $startcol : CharactersTableMap::translateFieldName('BackgroundNovice', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_novice = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 53 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc1', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 59 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc1', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_pthc1 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 54 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc2', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 60 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc2', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_pthc2 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 55 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc3', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 61 + $startcol : CharactersTableMap::translateFieldName('BackgroundPthc3', TableMap::TYPE_PHPNAME, $indexType)];
             $this->background_pthc3 = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 56 + $startcol : CharactersTableMap::translateFieldName('Notes', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 62 + $startcol : CharactersTableMap::translateFieldName('Afflictions', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->afflictions = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 63 + $startcol : CharactersTableMap::translateFieldName('Notes', TableMap::TYPE_PHPNAME, $indexType)];
             $this->notes = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 57 + $startcol : CharactersTableMap::translateFieldName('Nature', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 64 + $startcol : CharactersTableMap::translateFieldName('Nature', TableMap::TYPE_PHPNAME, $indexType)];
             $this->nature = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 58 + $startcol : CharactersTableMap::translateFieldName('SheetType', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 65 + $startcol : CharactersTableMap::translateFieldName('SheetType', TableMap::TYPE_PHPNAME, $indexType)];
             $this->sheet_type = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
@@ -2954,7 +3270,7 @@ abstract class Characters implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 59; // 59 = CharactersTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 66; // 66 = CharactersTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Propel\\PtuToolkit\\Characters'), 0, $e);
@@ -3310,6 +3626,24 @@ abstract class Characters implements ActiveRecordInterface
         if ($this->isColumnModified(CharactersTableMap::COL_BASE_SPD)) {
             $modifiedColumns[':p' . $index++]  = 'base_spd';
         }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_HP)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_hp';
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_ATK)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_atk';
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_DEF)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_def';
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SATK)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_satk';
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SDEF)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_sdef';
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SPD)) {
+            $modifiedColumns[':p' . $index++]  = 'lvl_up_spd';
+        }
         if ($this->isColumnModified(CharactersTableMap::COL_ADD_HP)) {
             $modifiedColumns[':p' . $index++]  = 'add_hp';
         }
@@ -3415,6 +3749,9 @@ abstract class Characters implements ActiveRecordInterface
         if ($this->isColumnModified(CharactersTableMap::COL_BACKGROUND_PTHC3)) {
             $modifiedColumns[':p' . $index++]  = 'background_pthc3';
         }
+        if ($this->isColumnModified(CharactersTableMap::COL_AFFLICTIONS)) {
+            $modifiedColumns[':p' . $index++]  = 'afflictions';
+        }
         if ($this->isColumnModified(CharactersTableMap::COL_NOTES)) {
             $modifiedColumns[':p' . $index++]  = 'notes';
         }
@@ -3497,6 +3834,24 @@ abstract class Characters implements ActiveRecordInterface
                         break;
                     case 'base_spd':
                         $stmt->bindValue($identifier, $this->base_spd, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_hp':
+                        $stmt->bindValue($identifier, $this->lvl_up_hp, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_atk':
+                        $stmt->bindValue($identifier, $this->lvl_up_atk, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_def':
+                        $stmt->bindValue($identifier, $this->lvl_up_def, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_satk':
+                        $stmt->bindValue($identifier, $this->lvl_up_satk, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_sdef':
+                        $stmt->bindValue($identifier, $this->lvl_up_sdef, PDO::PARAM_INT);
+                        break;
+                    case 'lvl_up_spd':
+                        $stmt->bindValue($identifier, $this->lvl_up_spd, PDO::PARAM_INT);
                         break;
                     case 'add_hp':
                         $stmt->bindValue($identifier, $this->add_hp, PDO::PARAM_INT);
@@ -3602,6 +3957,9 @@ abstract class Characters implements ActiveRecordInterface
                         break;
                     case 'background_pthc3':
                         $stmt->bindValue($identifier, $this->background_pthc3, PDO::PARAM_STR);
+                        break;
+                    case 'afflictions':
+                        $stmt->bindValue($identifier, $this->afflictions, PDO::PARAM_STR);
                         break;
                     case 'notes':
                         $stmt->bindValue($identifier, $this->notes, PDO::PARAM_STR);
@@ -3738,117 +4096,138 @@ abstract class Characters implements ActiveRecordInterface
                 return $this->getBaseSpd();
                 break;
             case 21:
-                return $this->getAddHp();
+                return $this->getLvlUpHp();
                 break;
             case 22:
-                return $this->getAddAtk();
+                return $this->getLvlUpAtk();
                 break;
             case 23:
-                return $this->getAddDef();
+                return $this->getLvlUpDef();
                 break;
             case 24:
-                return $this->getAddSatk();
+                return $this->getLvlUpSatk();
                 break;
             case 25:
-                return $this->getAddSdef();
+                return $this->getLvlUpSdef();
                 break;
             case 26:
-                return $this->getAddSpd();
+                return $this->getLvlUpSpd();
                 break;
             case 27:
-                return $this->getHealth();
+                return $this->getAddHp();
                 break;
             case 28:
-                return $this->getInjuries();
+                return $this->getAddAtk();
                 break;
             case 29:
-                return $this->getMoney();
+                return $this->getAddDef();
                 break;
             case 30:
-                return $this->getSkillAcrobatics();
+                return $this->getAddSatk();
                 break;
             case 31:
-                return $this->getSkillAthletics();
+                return $this->getAddSdef();
                 break;
             case 32:
-                return $this->getSkillCharm();
+                return $this->getAddSpd();
                 break;
             case 33:
-                return $this->getSkillCombat();
+                return $this->getHealth();
                 break;
             case 34:
-                return $this->getSkillCommand();
+                return $this->getInjuries();
                 break;
             case 35:
-                return $this->getSkillGeneralEd();
+                return $this->getMoney();
                 break;
             case 36:
-                return $this->getSkillMedicineEd();
+                return $this->getSkillAcrobatics();
                 break;
             case 37:
-                return $this->getSkillOccultEd();
+                return $this->getSkillAthletics();
                 break;
             case 38:
-                return $this->getSkillPokemonEd();
+                return $this->getSkillCharm();
                 break;
             case 39:
-                return $this->getSkillTechnologyEd();
+                return $this->getSkillCombat();
                 break;
             case 40:
-                return $this->getSkillFocus();
+                return $this->getSkillCommand();
                 break;
             case 41:
-                return $this->getSkillGuile();
+                return $this->getSkillGeneralEd();
                 break;
             case 42:
-                return $this->getSkillIntimidate();
+                return $this->getSkillMedicineEd();
                 break;
             case 43:
-                return $this->getSkillIntuition();
+                return $this->getSkillOccultEd();
                 break;
             case 44:
-                return $this->getSkillPerception();
+                return $this->getSkillPokemonEd();
                 break;
             case 45:
-                return $this->getSkillStealth();
+                return $this->getSkillTechnologyEd();
                 break;
             case 46:
-                return $this->getSkillSurvival();
+                return $this->getSkillFocus();
                 break;
             case 47:
-                return $this->getApSpent();
+                return $this->getSkillGuile();
                 break;
             case 48:
-                return $this->getApBound();
+                return $this->getSkillIntimidate();
                 break;
             case 49:
-                return $this->getApDrained();
+                return $this->getSkillIntuition();
                 break;
             case 50:
-                return $this->getBackgroundName();
+                return $this->getSkillPerception();
                 break;
             case 51:
-                return $this->getBackgroundAdept();
+                return $this->getSkillStealth();
                 break;
             case 52:
-                return $this->getBackgroundNovice();
+                return $this->getSkillSurvival();
                 break;
             case 53:
-                return $this->getBackgroundPthc1();
+                return $this->getApSpent();
                 break;
             case 54:
-                return $this->getBackgroundPthc2();
+                return $this->getApBound();
                 break;
             case 55:
-                return $this->getBackgroundPthc3();
+                return $this->getApDrained();
                 break;
             case 56:
-                return $this->getNotes();
+                return $this->getBackgroundName();
                 break;
             case 57:
-                return $this->getNature();
+                return $this->getBackgroundAdept();
                 break;
             case 58:
+                return $this->getBackgroundNovice();
+                break;
+            case 59:
+                return $this->getBackgroundPthc1();
+                break;
+            case 60:
+                return $this->getBackgroundPthc2();
+                break;
+            case 61:
+                return $this->getBackgroundPthc3();
+                break;
+            case 62:
+                return $this->getAfflictions();
+                break;
+            case 63:
+                return $this->getNotes();
+                break;
+            case 64:
+                return $this->getNature();
+                break;
+            case 65:
                 return $this->getSheetType();
                 break;
             default:
@@ -3902,44 +4281,51 @@ abstract class Characters implements ActiveRecordInterface
             $keys[18] => $this->getBaseSatk(),
             $keys[19] => $this->getBaseSdef(),
             $keys[20] => $this->getBaseSpd(),
-            $keys[21] => $this->getAddHp(),
-            $keys[22] => $this->getAddAtk(),
-            $keys[23] => $this->getAddDef(),
-            $keys[24] => $this->getAddSatk(),
-            $keys[25] => $this->getAddSdef(),
-            $keys[26] => $this->getAddSpd(),
-            $keys[27] => $this->getHealth(),
-            $keys[28] => $this->getInjuries(),
-            $keys[29] => $this->getMoney(),
-            $keys[30] => $this->getSkillAcrobatics(),
-            $keys[31] => $this->getSkillAthletics(),
-            $keys[32] => $this->getSkillCharm(),
-            $keys[33] => $this->getSkillCombat(),
-            $keys[34] => $this->getSkillCommand(),
-            $keys[35] => $this->getSkillGeneralEd(),
-            $keys[36] => $this->getSkillMedicineEd(),
-            $keys[37] => $this->getSkillOccultEd(),
-            $keys[38] => $this->getSkillPokemonEd(),
-            $keys[39] => $this->getSkillTechnologyEd(),
-            $keys[40] => $this->getSkillFocus(),
-            $keys[41] => $this->getSkillGuile(),
-            $keys[42] => $this->getSkillIntimidate(),
-            $keys[43] => $this->getSkillIntuition(),
-            $keys[44] => $this->getSkillPerception(),
-            $keys[45] => $this->getSkillStealth(),
-            $keys[46] => $this->getSkillSurvival(),
-            $keys[47] => $this->getApSpent(),
-            $keys[48] => $this->getApBound(),
-            $keys[49] => $this->getApDrained(),
-            $keys[50] => $this->getBackgroundName(),
-            $keys[51] => $this->getBackgroundAdept(),
-            $keys[52] => $this->getBackgroundNovice(),
-            $keys[53] => $this->getBackgroundPthc1(),
-            $keys[54] => $this->getBackgroundPthc2(),
-            $keys[55] => $this->getBackgroundPthc3(),
-            $keys[56] => $this->getNotes(),
-            $keys[57] => $this->getNature(),
-            $keys[58] => $this->getSheetType(),
+            $keys[21] => $this->getLvlUpHp(),
+            $keys[22] => $this->getLvlUpAtk(),
+            $keys[23] => $this->getLvlUpDef(),
+            $keys[24] => $this->getLvlUpSatk(),
+            $keys[25] => $this->getLvlUpSdef(),
+            $keys[26] => $this->getLvlUpSpd(),
+            $keys[27] => $this->getAddHp(),
+            $keys[28] => $this->getAddAtk(),
+            $keys[29] => $this->getAddDef(),
+            $keys[30] => $this->getAddSatk(),
+            $keys[31] => $this->getAddSdef(),
+            $keys[32] => $this->getAddSpd(),
+            $keys[33] => $this->getHealth(),
+            $keys[34] => $this->getInjuries(),
+            $keys[35] => $this->getMoney(),
+            $keys[36] => $this->getSkillAcrobatics(),
+            $keys[37] => $this->getSkillAthletics(),
+            $keys[38] => $this->getSkillCharm(),
+            $keys[39] => $this->getSkillCombat(),
+            $keys[40] => $this->getSkillCommand(),
+            $keys[41] => $this->getSkillGeneralEd(),
+            $keys[42] => $this->getSkillMedicineEd(),
+            $keys[43] => $this->getSkillOccultEd(),
+            $keys[44] => $this->getSkillPokemonEd(),
+            $keys[45] => $this->getSkillTechnologyEd(),
+            $keys[46] => $this->getSkillFocus(),
+            $keys[47] => $this->getSkillGuile(),
+            $keys[48] => $this->getSkillIntimidate(),
+            $keys[49] => $this->getSkillIntuition(),
+            $keys[50] => $this->getSkillPerception(),
+            $keys[51] => $this->getSkillStealth(),
+            $keys[52] => $this->getSkillSurvival(),
+            $keys[53] => $this->getApSpent(),
+            $keys[54] => $this->getApBound(),
+            $keys[55] => $this->getApDrained(),
+            $keys[56] => $this->getBackgroundName(),
+            $keys[57] => $this->getBackgroundAdept(),
+            $keys[58] => $this->getBackgroundNovice(),
+            $keys[59] => $this->getBackgroundPthc1(),
+            $keys[60] => $this->getBackgroundPthc2(),
+            $keys[61] => $this->getBackgroundPthc3(),
+            $keys[62] => $this->getAfflictions(),
+            $keys[63] => $this->getNotes(),
+            $keys[64] => $this->getNature(),
+            $keys[65] => $this->getSheetType(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -4120,117 +4506,138 @@ abstract class Characters implements ActiveRecordInterface
                 $this->setBaseSpd($value);
                 break;
             case 21:
-                $this->setAddHp($value);
+                $this->setLvlUpHp($value);
                 break;
             case 22:
-                $this->setAddAtk($value);
+                $this->setLvlUpAtk($value);
                 break;
             case 23:
-                $this->setAddDef($value);
+                $this->setLvlUpDef($value);
                 break;
             case 24:
-                $this->setAddSatk($value);
+                $this->setLvlUpSatk($value);
                 break;
             case 25:
-                $this->setAddSdef($value);
+                $this->setLvlUpSdef($value);
                 break;
             case 26:
-                $this->setAddSpd($value);
+                $this->setLvlUpSpd($value);
                 break;
             case 27:
-                $this->setHealth($value);
+                $this->setAddHp($value);
                 break;
             case 28:
-                $this->setInjuries($value);
+                $this->setAddAtk($value);
                 break;
             case 29:
-                $this->setMoney($value);
+                $this->setAddDef($value);
                 break;
             case 30:
-                $this->setSkillAcrobatics($value);
+                $this->setAddSatk($value);
                 break;
             case 31:
-                $this->setSkillAthletics($value);
+                $this->setAddSdef($value);
                 break;
             case 32:
-                $this->setSkillCharm($value);
+                $this->setAddSpd($value);
                 break;
             case 33:
-                $this->setSkillCombat($value);
+                $this->setHealth($value);
                 break;
             case 34:
-                $this->setSkillCommand($value);
+                $this->setInjuries($value);
                 break;
             case 35:
-                $this->setSkillGeneralEd($value);
+                $this->setMoney($value);
                 break;
             case 36:
-                $this->setSkillMedicineEd($value);
+                $this->setSkillAcrobatics($value);
                 break;
             case 37:
-                $this->setSkillOccultEd($value);
+                $this->setSkillAthletics($value);
                 break;
             case 38:
-                $this->setSkillPokemonEd($value);
+                $this->setSkillCharm($value);
                 break;
             case 39:
-                $this->setSkillTechnologyEd($value);
+                $this->setSkillCombat($value);
                 break;
             case 40:
-                $this->setSkillFocus($value);
+                $this->setSkillCommand($value);
                 break;
             case 41:
-                $this->setSkillGuile($value);
+                $this->setSkillGeneralEd($value);
                 break;
             case 42:
-                $this->setSkillIntimidate($value);
+                $this->setSkillMedicineEd($value);
                 break;
             case 43:
-                $this->setSkillIntuition($value);
+                $this->setSkillOccultEd($value);
                 break;
             case 44:
-                $this->setSkillPerception($value);
+                $this->setSkillPokemonEd($value);
                 break;
             case 45:
-                $this->setSkillStealth($value);
+                $this->setSkillTechnologyEd($value);
                 break;
             case 46:
-                $this->setSkillSurvival($value);
+                $this->setSkillFocus($value);
                 break;
             case 47:
-                $this->setApSpent($value);
+                $this->setSkillGuile($value);
                 break;
             case 48:
-                $this->setApBound($value);
+                $this->setSkillIntimidate($value);
                 break;
             case 49:
-                $this->setApDrained($value);
+                $this->setSkillIntuition($value);
                 break;
             case 50:
-                $this->setBackgroundName($value);
+                $this->setSkillPerception($value);
                 break;
             case 51:
-                $this->setBackgroundAdept($value);
+                $this->setSkillStealth($value);
                 break;
             case 52:
-                $this->setBackgroundNovice($value);
+                $this->setSkillSurvival($value);
                 break;
             case 53:
-                $this->setBackgroundPthc1($value);
+                $this->setApSpent($value);
                 break;
             case 54:
-                $this->setBackgroundPthc2($value);
+                $this->setApBound($value);
                 break;
             case 55:
-                $this->setBackgroundPthc3($value);
+                $this->setApDrained($value);
                 break;
             case 56:
-                $this->setNotes($value);
+                $this->setBackgroundName($value);
                 break;
             case 57:
-                $this->setNature($value);
+                $this->setBackgroundAdept($value);
                 break;
             case 58:
+                $this->setBackgroundNovice($value);
+                break;
+            case 59:
+                $this->setBackgroundPthc1($value);
+                break;
+            case 60:
+                $this->setBackgroundPthc2($value);
+                break;
+            case 61:
+                $this->setBackgroundPthc3($value);
+                break;
+            case 62:
+                $this->setAfflictions($value);
+                break;
+            case 63:
+                $this->setNotes($value);
+                break;
+            case 64:
+                $this->setNature($value);
+                break;
+            case 65:
                 $this->setSheetType($value);
                 break;
         } // switch()
@@ -4323,118 +4730,139 @@ abstract class Characters implements ActiveRecordInterface
             $this->setBaseSpd($arr[$keys[20]]);
         }
         if (array_key_exists($keys[21], $arr)) {
-            $this->setAddHp($arr[$keys[21]]);
+            $this->setLvlUpHp($arr[$keys[21]]);
         }
         if (array_key_exists($keys[22], $arr)) {
-            $this->setAddAtk($arr[$keys[22]]);
+            $this->setLvlUpAtk($arr[$keys[22]]);
         }
         if (array_key_exists($keys[23], $arr)) {
-            $this->setAddDef($arr[$keys[23]]);
+            $this->setLvlUpDef($arr[$keys[23]]);
         }
         if (array_key_exists($keys[24], $arr)) {
-            $this->setAddSatk($arr[$keys[24]]);
+            $this->setLvlUpSatk($arr[$keys[24]]);
         }
         if (array_key_exists($keys[25], $arr)) {
-            $this->setAddSdef($arr[$keys[25]]);
+            $this->setLvlUpSdef($arr[$keys[25]]);
         }
         if (array_key_exists($keys[26], $arr)) {
-            $this->setAddSpd($arr[$keys[26]]);
+            $this->setLvlUpSpd($arr[$keys[26]]);
         }
         if (array_key_exists($keys[27], $arr)) {
-            $this->setHealth($arr[$keys[27]]);
+            $this->setAddHp($arr[$keys[27]]);
         }
         if (array_key_exists($keys[28], $arr)) {
-            $this->setInjuries($arr[$keys[28]]);
+            $this->setAddAtk($arr[$keys[28]]);
         }
         if (array_key_exists($keys[29], $arr)) {
-            $this->setMoney($arr[$keys[29]]);
+            $this->setAddDef($arr[$keys[29]]);
         }
         if (array_key_exists($keys[30], $arr)) {
-            $this->setSkillAcrobatics($arr[$keys[30]]);
+            $this->setAddSatk($arr[$keys[30]]);
         }
         if (array_key_exists($keys[31], $arr)) {
-            $this->setSkillAthletics($arr[$keys[31]]);
+            $this->setAddSdef($arr[$keys[31]]);
         }
         if (array_key_exists($keys[32], $arr)) {
-            $this->setSkillCharm($arr[$keys[32]]);
+            $this->setAddSpd($arr[$keys[32]]);
         }
         if (array_key_exists($keys[33], $arr)) {
-            $this->setSkillCombat($arr[$keys[33]]);
+            $this->setHealth($arr[$keys[33]]);
         }
         if (array_key_exists($keys[34], $arr)) {
-            $this->setSkillCommand($arr[$keys[34]]);
+            $this->setInjuries($arr[$keys[34]]);
         }
         if (array_key_exists($keys[35], $arr)) {
-            $this->setSkillGeneralEd($arr[$keys[35]]);
+            $this->setMoney($arr[$keys[35]]);
         }
         if (array_key_exists($keys[36], $arr)) {
-            $this->setSkillMedicineEd($arr[$keys[36]]);
+            $this->setSkillAcrobatics($arr[$keys[36]]);
         }
         if (array_key_exists($keys[37], $arr)) {
-            $this->setSkillOccultEd($arr[$keys[37]]);
+            $this->setSkillAthletics($arr[$keys[37]]);
         }
         if (array_key_exists($keys[38], $arr)) {
-            $this->setSkillPokemonEd($arr[$keys[38]]);
+            $this->setSkillCharm($arr[$keys[38]]);
         }
         if (array_key_exists($keys[39], $arr)) {
-            $this->setSkillTechnologyEd($arr[$keys[39]]);
+            $this->setSkillCombat($arr[$keys[39]]);
         }
         if (array_key_exists($keys[40], $arr)) {
-            $this->setSkillFocus($arr[$keys[40]]);
+            $this->setSkillCommand($arr[$keys[40]]);
         }
         if (array_key_exists($keys[41], $arr)) {
-            $this->setSkillGuile($arr[$keys[41]]);
+            $this->setSkillGeneralEd($arr[$keys[41]]);
         }
         if (array_key_exists($keys[42], $arr)) {
-            $this->setSkillIntimidate($arr[$keys[42]]);
+            $this->setSkillMedicineEd($arr[$keys[42]]);
         }
         if (array_key_exists($keys[43], $arr)) {
-            $this->setSkillIntuition($arr[$keys[43]]);
+            $this->setSkillOccultEd($arr[$keys[43]]);
         }
         if (array_key_exists($keys[44], $arr)) {
-            $this->setSkillPerception($arr[$keys[44]]);
+            $this->setSkillPokemonEd($arr[$keys[44]]);
         }
         if (array_key_exists($keys[45], $arr)) {
-            $this->setSkillStealth($arr[$keys[45]]);
+            $this->setSkillTechnologyEd($arr[$keys[45]]);
         }
         if (array_key_exists($keys[46], $arr)) {
-            $this->setSkillSurvival($arr[$keys[46]]);
+            $this->setSkillFocus($arr[$keys[46]]);
         }
         if (array_key_exists($keys[47], $arr)) {
-            $this->setApSpent($arr[$keys[47]]);
+            $this->setSkillGuile($arr[$keys[47]]);
         }
         if (array_key_exists($keys[48], $arr)) {
-            $this->setApBound($arr[$keys[48]]);
+            $this->setSkillIntimidate($arr[$keys[48]]);
         }
         if (array_key_exists($keys[49], $arr)) {
-            $this->setApDrained($arr[$keys[49]]);
+            $this->setSkillIntuition($arr[$keys[49]]);
         }
         if (array_key_exists($keys[50], $arr)) {
-            $this->setBackgroundName($arr[$keys[50]]);
+            $this->setSkillPerception($arr[$keys[50]]);
         }
         if (array_key_exists($keys[51], $arr)) {
-            $this->setBackgroundAdept($arr[$keys[51]]);
+            $this->setSkillStealth($arr[$keys[51]]);
         }
         if (array_key_exists($keys[52], $arr)) {
-            $this->setBackgroundNovice($arr[$keys[52]]);
+            $this->setSkillSurvival($arr[$keys[52]]);
         }
         if (array_key_exists($keys[53], $arr)) {
-            $this->setBackgroundPthc1($arr[$keys[53]]);
+            $this->setApSpent($arr[$keys[53]]);
         }
         if (array_key_exists($keys[54], $arr)) {
-            $this->setBackgroundPthc2($arr[$keys[54]]);
+            $this->setApBound($arr[$keys[54]]);
         }
         if (array_key_exists($keys[55], $arr)) {
-            $this->setBackgroundPthc3($arr[$keys[55]]);
+            $this->setApDrained($arr[$keys[55]]);
         }
         if (array_key_exists($keys[56], $arr)) {
-            $this->setNotes($arr[$keys[56]]);
+            $this->setBackgroundName($arr[$keys[56]]);
         }
         if (array_key_exists($keys[57], $arr)) {
-            $this->setNature($arr[$keys[57]]);
+            $this->setBackgroundAdept($arr[$keys[57]]);
         }
         if (array_key_exists($keys[58], $arr)) {
-            $this->setSheetType($arr[$keys[58]]);
+            $this->setBackgroundNovice($arr[$keys[58]]);
+        }
+        if (array_key_exists($keys[59], $arr)) {
+            $this->setBackgroundPthc1($arr[$keys[59]]);
+        }
+        if (array_key_exists($keys[60], $arr)) {
+            $this->setBackgroundPthc2($arr[$keys[60]]);
+        }
+        if (array_key_exists($keys[61], $arr)) {
+            $this->setBackgroundPthc3($arr[$keys[61]]);
+        }
+        if (array_key_exists($keys[62], $arr)) {
+            $this->setAfflictions($arr[$keys[62]]);
+        }
+        if (array_key_exists($keys[63], $arr)) {
+            $this->setNotes($arr[$keys[63]]);
+        }
+        if (array_key_exists($keys[64], $arr)) {
+            $this->setNature($arr[$keys[64]]);
+        }
+        if (array_key_exists($keys[65], $arr)) {
+            $this->setSheetType($arr[$keys[65]]);
         }
     }
 
@@ -4540,6 +4968,24 @@ abstract class Characters implements ActiveRecordInterface
         if ($this->isColumnModified(CharactersTableMap::COL_BASE_SPD)) {
             $criteria->add(CharactersTableMap::COL_BASE_SPD, $this->base_spd);
         }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_HP)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_HP, $this->lvl_up_hp);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_ATK)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_ATK, $this->lvl_up_atk);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_DEF)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_DEF, $this->lvl_up_def);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SATK)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_SATK, $this->lvl_up_satk);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SDEF)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_SDEF, $this->lvl_up_sdef);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_LVL_UP_SPD)) {
+            $criteria->add(CharactersTableMap::COL_LVL_UP_SPD, $this->lvl_up_spd);
+        }
         if ($this->isColumnModified(CharactersTableMap::COL_ADD_HP)) {
             $criteria->add(CharactersTableMap::COL_ADD_HP, $this->add_hp);
         }
@@ -4644,6 +5090,9 @@ abstract class Characters implements ActiveRecordInterface
         }
         if ($this->isColumnModified(CharactersTableMap::COL_BACKGROUND_PTHC3)) {
             $criteria->add(CharactersTableMap::COL_BACKGROUND_PTHC3, $this->background_pthc3);
+        }
+        if ($this->isColumnModified(CharactersTableMap::COL_AFFLICTIONS)) {
+            $criteria->add(CharactersTableMap::COL_AFFLICTIONS, $this->afflictions);
         }
         if ($this->isColumnModified(CharactersTableMap::COL_NOTES)) {
             $criteria->add(CharactersTableMap::COL_NOTES, $this->notes);
@@ -4760,6 +5209,12 @@ abstract class Characters implements ActiveRecordInterface
         $copyObj->setBaseSatk($this->getBaseSatk());
         $copyObj->setBaseSdef($this->getBaseSdef());
         $copyObj->setBaseSpd($this->getBaseSpd());
+        $copyObj->setLvlUpHp($this->getLvlUpHp());
+        $copyObj->setLvlUpAtk($this->getLvlUpAtk());
+        $copyObj->setLvlUpDef($this->getLvlUpDef());
+        $copyObj->setLvlUpSatk($this->getLvlUpSatk());
+        $copyObj->setLvlUpSdef($this->getLvlUpSdef());
+        $copyObj->setLvlUpSpd($this->getLvlUpSpd());
         $copyObj->setAddHp($this->getAddHp());
         $copyObj->setAddAtk($this->getAddAtk());
         $copyObj->setAddDef($this->getAddDef());
@@ -4795,6 +5250,7 @@ abstract class Characters implements ActiveRecordInterface
         $copyObj->setBackgroundPthc1($this->getBackgroundPthc1());
         $copyObj->setBackgroundPthc2($this->getBackgroundPthc2());
         $copyObj->setBackgroundPthc3($this->getBackgroundPthc3());
+        $copyObj->setAfflictions($this->getAfflictions());
         $copyObj->setNotes($this->getNotes());
         $copyObj->setNature($this->getNature());
         $copyObj->setSheetType($this->getSheetType());
@@ -5944,6 +6400,12 @@ abstract class Characters implements ActiveRecordInterface
         $this->base_satk = null;
         $this->base_sdef = null;
         $this->base_spd = null;
+        $this->lvl_up_hp = null;
+        $this->lvl_up_atk = null;
+        $this->lvl_up_def = null;
+        $this->lvl_up_satk = null;
+        $this->lvl_up_sdef = null;
+        $this->lvl_up_spd = null;
         $this->add_hp = null;
         $this->add_atk = null;
         $this->add_def = null;
@@ -5979,6 +6441,7 @@ abstract class Characters implements ActiveRecordInterface
         $this->background_pthc1 = null;
         $this->background_pthc2 = null;
         $this->background_pthc3 = null;
+        $this->afflictions = null;
         $this->notes = null;
         $this->nature = null;
         $this->sheet_type = null;
