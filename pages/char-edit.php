@@ -60,19 +60,19 @@ $moves = $character->getCharacterMovessJoinMoves();
 
                 <div class="form-group label-floating">
                     <label class="control-label" for="char-name">Name</label>
-                    <input class="form-control" type="text" id="char-name" data-field="name" value="<?php echo $character->getName()?>" required />
+                    <input class="form-control" type="text" id="char-name" data-field="Name" value="<?php echo $character->getName()?>" required />
                 </div>
                 <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
                     <label class="control-label" for="char-dex">Pokédex ID</label>
-                    <input class="form-control" type="text" id="char-dex" data-field="pokedex" value="<?php echo $character->getPokedexNo()?>" required />
+                    <input class="form-control" type="text" id="char-dex" data-field="PokedexNo" value="<?php echo $character->getPokedexNo()?>" required />
                 </div>
                 <?php endif; ?>
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
                             <label class="control-label" for="char-type1">Type 1</label>
-                            <select class="form-control" id="char-type1" data-field="type1" <?php
+                            <select class="form-control" id="char-type1" data-field="Type1" <?php
                             if ($character->getType() == "POKEMON") echo "required"; ?>><option></option><?php
                                 echo $type_list1 ?></select>
                         </div>
@@ -80,7 +80,7 @@ $moves = $character->getCharacterMovessJoinMoves();
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
                             <label class="control-label" for="char-type2">Type 2</label>
-                            <select class="form-control" id="char-type2" data-populate="type" data-field="type2"><option></option><?php
+                            <select class="form-control" id="char-type2" data-populate="type" data-field="Type2"><option></option><?php
                                 echo $type_list2 ?></select>
                         </div>
                     </div>
@@ -88,20 +88,20 @@ $moves = $character->getCharacterMovessJoinMoves();
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
                             <label class="control-label" for="char-level">Level</label>
-                            <input class="form-control" type="number" id="char-level" data-field="level" value="<?php echo $character->getLevel()?>"  required />
+                            <input class="form-control" type="number" id="char-level" data-field="Level" value="<?php echo $character->getLevel()?>"  required />
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
                             <label class="control-label" for="char-exp">EXP</label>
-                            <input class="form-control" type="number" id="char-exp" data-field="EXP" value="<?php echo $character->getExp()?>"  />
+                            <input class="form-control" type="number" id="char-exp" data-field="Exp" value="<?php echo $character->getExp()?>"  />
                         </div>
                     </div>
 
                     <div class="col-xs-6">
                         <div class="form-group label-floating">
                             <label class="control-label" for="char-gender">Gender</label>
-                            <select class="form-control" id="char-gender" data-field="sex" value="<?php echo $character->getSex()?>"  required>
+                            <select class="form-control" id="char-gender" data-field="Sex" value="<?php echo $character->getSex()?>"  required>
                                 <option>Genderless</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -112,7 +112,7 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-6">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-nature">Nature</label>
-                                <select class="form-control" id="char-nature" data-field="nature" data-populate="nature" required>
+                                <select class="form-control" id="char-nature" data-field="Nature" data-populate="nature" required>
                                     <option></option>
                                 </select>
                             </div>
@@ -120,16 +120,9 @@ $moves = $character->getCharacterMovessJoinMoves();
                     <?php endif; ?>
                 </div>
 
-                <?php if ($character->getType() == "POKEMON"): ?>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="char-discover">Discovered at</label>
-                    <input class="form-control" type="text" id="char-discover" data-field="discovery" />
-                    <p class="help-block">Where was the Pokémon found</p>
-                </div>
-                <?php endif; ?>
-                <div class="form-group label-floating">
-                    <label class="control-label" for="char-item">Held Item</label>
-                    <input class="form-control" type="text" id="char-item" data-field="held-item" />
+                    <label class="control-label" for="char-notes">Notes</label>
+                    <textarea class="form-control" id="char-notes" data-field="Notes"><?php echo $character->getNotes() ?></textarea>
                 </div>
 
                 <hr/>
@@ -139,13 +132,13 @@ $moves = $character->getCharacterMovessJoinMoves();
                 <div class="col-xs-6">
                     <div class="form-group label-floating">
                         <label class="control-label" for="char-health">Current Health</label>
-                        <input class="form-control" type="number" id="char-health" data-field="health" />
+                        <input class="form-control" type="number" id="char-health" data-field="Health" value="<?php echo $character->getHealth() ?>" />
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="form-group label-floating">
                         <label class="control-label" for="char-injure">Injuries</label>
-                        <input class="form-control" type="number" id="char-injure" data-field="injuries" value="0" />
+                        <input class="form-control" type="number" id="char-injure" data-field="Injuries" value="<?php echo $character->getInjuries() ?>" />
                     </div>
                 </div>
 
@@ -160,19 +153,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-hp">Base</label>
-                                <input class="form-control" type="number" id="char-base-hp" data-field="base-hp" value="<?php echo $character->getBaseHp() ?>" required />
+                                <input class="form-control" type="number" id="char-base-hp" data-field="BaseHp" value="<?php echo $character->getBaseHp() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-hp">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-hp" data-field="lvl-up-hp" value="<?php echo $character->getLvlUpHp() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-hp" data-field="LvlUpHp" value="<?php echo $character->getLvlUpHp() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-hp">Add</label>
-                                <input class="form-control" type="number" id="char-add-hp" data-field="add-hp" value="<?php echo $character->getAddHp() ?>" required />
+                                <input class="form-control" type="number" id="char-add-hp" data-field="AddHp" value="<?php echo $character->getAddHp() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -182,19 +175,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-atk">Base</label>
-                                <input class="form-control" type="number" id="char-base-atk" data-field="base-atk" value="<?php echo $character->getBaseAtk() ?>" required />
+                                <input class="form-control" type="number" id="char-base-atk" data-field="BaseAtk" value="<?php echo $character->getBaseAtk() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-atk">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-atk" data-field="lvl-up-atk" value="<?php echo $character->getLvlUpAtk() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-atk" data-field="LvlUpAtk" value="<?php echo $character->getLvlUpAtk() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-atk">Add</label>
-                                <input class="form-control" type="number" id="char-add-atk" data-field="add-atk" value="<?php echo $character->getAddAtk() ?>" required />
+                                <input class="form-control" type="number" id="char-add-atk" data-field="AddAtk" value="<?php echo $character->getAddAtk() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -204,19 +197,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-def">Base</label>
-                                <input class="form-control" type="number" id="char-base-def" data-field="base-def" value="<?php echo $character->getBaseDef() ?>" required />
+                                <input class="form-control" type="number" id="char-base-def" data-field="BaseDef" value="<?php echo $character->getBaseDef() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-def">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-def" data-field="lvl-up-def" value="<?php echo $character->getLvlUpDef() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-def" data-field="LvlUpDef" value="<?php echo $character->getLvlUpDef() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-def">Add</label>
-                                <input class="form-control" type="number" id="char-add-def" data-field="add-def" value="<?php echo $character->getAddDef() ?>" required />
+                                <input class="form-control" type="number" id="char-add-def" data-field="AddDef" value="<?php echo $character->getAddDef() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -226,19 +219,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-spatk">Base</label>
-                                <input class="form-control" type="number" id="char-base-spatk" data-field="base-spatk" value="<?php echo $character->getBaseSatk() ?>" required />
+                                <input class="form-control" type="number" id="char-base-spatk" data-field="BaseSatk" value="<?php echo $character->getBaseSatk() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-spatk">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-spatk" data-field="lvl-up-spatk" value="<?php echo $character->getLvlUpSatk() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-spatk" data-field="LvlUpSatk" value="<?php echo $character->getLvlUpSatk() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-spatk">Add</label>
-                                <input class="form-control" type="number" id="char-add-spatk" data-field="add-spatk" value="<?php echo $character->getAddSatk() ?>" required />
+                                <input class="form-control" type="number" id="char-add-spatk" data-field="AddSatk" value="<?php echo $character->getAddSatk() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -248,19 +241,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-spdef">Base</label>
-                                <input class="form-control" type="number" id="char-base-spdef" data-field="base-spdef" value="<?php echo $character->getBaseSdef() ?>" required />
+                                <input class="form-control" type="number" id="char-base-spdef" data-field="BaseSdef" value="<?php echo $character->getBaseSdef() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-spdef">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-spdef" data-field="lvl-up-spdef" value="<?php echo $character->getLvlUpSdef() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-spdef" data-field="LvlUpSdef" value="<?php echo $character->getLvlUpSdef() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-spdef">Add</label>
-                                <input class="form-control" type="number" id="char-add-spdef" data-field="add-spdef" value="<?php echo $character->getAddSdef() ?>" required />
+                                <input class="form-control" type="number" id="char-add-spdef" data-field="AddSdef" value="<?php echo $character->getAddSdef() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -270,19 +263,19 @@ $moves = $character->getCharacterMovessJoinMoves();
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-base-speed">Base</label>
-                                <input class="form-control" type="number" id="char-base-speed" data-field="base-speed" value="<?php echo $character->getBaseSpd() ?>" required />
+                                <input class="form-control" type="number" id="char-base-speed" data-field="BaseSpd" value="<?php echo $character->getBaseSpd() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-lvl-up-speed">Lvl-Up</label>
-                                <input class="form-control" type="number" id="char-lvl-up-speed" data-field="lvl-up-speed" value="<?php echo $character->getLvlUpSpd() ?>" required />
+                                <input class="form-control" type="number" id="char-lvl-up-speed" data-field="LvlUpSpd" value="<?php echo $character->getLvlUpSpd() ?>" required />
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="char-add-speed">Add</label>
-                                <input class="form-control" type="number" id="char-add-speed" data-field="add-speed" value="<?php echo $character->getAddSpd() ?>" required />
+                                <input class="form-control" type="number" id="char-add-speed" data-field="AddSpd" value="<?php echo $character->getAddSpd() ?>" required />
                             </div>
                         </div>
                     </div>
@@ -298,7 +291,7 @@ $moves = $character->getCharacterMovessJoinMoves();
                     <?php if ($moves->count() > 0) : ?>
                     <?php foreach ($moves as $move) : ?>
                     <div class="input-group">
-                        <input class="form-control" title="Move" value="<?php echo $move->getMoveName() ?>" data-value="<?php echo $move->getMoveId() ?>" />
+                        <input class="form-control" title="Move" value="<?php echo $move->getMoveName() ?>" data-value="<?php echo $move->getMoveId() ?>" onchange="editMove($(this))" />
                         <span class="input-group-addon input-group-action">
                             <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">
                                 <i class="material-icons">delete</i>
@@ -307,7 +300,7 @@ $moves = $character->getCharacterMovessJoinMoves();
                     </div>
                     <?php endforeach; else : ?>
                     <div class="input-group">
-                        <input class="form-control" title="Move" />
+                        <input class="form-control" title="Move" data-dirty="A" />
                         <span class="input-group-addon input-group-action">
                             <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">
                                 <i class="material-icons">delete</i>
@@ -329,7 +322,7 @@ $moves = $character->getCharacterMovessJoinMoves();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="btn-char">Save</button>
+                <button type="button" class="btn btn-success" onclick="submitCharSheet()">Save</button>
             </div>
         </div>
     </div>
@@ -367,6 +360,8 @@ $moves = $character->getCharacterMovessJoinMoves();
             "EggMove": "<?php echo $move["EggMove"] ?>"
         },<?php endforeach; ?>{"label": "test", "value": "ehh", "LevelLearned": "1"}
     ];
+    
+    var moves_removed = [];
 
     $("#char-moves").find("input").each(function () {
         initMoveInput($(this));
@@ -411,7 +406,7 @@ $moves = $character->getCharacterMovessJoinMoves();
 
     function addMove(elem) {
         elem.before($('<div class="input-group">').append(
-            initMoveInput($('<input class="form-control" title="Move" />')),
+            initMoveInput($('<input class="form-control" title="Move" data-dirty="A" />')),
             '                        <span class="input-group-addon input-group-action">\n' +
             '                            <button class="btn btn-simple btn-danger btn-xs" onclick="removeMove($(this))">\n' +
             '                                <i class="material-icons">delete</i>\n' +
@@ -420,6 +415,29 @@ $moves = $character->getCharacterMovessJoinMoves();
     }
 
     function removeMove(elem) {
-        elem.parent().parent().remove();
+        var parent = elem.parent().parent();
+        
+        moves_removed.push(parent.find("input").attr("data-value"));
+        parent.remove();
+    }
+    
+    function editMove(elem) {
+        elem.attr("data-dirty", "E");
+    }
+
+    function submitCharSheet() {
+        var clob = {};
+
+        $(".form-char").find("[data-field]").each(function () {
+            clob[$(this).attr("data-field")] = $(this).val();
+        });
+
+        $.post("api/v1/data/character/<?php echo $character_id ?>", clob, function (response) {
+            if (response == "1")
+                doToast(clob["Name"] + " was saved.");
+            else alert(response);
+        }).fail(function (e) {
+            alert(e);
+        });
     }
 </script>

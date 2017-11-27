@@ -379,10 +379,12 @@ class PtuAPI extends API
         if ($this->verb === "character") {
             if ($this->args[0] === "list" && $this->method == "GET")
                 return $app->getCampaignById($_GET['campaign_id'])->getCharacterss()->toArray();
-            if ($this->args[0] === "moves" && $this->method == "GET")
+            else if ($this->args[0] === "moves" && $this->method == "GET")
                 return $app->getCharacterMoves($_GET['character_id']);
             else if (!is_null($this->args[0]) && $this->method == "GET")
                 return $app->getCharacterById($this->args[0])->toArray();
+            else if (!is_null($this->args[0]) && $this->method == "POST")
+                return $app->saveCharacterData($this->args[0], $this->request);
         }
 
         // Nothing has been returned, assume it's the users's fault

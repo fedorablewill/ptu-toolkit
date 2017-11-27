@@ -8,6 +8,7 @@
 
 namespace Propel\PtuToolkit;
 
+use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Propel;
 
 class PtuApp
@@ -124,5 +125,11 @@ class PtuApp
         }
 
         return $moves;
+    }
+
+    public function saveCharacterData($characterId, $data) {
+        $character = CharactersQuery::create()->findOneByCharacterId($characterId);
+        $character->fromArray($data, TableMap::TYPE_PHPNAME);
+        return $character->save();
     }
 }
