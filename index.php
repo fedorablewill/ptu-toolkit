@@ -432,12 +432,6 @@
         </div>
         <div class="content-header">
 
-            <button class="btn btn-danger btn-lg btn-sidebar" data-toggle="tab" data-target="1">Actions</button>
-
-            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="2">Info</button>
-
-            <button class="btn btn-danger btn-lg btn-sidebar btn-simple" data-toggle="tab" data-target="3">Manage</button>
-
             <button class="btn btn-danger btn-raised" id="btn-set-battle" onclick="addPokemonToBattle()">Join Battle
             </button>
 
