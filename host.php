@@ -382,6 +382,12 @@
                                     Manage
                                 </a>
                             </li>
+                            <li class="hidden">
+                                <a href="#tab-char-io" data-toggle="tab">
+                                    <i class="material-icons">view_module</i>
+                                    Manage
+                                </a>
+                            </li>
                             <li>
                                 <a href="#tab-add" data-toggle="tab">
                                     <i class="material-icons">add</i>
@@ -417,6 +423,8 @@
                 <div class="tab-content text-center">
                     <div class="tab-pane active" id="tab-manage">
                         <div class="list-pokemon"></div>
+                    </div>
+                    <div class="tab-pane" id="tab-char-io">
                     </div>
                     <div class="tab-pane" id="tab-add">
                         <small class="text-muted"><i>MORE CHARACTER/POKEMON SHEET FEATURES ARE COMING</i></small>
@@ -1028,6 +1036,8 @@
 <script src="dist/snackbar.min.js"></script>
 <script src="js/material.min.js"></script>
 <script src="js/nouislider.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/jquery.appear.js"></script>
 
 <script src="js/script.js"></script>
 <script src="js/JSONImport.js"></script>

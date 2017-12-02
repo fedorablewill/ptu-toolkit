@@ -32,9 +32,10 @@ function fetchPage(pageName, callback) {
     $.get("/pages/" + pageName + ".php", callback)
 }
 
-function createCharacterEditor(character_id) {
+function createCharacterEditor(character_id, parent) {
     $.get("/pages/char-edit.php", {"id": character_id}, function (html) {
-        $("#io-modal").html(html);
-        $("#modalCharSheet").modal('show')
+        var parent_elem = $(parent);
+
+        parent_elem.html(html);
     });
 }
