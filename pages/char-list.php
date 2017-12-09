@@ -23,6 +23,10 @@ $output = array();
 foreach ($characters as $character) {
     $char = array(
         "id" => $character->getCharacterId(),
+        "type" => $character->getType(),
+        "dex" => $character->getPokedexNo(),
+        "type1" => $character->getType1(),
+        "type2" => $character->getType2(),
         "name" => $character->getName(),
         "owned" => array()
     );
@@ -33,6 +37,10 @@ foreach ($characters as $character) {
     foreach ($ownedChars as $ownedChar) {
         array_push($char['owned'], array(
             "id" => $ownedChar->getCharacterId(),
+            "type" => $ownedChar->getType(),
+            "dex" => $ownedChar->getPokedexNo(),
+            "type1" => $ownedChar->getType1(),
+            "type2" => $ownedChar->getType2(),
             "name" => $ownedChar->getName()
         ));
     }

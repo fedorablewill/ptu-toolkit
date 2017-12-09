@@ -13,21 +13,32 @@ function renderCharacterList() {
         var json = JSON.parse(html);
 
         $.each(json, function (i, char) {
-            list.append('<div class="char-entry char-owner col-sm-6">'+
+            var img = '<img class="img-circle pull-left bg-danger" height="60px" width="60px" />';
+
+            if (char['type'] === "POKEMON")
+                img = '<img src="img/pokemon-profiles/' + char['dex'] + '.png" class="img-circle pull-left bg-danger" height="60px" width="60px" />';
+
+            list.append('<div class="char-entry char-owner col-sm-6">'+ img +
+                '<div class="btn-group-vertical pull-right">'+
+                    '<button onclick="onClickEditCharacter(\''+char['id']+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
+                    '<button onclick="onClickDeletePokemon(\''+char['id']+'\')" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></button>'+
+                '</div>'+
                     '<span class="char-name">'+char["name"]+'</span>'+
-                    '<div class="btn-group-vertical pull-right">'+
-                        '<button onclick="onClickEditCharacter(\''+char['id']+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
-                        '<button onclick="onClickDeletePokemon(\''+char['id']+'\')" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></button>'+
-                    '</div>'+
                 '</div>');
 
             $.each(char["owned"], function (i, char2) {
-                list.append('<div class="char-entry col-sm-6">'+
+
+                var img = '<img class="img-circle pull-left bg-danger" height="60px" width="60px" />';
+
+                if (char2['type'] === "POKEMON")
+                    img = '<img src="img/pokemon-profiles/' + char2['dex'] + '.png" class="img-circle pull-left bg-danger" height="60px" width="60px" />';
+
+                list.append('<div class="char-entry col-sm-6">'+ img +
+                    '<div class="btn-group-vertical pull-right">'+
+                        '<button onclick="onClickEditCharacter(\''+char2['id']+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
+                        '<button onclick="onClickDeletePokemon(\''+char2['id']+'\')" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></button>'+
+                    '</div>'+
                     '<span class="char-name">'+char2["name"]+'</span>'+
-                        '<div class="btn-group-vertical pull-right">'+
-                            '<button onclick="onClickEditCharacter(\''+char2['id']+'\')" class="btn btn-info btn-xs"><i class="material-icons">edit</i></button>'+
-                            '<button onclick="onClickDeletePokemon(\''+char2['id']+'\')" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></button>'+
-                        '</div>'+
                     '</div>');
             });
 

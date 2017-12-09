@@ -119,6 +119,20 @@
             background: #bababa;
         }
 
+        .char-name {
+            vertical-align: middle;
+            display: inline-block;
+            height: fit-content;
+        }
+
+        .char-entry {
+            margin: 5px 0;
+        }
+
+        .char-entry .btn-group-vertical {
+            margin: 5px 1px;
+        }
+
         .effects {
             padding-bottom: 10px;
             min-height: 20px;
