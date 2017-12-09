@@ -92,6 +92,10 @@
             background: #f0f0f0;
         }
 
+        .progress-bar-injuries {
+            background-color: #9a9595;
+        }
+
         .card-battle .content {
             padding: 15px 45px;
         }

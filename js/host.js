@@ -286,9 +286,10 @@ function renderBattler() {
 
             $.each(battle, function (id, data) {
                 var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-                var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+                var health_pcent = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
+                var injuries = gm_data["pokemon"][id]['injuries'];
 
-                if (w > 100)
+                if (health_pcent > 100)
                     console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
                         gm_data["pokemon"][id]['health'] + "/" + max_hp);
 
@@ -319,7 +320,8 @@ function renderBattler() {
                 elems.splice(i, 0, {'html': '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
                         '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
                         '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                        '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
+                        '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + health_pcent + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + health_pcent + '%;"></div>' +
+                        '<div class="progress-bar progress-bar-injuries pull-right" role="progressbar" aria-valuenow="' + injuries + '0" aria-valuemin="0" aria-valuemax="100" style="width: ' + injuries + '0%;"></div>' +
                         '</div>' +
                         '</div>',
                     'speed': speed});
@@ -739,7 +741,7 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
 
     //Limiting health by number of injuries if appropriate
     if ((10-gm_data["pokemon"][target_id]["injuries"])/10 * max_hp < gm_data["pokemon"][target_id]["health"]){
-        gm_data["pokemon"][target_id]["health"] = Math.round((10-gm_data["pokemon"][target_id]["injuries"])/10) * max_hp;
+        gm_data["pokemon"][target_id]["health"] = Math.round((10-gm_data["pokemon"][target_id]["injuries"])/10 * max_hp);
     }
 
     addMoveDialogInfo('<strong>Damage Delt:</strong> ' + damage);
