@@ -5,7 +5,159 @@
 // Imports
 $.getScript('js/script.js');
 $.getScript('js/ptu-io.js');
+$.getScript('js/ptu-char.js');
 $.getScript('js/ptu-battle.js');
+
+function readMessage(connection, data) {
+
+    var json = JSON.parse(data);
+
+    /*
+         Snackbar Alert Received
+         */
+    if (json.type == "alert"){
+        doToast(message["content"]);
+    }
+    /*
+     Send Pokemon Data
+     */
+    else if (json.type == "pokemon_get") {
+        var msg = {
+            "type": "pokemon",
+            "pokemon": gm_data["entities"][json.pokemon_id]
+        };
+        connection.send(JSON.stringify(msg));
+    }
+    /*
+     Send Pokemon List
+     */
+    else if (json.type == "pokemon_list") {
+        var msg1 = {
+            "type": "pokemon_list",
+            "pokemon": gm_data["entities"]
+        };
+        connection.send(JSON.stringify(msg1));
+    }
+    /*
+     Add Pokemon to Battle
+     */
+    else if (json.type == "battle_add") {
+
+        var pokemon_id = json.pokemon;
+
+        $.each(in_battle, function (key, id) {
+            sendMessageToAll(JSON.stringify({
+                "type": "battle_added",
+                "pokemon_id": pokemon_id,
+                "pokemon_name": gm_data["entities"][pokemon_id]["name"]
+            }));
+
+            connection.send(JSON.stringify({
+                "type": "battle_added",
+                "pokemon_id": id,
+                "pokemon_name": gm_data["entities"][id]["name"]
+            }));
+        });
+
+        // Record peer id
+        connections[json.pokemon] = json.from;
+
+        // Add as "In Battle"
+        in_battle.push(json.pokemon);
+
+        // TODO: reset CS on player client when joining battle
+
+        connection.send(JSON.stringify({
+            "type": "battle_added",
+            "pokemon_id": pokemon_id,
+            "pokemon_name": gm_data["entities"][pokemon_id]["name"]
+        }));
+
+        // TODO: If has persistent affliction, update data appropriately
+
+        // Display Message
+        doToast(gm_data["entities"][json.pokemon]["name"] + " Appears!");
+
+        renderBattler();
+    }
+    /*
+     Update Field Received
+     */
+    else if (json.type == "pokemon_update") {
+        gm_data["entities"][json.pokemon][json.field][0] = json.value;
+
+        if (this.field === "health") {
+            gm_data["entities"][json.pokemon]['health'][0] = json.value;
+        }
+    }
+    /*
+     Update Combat Stage Received
+     */
+    else if (json.type == "pokemon_setcs") { //TODO: new logic for CS
+        battle[json.pokemon][json.field] = json.value;
+    }
+    /*
+     Add an affliction
+     */
+    else if (json.type == "pokemon_afflict_add") {
+        AfflictionHelper.addAffliction(json.affliction, json.pokemon, json['value']);
+    }
+    /*
+     Remove an affliction
+     */
+    else if (json.type == "pokemon_afflict_delete") {
+        AfflictionHelper.deleteAffliction(json.affliction, json.pokemon);
+    }
+    /*
+     Trigger an affliction's handler
+     */
+    else if (json.type == "pokemon_afflict_trigger") {
+        AfflictionHelper.handleAffliction(json.affliction, json.pokemon);
+    }
+    /*
+     Request for battle grid
+     */
+    else if (json.type == "battle_grid") {
+        // Get grid size
+        var size = (json.max_width / parseInt($("#grid-w").val())) - 2;
+        // Create parent
+        var grid = $('<div />');
+
+        // Create ready callback
+        grid.ready_callback = function () {
+            // Send result
+            connection.send(JSON.stringify({
+                'type': 'battle_grid',
+                'html': grid.html()
+            }));
+        };
+
+        // Generate grid
+        generateGrid(grid, size);
+    }
+    /*
+     Attack Received
+     */
+    else if (json.type == "battle_move") {
+        ActionImpl.performMove(json.move, json.target, json.dealer, json.bonus_acc, json.bonus_dmg);
+    }
+    /*
+     Manual Damage Received
+     */
+    else if (json.type == "battle_damage") {
+        var target = $.get("api/v1/data/character/" + json.target);
+        ActionImpl.damagePokemon(target, json.moveType, json.isSpecial, json.damage);
+    }
+    /*
+     Request for Status
+     */
+    else if (json.type == "status") {
+        connection.send(JSON.stringify({
+            "type": "gm_status",
+            "value": "online"
+        }));
+    }
+}
 
 function renderCharacterList() {
     fetchPage('char-list', function (html) {

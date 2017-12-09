@@ -99,14 +99,23 @@ class PtuApp
 
     /**
      * @param $characterId
-     * @return Characters
+     * @return array
      */
     public function getCharacterById($characterId) {
-        return CharactersQuery::create()->findOneByCharacterId($characterId);
+        $char = CharactersQuery::create()->findOneByCharacterId($characterId)->toArray();
+
+        $char["Hp"] = $char["BaseHp"] + $char["LvlUpHp"] + $char["AddHp"];
+        $char["Atk"] = $char["BaseAtk"] + $char["LvlUpAtk"] + $char["AddAtk"];
+        $char["Def"] = $char["BaseDef"] + $char["LvlUpDef"] + $char["AddDef"];
+        $char["Satk"] = $char["BaseSatk"] + $char["LvlUpSatk"] + $char["AddSatk"];
+        $char["Sdef"] = $char["BaseSdef"] + $char["LvlUpSdef"] + $char["AddSdef"];
+        $char["Spd"] = $char["BaseSpd"] + $char["LvlUpSpd"] + $char["AddSpd"];
+
+        return $char;
     }
 
     public function getCharacterMoves($characterId) {
-        $charMoves = $this->getCharacterById($characterId)->getCharacterMovessJoinMoves();
+        $charMoves = CharactersQuery::create()->findOneByCharacterId($characterId)->getCharacterMovessJoinMoves();
         $moves = array();
 
         foreach ($charMoves as $charMove) {
