@@ -26,35 +26,36 @@ var connections = {}, previous_moves = [], in_battle = [];
 //     }
 // };
 
-var MoveHelper = {
-        current_move: {
-            "move": {
-                "Name": "Bugg Buzz",
-                "Type": "Bug",
-                "Freq": "Scene x2",
-                "AC": "2", "DB": "9",
-                "Class": "Special",
-                "Range": "Cone 2 or Close Blast 2; Sonic, Smite",
-                "Effect": "Bug Buzz lowers the Special Defense of all legal targets by -1 CS on 19+.",
-                "Contest Type": "Cute",
-                "Contest Effect": "Incentives",
-                "Crits On": 20,
-                "Triggers": [{
-                    "prereq": {
-                        "stmt": "current_move.acc >= 18",
-                        "val": {
-                            "true": {"type": "CS", "stat": ["spdef"], "value": -1, "target": "TARGET"}
-                        }
-                    }
-                }]
-            },
-            "dealer": "AAA",
-            "target": "BBB",
-            "acc": 17,
-            "hit": true,
-            "dmg-rolled": 17,
-            "dmg-dealt": 27
-        },
+var CurrentAction = {
+    "move": {
+        "Name": "Bugg Buzz",
+            "Type": "Bug",
+            "Freq": "Scene x2",
+            "AC": "2", "DB": "9",
+            "Class": "Special",
+            "Range": "Cone 2 or Close Blast 2; Sonic, Smite",
+            "Effect": "Bug Buzz lowers the Special Defense of all legal targets by -1 CS on 19+.",
+            "Contest Type": "Cute",
+            "Contest Effect": "Incentives",
+            "Crits On": 20,
+            "Triggers": [{
+            "prereq": {
+                "stmt": "current_move.acc >= 18",
+                "val": {
+                    "true": {"type": "CS", "stat": ["spdef"], "value": -1, "target": "TARGET"}
+                }
+            }
+        }]
+    },
+    "dealer": "AAA",
+        "target": "BBB",
+        "acc": 17,
+        "hit": true,
+        "dmg-rolled": 17,
+        "dmg-dealt": 27
+};
+
+var ActionHelper = {
 
     evalPrereq: function (prereq) {
         try {
@@ -74,7 +75,7 @@ var MoveHelper = {
 var ActionImpl = {
     /**
      * Handle a move request and dish out effects
-     * @param move Move JSON
+     * @param move Move JSON or Name
      * @param target_id The Pokemon id of the target
      * @param dealer_id The Pokemon id of the user
      * @param mods JSON Object of optional modifiers
@@ -84,15 +85,18 @@ var ActionImpl = {
             acc_bonus = mods && mods['acc_bonus'] ? mods['acc_bonus'] : 0;
 
         var dealer = $.getJSON("api/v1/data/character/" + dealer_id);
-        if (target_id !== "other")
-            var target = $.getJSON("api/v1/data/character/" + target_id);
+        var target = target_id !== "other" ? $.getJSON("api/v1/data/character/" + target_id) : null;
+
+        if ($.type(move) === "string") {
+            move = $.getJSON("api/v1/moves/" + move);
+        }
 
         doMoveDialog(dealer_id, move["Title"], move);
 
         var damageDone = 0;
         var canMove = true;
 
-        MoveHelper.current_move = {"dealer": dealer, "target": target, "move": move};
+        CurrentAction = {"dealer": dealer, "target": target, "move": move};
 
 
         // Paralysis check
@@ -128,24 +132,24 @@ var ActionImpl = {
 
             addMoveDialogInfo('<strong>ACC:</strong> ' + acRoll + ' + ' + acc_bonus);
 
-            MoveHelper.current_move["acc"] = acRoll + acc_bonus;
+            CurrentAction["acc"] = acRoll + acc_bonus;
 
             // Subtract target evade
 
-            if (target_id !== "other") {
+            if (target !== null) {
                 // Find speed evade
-                var speed_evade = Math.floor(getStatByAction('SPD', current_move, "TARGET") / 5);
+                var speed_evade = Math.floor(target["Spd"] / 5);
 
                 // Apply evade bonus
-                acCheck -= getEvadeBonus(target_id);
+                acCheck -= CharacterHelper.getEvadeBonus(target_id);
 
                 if (move["Class"] === "Physical") {
-                    var phy_evade = Math.floor(getStatByAction('DEF', current_move, "TARGET") / 5);
+                    var phy_evade = Math.floor(target["Def"] / 5);
 
                     acCheck -= speed_evade > phy_evade ? speed_evade : phy_evade;
                 }
                 else if (move["Class"] === "Special") {
-                    var spc_evade = Math.floor(getStatByAction('SDEF', current_move, "TARGET") / 5);
+                    var spc_evade = Math.floor(target["Sdef"] / 5);
 
                     acCheck -= speed_evade > spc_evade ? speed_evade : spc_evade;
                 }
@@ -156,21 +160,21 @@ var ActionImpl = {
             // Move missed
             if (move.hasOwnProperty('AC') && acCheck < parseInt(move["AC"])) {
                 doToast("It missed!");
-                MoveHelper.current_move["hit"] = false;
+                CurrentAction["hit"] = false;
 
-                // Check for triggers for if missed
-                if (move.hasOwnProperty("Triggers")) {
-                    $.each(move["Triggers"], function (k, trigger) {
-                        if (trigger.hasOwnProperty("prereq") && trigger.prereq === "miss")
-                            $.each(trigger["req"]["miss"], function (t) {
-                                this.handleTrigger(t, dealer_id, target_id, damageDone, move["Title"], acRoll);
-                            });
-                    });
-                }
+                // Check for triggers for if missed TODO
+                // if (move.hasOwnProperty("Triggers")) {
+                //     $.each(move["Triggers"], function (k, trigger) {
+                //         if (trigger.hasOwnProperty("prereq") && trigger.prereq === "miss")
+                //             $.each(trigger["req"]["miss"], function (t) {
+                //                 this.handleTrigger(t, dealer_id, target_id, damageDone, move["Title"], acRoll);
+                //             });
+                //     });
+                // }
             }
             // Move hit
             else {
-                MoveHelper.current_move["hit"] = true;
+                CurrentAction["hit"] = true;
 
                 if (move["Class"] === "Physical" || move["Class"] === "Special") {
                     var db = parseInt(move["DB"]);
@@ -185,7 +189,7 @@ var ActionImpl = {
                     // Show roll
 
                     addMoveDialogInfo('<strong>DMG:</strong> Rolled ' + rolledDmg + ' on DB' + db);
-                    MoveHelper.current_move["dmg_rolled"] = rolledDmg;
+                    CurrentAction["dmg_rolled"] = rolledDmg;
 
                     // Declare if critical hit
                     if (acRoll >= crit)
@@ -203,7 +207,7 @@ var ActionImpl = {
 
                     damage += parseInt(dmg_bonus);
 
-                    MoveHelper.current_move["dmg_dealt"] = damage;
+                    CurrentAction["dmg_dealt"] = damage;
 
                     if (target_id === "other") {
                         doToast("OUTGOING DAMAGE = " + damage);
@@ -211,19 +215,19 @@ var ActionImpl = {
                         damageDone = damage;
                     }
                     else {
-                        damageDone = damagePokemon(target, move["Type"], move["Class"] === "Special", damage);
+                        damageDone = this.damagePokemon(target, move["Type"], move["Class"] === "Special", damage);
                         addMoveDialogInfo('<strong>'+ damageDone +'</strong> total damage');
                     }
                 }
 
                 /*
-                Triggers
+                Triggers TODO
                  */
 
                 if (move.hasOwnProperty("Triggers")) {
-                    $.each(move["Triggers"], function (k, trigger) {
-                        this.handleTrigger(trigger, dealer_id, target_id, damageDone, move["Title"], acRoll);
-                    });
+                    // $.each(move["Triggers"], function (k, trigger) {
+                    //     this.handleTrigger(trigger, dealer_id, target_id, damageDone, move["Title"], acRoll);
+                    // });
                 }
             }
         }
@@ -253,10 +257,14 @@ var ActionImpl = {
 
         var effect1 = 1, effect2 = 1;
 
-        if (moveType == null) {
+        if (moveType) {
             effect1 = typeEffects[moveType.toLowerCase()][target["Type1"].toLowerCase()];
             effect2 = target["Type2"] !== null && target["Type2"] !== "" ?
                 typeEffects[moveType.toLowerCase()][target["Type2"].toLowerCase()] : 1;
+        }
+
+        if ($.type(target) === "string") {
+            target = $.getJSON("api/v1/data/character/" + target_id);
         }
 
         damage = damage * effect1 * effect2;
@@ -274,7 +282,7 @@ var ActionImpl = {
         }
 
         // Calculating max_hp
-        var max_hp = gm_data["pokemon"][target_id]['level'] + gm_data["pokemon"][target_id]['hp'] * 3 + 10;
+        var max_hp = target['Level'] + target['Hp'] * 3 + 10;
 
         // Checking for injuries
         if (damage >= max_hp/2){
@@ -297,12 +305,15 @@ var ActionImpl = {
         }
         //No need to go to other thresholds, as you'd be dead at that point
 
+        // Find Max HP based on Injuries
+        max_hp = Math.round((10-target["Injuries"])/10 * max_hp);
+
         // Subtract health
         target["Health"] -= damage;
 
         //Limiting health by number of injuries if appropriate
-        if ((10-target["Injuries"])/10 * max_hp < target["Health"]){
-            target["Health"] = (10-target["Injuries"])/10;
+        if (target["Health"] > max_hp){
+            target["Health"] = max_hp;
         }
 
         // Check if fainted
@@ -339,12 +350,12 @@ var ActionImpl = {
         if (trigger.hasOwnProperty("prereq")) {
 
             // Accuracy prerequisite
-            if (trigger.prereq == "accuracy" && trigger.req.hasOwnProperty(String(MoveHelper.current_move['acc']))) {
+            if (trigger.prereq == "accuracy" && trigger.req.hasOwnProperty(String(CurrentAction['acc']))) {
                 // If not pointing to other entry
-                if (typeof trigger.req[String(MoveHelper.current_move['acc'])] == "object")
-                    this.handleTrigger(trigger.req[String(MoveHelper.current_move['acc'])], dealer_id, target_id);
+                if (typeof trigger.req[String(CurrentAction['acc'])] == "object")
+                    this.handleTrigger(trigger.req[String(CurrentAction['acc'])], dealer_id, target_id);
                 else
-                    this.handleTrigger(trigger.req[String(trigger.req[String(MoveHelper.current_move['acc'])])], dealer_id, target_id);
+                    this.handleTrigger(trigger.req[String(trigger.req[String(CurrentAction['acc'])])], dealer_id, target_id);
             }
         }
         // Not a prereq
@@ -401,7 +412,7 @@ var ActionImpl = {
                         gm_data["pokemon"][id]['health']+mult*max_hp)
                 } else if (arr[1]=="Damage"){
                     gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,
-                        gm_data["pokemon"][id]['health']+mult*MoveHelper.current_move['dmg_dealt'])
+                        gm_data["pokemon"][id]['health']+mult*CurrentAction['dmg_dealt'])
                 }
 
                 //Setting Health bar
@@ -487,7 +498,7 @@ var ActionImpl = {
                     doToast(target["name"] + " fainted!");
                     target["Health"] = 0;
                 } else {
-                    doToast(MoveHelper.current_move.move.Name + " missed "+target["name"]+"!");
+                    doToast(CurrentAction.move.Name + " missed "+target["name"]+"!");
                 }
             }
         }

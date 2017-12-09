@@ -739,7 +739,7 @@ function damagePokemon(target_id, moveType, moveIsSpecial, damage) {
 
     //Limiting health by number of injuries if appropriate
     if ((10-gm_data["pokemon"][target_id]["injuries"])/10 * max_hp < gm_data["pokemon"][target_id]["health"]){
-        gm_data["pokemon"][target_id]["health"] = Math.round((10-gm_data["pokemon"][target_id]["injuries"])/10);
+        gm_data["pokemon"][target_id]["health"] = Math.round((10-gm_data["pokemon"][target_id]["injuries"])/10) * max_hp;
     }
 
     addMoveDialogInfo('<strong>Damage Delt:</strong> ' + damage);

@@ -1,5 +1,8 @@
 var CharacterHelper = {
-
+    getEvadeBonus: function (char_id) {
+        //TODO implement
+        return 0;
+    }
 };
 
 var AfflictionHelper = {
