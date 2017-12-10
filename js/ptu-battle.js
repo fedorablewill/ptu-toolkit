@@ -84,11 +84,11 @@ var ActionImpl = {
         var dmg_bonus = mods && mods['dmg_bonus'] ? mods['dmg_bonus'] : 0,
             acc_bonus = mods && mods['acc_bonus'] ? mods['acc_bonus'] : 0;
 
-        var dealer = $.getJSON("api/v1/data/character/" + dealer_id);
-        var target = target_id !== "other" ? $.getJSON("api/v1/data/character/" + target_id) : null;
+        var dealer = getJSONNonAsync("api/v1/data/character/" + dealer_id);
+        var target = target_id !== "other" ? getJSONNonAsync("api/v1/data/character/" + target_id) : null;
 
         if ($.type(move) === "string") {
-            move = $.getJSON("api/v1/moves/" + move);
+            move = getJSONNonAsync("api/v1/moves/" + move);
         }
 
         doMoveDialog(dealer_id, move["Title"], move);
@@ -215,7 +215,7 @@ var ActionImpl = {
                         damageDone = damage;
                     }
                     else {
-                        damageDone = this.damagePokemon(target, move["Type"], move["Class"] === "Special", damage);
+                        damageDone = this.damageCharacter(target, move["Type"], move["Class"] === "Special", damage);
                         addMoveDialogInfo('<strong>'+ damageDone +'</strong> total damage');
                     }
                 }
@@ -249,22 +249,23 @@ var ActionImpl = {
      * @param moveIsSpecial True when special, false when physical
      * @param damage The amount of damage
      */
-    damagePokemon: function (target, moveType, moveIsSpecial, damage) {
+    damageCharacter: function (target, moveType, moveIsSpecial, damage) {
+
+        if (target && $.type(target) !== "object") {
+            target = getJSONNonAsync("api/v1/data/character/" + target);
+        }
+
         if (moveIsSpecial)
-            damage -= getStatByAction('SDEF', current_move, "TARGET");
+            damage -= target["Sdef"];
         else
-            damage -= getStatByAction('SPD', current_move, "TARGET");
+            damage -= target["Def"];
 
         var effect1 = 1, effect2 = 1;
 
-        if (moveType) {
+        if (moveType && target["Type1"]) {
             effect1 = typeEffects[moveType.toLowerCase()][target["Type1"].toLowerCase()];
-            effect2 = target["Type2"] !== null && target["Type2"] !== "" ?
+            effect2 = target["Type2"] && target["Type2"] !== "" ?
                 typeEffects[moveType.toLowerCase()][target["Type2"].toLowerCase()] : 1;
-        }
-
-        if ($.type(target) === "string") {
-            target = $.getJSON("api/v1/data/character/" + target_id);
         }
 
         damage = damage * effect1 * effect2;
@@ -320,25 +321,24 @@ var ActionImpl = {
         if (target["Health"] <= 0) {
             doToast(target["name"] + " fainted!");
             target["Health"] = 0;
-            AfflictionHelper.addAffliction("Fainted", target_id, 0);
+            AfflictionHelper.addAffliction("Fainted", target["CharacterId"], 0);
         }
 
         // Update health bar
-        var w = Math.floor((target['health'] / max_hp) * 100);
+        var w = Math.floor((target['Health'] / max_hp) * 100);
 
-        $("[data-name='"+target_id+"']").find(".progress-bar").css("width", w + "%");
+        $("[data-name='"+target["CharacterId"]+"']").find(".progress-bar").css("width", w + "%");
 
-        // Update Player client
-        sendMessage(battle[target_id]["client_id"], JSON.stringify({
-            "type": "health",
-            "value": target['health']
-        }));
+        // Update Player client TODO
+        // sendMessage(battle[target_id]["client_id"], JSON.stringify({
+        //     "type": "health",
+        //     "value": target['health']
+        // }));
 
         // Check if cured target of Frozen
         if ((moveType === "Fire" || moveType === "Fighting" || moveType === "Rock" || moveType === "Steel") &&
-            AfflictionHelper.hasAffliction("Frozen", target_id)) {
-
-            AfflictionHelper.deleteAffliction("Frozen", target_id);
+                AfflictionHelper.hasAffliction("Frozen", target["CharacterId"])) {
+            AfflictionHelper.deleteAffliction("Frozen", target["CharacterId"]);
         }
 
         return damage;

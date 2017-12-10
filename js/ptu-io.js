@@ -39,3 +39,17 @@ function createCharacterEditor(character_id, parent) {
         parent_elem.html(html);
     });
 }
+
+function getJSONNonAsync(url) {
+    var result;
+    $.ajax({
+        type:'GET',
+        url:url,
+        dataType:'json',
+        async:false,
+        success:function(data){
+            result = data;
+        }
+    });
+    return result;
+}

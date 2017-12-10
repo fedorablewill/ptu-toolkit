@@ -146,7 +146,7 @@ function readMessage(connection, data) {
      */
     else if (json.type == "battle_damage") {
         var target = $.get("api/v1/data/character/" + json.target);
-        ActionImpl.damagePokemon(target, json.moveType, json.isSpecial, json.damage);
+        ActionImpl.damageCharacter(target, json.moveType, json.isSpecial, json.damage);
     }
     /*
      Request for Status
