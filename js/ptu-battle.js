@@ -26,34 +26,7 @@ var connections = {}, previous_moves = [], in_battle = [];
 //     }
 // };
 
-var CurrentAction = {
-    "move": {
-        "Name": "Bugg Buzz",
-            "Type": "Bug",
-            "Freq": "Scene x2",
-            "AC": "2", "DB": "9",
-            "Class": "Special",
-            "Range": "Cone 2 or Close Blast 2; Sonic, Smite",
-            "Effect": "Bug Buzz lowers the Special Defense of all legal targets by -1 CS on 19+.",
-            "Contest Type": "Cute",
-            "Contest Effect": "Incentives",
-            "Crits On": 20,
-            "Triggers": [{
-            "prereq": {
-                "stmt": "current_move.acc >= 18",
-                "val": {
-                    "true": {"type": "CS", "stat": ["spdef"], "value": -1, "target": "TARGET"}
-                }
-            }
-        }]
-    },
-    "dealer": "AAA",
-        "target": "BBB",
-        "acc": 17,
-        "hit": true,
-        "dmg-rolled": 17,
-        "dmg-dealt": 27
-};
+var CurrentAction = {"dealer":{"CharacterId":2,"CampaignId":34,"Type":"POKEMON","PokedexNo":"374","PokedexId":1,"Name":"Siri","Owner":13,"Age":null,"Weight":null,"Height":null,"Sex":"Genderless","Type1":"Steel","Type2":"Psychic","Level":9,"Exp":87,"BaseHp":4,"BaseAtk":6,"BaseDef":8,"BaseSatk":4,"BaseSdef":6,"BaseSpd":3,"LvlUpHp":1,"LvlUpAtk":5,"LvlUpDef":0,"LvlUpSatk":3,"LvlUpSdef":7,"LvlUpSpd":1,"AddHp":0,"AddAtk":1,"AddDef":0,"AddSatk":-1,"AddSdef":0,"AddSpd":0,"Health":34,"Injuries":0,"Money":0,"SkillAcrobatics":2,"SkillAthletics":2,"SkillCharm":2,"SkillCombat":2,"SkillCommand":2,"SkillGeneralEd":2,"SkillMedicineEd":2,"SkillOccultEd":2,"SkillPokemonEd":2,"SkillTechnologyEd":2,"SkillFocus":2,"SkillGuile":2,"SkillIntimidate":2,"SkillIntuition":2,"SkillPerception":2,"SkillStealth":2,"SkillSurvival":2,"ApSpent":0,"ApBound":0,"ApDrained":0,"BackgroundName":null,"BackgroundAdept":null,"BackgroundNovice":null,"BackgroundPthc1":null,"BackgroundPthc2":null,"BackgroundPthc3":null,"Afflictions":null,"Notes":"Discovered at Starter","Nature":"Adamant","SheetType":null,"Hp":5,"Atk":12,"Def":8,"Satk":6,"Sdef":13,"Spd":4},"target":{"CharacterId":1,"CampaignId":34,"Type":"POKEMON","PokedexNo":"179","PokedexId":1,"Name":"Phoebe","Owner":9,"Age":null,"Weight":null,"Height":null,"Sex":"Female","Type1":"Electric","Type2":null,"Level":6,"Exp":60,"BaseHp":6,"BaseAtk":4,"BaseDef":4,"BaseSatk":7,"BaseSdef":5,"BaseSpd":4,"LvlUpHp":5,"LvlUpAtk":2,"LvlUpDef":2,"LvlUpSatk":3,"LvlUpSdef":2,"LvlUpSpd":0,"AddHp":0,"AddAtk":0,"AddDef":0,"AddSatk":0,"AddSdef":1,"AddSpd":-1,"Health":36,"Injuries":0,"Money":0,"SkillAcrobatics":2,"SkillAthletics":2,"SkillCharm":2,"SkillCombat":2,"SkillCommand":2,"SkillGeneralEd":2,"SkillMedicineEd":2,"SkillOccultEd":2,"SkillPokemonEd":2,"SkillTechnologyEd":2,"SkillFocus":2,"SkillGuile":2,"SkillIntimidate":2,"SkillIntuition":2,"SkillPerception":2,"SkillStealth":2,"SkillSurvival":2,"ApSpent":0,"ApBound":0,"ApDrained":0,"BackgroundName":null,"BackgroundAdept":null,"BackgroundNovice":null,"BackgroundPthc1":null,"BackgroundPthc2":null,"BackgroundPthc3":null,"Afflictions":null,"Notes":"Discovered at Starter","Nature":"Sassy","SheetType":null,"Hp":11,"Atk":6,"Def":6,"Satk":10,"Sdef":8,"Spd":3},"move":{"Type":"Normal","Freq":"At-Will","AC":"4","DB":"4","Class":"Physical","Range":"Melee, 1 Target","Crits On":20},"acc":15,"hit":true,"is_crit":false,"dmg_rolled":7,"dmg_dealt":19,"dmg_final":13};
 
 var ActionHelper = {
 
@@ -87,11 +60,11 @@ var ActionImpl = {
         var dealer = getJSONNonAsync("api/v1/data/character/" + dealer_id);
         var target = target_id !== "other" ? getJSONNonAsync("api/v1/data/character/" + target_id) : null;
 
-        if ($.type(move) === "string") {
+        if ($.type(move) !== "object") {
             move = getJSONNonAsync("api/v1/moves/" + move);
         }
 
-        doMoveDialog(dealer_id, move["Title"], move);
+        doMoveDialog(dealer, move["Title"], move);
 
         var damageDone = 0;
         var canMove = true;
@@ -179,16 +152,20 @@ var ActionImpl = {
                 if (move["Class"] === "Physical" || move["Class"] === "Special") {
                     var db = parseInt(move["DB"]);
 
+                    var is_crit = acRoll >= crit;
+
                     // STAB is moved to Player Client
 
                     // Roll for damage
 
-                    var rolledDmg = rollDamageBase(db, acRoll >= crit ? 2 : 1);
+                    var rolledDmg = rollDamageBase(db, is_crit ? 2 : 1);
                     var damage = 0;
 
                     // Show roll
 
                     addMoveDialogInfo('<strong>DMG:</strong> Rolled ' + rolledDmg + ' on DB' + db);
+
+                    CurrentAction["is_crit"] = is_crit;
                     CurrentAction["dmg_rolled"] = rolledDmg;
 
                     // Declare if critical hit
@@ -197,10 +174,10 @@ var ActionImpl = {
 
                     // Add stat bonus to damage
                     if (move["Class"] === "Physical") {
-                        damage = rolledDmg + getStatByAction('ATK', current_move, "DEALER");
+                        damage = rolledDmg + dealer["Atk"];
                     }
                     else if (move["Class"] === "Special") {
-                        damage = rolledDmg + getStatByAction('SATK', current_move, "DEALER");
+                        damage = rolledDmg + dealer["Satk"];
                     }
 
                     // Distribute damage
@@ -218,6 +195,8 @@ var ActionImpl = {
                         damageDone = this.damageCharacter(target, move["Type"], move["Class"] === "Special", damage);
                         addMoveDialogInfo('<strong>'+ damageDone +'</strong> total damage');
                     }
+
+                    CurrentAction["dmg_final"] = damageDone;
                 }
 
                 /*
@@ -255,10 +234,7 @@ var ActionImpl = {
             target = getJSONNonAsync("api/v1/data/character/" + target);
         }
 
-        if (moveIsSpecial)
-            damage -= target["Sdef"];
-        else
-            damage -= target["Def"];
+        damage -= moveIsSpecial ? target["Sdef"] : target["Def"];
 
         var effect1 = 1, effect2 = 1;
 

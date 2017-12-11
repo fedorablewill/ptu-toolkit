@@ -159,6 +159,18 @@ function readMessage(connection, data) {
     }
 }
 
+function doMoveDialog(dealer, move_name, move_json) {
+    if (currentView !== 0)
+        doToast(dealer["Name"] + " used " + move_name + "!");
+
+    var html = '<img src="img/pokemon/' + dealer["PokedexNo"] + '.gif" />' +
+        '<div class="battle-dialog">' +
+        '<p>' + dealer["Name"] + ' used <span style="color:' + typeColor(move_json["Type"]) + '">' + move_name + '</span></p>' +
+        '</div>';
+
+    $("#battle-message").html(html);
+}
+
 function renderCharacterList() {
     fetchPage('char-list', function (html) {
         var list = $(".list-pokemon").html('');
