@@ -18,35 +18,22 @@ $characters = CharactersQuery::create()
     ->filterByOwner(null)
     ->find();
 
-$output = array();
+foreach ($characters as $character): ?>
 
-foreach ($characters as $character) {
-    $char = array(
-        "id" => $character->getCharacterId(),
-        "type" => $character->getType(),
-        "dex" => $character->getPokedexNo(),
-        "type1" => $character->getType1(),
-        "type2" => $character->getType2(),
-        "name" => $character->getName(),
-        "owned" => array()
-    );
+    <div class="char-list char-list-select">
+        <div class="char-item char-owner" data-id="<?php echo $character->getCharacterId();?>">
+            <span class="char-name"><strong><?php echo $character->getName();?></strong></span>
+            <?php
+            $ownedChars = CharactersQuery::create()
+                ->findByOwner($character->getCharacterId());
 
-    $ownedChars = CharactersQuery::create()
-        ->findByOwner($character->getCharacterId());
+            foreach ($ownedChars as $ownedChar): ?>
+                <div class="char-item char-owned" data-id="<?php echo $ownedChar->getCharacterId();?>">
 
-    foreach ($ownedChars as $ownedChar) {
-        array_push($char['owned'], array(
-            "id" => $ownedChar->getCharacterId(),
-            "type" => $ownedChar->getType(),
-            "dex" => $ownedChar->getPokedexNo(),
-            "type1" => $ownedChar->getType1(),
-            "type2" => $ownedChar->getType2(),
-            "name" => $ownedChar->getName()
-        ));
-    }
+                    <span class="char-name"><?php echo $ownedChar->getName();?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
-    array_push($output, $char);
-}
-
-echo json_encode($output);
-
+<?php endforeach; ?>

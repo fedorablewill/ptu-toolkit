@@ -378,7 +378,7 @@ class PtuAPI extends API
 
         if ($this->verb === "character") {
             if ($this->args[0] === "list" && $this->method == "GET")
-                return $app->getCampaignById($_GET['campaign_id'])->getCharacterss()->toArray();
+                return $app->getCharacterList($_GET['campaign_id']);
             else if ($this->args[0] === "moves" && $this->method == "GET")
                 return $app->getCharacterMoves($_GET['character_id']);
             else if (!is_null($this->args[0]) && $this->method == "GET")

@@ -141,4 +141,43 @@ class PtuApp
         $character->fromArray($data, TableMap::TYPE_PHPNAME);
         return $character->save();
     }
+
+    public function getCharacterList($campaignId) {
+        $characters = CharactersQuery::create()
+            ->filterByCampaignId($campaignId)
+            ->filterByOwner(null)
+            ->find();
+
+        $output = array();
+
+        foreach ($characters as $character) {
+            $char = array(
+                "id" => $character->getCharacterId(),
+                "type" => $character->getType(),
+                "dex" => $character->getPokedexNo(),
+                "type1" => $character->getType1(),
+                "type2" => $character->getType2(),
+                "name" => $character->getName(),
+                "owned" => array()
+            );
+
+            $ownedChars = CharactersQuery::create()
+                ->findByOwner($character->getCharacterId());
+
+            foreach ($ownedChars as $ownedChar) {
+                array_push($char['owned'], array(
+                    "id" => $ownedChar->getCharacterId(),
+                    "type" => $ownedChar->getType(),
+                    "dex" => $ownedChar->getPokedexNo(),
+                    "type1" => $ownedChar->getType1(),
+                    "type2" => $ownedChar->getType2(),
+                    "name" => $ownedChar->getName()
+                ));
+            }
+
+            array_push($output, $char);
+        }
+
+        return json_encode($output);
+    }
 }

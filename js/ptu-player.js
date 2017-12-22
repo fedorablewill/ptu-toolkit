@@ -6,7 +6,7 @@
 $.getScript('js/script.js');
 $.getScript('js/ptu-io.js');
 
-function createPlayerList() {
+function createCharacterList() {
     fetchPage('char-list', function (html) {
         html = '<h2>Select Character</h2>' + html;
 

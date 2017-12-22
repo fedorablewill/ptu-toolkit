@@ -172,9 +172,8 @@ function doMoveDialog(dealer, move_name, move_json) {
 }
 
 function renderCharacterList() {
-    fetchPage('char-list', function (html) {
+    $.getJSON('api/v1/data/character/list', {"campaign_id": 34}, function (json) {
         var list = $(".list-pokemon").html('');
-        var json = JSON.parse(html);
 
         $.each(json, function (i, char) {
             var img = '<img class="img-circle pull-left bg-danger" height="60px" width="60px" />';
