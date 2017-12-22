@@ -180,4 +180,11 @@ class PtuApp
 
         return json_encode($output);
     }
+
+    public function setCharacterCS($characterId, $stat, $value, $doInc = false) {
+        $stat = strtoupper($stat);
+        $isCs = !($stat == "ACC" || $stat == "EVD");
+
+        return CharactersQuery::create()->findOneByCharacterId($characterId)->addOrUpdateBuff($stat, $value, $isCs, $doInc);
+    }
 }

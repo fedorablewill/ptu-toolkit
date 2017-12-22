@@ -20,12 +20,20 @@ describe("Battle", function () {
 
                 if (CurrentAction.acc >= 20) {
                     expect(CurrentAction.is_crit).toBeTruthy();
-                    expect(CurrentAction.dmg_rolled).toBeGreaterThanOrEqual(0); //TODO
-                    expect(CurrentAction.dmg_rolled).toBeLessThanOrEqual(50); //TODO
-                    expect(CurrentAction.dmg_dealt).toBeGreaterThanOrEqual(0); //TODO
-                    expect(CurrentAction.dmg_dealt).toBeLessThanOrEqual(50); //TODO
+                    expect(CurrentAction.dmg_rolled).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_rolled).toBeLessThanOrEqual(50); //TODO determine value
+                    expect(CurrentAction.dmg_dealt).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_dealt).toBeLessThanOrEqual(50); //TODO determine value
+                    expect(CurrentAction.dmg_final).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_final).toBeLessThanOrEqual(50); //TODO determine value
                 } else {
                     expect(CurrentAction.is_crit).toBeFalsy();
+                    expect(CurrentAction.dmg_rolled).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_rolled).toBeLessThanOrEqual(50); //TODO determine value
+                    expect(CurrentAction.dmg_dealt).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_dealt).toBeLessThanOrEqual(50); //TODO determine value
+                    expect(CurrentAction.dmg_final).toBeGreaterThanOrEqual(0); //TODO determine value
+                    expect(CurrentAction.dmg_final).toBeLessThanOrEqual(50); //TODO determine value
                 }
             } else {
                 expect(CurrentAction.hit).toBeFalsy();

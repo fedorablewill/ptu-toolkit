@@ -381,6 +381,9 @@ class PtuAPI extends API
                 return $app->getCharacterList($_GET['campaign_id']);
             else if ($this->args[0] === "moves" && $this->method == "GET")
                 return $app->getCharacterMoves($_GET['character_id']);
+            else if ($this->args[0] === "cs" && $this->method == "POST")
+                return $app->setCharacterCS($_POST['character_id'], $_POST['stat'], $_POST['value'],
+                    array_key_exists('doInc', $_POST) ? $_POST['doInc'] : true);
             else if (!is_null($this->args[0]) && $this->method == "GET")
                 return $app->getCharacterById($this->args[0]);
             else if (!is_null($this->args[0]) && $this->method == "POST")

@@ -5,6 +5,8 @@ namespace Propel\PtuToolkit;
 use PDO;
 use Propel\PtuToolkit\Base\Characters as BaseCharacters;
 use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\Exception\PropelException;
+use Propel\Runtime\Exception\RuntimeException;
 use Propel\Runtime\Propel;
 
 /**
@@ -46,5 +48,57 @@ ORDER BY CASE
         $moves = $st->fetchAll(PDO::FETCH_ASSOC);
 
         return $moves;
+    }
+
+    public function addOrUpdateBuff($stat, $value, $isCS = true, $doInc = false) {
+        $sql = "
+SELECT be.battle_entry_id AS \"EntryId\", be.battle_id AS \"BattleId\" FROM battle_entries be
+  LEFT OUTER JOIN battles b ON b.battle_id = be.battle_id
+WHERE b.is_active > 0 AND be.character_id=:charId
+LIMIT 1";
+
+        $conn = Propel::getConnection();
+        $st = $conn->prepare($sql);
+        $st->bindParam('charId', $this->getCharacterId());
+        $st->execute();
+
+        $entry = $st->fetch(PDO::FETCH_ASSOC);
+
+        if ($entry == false) {
+            throw new RuntimeException("No active battle found for character");
+        } else {
+            $buff = CharacterBuffsQuery::create()
+                ->filterByBattleId($entry["BattleId"])
+                ->filterByCharacterId($this->getCharacterId())
+                ->filterByTargetStat($stat)
+                ->filterByType($isCS ? "CS" : "ADD")
+                ->filterByPrereq(null)
+                ->findOne();
+
+            if (is_null($buff)) {
+                $buff = new CharacterBuffs();
+                $buff->setBattleId($entry["BattleId"]);
+                $buff->setCharacterId($this->getCharacterId());
+                $buff->setType($isCS ? "CS" : "ADD");
+                $buff->setTargetStat($stat);
+                $buff->setValue($value);
+            }
+            else {
+                $buff->setValue($doInc ? $buff->getValue() + $value : $value);
+            }
+
+            if ($buff->getValue() > 6)
+                $buff->setValue(6);
+            else if ($buff->getValue() < -6)
+                $buff->setValue(-6);
+
+            try {
+                $buff->save();
+            } catch (PropelException $e) {
+                throw new RuntimeException($e);
+            }
+
+            return $buff->getValue();
+        }
     }
 }

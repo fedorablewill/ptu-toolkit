@@ -204,9 +204,9 @@ var ActionImpl = {
                  */
 
                 if (move.hasOwnProperty("Triggers")) {
-                    // $.each(move["Triggers"], function (k, trigger) {
-                    //     this.handleTrigger(trigger, dealer_id, target_id, damageDone, move["Title"], acRoll);
-                    // });
+                    $.each(move["Triggers"], function (k, trigger) {
+                        ActionImpl.handleTrigger(trigger, dealer, target);
+                    });
                 }
             }
         }
@@ -320,43 +320,54 @@ var ActionImpl = {
         return damage;
     },
 
-    handleTrigger: function (trigger, dealer_id, target_id) {
+    handleTrigger: function (trigger, dealer, target) {
+
+        // If Character ID's were provided instead of JSON, fetch JSON
+
+        if (target && $.type(target) !== "object") {
+            target = getJSONNonAsync("api/v1/data/character/" + target);
+        }
+
+        if (dealer && $.type(target) !== "object") {
+            dealer = getJSONNonAsync("api/v1/data/character/" + dealer);
+        }
 
         // If trigger is a prereq
         if (trigger.hasOwnProperty("prereq")) {
 
             // Accuracy prerequisite
-            if (trigger.prereq == "accuracy" && trigger.req.hasOwnProperty(String(CurrentAction['acc']))) {
+            if (trigger.prereq === "accuracy" && trigger.req.hasOwnProperty(String(CurrentAction['acc']))) {
                 // If not pointing to other entry
-                if (typeof trigger.req[String(CurrentAction['acc'])] == "object")
-                    this.handleTrigger(trigger.req[String(CurrentAction['acc'])], dealer_id, target_id);
+                if ($.type(trigger.req[String(CurrentAction['acc'])]) === "object")
+                    this.handleTrigger(trigger.req[String(CurrentAction['acc'])], dealer, target);
                 else
-                    this.handleTrigger(trigger.req[String(trigger.req[String(CurrentAction['acc'])])], dealer_id, target_id);
+                    this.handleTrigger(trigger.req[String(trigger.req[String(CurrentAction['acc'])])], dealer, target);
             }
         }
         // Not a prereq
         else {
             //Making a variable for storing important ids
-            var id;
+            var char;
             if (trigger.hasOwnProperty("target")){
-                id = trigger.target == "SELF" ? dealer_id : target_id;
+                char = trigger.target === "SELF" ? dealer : target;
             }
 
             //Handling trigger by type
-            if (trigger.type=="action-needed"){
+            if (trigger.type==="action-needed"){
                 doToast(trigger.text);
 
                 addMoveDialogInfo('<strong>MANUAL ACTION:</strong> ' + trigger.text);
             }
-            else if (trigger.type=="CS"){
+            else if (trigger.type==="CS"){
                 //Raising/lowering stats
                 $.each(trigger.stat, function(k, stat){
-                    battle[id]["stage_"+stat] = parseInt(battle[id]["stage_"+stat]) + trigger.value;
-
-                    if (battle[id]["stage_"+stat] > 6)
-                        battle[id]["stage_"+stat] = 6;
-                    else if (battle[id]["stage_"+stat] < -6)
-                        battle[id]["stage_"+stat] = -6;
+                    $.post("api/v1/data/character/cs", {
+                        "characterId": char["CharacterId"],
+                        "stat": stat,
+                        "value": trigger.value
+                    }, function (response) {
+                        debugger;
+                    });
 
                     // Notify client
                     sendMessage(battle[id]['client_id'], JSON.stringify({
