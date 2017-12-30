@@ -101,4 +101,22 @@ LIMIT 1";
             return $buff->getValue();
         }
     }
+
+    public function addAffliction($affliction) {
+        $afflictionList = empty($this->getAfflictions()) ? array() : json_decode($this->getAfflictions());
+        if (!in_array($affliction, $afflictionList)){
+            array_push($afflictionList, $affliction);
+            $afflictionList = json_encode($afflictionList);
+            $this->setAfflictions($afflictionList);
+        }
+    }
+
+    public function removeAffliction($affliction) {
+        $afflictionList = empty($this->getAfflictions()) ? array() : json_decode($this->getAfflictions());
+        if (($key = array_search($affliction, $afflictionList)) !== false) {
+            unset($afflictionList[$key]);
+            $afflictionList = json_encode($afflictionList);
+            $this->setAfflictions($afflictionList);
+        }
+    }
 }

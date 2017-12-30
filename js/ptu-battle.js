@@ -361,20 +361,7 @@ var ActionImpl = {
             else if (trigger.type==="CS"){
                 //Raising/lowering stats
                 $.each(trigger.stat, function(k, stat){
-                    $.post("api/v1/data/character/cs", {
-                        "characterId": char["CharacterId"],
-                        "stat": stat,
-                        "value": trigger.value
-                    }, function (response) {
-                        debugger;
-                    });
-
-                    // Notify client
-                    sendMessage(battle[id]['client_id'], JSON.stringify({
-                        "type": "data_changed",
-                        "field": "stage-"+stat,
-                        "value": battle[id]['stage_'+stat]
-                    }));
+                    CharacterHelper.modifyCombatStage(char["CharacterId"], trigger.stat, trigger.value);
 
                     // Log change
                     if (trigger.value > 0)

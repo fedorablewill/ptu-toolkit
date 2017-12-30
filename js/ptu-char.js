@@ -2,7 +2,33 @@ var CharacterHelper = {
     getEvadeBonus: function (char_id) {
         //TODO implement
         return 0;
+    },
+
+    modifyCombatStage: function (charId, stat, amnt) {
+        $.post("api/v1/data/character/cs", {
+            "characterId": charId,
+            "stat": stat,
+            "value": amnt
+        }, function (response) {
+            if ($.isNumeric(response)) {
+                // Notify client
+                sendMessage(battle[charId]['client_id'], JSON.stringify({
+                    "type": "data_changed",
+                    "field": "stage-"+stat,
+                    "value": parseInt(response)
+                }));
+            }
+        });
     }
+};
+
+var AfflictionEnum = {
+    Burned: "BURNED",
+    Frozen: "FROZEN",
+    Paralysis: "PARALYSIS",
+    Poisoned: "POISONED",
+    Fainted: "FAINTED",
+    Confused: "CONFUSED"
 };
 
 var AfflictionHelper = {
@@ -11,93 +37,45 @@ var AfflictionHelper = {
         return false;
     },
 
-    addAffliction: function (affliction, entity_id, value) {
+    addAffliction: function (affliction, character, value) {
 
         affliction = affliction.toUpperCase();
 
-        // Create array if not found
-        if (!gm_data["entities"][entity_id].hasOwnProperty('tags'))
-            gm_data["entities"][entity_id]['tags'] = [];
+        if (!this.typeHasImmunity(character["Type1"], affliction) && !this.typeHasImmunity(character["Type2"], affliction)) {
+            $.post("api/v1/data/character/affliction", {
+                "character_id" : character["CharacterId"],
+                "affliction": affliction,
+                "method": "ADD"
+            }, function (response) {
+                if (affliction === AfflictionEnum.Burned) {
+                    CharacterHelper.modifyCombatStage(character["CharacterId"], "def", -2);
+                    doToast(character['Name'] + " is being burned!");
+                }
+                else if (affliction === AfflictionEnum.Frozen) {
+                    doToast(character['Name'] + " is frozen solid!");
+                }
+                else if (affliction === AfflictionEnum.Paralysis) {
+                    doToast(character['Name'] + " has been paralyzed!");
+                }
+                else if (affliction === AfflictionEnum.Poisoned) {
+                    CharacterHelper.modifyCombatStage(character["CharacterId"], "spdef", -2);
+                    doToast(character['Name'] + " has been poisoned!");
+                }
+                else if (affliction === AfflictionEnum.Confused) {
+                    doToast(character['Name'] + " is confused!");
+                }
+                // TODO: remove all Persistent & Volatile afflictions when fainted
 
-        // Persistent Afflictions
-        if ((affliction == "BURNED" && $.inArray("Fire", gm_data["entities"][entity_id]['type'].split(" / ")) < 0) ||
-            (affliction == "FROZEN" && $.inArray("Ice", gm_data["entities"][entity_id]['type'].split(" / ")) < 0) ||
-            (affliction == "PARALYSIS" && $.inArray("Electric", gm_data["entities"][entity_id]['type'].split(" / ")) < 0) ||
-            (affliction == "POISONED"  && $.inArray("Poison", gm_data["entities"][entity_id]['type'].split(" / ")) < 0 &&
-                $.inArray("Steel", gm_data["entities"][entity_id]['type'].split(" / ")) < 0)) {
+                // Update Player client
+                sendMessage(connections[entity_id]["client_id"], JSON.stringify({
+                    "type": "afflict_add",
+                    "affliction": affliction
+                }));
 
-            // Add affliction to list
-            gm_data["entities"][entity_id]['tags'].push(affliction);
-
-            // SPECIAL EFFECTS
-
-            // Burn: Defense -2 CS during burn
-            if (affliction == "BURNED") {
-                modifyCombatStage(entity_id, 'def', -2);
-
-                doToast(gm_data["entities"][entity_id]['name'] + " is being burned!");
-            }
-            else if (affliction == "FROZEN") {
-                doToast(gm_data["entities"][entity_id]['name'] + " is frozen solid!");
-            }
-            else if (affliction == "PARALYSIS") {
-                doToast(gm_data["entities"][entity_id]['name'] + " has been paralyzed!");
-            }
-            else if (affliction == "POISONED") {
-                modifyCombatStage(entity_id, 'spdef', -2);
-
-                doToast(gm_data["entities"][entity_id]['name'] + " has been poisoned!");
-            }
+                if (currentView === 0)
+                    renderBattler();
+            });
         }
-        // Other Afflictions
-        else {
-            // Set affliction in battle entry
-            gm_data["entities"][entity_id]['battle_tags'].push(affliction);
-
-            // Fainted: Cure of Persistent and Volatile afflictions
-            if (affliction == "FAINTED") {
-                if (hasAffliction("FROZEN"))
-                    deleteAffliction("Frozen", entity_id);
-                if (hasAffliction("BURNED"))
-                    deleteAffliction("Burned", entity_id);
-                if (hasAffliction("PARALYSIS"))
-                    deleteAffliction("Paralysis", entity_id);
-                if (hasAffliction("POISONED"))
-                    deleteAffliction("Poisoned", entity_id);
-                if (hasAffliction("BAD SLEEP"))
-                    deleteAffliction("Bad Sleep", entity_id);
-                if (hasAffliction("CONFUSED"))
-                    deleteAffliction("Confused", entity_id);
-                if (hasAffliction("CURSED"))
-                    deleteAffliction("Cursed", entity_id);
-                if (hasAffliction("DISABLED"))
-                    deleteAffliction("Disabled", entity_id);
-                if (hasAffliction("RAGE"))
-                    deleteAffliction("Rage", entity_id);
-                if (hasAffliction("FLINCH"))
-                    deleteAffliction("Flinch", entity_id);
-                if (hasAffliction("INFATUATION"))
-                    deleteAffliction("Infatuation", entity_id);
-                if (hasAffliction("SLEEP"))
-                    deleteAffliction("Sleep", entity_id);
-                if (hasAffliction("SUPPRESSED"))
-                    deleteAffliction("Suppressed", entity_id);
-                if (hasAffliction("TEMPORARY HIT POINTS"))
-                    deleteAffliction("Temporary Hit Points", entity_id);
-            }
-            else if (affliction == "CONFUSED") {
-                doToast(gm_data["entities"][entity_id]['name'] + " is Confused!");
-            }
-        }
-
-        // Update Player client
-        sendMessage(connections[entity_id]["client_id"], JSON.stringify({
-            "type": "afflict_add",
-            "affliction": affliction
-        }));
-
-        if (currentView == 0)
-            renderBattler();
     },
 
     deleteAffliction: function (affliction, entity_id) {
@@ -221,5 +199,15 @@ var AfflictionHelper = {
         }
 
         return true;
+    },
+
+    typeHasImmunity: function (type, affliction) {
+        affliction = affliction.toUpperCase();
+        type = type.toUpperCase();
+
+        return  (affliction === AfflictionEnum.Burned &&      type === "FIRE") ||
+                (affliction === AfflictionEnum.Frozen &&     (type === "FIRE" || type === "ICE")) ||
+                (affliction === AfflictionEnum.Paralysis &&   type === "ELECTRIC") ||
+                (affliction === AfflictionEnum.Poisoned &&   (type === "POISON" || type === "STEEL"))
     }
 };

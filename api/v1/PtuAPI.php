@@ -384,6 +384,15 @@ class PtuAPI extends API
             else if ($this->args[0] === "cs" && $this->method == "POST")
                 return $app->setCharacterCS($_POST['character_id'], $_POST['stat'], $_POST['value'],
                     array_key_exists('doInc', $_POST) ? $_POST['doInc'] : true);
+            else if ($this->args[0] === "affliction" && $this->method == "POST") {
+                if ($_POST['method'] === "ADD") return $app->addAffliction($_POST['character_id'], $_POST['affliction']);
+                elseif ($_POST['method'] === "REMOVE") return $app->removeAffliction($_POST['character_id'], $_POST['affliction']);
+                else {
+                    echo "Invalid method. Must be either 'ADD' or 'REMOVE'.";
+                    http_response_code(400);
+                    die;
+                }
+            }
             else if (!is_null($this->args[0]) && $this->method == "GET")
                 return $app->getCharacterById($this->args[0]);
             else if (!is_null($this->args[0]) && $this->method == "POST")

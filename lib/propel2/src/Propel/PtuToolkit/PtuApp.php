@@ -13,6 +13,12 @@ use Propel\Runtime\Propel;
 
 class PtuApp
 {
+    public static $PersistentAfflictions = array("BURNED", "FROZEN", "PARALYSIS", "POISONED", "BADLY POISONED");
+    public static $VolatileAfflictions = array("BAD SLEEP", "CONFUSED", "CURSED", "DISABLED", "RAGE", "FLINCH",
+        "INFATUATION", "SLEEP", "SUPPRESSED", "TEMPORARY HIT POINTS");
+    public static $OtherAfflictions = array("FAINTED", "BLINDNESS", "TOTAL BLINDNESS", "SLOWED", "STUCK", "TRAPPED",
+        "TRIPPED", "VULNERABLE");
+
     public function __construct()
     {
         if (file_exists($file = __DIR__.'/../../../vendor/autoload.php')) {
@@ -186,5 +192,17 @@ class PtuApp
         $isCs = !($stat == "ACC" || $stat == "EVD");
 
         return CharactersQuery::create()->findOneByCharacterId($characterId)->addOrUpdateBuff($stat, $value, $isCs, $doInc);
+    }
+
+    public function addAffliction($characterId, $affliction) {
+        $character = CharactersQuery::create()->findOneByCharacterId($characterId);
+        $character->addAffliction($affliction);
+        return $character->save();
+    }
+
+    public function removeAffliction($characterId, $affliction) {
+        $character = CharactersQuery::create()->findOneByCharacterId($characterId);
+        $character->removeAffliction($affliction);
+        return $character->save();
     }
 }
