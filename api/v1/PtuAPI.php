@@ -398,6 +398,10 @@ class PtuAPI extends API
             else if (!is_null($this->args[0]) && $this->method == "POST")
                 return $app->saveCharacterData($this->args[0], $this->request);
         }
+        else if ($this->verb === "battle") {
+            if ($this->args[0] === "join" && $this->method == "POST")
+                return $app->joinBattle($_POST['character_id']);
+        }
 
         // Nothing has been returned, assume it's the users's fault
         http_response_code(400);

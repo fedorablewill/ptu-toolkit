@@ -8,6 +8,7 @@
 
 namespace Propel\PtuToolkit;
 
+use PDO;
 use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Propel;
 
@@ -204,5 +205,50 @@ class PtuApp
         $character = CharactersQuery::create()->findOneByCharacterId($characterId);
         $character->removeAffliction($affliction);
         return $character->save();
+    }
+
+    public function joinBattle($characterId) {
+        // Check if already in battle
+        $sql = "
+SELECT b.battle_id AS \"BattleId\", 
+  (SELECT be.battle_entry_id FROM battle_entries be 
+  WHERE be.battle_id= b.battle_id AND be.character_id=:charId) AS \"EntryId\"
+FROM battles b
+WHERE b.is_active > 0 AND b.campaign_id=(SELECT campaign_id FROM characters WHERE character_id=:charId)
+LIMIT 1";
+
+        $conn = Propel::getConnection();
+        $st = $conn->prepare($sql);
+        $st->bindParam('charId', $characterId);
+        $st->execute();
+
+        $entry = $st->fetch(PDO::FETCH_ASSOC);
+
+        // No active battle
+        if (!$entry) {
+            $battle = new Battles();
+            $battleEntry = new BattleEntries();
+            $campaignId = CharactersQuery::create()->select(array('campaign_id'))->findByCharacterId($characterId)->getData()[0];
+
+            $battle->setCampaignId($campaignId);
+            $battle->save();
+
+            $battleEntry->setCharacterId($characterId);
+            $battleEntry->setBattles($battle);
+            $battleEntry->save();
+
+            return true;
+        }
+        elseif (is_null($entry["EntryId"])) {
+            $battleEntry = new BattleEntries();
+            $battleEntry->setBattleId($entry["BattleId"]);
+            $battleEntry->setCharacterId($characterId);
+            $battleEntry->save();
+
+            return true;
+        }
+
+        // Character is already in active battle
+        return false;
     }
 }

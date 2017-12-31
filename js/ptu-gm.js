@@ -16,7 +16,7 @@ function readMessage(connection, data) {
          Snackbar Alert Received
          */
     if (json.type == "alert"){
-        doToast(message["content"]);
+        doToast(json["content"]);
     }
     /*
      Send Pokemon Data
@@ -41,22 +41,22 @@ function readMessage(connection, data) {
     /*
      Add Pokemon to Battle
      */
-    else if (json.type == "battle_add") {
+    else if (json.type === "battle_add") {
 
-        var pokemon_id = json.pokemon;
-
-        $.each(in_battle, function (key, id) {
-            sendMessageToAll(JSON.stringify({
-                "type": "battle_added",
-                "pokemon_id": pokemon_id,
-                "pokemon_name": gm_data["entities"][pokemon_id]["name"]
-            }));
-
-            connection.send(JSON.stringify({
-                "type": "battle_added",
-                "pokemon_id": id,
-                "pokemon_name": gm_data["entities"][id]["name"]
-            }));
+        $.post("api/v1/battle/join", {"character_id": json.character_id}, function (result) {
+            if (result === "false") {
+                connection.send({
+                    "type": "alert",
+                    "content": "Already in battle"
+                })
+            }
+            else {
+                alert(result);
+            }
+            // sendMessageToAll(JSON.stringify({
+            //     "type": "battle_added",
+            //     "list": TODO
+            // }));
         });
 
         // Record peer id
