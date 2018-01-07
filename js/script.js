@@ -13,7 +13,7 @@ var campaign_id = 34;
  * 2 - Unit Testing
  * @type {number}
  */
-var MODE = 0;
+var DBG_MODE = 0;
 
 var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 

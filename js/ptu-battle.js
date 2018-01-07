@@ -297,11 +297,11 @@ var ActionImpl = {
         if (target["Health"] <= 0) {
             doToast(target["Name"] + " fainted!");
             target["Health"] = 0;
-            AfflictionHelper.addAffliction("Fainted", target["CharacterId"], 0);
+            AfflictionHelper.addAffliction("Fainted", target, 0);
         }
         
         // Save health & injuries
-        CharacterHelper.updateCharData(char["CharacterId"], {"Health": target["Health"], "Injuries": target["Injuries"]}, null);
+        CharacterHelper.updateCharData(target["CharacterId"], {"Health": target["Health"], "Injuries": target["Injuries"]}, null);
 
         // Update health bar
         var w = Math.floor((target['Health'] / max_hp) * 100);
@@ -417,7 +417,7 @@ var ActionImpl = {
             }
             else if (trigger.type==="status"){
                 $.each(trigger.stat, function (k, status) {
-                    AfflictionHelper.addAffliction(status, char["CharacterId"], 0);
+                    AfflictionHelper.addAffliction(status, char, 0);
                 });
             }
             else if (trigger.type==="damage"){
@@ -476,7 +476,7 @@ var ActionImpl = {
                 if (r <= 30+gm_data["pokemon"][dealer_id]['level']-target['level']){
                     doToast(char["Name"] + " fainted!");
                     CharacterHelper.updateCharData(char["CharacterId"], {"Health": 0}, null);
-                    AfflictionHelper.addAffliction("Fainted", char["CharacterId"], 0);
+                    AfflictionHelper.addAffliction("Fainted", char, 0);
                 } else {
                     doToast(CurrentAction.move.Name + " missed "+target["name"]+"!");
                 }

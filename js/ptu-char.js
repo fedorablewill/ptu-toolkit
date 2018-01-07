@@ -5,7 +5,7 @@ var CharacterHelper = {
     },
 
     modifyCombatStage: function (charId, stat, amnt) {
-        if (MODE === 2) {
+        if (DBG_MODE === 2) {
             console.log("skipping CS modify for charId " + charId);
             console.log("stat " + stat + " amnt " + amnt);
         }
@@ -28,7 +28,7 @@ var CharacterHelper = {
     },
 
     updateCharData: function (charId, data, callback) {
-        if (MODE === 2) {
+        if (DBG_MODE === 2) {
             console.log("skipping save for charId " + charId);
             console.log(data);
 
@@ -63,9 +63,17 @@ var AfflictionHelper = {
 
     addAffliction: function (affliction, character, value) {
 
+        // If Character ID's were provided instead of JSON, fetch JSON
+
+        if (character && $.type(character) !== "object") {
+            character = getJSONNonAsync("api/v1/data/character/" + character);
+        }
+
         affliction = affliction.toUpperCase();
 
-        if (!this.typeHasImmunity(character["Type1"], affliction) && !this.typeHasImmunity(character["Type2"], affliction)) {
+        if (!this.typeHasImmunity(character["Type1"], affliction) && (!character["Type2"] || !this.typeHasImmunity(character["Type2"], affliction))) {
+            if (DBG_MODE === 2) return;
+
             $.post("api/v1/data/character/affliction", {
                 "character_id" : character["CharacterId"],
                 "affliction": affliction,
@@ -91,10 +99,12 @@ var AfflictionHelper = {
                 // TODO: remove all Persistent & Volatile afflictions when fainted
 
                 // Update Player client
-                sendMessage(connections[entity_id]["client_id"], JSON.stringify({
-                    "type": "afflict_add",
-                    "affliction": affliction
-                }));
+                if (connections[character["CharacterId"]]) {
+                    sendMessage(connections[character["CharacterId"]]["client_id"], JSON.stringify({
+                        "type": "afflict_add",
+                        "affliction": affliction
+                    }));
+                }
 
                 if (currentView === 0)
                     renderBattler();
