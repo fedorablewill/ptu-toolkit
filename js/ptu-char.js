@@ -5,30 +5,44 @@ var CharacterHelper = {
     },
 
     modifyCombatStage: function (charId, stat, amnt) {
-        $.post("api/v1/data/character/cs", {
-            "characterId": charId,
-            "stat": stat,
-            "value": amnt
-        }, function (response) {
-            if ($.isNumeric(response)) {
-                // Notify client
-                sendMessage(battle[charId]['client_id'], JSON.stringify({
-                    "type": "data_changed",
-                    "field": "stage-"+stat,
-                    "value": parseInt(response)
-                }));
-            }
-        });
+        if (MODE === 2) {
+            console.log("skipping CS modify for charId " + charId);
+            console.log("stat " + stat + " amnt " + amnt);
+        }
+        else {
+            $.post("api/v1/data/character/cs", {
+                "characterId": charId,
+                "stat": stat,
+                "value": amnt
+            }, function (response) {
+                if ($.isNumeric(response)) {
+                    // Notify client
+                    sendMessage(battle[charId]['client_id'], JSON.stringify({
+                        "type": "data_changed",
+                        "field": "stage-" + stat,
+                        "value": parseInt(response)
+                    }));
+                }
+            });
+        }
     },
 
     updateCharData: function (charId, data, callback) {
-        $.post("api/v1/data/character/" + charId, data, function (response) {
-            if (response === "1" && callback)
-                callback();
-            else alert(response);
-        }).fail(function (e) {
-            alert(e);
-        });
+        if (MODE === 2) {
+            console.log("skipping save for charId " + charId);
+            console.log(data);
+
+            if (callback) callback();
+        }
+        else {
+            $.post("api/v1/data/character/" + charId, data, function (response) {
+                if (response === "1" && callback)
+                    callback();
+                else alert(response);
+            }).fail(function (e) {
+                alert(e);
+            });
+        }
     }
 };
 

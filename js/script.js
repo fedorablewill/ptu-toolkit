@@ -7,6 +7,14 @@ var host_id = null;
 var client_id = "";
 var campaign_id = 34;
 
+/**
+ * 0 - Normal
+ * 1 - Debug
+ * 2 - Unit Testing
+ * @type {number}
+ */
+var MODE = 0;
+
 var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 
 var EXP_CHART = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90,

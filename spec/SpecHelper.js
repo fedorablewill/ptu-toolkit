@@ -1,3 +1,6 @@
+// Set Debug Mode to Unit Testing
+MODE = 2;
+
 beforeEach(function () {
     jasmine.addMatchers({
         toBePlaying: function () {
