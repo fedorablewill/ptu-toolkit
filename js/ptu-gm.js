@@ -60,17 +60,14 @@ function readMessage(connection, data) {
         });
 
         // Record peer id
-        connections[json.pokemon] = json.from;
+        connections[json.character_id] = json.from;
 
         // Add as "In Battle"
-        in_battle.push(json.pokemon);
-
-        // TODO: reset CS on player client when joining battle
+        in_battle.push(json.character_id);
 
         connection.send(JSON.stringify({
             "type": "battle_added",
-            "pokemon_id": pokemon_id,
-            "pokemon_name": gm_data["entities"][pokemon_id]["name"]
+            "pokemon_id": json.character_id
         }));
 
         // TODO: If has persistent affliction, update data appropriately

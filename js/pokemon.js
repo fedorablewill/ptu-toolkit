@@ -543,6 +543,8 @@ function updateAfflictions() {
 // SERVER FUNCTIONS
 
 peer.on('connection', function (c) {
+    receiveMessages(c, readMessage);
+
     window.alert("debug");
 });
 
@@ -563,103 +565,6 @@ function onClickConnect() {
     });
 
     connection.on('open', function () {
-        connection.on('data', function (data) {
-            var json = JSON.parse(data);
-
-            /*
-             Pokemon received
-             */
-            if (json.type == "pokemon") {
-                character_data = json.pokemon;
-                fetchMoves();
-            }
-            /*
-             List of Pokemon received
-             */
-            else if (json.type == "pokemon_list") {
-                var html = "";
-                $.each(json.pokemon, function (id, pmon) {
-                    html += '<option value="' + id + '">' + pmon['name'] + '</option>';
-                });
-                $("#pokemonId").html(html);
-
-                $("#init-select").css("display", "block");
-                $("#init-connect").css("display", "none");
-            }
-            /*
-             Pokemon Added to Battle
-             */
-            else if (json.type == "battle_added") {
-                battle_data[json.pokemon_id] = json.pokemon_name;
-                updateTargetList();
-
-                // Show target list
-                $("#modalTarget-join").addClass("hidden");
-                $("#modalTarget-select").removeClass("hidden");
-            }
-            /*
-             Battle ended
-             */
-            else if (json.type == "battle_end") {
-                // Hide target list
-                $("#modalTarget-join").removeClass("hidden");
-                $("#modalTarget-select").addClass("hidden");
-            }
-            /*
-             Grid returned
-             */
-            else if (json.type == "battle_grid") {
-                $(".battle-grid").html(json.html);
-                onTargetGridLoaded();
-            }
-            /*
-             Health changed
-             */
-            else if (json.type == "health") {
-                character_data["health"] = json.value;
-                updateStatus();
-            }
-            /*
-             Battle data changed
-             */
-            else if (json.type == "data_changed") {
-                if (json.field == "affliction") {
-                    afflictions = json.value;
-                    updateAfflictions();
-                }
-                else {
-                    $("#" + json.field).val(json.value);
-                }
-            }
-            /*
-             Add affliction
-             */
-            else if (json.type == "afflict_add") {
-                // Check if affliction is already on Pokemon
-                if ($.inArray(json.affliction) < 0) {
-                    afflictions.push(json.affliction);
-                    updateAfflictions();
-                }
-            }
-            /*
-             Remove affliction
-             */
-            else if (json.type == "afflict_delete") {
-                // Check if affliction is on Pokemon
-                if ($.inArray(json.affliction) >= 0) {
-                    afflictions.splice(array.indexOf(json.affliction), 1);
-                    updateAfflictions();
-                }
-            }
-            /*
-             Snackbar Alert Received
-             */
-            else if (json.type == "alert") {
-                doToast(message["content"]);
-            }
-
-        });
-
         // Connection established - make appropriate calls
 
         if ($.isEmptyObject(character_data)) {
@@ -676,6 +581,103 @@ function onClickConnect() {
     connection.on('error', function (err) {
         alert(err);
     });
+}
+
+function readMessage(connection, data) {
+    var json = JSON.parse(data);
+
+    /*
+     Pokemon received
+     */
+    if (json.type == "pokemon") {
+        character_data = json.pokemon;
+        fetchMoves();
+    }
+    /*
+     List of Pokemon received
+     */
+    else if (json.type == "pokemon_list") {
+        var html = "";
+        $.each(json.pokemon, function (id, pmon) {
+            html += '<option value="' + id + '">' + pmon['name'] + '</option>';
+        });
+        $("#pokemonId").html(html);
+
+        $("#init-select").css("display", "block");
+        $("#init-connect").css("display", "none");
+    }
+    /*
+     Pokemon Added to Battle
+     */
+    else if (json.type == "battle_added") {
+        battle_data[json.pokemon_id] = json.pokemon_name;
+        updateTargetList();
+
+        // Show target list
+        $("#modalTarget-join").addClass("hidden");
+        $("#modalTarget-select").removeClass("hidden");
+    }
+    /*
+     Battle ended
+     */
+    else if (json.type == "battle_end") {
+        // Hide target list
+        $("#modalTarget-join").removeClass("hidden");
+        $("#modalTarget-select").addClass("hidden");
+    }
+    /*
+     Grid returned
+     */
+    else if (json.type == "battle_grid") {
+        $(".battle-grid").html(json.html);
+        onTargetGridLoaded();
+    }
+    /*
+     Health changed
+     */
+    else if (json.type == "health") {
+        character_data["health"] = json.value;
+        updateStatus();
+    }
+    /*
+     Battle data changed
+     */
+    else if (json.type == "data_changed") {
+        if (json.field == "affliction") {
+            afflictions = json.value;
+            updateAfflictions();
+        }
+        else {
+            $("#" + json.field).val(json.value);
+        }
+    }
+    /*
+     Add affliction
+     */
+    else if (json.type == "afflict_add") {
+        // Check if affliction is already on Pokemon
+        if ($.inArray(json.affliction) < 0) {
+            afflictions.push(json.affliction);
+            updateAfflictions();
+        }
+    }
+    /*
+     Remove affliction
+     */
+    else if (json.type == "afflict_delete") {
+        // Check if affliction is on Pokemon
+        if ($.inArray(json.affliction) >= 0) {
+            afflictions.splice(array.indexOf(json.affliction), 1);
+            updateAfflictions();
+        }
+    }
+    /*
+     Snackbar Alert Received
+     */
+    else if (json.type == "alert") {
+        doToast(message["content"]);
+    }
+
 }
 
 function onClickLoadFromSelected() {

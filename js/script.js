@@ -5,6 +5,7 @@
 
 var host_id = null;
 var client_id = "";
+var campaign_id = 34;
 
 var peer = new Peer({key: '0ecbb01z4hkc5wmi', debug: 3});
 
