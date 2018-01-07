@@ -295,10 +295,13 @@ var ActionImpl = {
 
         // Check if fainted
         if (target["Health"] <= 0) {
-            doToast(target["name"] + " fainted!");
+            doToast(target["Name"] + " fainted!");
             target["Health"] = 0;
             AfflictionHelper.addAffliction("Fainted", target["CharacterId"], 0);
         }
+        
+        // Save health & injuries
+        CharacterHelper.updateCharData(char["CharacterId"], {"Health": target["Health"], "Injuries": target["Injuries"]}, null);
 
         // Update health bar
         var w = Math.floor((target['Health'] / max_hp) * 100);
@@ -328,7 +331,7 @@ var ActionImpl = {
             target = getJSONNonAsync("api/v1/data/character/" + target);
         }
 
-        if (dealer && $.type(target) !== "object") {
+        if (dealer && $.type(dealer) !== "object") {
             dealer = getJSONNonAsync("api/v1/data/character/" + dealer);
         }
 
@@ -365,75 +368,74 @@ var ActionImpl = {
 
                     // Log change
                     if (trigger.value > 0)
-                        addMoveDialogInfo(gm_data["pokemon"][id]['name'] + '\'s <strong>'+stat+'</strong> increased');
+                        addMoveDialogInfo(char['Name'] + '\'s <strong>'+stat+'</strong> increased');
                     else
-                        addMoveDialogInfo(gm_data["pokemon"][id]['name'] + '\'s <strong>'+stat+'</strong> decreased');
+                        addMoveDialogInfo(char['Name'] + '\'s <strong>'+stat+'</strong> decreased');
                 });
             }
-            else if (trigger.type=="heal"){
+            else if (trigger.type==="heal"){
                 //Seeing what type of healing is needed
                 var arr = trigger.value.split(" ");
 
                 // Getting max HP
-                var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+                var max_hp = char['Level'] + char['Hp'] * 3 + 10;
 
                 //Getting multiplier
-                var mult = arr[0] == "1/2" ? 0.5 : parseInt(arr[0], 10);
+                var mult = arr[0] === "1/2" ? 0.5 : parseInt(arr[0], 10);
 
                 //Checking type of healing and setting HP
-                if (arr[1]=="HP"){
-                    gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,
-                        gm_data["pokemon"][id]['health']+mult*max_hp)
-                } else if (arr[1]=="Damage"){
-                    gm_data["pokemon"][id]['health'] = Math.min(max_hp*(10-gm_data["pokemon"][id]['injuries'])/10,
-                        gm_data["pokemon"][id]['health']+mult*CurrentAction['dmg_dealt'])
+                if (arr[1]==="HP"){
+                    char["Health"] = Math.min(max_hp*(10-char["Injuries"])/10, char["Health"]+mult*max_hp)
+                } else if (arr[1]==="Damage"){
+                    char["Health"] = Math.min(max_hp*(10-char["Injuries"])/10, char["Health"]+mult*CurrentAction['dmg_dealt'])
                 }
 
                 //Setting Health bar
-                var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
-                $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
+                var w = Math.floor((char["Health"] / max_hp) * 100);
+                $("[data-name='"+char["CharacterId"]+"']").find(".progress-bar").css("width", w + "%");
+
+                //Saving health * injuries
+                CharacterHelper.updateCharData(char["CharacterId"], {"Health": char["Health"], "Injuries": char["Injuries"]}, null);
 
                 // Log change
-                addMoveDialogInfo(gm_data["pokemon"][id]['name'] + ' <strong>was healed</strong>');
+                addMoveDialogInfo(char["Name"] + ' <strong>was healed</strong>');
             }
-            else if (trigger.type=="vortex"){
+            else if (trigger.type==="vortex"){
                 //TODO: Figure out vortex
                 // Log change
                 addMoveDialogInfo('<strong>Vortex</strong> has yet to be implemented');
             }
-            else if (trigger.type=="push"){
+            else if (trigger.type==="push"){
                 //TODO: Wait until map is implemented
                 // Log change
                 addMoveDialogInfo('<strong>Push</strong> has yet to be implemented');
             }
-            else if (trigger.type=="switch"){
+            else if (trigger.type==="switch"){
                 //TODO: Not really a mechanism for this at present
                 // Log change
                 addMoveDialogInfo('<strong>Switch</strong> has yet to be implemented');
             }
-            else if (trigger.type=="status"){
+            else if (trigger.type==="status"){
                 $.each(trigger.stat, function (k, status) {
-                    AfflictionHelper.addAffliction(status, id, 0);
+                    AfflictionHelper.addAffliction(status, char["CharacterId"], 0);
                 });
             }
-            else if (trigger.type=="damage"){
+            else if (trigger.type==="damage"){
                 // Setting up for changing HP
-                var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
+                var max_hp = char['Level'] + char['Hp'] * 3 + 10;
 
                 //Getting damage to do
                 var dmg;
-                if (typeof trigger.value == "number"){
+                if (typeof trigger.value === "number"){
                     dmg = trigger.value;
                 }
-                else if (trigger.value=="User Level"){
-                    dmg = gm_data["pokemon"][dealer_id]['level'];
+                else if (trigger.value==="User Level"){
+                    dmg = dealer['Level'];
                 }
                 else {
                     var arr = trigger.value.split(" ")[0].split("/");
                     dmg = max_hp*parseInt(arr[0],10)/parseInt(arr[1],10);
                 }
-                // Getting max HP
-                var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
 
                 //Checking for threshhold injuries; Massive Damage doesn't apply for flat damage sources
                 if (target["Health"] > max_hp/2 && target["Health"] - damage <= max_hp/2){
@@ -454,23 +456,27 @@ var ActionImpl = {
                 //No need to go to other thresholds, as you'd be dead at that point
 
                 //Lowering health
-                gm_data["pokemon"][id]['health'] = Math.min(gm_data["pokemon"][id]['health'] - dmg,max_hp*(10-gm_data["pokemon"][id]['injuries'])/10);
+                char['Health'] = Math.min(char['Health'] - dmg, max_hp*(10-char['Injuries'])/10);
 
                 //Setting Health bar
-                var w = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
-                $("[data-name='"+id+"']").find(".progress-bar").css("width", w + "%");
+                var w = Math.floor((char['Health'] / max_hp) * 100);
+                $("[data-name='"+char["CharacterId"]+"']").find(".progress-bar").css("width", w + "%");
+                
+                //Saving health * injuries
+                CharacterHelper.updateCharData(char["CharacterId"], {"Health": char["Health"], "Injuries": char["Injuries"]}, null);
             }
-            else if (trigger.type=="protect"){
+            else if (trigger.type==="protect"){
                 //TODO: Need ability to interrupt to implement
 
                 // Log change
                 addMoveDialogInfo('<strong>Protect/Interrupt</strong> has yet to be implemented');
             }
-            else if (trigger.type=="execute"){
+            else if (trigger.type==="execute"){
                 var r = roll(1,100,1);
                 if (r <= 30+gm_data["pokemon"][dealer_id]['level']-target['level']){
-                    doToast(target["name"] + " fainted!");
-                    target["Health"] = 0;
+                    doToast(char["Name"] + " fainted!");
+                    CharacterHelper.updateCharData(char["CharacterId"], {"Health": 0}, null);
+                    AfflictionHelper.addAffliction("Fainted", char["CharacterId"], 0);
                 } else {
                     doToast(CurrentAction.move.Name + " missed "+target["name"]+"!");
                 }

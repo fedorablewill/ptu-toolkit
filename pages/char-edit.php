@@ -441,12 +441,8 @@ $moves = $character->getCharacterMovessJoinMoves();
             clob[$(this).attr("data-field")] = $(this).val();
         });
 
-        $.post("api/v1/data/character/<?php echo $character_id ?>", clob, function (response) {
-            if (response == "1")
-                doToast(clob["Name"] + " was saved.");
-            else alert(response);
-        }).fail(function (e) {
-            alert(e);
+        CharacterHelper.updateCharData(<?php echo $character_id ?>, clob, function () {
+            doToast(clob["Name"] + " was saved.");
         });
     }
 </script>

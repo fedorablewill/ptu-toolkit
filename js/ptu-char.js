@@ -19,6 +19,16 @@ var CharacterHelper = {
                 }));
             }
         });
+    },
+
+    updateCharData: function (charId, data, callback) {
+        $.post("api/v1/data/character/" + charId, data, function (response) {
+            if (response === "1" && callback)
+                callback();
+            else alert(response);
+        }).fail(function (e) {
+            alert(e);
+        });
     }
 };
 
