@@ -394,7 +394,7 @@ class PtuAPI extends API
                 }
             }
             else if (!is_null($this->args[0]) && $this->method == "GET")
-                return $app->getCharacterById($this->args[0]);
+                return $app->getCharacterById($this->args[0], array_key_exists("buffs", $_GET) ? $_GET['buffs'] : false);
             else if (!is_null($this->args[0]) && $this->method == "POST")
                 return $app->saveCharacterData($this->args[0], $this->request);
         }

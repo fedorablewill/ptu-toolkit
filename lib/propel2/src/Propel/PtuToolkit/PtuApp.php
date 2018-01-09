@@ -108,7 +108,7 @@ class PtuApp
      * @param $characterId
      * @return array
      */
-    public function getCharacterById($characterId) {
+    public function getCharacterById($characterId, $fetchBuffs = false) {
         $char = CharactersQuery::create()->findOneByCharacterId($characterId)->toArray();
 
         $char["Hp"] = $char["BaseHp"] + $char["LvlUpHp"] + $char["AddHp"];
@@ -118,7 +118,24 @@ class PtuApp
         $char["Sdef"] = $char["BaseSdef"] + $char["LvlUpSdef"] + $char["AddSdef"];
         $char["Spd"] = $char["BaseSpd"] + $char["LvlUpSpd"] + $char["AddSpd"];
 
+        if ($fetchBuffs) {
+            $char["Buffs"] = $this->getCharacterBuffs($characterId);
+        }
+
         return $char;
+    }
+
+    public function getCharacterBuffs($characterId) {
+        $sql = "SELECT cb.prereq, cb.type, cb.value, cb.target_stat FROM character_buffs cb
+INNER JOIN battles b ON cb.battle_id = b.battle_id
+WHERE b.is_active > 0 AND cb.character_id=:cId";
+
+        $conn = Propel::getConnection();
+        $st = $conn->prepare($sql);
+        $st->bindParam('cId', $characterId);
+        $st->execute();
+
+        return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getCharacterMoves($characterId) {

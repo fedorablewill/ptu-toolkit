@@ -57,8 +57,8 @@ var ActionImpl = {
         var dmg_bonus = mods && mods['dmg_bonus'] ? mods['dmg_bonus'] : 0,
             acc_bonus = mods && mods['acc_bonus'] ? mods['acc_bonus'] : 0;
 
-        var dealer = getJSONNonAsync("api/v1/data/character/" + dealer_id);
-        var target = target_id !== "other" ? getJSONNonAsync("api/v1/data/character/" + target_id) : null;
+        var dealer = CharacterHelper.fetchCharWithBuffs(dealer_id);
+        var target = target_id !== "other" ? CharacterHelper.fetchCharWithBuffs(target_id) : null;
 
         if ($.type(move) !== "object") {
             move = getJSONNonAsync("api/v1/moves/" + move);
@@ -231,7 +231,7 @@ var ActionImpl = {
     damageCharacter: function (target, moveType, moveIsSpecial, damage) {
 
         if (target && $.type(target) !== "object") {
-            target = getJSONNonAsync("api/v1/data/character/" + target);
+            target = CharacterHelper.fetchCharWithBuffs(target);
         }
 
         damage -= moveIsSpecial ? target["Sdef"] : target["Def"];
@@ -328,11 +328,11 @@ var ActionImpl = {
         // If Character ID's were provided instead of JSON, fetch JSON
 
         if (target && $.type(target) !== "object") {
-            target = getJSONNonAsync("api/v1/data/character/" + target);
+            target = CharacterHelper.fetchCharWithBuffs(target);
         }
 
         if (dealer && $.type(dealer) !== "object") {
-            dealer = getJSONNonAsync("api/v1/data/character/" + dealer);
+            dealer = CharacterHelper.fetchCharWithBuffs(dealer);
         }
 
         // If trigger is a prereq
@@ -364,7 +364,7 @@ var ActionImpl = {
             else if (trigger.type==="CS"){
                 //Raising/lowering stats
                 $.each(trigger.stat, function(k, stat){
-                    CharacterHelper.modifyCombatStage(char["CharacterId"], trigger.stat, trigger.value);
+                    CharacterHelper.modifyCombatStage(char["CharacterId"], stat, trigger.value);
 
                     // Log change
                     if (trigger.value > 0)

@@ -53,3 +53,18 @@ function getJSONNonAsync(url) {
     });
     return result;
 }
+
+function getJSONNonAsync(url, data) {
+    var result;
+    $.ajax({
+        type:'GET',
+        url:url,
+        dataType:'json',
+        async:false,
+        data: data,
+        success:function(data){
+            result = data;
+        }
+    });
+    return result;
+}
