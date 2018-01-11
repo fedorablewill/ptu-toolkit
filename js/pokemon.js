@@ -565,6 +565,8 @@ function onClickConnect() {
     });
 
     connection.on('open', function () {
+        receiveMessages(connection, readMessage);
+
         // Connection established - make appropriate calls
 
         if ($.isEmptyObject(character_data)) {

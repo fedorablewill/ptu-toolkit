@@ -20,13 +20,17 @@ window.onbeforeunload = function() {
 /**
  * Receives commands/messages
  */
-peer.on('connection', function (c) {
-    receiveMessages(c, readMessage);
+peer.on('connection', function (c) { debugger;
 
-    c.send(JSON.stringify({
-        "type": "pokemon_list",
-        "pokemon": gm_data["pokemon"]
-    }));
+    c.on('open', function () {
+        receiveMessages(c, readMessage);
+
+        c.send(JSON.stringify({
+            "type": "pokemon_list",
+            "pokemon": gm_data["pokemon"]
+        }));
+    });
+
 });
 
 function reconnect() {

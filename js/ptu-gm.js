@@ -8,7 +8,7 @@ $.getScript('js/ptu-io.js');
 $.getScript('js/ptu-char.js');
 $.getScript('js/ptu-battle.js');
 
-function readMessage(connection, data) {
+function readMessage(connection, data) {debugger;
 
     var json = JSON.parse(data);
 
