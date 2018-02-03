@@ -401,6 +401,8 @@ class PtuAPI extends API
         else if ($this->verb === "battle") {
             if ($this->args[0] === "join" && $this->method == "POST")
                 return $app->joinBattle($_POST['character_id']);
+            else if ($this->args[0] === "list" && $this->method == "GET")
+                return $app->getCharactersInActiveBattle($_GET['campaign_id']);
         }
 
         // Nothing has been returned, assume it's the users's fault

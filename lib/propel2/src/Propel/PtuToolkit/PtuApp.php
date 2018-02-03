@@ -268,4 +268,20 @@ LIMIT 1";
         // Character is already in active battle
         return false;
     }
+
+    public function getCharactersInActiveBattle($campaignId) {
+        $characters = CharactersQuery::create()->joinBattleEntries()->join("BattleEntries.Battles")->where("Battles.IsActive")->find()->toArray();
+
+        for ($i=0; $i < sizeof($characters); $i++) {
+            $characters[$i]["Hp"] = $characters[$i]["BaseHp"] + $characters[$i]["LvlUpHp"] + $characters[$i]["AddHp"];
+            $characters[$i]["Atk"] = $characters[$i]["BaseAtk"] + $characters[$i]["LvlUpAtk"] + $characters[$i]["AddAtk"];
+            $characters[$i]["Def"] = $characters[$i]["BaseDef"] + $characters[$i]["LvlUpDef"] + $characters[$i]["AddDef"];
+            $characters[$i]["Satk"] = $characters[$i]["BaseSatk"] + $characters[$i]["LvlUpSatk"] + $characters[$i]["AddSatk"];
+            $characters[$i]["Sdef"] = $characters[$i]["BaseSdef"] + $characters[$i]["LvlUpSdef"] + $characters[$i]["AddSdef"];
+            $characters[$i]["Spd"] = $characters[$i]["BaseSpd"] + $characters[$i]["LvlUpSpd"] + $characters[$i]["AddSpd"];
+            
+        }
+
+        return $characters;
+    }
 }
