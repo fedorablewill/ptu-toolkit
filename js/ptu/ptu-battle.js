@@ -64,7 +64,7 @@ var ActionImpl = {
             move = getJSONNonAsync("api/v1/moves/" + move);
         }
 
-        doMoveDialog(dealer, move["Title"], move);
+        BattlerView.createMoveDialog(dealer, move["Title"], move);
 
         var damageDone = 0;
         var canMove = true;
