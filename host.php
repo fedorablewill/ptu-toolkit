@@ -312,9 +312,9 @@
     <div id="view-holder">
         <div class="col-md-6 col-md-offset-3 content-select">
             <h2>Create or Import a GM File</h2>
-            <button class="btn btn-danger btn-raised" onclick="newCampaign();">Create Blank GM File</button>
+            <button class="btn btn-danger btn-raised" onclick="!CampaignHelper ? newCampaign() : CampaignHelper.createNewCampaign();">Create Blank GM File</button>
             <br>
-            <button class="btn btn-danger btn-raised" onclick="uploadCampaign();">Upload Existing GM File</button>
+            <button class="btn btn-danger btn-raised" onclick="!CampaignHelper ? uploadCampaign() : CampaignHelper.uploadCampaign();">Upload Existing GM File</button>
         </div>
         <div class="col-md-6 col-md-offset-3 pokemon"></div>
     </div>
@@ -1057,10 +1057,15 @@
 <script src="js/jquery.sticky.js"></script>
 <script src="js/jquery.appear.js"></script>
 
+<?php if (array_key_exists('debug', $_GET)) :?>
+<script src="js/ptu-gm.min.js"></script>
+<script src="js/ptu/ptu-data-local.js"></script>
+<?php else: ?>
 <script src="js/script.js"></script>
 <script src="js/JSONImport.js"></script>
 <script src="js/JSONExport.js"></script>
 <script src="js/species_to_dex.js"></script>
 <script src="js/host.js"></script>
+<?php endif;?>
 </body>
 </html>

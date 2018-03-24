@@ -6,7 +6,7 @@ var connectionMap = {};
 peer.on('connection', function (c) {
 
     c.on('open', function () {
-        receiveMessages(c, readMessage);
+        receiveMessages(c, GMPeer.readMessage);
 
         c.send(JSON.stringify({
             "type": "pokemon_list",
@@ -51,7 +51,7 @@ var GMPeer = (function(){
             else if (json.type == "pokemon_get") {
                 var msg = {
                     "type": "pokemon",
-                    "pokemon": gm_data["entities"][json.pokemon_id]
+                    "pokemon": gm_data["pokemon"][json.pokemon_id]
                 };
                 connection.send(JSON.stringify(msg));
             }
@@ -102,7 +102,7 @@ var GMPeer = (function(){
                 // Display Message
                 doToast(gm_data["entities"][json.pokemon]["name"] + " Appears!");
 
-                renderBattler();
+                BattlerView.render();
             }
             /*
              Update Field Received

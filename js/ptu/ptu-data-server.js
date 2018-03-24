@@ -82,3 +82,60 @@ var CharacterHelper = {
         }
     }
 };
+
+var CampaignHelper = $.extend(DataHelperBase, (function(){
+    return {
+        /**
+         * Creates a new campaign
+         */
+        createNewCampaign: function () {
+            // Create new entry in the database
+            if (firebase.auth().currentUser && !firebase.auth().currentUser.isAnonymous)
+                $.ajax({
+                    type: "POST",
+                    url: "api/v1/campaign/",
+                    dataType: 'json',
+                    data: {"name": "Campaign"},
+                    async: false,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+                    },
+                    success: function (data, status, xhr){
+                        if (data) {
+                            campaignId = data;
+                            this.onDataLoaded();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        window.alert(status + " " + error);
+                    }
+                });
+        },
+
+        /**
+         * Fetches campaign from database by id
+         * @param id
+         */
+        fetchCampaign: function (id) {
+            $.ajax({
+                type: "GET",
+                url: "api/v1/campaign/?id=" + id,
+                dataType: 'json',
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "Basic " + btoa(firebase.auth().currentUser.uid+ ":" + f_token));
+                },
+                success: function (data, status, xhr){
+                    if (data) {
+                        gm_data = JSON.parse(data['campaign_data']);
+                        campaignId = id;
+                        this.onDataLoaded();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    window.alert(status + " " + error);
+                }
+            });
+        }
+    };
+})());

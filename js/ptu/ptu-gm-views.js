@@ -5,8 +5,6 @@ var BattlerView = {
      */
     render: function () {
         if (currentView === 0) {
-            // Create grid
-            generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
 
             var elems = [], html = '';
 

@@ -126,7 +126,7 @@ function readMessage(connection, data) {
         // Display Message
         doToast(gm_data["pokemon"][json.pokemon]["name"] + " Appears!");
 
-        renderBattler();
+        BattlerView.render();
     }
     /*
      Update Field Received
@@ -138,7 +138,7 @@ function readMessage(connection, data) {
             var max_hp = gm_data["pokemon"][json.pokemon]['level'] + gm_data["pokemon"][json.pokemon]['hp'] * 3 + 10;
             var w = Math.floor((gm_data["pokemon"][json.pokemon]['health'] / max_hp) * 100);
 
-            renderBattler();
+            BattlerView.render();
 
             sendMessage(battle[json.pokemon]["client_id"], JSON.stringify({
                 "type": "health",
@@ -153,7 +153,7 @@ function readMessage(connection, data) {
         battle[json.pokemon][json.field] = parseInt(json.value);
 
         if (json.field === "stage_speed")
-            renderBattler();
+            BattlerView.render();
     }
     /*
      Add an affliction
@@ -268,81 +268,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log(error);
 });
 
-/**
- * Generates the Pokemon battle, primarily the health visual
- */
-function renderBattler() {
-    if (currentView == 0) {
-        // Create grid
-        generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
-
-        var elems = [], html = '';
-
-        // If no one is in battle
-        if ($.isEmptyObject(battle)) {
-            html = '<h3 class="text-muted">No one\'s here yet 😟</h3>' +
-                '<h4 class="text-muted">Send your <a data-toggle="modal" data-target="#modalShare">customized link</a> to your players. ' +
-                'Then, have them hit "Join Battle" when they\'re ready.</h4>';
-        }
-        else {
-
-            // Create health bars
-
-            $.each(battle, function (id, data) {
-                var max_hp = gm_data["pokemon"][id]['level'] + gm_data["pokemon"][id]['hp'] * 3 + 10;
-                var health_pcent = Math.floor((gm_data["pokemon"][id]['health'] / max_hp) * 100);
-                var injuries = gm_data["pokemon"][id]['injuries'];
-
-                if (health_pcent > 100)
-                    console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
-                        gm_data["pokemon"][id]['health'] + "/" + max_hp);
-
-                // Gather afflictions
-                var afflictions = "";
-
-                if (gm_data["pokemon"][id]['afflictions'] != null)
-                    $.each(gm_data["pokemon"][id]['afflictions'], function (k, a) {
-                        afflictions += ' <span class="label label-danger">' + a + '</span>';
-                    });
-
-                if (data['afflictions'] != null)
-                    $.each(data['afflictions'], function (a, v) {
-                        afflictions += ' <span class="label label-danger">' + a + '</span>';
-                    });
-
-                // Generate HTML Elements in order of initiative
-
-                var i = 0, speed = gm_data["pokemon"][id]['speed'] * getStageMultiplier(battle[id]["stage_speed"]);
-
-                while (i < elems.length) {
-                    if (speed > elems[i]["speed"])
-                        break;
-                    i++;
-                }
-
-                // Generate HTML
-                elems.splice(i, 0, {'html': '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
-                        '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
-                        '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                        '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + health_pcent + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + health_pcent + '%;"></div>' +
-                        '<div class="progress-bar progress-bar-injuries pull-right" role="progressbar" aria-valuenow="' + injuries + '0" aria-valuemin="0" aria-valuemax="100" style="width: ' + injuries + '0%;"></div>' +
-                        '</div>' +
-                        '</div>',
-                    'speed': speed});
-            });
-
-            $.each(elems, function (k, e) {
-                html += e['html'];
-            });
-
-            html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
-        }
-
-        //$("#view-holder").html(html);
-        $("#tab-battle-list").html(html);
-    }
-}
-
 function generateGrid(parent, size) {
     // // Create Grid
     //
@@ -408,7 +333,7 @@ function generateGrid(parent, size) {
     //                 battle[unplaced_id]['x'] = parseInt($(this).attr("data-x"));
     //                 battle[unplaced_id]['y'] = parseInt($(this).attr("data-y"));
     //
-    //                 renderBattler();
+    //                 BattlerView.render();
     //             });
     //         }
     //
@@ -450,7 +375,7 @@ function changeGMView(view) {
         $("#body-battle").removeClass("hidden");
         $("#body-pokemon").addClass("hidden");
         $("#body-settings").addClass("hidden");
-        renderBattler();
+        BattlerView.render();
     }
     else if (view == 1) {
         $("#body-battle").addClass("hidden");
@@ -489,7 +414,7 @@ function endBattle() {
         battle = {};
 
         // Redraw battler
-        renderBattler();
+        BattlerView.render();
     }
 }
 
@@ -1042,7 +967,7 @@ function addAffliction(affliction, monId, value) {
     }));
 
     if (currentView == 0)
-        renderBattler();
+        BattlerView.render();
 }
 
 function deleteAffliction(affliction, monId) {
@@ -1106,7 +1031,7 @@ function deleteAffliction(affliction, monId) {
     }));
 
     if (currentView == 0)
-        renderBattler();
+        BattlerView.render();
 }
 
 /**
@@ -2026,7 +1951,7 @@ function onDataLoaded() {
             max: 20
         }
     }).on("change", function () {
-        renderBattler();
+        BattlerView.render();
     });
 
     $("#view-holder").addClass("hidden");

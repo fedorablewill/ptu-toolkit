@@ -524,66 +524,7 @@ function endBattle() {
         in_battle = {};
 
         // Redraw battler
-        renderBattler();
-    }
-}
-
-//TODO: Move to host.js after refining
-/**
- * Generates the Pokemon battle, primarily the health visual
- */
-function renderBattler() {
-    if (currentView == 0) {
-        // Create grid
-        generateGrid($(".battle-grid"), parseInt($("#zoom-slider").val()) * 6);
-
-        var html = '';
-
-        // If no one is in battle
-        if ($.isEmptyObject(in_battle)) {
-            html = '<h3 class="text-muted">No one\'s here yet 😟</h3>' +
-                '<h4 class="text-muted">Send your <a data-toggle="modal" data-target="#modalShare">customized link</a> to your players. ' +
-                'Then, have them hit "Join Battle" when they\'re ready.</h4>';
-        }
-        else {
-
-            // Create health bars
-
-            $.each(in_battle, function (key, id) {
-                var max_hp = gm_data["entities"][id]['level'] + getStatById('hp', id) * 3 + 10;
-                var w = Math.floor((getStatById('health', id) / max_hp) * 100);
-
-                if (w > 100)
-                    console.log("Warning: Pokemon with ID " + id + " has hit points above its max: " +
-                        getStatById('health', id) + "/" + max_hp);
-
-                // TODO: Render afflictions
-                var afflictions = "";
-                //
-                // if (gm_data["pokemon"][id]['afflictions'] != null)
-                //     $.each(gm_data["pokemon"][id]['afflictions'], function (k, a) {
-                //         afflictions += ' <span class="label label-danger">' + a + '</span>';
-                //     });
-                //
-                // if (data['afflictions'] != null)
-                //     $.each(data['afflictions'], function (a, v) {
-                //         afflictions += ' <span class="label label-danger">' + a + '</span>';
-                //     });
-
-                // Generate HTML
-                html += '<div class="col-md-6 col-md-offset-3 pokemon" data-name="' + id + '">' +
-                    '<h2 class="name">' + gm_data["pokemon"][id]["name"] + afflictions + '</h2>' +
-                    '<div class="progress" data-hp="' + gm_data["pokemon"][id]["hp"] + '" data-max-hp="' + gm_data["pokemon"][id]["max_hp"] + '">' +
-                    '<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="' + w + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + w + '%;"></div>' +
-                    '</div>' +
-                    '</div>';
-            });
-
-            html += '<br/><button class="btn btn-danger btn-raised" onclick="endBattle()">End Battle</button>';
-        }
-
-        //$("#view-holder").html(html);
-        $("#tab-battle-list").html(html);
+        BattlerView.render();
     }
 }
 

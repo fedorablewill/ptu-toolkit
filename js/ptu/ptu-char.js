@@ -59,7 +59,7 @@ var AfflictionHelper = {
                 }
 
                 if (currentView === 0)
-                    renderBattler();
+                    BattlerView.render();
             });
         }
     },
@@ -109,7 +109,7 @@ var AfflictionHelper = {
         }));
 
         if (currentView == 0)
-            renderBattler();
+            BattlerView.render();
     },
     /**
      * Handle the effects of an affliction when triggered

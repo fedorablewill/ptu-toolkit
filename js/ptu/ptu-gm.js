@@ -2,12 +2,6 @@
  *  Game Master (GM) Client Functionality
  */
 
-// Imports
-$.getScript('js/script.js');
-$.getScript('js/ptu-io.js');
-$.getScript('js/ptu-char.js');
-$.getScript('js/ptu-battle.js');
-
 
 function changeView(index, suppressRender) {
     currentView = index;
@@ -18,7 +12,7 @@ function changeView(index, suppressRender) {
         $("#body-settings").addClass("hidden");
 
         if (!suppressRender)
-            renderBattler();
+            BattlerView.render();
     }
     else if (index === 1) {
         $("#body-battle").addClass("hidden");
@@ -93,7 +87,7 @@ function changeGMView(view) {
         $("#body-battle").removeClass("hidden");
         $("#body-pokemon").addClass("hidden");
         $("#body-settings").addClass("hidden");
-        renderBattler();
+        BattlerView.render();
     }
     else if (view === 1) {
         $("#body-battle").addClass("hidden");
@@ -107,3 +101,34 @@ function changeGMView(view) {
         $("#body-settings").removeClass("hidden");
     }
 }
+
+var DataHelperBase = (function () {
+    return {
+        /**
+         * Executes when a campaign is loaded (i.e. after either being created or fetched
+         */
+        onDataLoaded : function () {
+            $("#display-gmid").html(client_id);
+            $(".content-select").css("display", "none");
+            $(".footer-gm").removeClass("hidden");
+
+            $("#link-sharable").val('http://ptu.will-step.com/?host=' + client_id);
+            new Clipboard('.btn');
+
+            $("#zoom-slider").noUiSlider({
+                start: [10] ,
+                step: 1,
+                connect: false,
+                range: {
+                    min: 1,
+                    max: 20
+                }
+            }).on("change", function () {
+                BattlerView.render();
+            });
+
+            $("#view-holder").addClass("hidden");
+            changeGMView(0);
+        }
+    }
+})();
