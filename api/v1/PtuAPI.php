@@ -558,15 +558,25 @@ class PtuAPI extends API
             return "Not Found";
         }
 
-        // Get Pokemon by name
         if (!empty($this->verb)) {
-            $pokemonName = strtolower($this->verb);
-            foreach ($pokemonData as $id => $pokemon) {
-                if (strtolower($pokemon["Species"]) == $pokemonName) {
-                    return $pokemonData[$id];
+            // Get list of Pokemon name and Pokedex numbers
+            if ($this->verb == "list") {
+                $list = array();
+                foreach ($pokemonData as $id => $pokemon) {
+                    $list[$id] = $pokemon["Species"];
                 }
+                return $list;
             }
-            return "Not Found";
+            // Get Pokemon by name
+            else {
+                $pokemonName = strtolower($this->verb);
+                foreach ($pokemonData as $id => $pokemon) {
+                    if (strtolower($pokemon["Species"]) == $pokemonName) {
+                        return $pokemonData[$id];
+                    }
+                }
+                return "Not Found";
+            }
         }
     }
     
